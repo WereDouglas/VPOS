@@ -459,8 +459,10 @@ namespace VPOS
 
             if (DBConnect.Insert(_billing) != "")
             {
-                _pay = new Payment(ID, invoiceTxt.Text, methodCbx.Text, amountTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID,"Purchase");
-                DBConnect.Insert(_pay);
+                if (Convert.ToDouble(amountTxt.Text)>0) {
+                    _pay = new Payment(ID, invoiceTxt.Text, methodCbx.Text, amountTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, "Purchase");
+                    DBConnect.Insert(_pay);
+                }
                 Global._billings.Add(_billing);
                 foreach (var h in SelectedItems)
                 {

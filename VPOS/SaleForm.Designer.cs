@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaleForm));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.imgCapture = new System.Windows.Forms.PictureBox();
             this.customerTxt = new System.Windows.Forms.TextBox();
             this.contactTxt = new System.Windows.Forms.TextBox();
@@ -75,7 +76,6 @@
             this.itemGrid = new System.Windows.Forms.DataGridView();
             this.panel7 = new System.Windows.Forms.Panel();
             this.taxLbl = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.nameTxt = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -86,6 +86,7 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).BeginInit();
@@ -114,7 +115,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.16605F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.83395F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 572F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 243F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 244F));
             this.tableLayoutPanel1.Controls.Add(this.panel8, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 2, 1);
@@ -142,7 +143,7 @@
             this.panel8.Controls.Add(this.contactTxt);
             this.panel8.Controls.Add(this.label13);
             this.panel8.Controls.Add(this.label14);
-            this.panel8.Location = new System.Drawing.Point(519, 3);
+            this.panel8.Location = new System.Drawing.Point(518, 3);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(563, 70);
             this.panel8.TabIndex = 105;
@@ -161,6 +162,20 @@
             this.label7.TabIndex = 103;
             this.label7.Text = "CUSTOMER";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.BackgroundImage = global::VPOS.Properties.Resources.Cancel_24;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(532, 6);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(21, 15);
+            this.button2.TabIndex = 102;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // imgCapture
             // 
@@ -213,10 +228,10 @@
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.dtGrid2);
-            this.panel2.Location = new System.Drawing.Point(1091, 79);
+            this.panel2.Location = new System.Drawing.Point(1090, 79);
             this.panel2.Name = "panel2";
             this.tableLayoutPanel1.SetRowSpan(this.panel2, 3);
-            this.panel2.Size = new System.Drawing.Size(238, 521);
+            this.panel2.Size = new System.Drawing.Size(239, 521);
             this.panel2.TabIndex = 2;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
@@ -230,18 +245,18 @@
             this.dtGrid2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dtGrid2.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dtGrid2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtGrid2.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtGrid2.DefaultCellStyle = dataGridViewCellStyle1;
             this.dtGrid2.Location = new System.Drawing.Point(3, 0);
             this.dtGrid2.Name = "dtGrid2";
             this.dtGrid2.RowHeadersVisible = false;
-            this.dtGrid2.Size = new System.Drawing.Size(231, 514);
+            this.dtGrid2.Size = new System.Drawing.Size(232, 514);
             this.dtGrid2.TabIndex = 2;
             this.dtGrid2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid2_CellClick);
             this.dtGrid2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid2_CellContentClick);
@@ -255,7 +270,7 @@
             this.panel1.Controls.Add(this.addressLbl);
             this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(519, 79);
+            this.panel1.Location = new System.Drawing.Point(518, 79);
             this.panel1.Name = "panel1";
             this.tableLayoutPanel1.SetRowSpan(this.panel1, 2);
             this.panel1.Size = new System.Drawing.Size(566, 487);
@@ -668,7 +683,7 @@
             this.itemGrid.Name = "itemGrid";
             this.itemGrid.RowHeadersVisible = false;
             this.tableLayoutPanel1.SetRowSpan(this.itemGrid, 3);
-            this.itemGrid.Size = new System.Drawing.Size(510, 532);
+            this.itemGrid.Size = new System.Drawing.Size(509, 532);
             this.itemGrid.TabIndex = 4;
             this.itemGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemGrid_CellClick);
             this.itemGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemGrid_CellContentClick);
@@ -676,7 +691,7 @@
             // panel7
             // 
             this.panel7.Controls.Add(this.taxLbl);
-            this.panel7.Location = new System.Drawing.Point(1091, 3);
+            this.panel7.Location = new System.Drawing.Point(1090, 3);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(238, 70);
             this.panel7.TabIndex = 26;
@@ -690,20 +705,6 @@
             this.taxLbl.TabIndex = 103;
             this.taxLbl.Text = "#";
             // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackgroundImage = global::VPOS.Properties.Resources.Cancel_24;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(532, 6);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(21, 15);
-            this.button2.TabIndex = 102;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // panel3
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.panel3, 2);
@@ -715,7 +716,7 @@
             this.panel3.Controls.Add(this.barSearch);
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(510, 70);
+            this.panel3.Size = new System.Drawing.Size(509, 70);
             this.panel3.TabIndex = 106;
             // 
             // nameTxt
@@ -777,7 +778,7 @@
             // 
             this.panel6.Controls.Add(this.button1);
             this.panel6.Controls.Add(this.button3);
-            this.panel6.Location = new System.Drawing.Point(519, 572);
+            this.panel6.Location = new System.Drawing.Point(518, 572);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(561, 39);
             this.panel6.TabIndex = 107;
@@ -911,5 +912,6 @@
         private System.Windows.Forms.Label taxLbl;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel6;
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }

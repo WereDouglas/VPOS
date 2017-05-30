@@ -50,6 +50,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.imgVideo = new System.Windows.Forms.PictureBox();
             this.imgCapture = new System.Windows.Forms.PictureBox();
+            this.countsTxt = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.tinTxt = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.emailTxt = new System.Windows.Forms.TextBox();
@@ -81,8 +83,9 @@
             this.applyChk = new System.Windows.Forms.CheckBox();
             this.Save = new System.Windows.Forms.Button();
             this.dtGrid = new System.Windows.Forms.DataGridView();
-            this.countsTxt = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
+            this.companyCode = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgVideo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).BeginInit();
@@ -113,9 +116,9 @@
             this.fileUrlTxtBx.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.fileUrlTxtBx.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.fileUrlTxtBx.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fileUrlTxtBx.Location = new System.Drawing.Point(3, 362);
+            this.fileUrlTxtBx.Location = new System.Drawing.Point(3, 368);
             this.fileUrlTxtBx.Name = "fileUrlTxtBx";
-            this.fileUrlTxtBx.Size = new System.Drawing.Size(268, 19);
+            this.fileUrlTxtBx.Size = new System.Drawing.Size(254, 19);
             this.fileUrlTxtBx.TabIndex = 151;
             // 
             // label16
@@ -284,6 +287,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label21);
+            this.groupBox1.Controls.Add(this.companyCode);
+            this.groupBox1.Controls.Add(this.label20);
             this.groupBox1.Controls.Add(this.bntStart);
             this.groupBox1.Controls.Add(this.bntContinue);
             this.groupBox1.Controls.Add(this.bntStop);
@@ -295,7 +301,7 @@
             this.groupBox1.Controls.Add(this.label19);
             this.groupBox1.Location = new System.Drawing.Point(3, 35);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(267, 321);
+            this.groupBox1.Size = new System.Drawing.Size(254, 321);
             this.groupBox1.TabIndex = 107;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "LOGO";
@@ -304,9 +310,9 @@
             // 
             this.imgVideo.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.imgVideo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.imgVideo.Location = new System.Drawing.Point(114, 30);
+            this.imgVideo.Location = new System.Drawing.Point(114, 35);
             this.imgVideo.Name = "imgVideo";
-            this.imgVideo.Size = new System.Drawing.Size(128, 84);
+            this.imgVideo.Size = new System.Drawing.Size(128, 79);
             this.imgVideo.TabIndex = 104;
             this.imgVideo.TabStop = false;
             // 
@@ -321,6 +327,22 @@
             this.imgCapture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgCapture.TabIndex = 102;
             this.imgCapture.TabStop = false;
+            // 
+            // countsTxt
+            // 
+            this.countsTxt.Location = new System.Drawing.Point(5, 297);
+            this.countsTxt.Name = "countsTxt";
+            this.countsTxt.Size = new System.Drawing.Size(237, 21);
+            this.countsTxt.TabIndex = 154;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(6, 278);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(99, 13);
+            this.label19.TabIndex = 154;
+            this.label19.Text = "Date of stock taking";
             // 
             // tinTxt
             // 
@@ -418,10 +440,10 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button2.Location = new System.Drawing.Point(594, 365);
+            this.button2.Location = new System.Drawing.Point(593, 367);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 32);
+            this.button2.Size = new System.Drawing.Size(100, 27);
             this.button2.TabIndex = 105;
             this.button2.Text = "Submit";
             this.button2.UseVisualStyleBackColor = false;
@@ -495,23 +517,23 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39.31241F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60.68759F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 443F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.41007F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.58993F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 444F));
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button2, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.fileUrlTxtBx, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.button2, 1, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.977036F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.02296F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1140, 428);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1140, 429);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // flowLayoutPanel1
@@ -547,9 +569,9 @@
             this.flowLayoutPanel1.Controls.Add(this.label14);
             this.flowLayoutPanel1.Controls.Add(this.expireDate);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(277, 35);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(263, 35);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(416, 321);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(429, 327);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // statusCbx
@@ -570,14 +592,14 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.07323F));
             this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel2, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.dtGrid, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(699, 35);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(698, 35);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel1.SetRowSpan(this.tableLayoutPanel2, 2);
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.108109F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.89189F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(437, 365);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(437, 358);
             this.tableLayoutPanel2.TabIndex = 152;
             // 
             // flowLayoutPanel2
@@ -593,7 +615,7 @@
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.tableLayoutPanel2.SetRowSpan(this.flowLayoutPanel2, 3);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(150, 359);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(150, 352);
             this.flowLayoutPanel2.TabIndex = 0;
             // 
             // label10
@@ -663,7 +685,7 @@
             this.Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Save.Location = new System.Drawing.Point(3, 325);
             this.Save.Name = "Save";
-            this.Save.Size = new System.Drawing.Size(98, 34);
+            this.Save.Size = new System.Drawing.Size(98, 30);
             this.Save.TabIndex = 115;
             this.Save.Text = "Save";
             this.Save.UseVisualStyleBackColor = false;
@@ -674,34 +696,43 @@
             this.dtGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGrid.Location = new System.Drawing.Point(159, 3);
             this.dtGrid.Name = "dtGrid";
-            this.tableLayoutPanel2.SetRowSpan(this.dtGrid, 2);
-            this.dtGrid.Size = new System.Drawing.Size(275, 350);
+            this.tableLayoutPanel2.SetRowSpan(this.dtGrid, 3);
+            this.dtGrid.Size = new System.Drawing.Size(275, 348);
             this.dtGrid.TabIndex = 17;
             this.dtGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellClick);
             this.dtGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellEndEdit);
             // 
-            // countsTxt
+            // companyCode
             // 
-            this.countsTxt.Location = new System.Drawing.Point(5, 297);
-            this.countsTxt.Name = "countsTxt";
-            this.countsTxt.Size = new System.Drawing.Size(237, 21);
-            this.countsTxt.TabIndex = 154;
+            this.companyCode.Location = new System.Drawing.Point(5, 257);
+            this.companyCode.Name = "companyCode";
+            this.companyCode.Size = new System.Drawing.Size(237, 21);
+            this.companyCode.TabIndex = 155;
             // 
-            // label19
+            // label20
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(6, 278);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(99, 13);
-            this.label19.TabIndex = 154;
-            this.label19.Text = "Date of stock taking";
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(6, 222);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(77, 13);
+            this.label20.TabIndex = 156;
+            this.label20.Text = "Company Code";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(6, 241);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(190, 13);
+            this.label21.TabIndex = 157;
+            this.label21.Text = "use this to identify your other branches";
             // 
             // OrganisationDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1164, 456);
+            this.ClientSize = new System.Drawing.Size(1164, 525);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -783,5 +814,8 @@
         private System.Windows.Forms.DataGridView dtGrid;
         private System.Windows.Forms.TextBox countsTxt;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox companyCode;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
     }
 }

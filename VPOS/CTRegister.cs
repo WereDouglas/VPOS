@@ -42,14 +42,14 @@ namespace VPOS
             t.Columns.Add("B/F");//9    
             t.Columns.Add("Purchases");//10  
             t.Columns.Add("Sales");//15         
-            t.Columns.Add("Total Stock");//11
-            t.Columns.Add("System Stock");//19
+            t.Columns.Add("Total stock");//11
+            t.Columns.Add("System stock");//19
             t.Columns.Add("Variance");//17
-            t.Columns.Add("Purchases Amount");//12           
-            t.Columns.Add("Sales Amount");//14                  
+            t.Columns.Add("Purchases amount");//12           
+            t.Columns.Add("Sales amount");//14                  
             t.Columns.Add("Profit");//16 
             t.Columns.Add("Physical count");//13
-            t.Columns.Add("Stock Variance");//18            
+            t.Columns.Add("Stock variance");//18            
             t.Columns.Add("Damages");//18
             t.Columns.Add("Shrinkable");//20
             t.Columns.Add("Approve");//21
@@ -177,15 +177,15 @@ namespace VPOS
             string itemID = dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString();
             //  _transactor = new Transactor(updateID, dtGrid.Rows[e.RowIndex].Cells[3].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[4].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[6].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[5].Value.ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), dtGrid.Rows[e.RowIndex].Cells[7].Value.ToString(), Helper.OrgID);
 
-            dtGrid.Rows[e.RowIndex].Cells["Total Stock"].Value = (Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["B/F"].Value) + Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Purchases"].Value) - Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Sales"].Value)).ToString();
-            dtGrid.Rows[e.RowIndex].Cells["Purchases Amount"].Value = ((Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Purchases"].Value) * Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Purchase price"].Value))).ToString();
-            dtGrid.Rows[e.RowIndex].Cells["Sales Amount"].Value = ((Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Sales"].Value) * Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Sale price"].Value))).ToString();
+            dtGrid.Rows[e.RowIndex].Cells["Total stock"].Value = (Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["B/F"].Value) + Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Purchases"].Value) - Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Sales"].Value)).ToString();
+            dtGrid.Rows[e.RowIndex].Cells["Purchases amount"].Value = ((Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Purchases"].Value) * Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Purchase price"].Value))).ToString();
+            dtGrid.Rows[e.RowIndex].Cells["Sales amount"].Value = ((Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Sales"].Value) * Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Sale price"].Value))).ToString();
 
             dtGrid.Rows[e.RowIndex].Cells["Variance"].Value = (Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["System stock"].Value) - Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Total stock"].Value)).ToString();
 
-            dtGrid.Rows[e.RowIndex].Cells["Stock Variance"].Value = (Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Physical count"].Value) - Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["System stock"].Value)).ToString();
+            dtGrid.Rows[e.RowIndex].Cells["Stock variance"].Value = (Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Physical count"].Value) - Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["System stock"].Value)).ToString();
 
-            if (Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Total Stock"].Value) != Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["System stock"].Value))
+            if (Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Total stock"].Value) != Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["System stock"].Value))
             {
                 dtGrid.Rows[e.RowIndex].Cells["Variance"].Style.ForeColor = Color.Red;
                 dtGrid.Rows[e.RowIndex].Cells["Variance"].Style.Font = new Font("Calibri", 17.5F, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -195,7 +195,7 @@ namespace VPOS
                 dtGrid.Rows[e.RowIndex].Cells["Variance"].Style.ForeColor = Color.Teal;
                 dtGrid.Rows[e.RowIndex].Cells["Variance"].Style.Font = new Font("Calibri", 14.5F, FontStyle.Bold, GraphicsUnit.Pixel);
             }
-            dtGrid.Rows[e.RowIndex].Cells["Profit"].Value = (Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Sales Amount"].Value) - Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Purchases Amount"].Value)).ToString();
+            dtGrid.Rows[e.RowIndex].Cells["Profit"].Value = (Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Sales amount"].Value) - Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Purchases amount"].Value)).ToString();
 
 
             if (Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Physical count"].Value) == Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["System stock"].Value))
@@ -221,33 +221,33 @@ namespace VPOS
                 dtGrid.Rows[e.RowIndex].Cells["Variance"].Style.Font = new Font("Calibri", 12.5F, FontStyle.Bold, GraphicsUnit.Pixel);
             }
 
-            if (Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Stock Variance"].Value) < 0)
+            if (Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Stock variance"].Value) < 0)
             {
-                if (Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Stock Variance"].Value) == - Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Shrinkable"].Value))
+                if (Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Stock variance"].Value) == - Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Shrinkable"].Value))
                 {
-                    dtGrid.Rows[e.RowIndex].Cells["Stock Variance"].Style.ForeColor = Color.Green;
-                    dtGrid.Rows[e.RowIndex].Cells["Stock Variance"].Style.Font = new Font("Calibri", 12.5F, FontStyle.Bold, GraphicsUnit.Pixel);
+                    dtGrid.Rows[e.RowIndex].Cells["Stock variance"].Style.ForeColor = Color.Green;
+                    dtGrid.Rows[e.RowIndex].Cells["Stock variance"].Style.Font = new Font("Calibri", 12.5F, FontStyle.Bold, GraphicsUnit.Pixel);
                 }
                 else
                 {
 
-                    dtGrid.Rows[e.RowIndex].Cells["Stock Variance"].Style.ForeColor = Color.Red;
-                    dtGrid.Rows[e.RowIndex].Cells["Stock Variance"].Style.Font = new Font("Calibri", 14.5F, FontStyle.Bold, GraphicsUnit.Pixel);
+                    dtGrid.Rows[e.RowIndex].Cells["Stock variance"].Style.ForeColor = Color.Red;
+                    dtGrid.Rows[e.RowIndex].Cells["Stock variance"].Style.Font = new Font("Calibri", 14.5F, FontStyle.Bold, GraphicsUnit.Pixel);
                 }
             }
             else
             {
 
-                if (Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Stock Variance"].Value) == Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Damages"].Value))
+                if (Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Stock variance"].Value) == Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Damages"].Value))
                 {
-                    dtGrid.Rows[e.RowIndex].Cells["Stock Variance"].Style.ForeColor = Color.Green;
-                    dtGrid.Rows[e.RowIndex].Cells["Stock Variance"].Style.Font = new Font("Calibri", 12.5F, FontStyle.Bold, GraphicsUnit.Pixel);
+                    dtGrid.Rows[e.RowIndex].Cells["Stock variance"].Style.ForeColor = Color.Green;
+                    dtGrid.Rows[e.RowIndex].Cells["Stock variance"].Style.Font = new Font("Calibri", 12.5F, FontStyle.Bold, GraphicsUnit.Pixel);
                 }
                 else
                 {
 
-                    dtGrid.Rows[e.RowIndex].Cells["Stock Variance"].Style.ForeColor = Color.Red;
-                    dtGrid.Rows[e.RowIndex].Cells["Stock Variance"].Style.Font = new Font("Calibri", 14.5F, FontStyle.Bold, GraphicsUnit.Pixel);
+                    dtGrid.Rows[e.RowIndex].Cells["Stock variance"].Style.ForeColor = Color.Red;
+                    dtGrid.Rows[e.RowIndex].Cells["Stock variance"].Style.Font = new Font("Calibri", 14.5F, FontStyle.Bold, GraphicsUnit.Pixel);
                 }
 
 
@@ -271,7 +271,7 @@ namespace VPOS
         {
             //  dtGrid_CellEndEdit(null, null);
         }
-
+        Taking _take;
         private void dtGrid_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
@@ -282,8 +282,25 @@ namespace VPOS
 
             if (e.ColumnIndex == 22)
             {
+                //if (Helper.Exists("taking", "date", noLbl.Text))
+                //{
+                //    MessageBox.Show("Stock taking already done today ");
+
+                //    return;
+                //}
                 if (Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells["Physical count"].Value) != 0)
                 {
+                    if (MessageBox.Show("YES or No?", "Stock counts Confirmed ?", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    {
+                        // dtGrid_CellEndEdit(sender, e);
+                        string IDs = Guid.NewGuid().ToString();
+                        _take = new Taking(IDs,Convert.ToDateTime(takingDate.Text).ToString("dd-MM-yyyy"),dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["B/F"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Purchases"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Sales"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Total stock"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["System stock"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Variance"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Purchases amount"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Sales amount"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Profit"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Physical count"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Damages"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Shrinkable"].Value.ToString(), Helper.OrgID, Helper.UserID, DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"));
+                        DBConnect.Insert(_take);
+                        Global._taking.Add(_take);
+                        string SQL = "UPDATE item SET taking = '" + DateTime.Now.ToString("dd-MM-yyyy H:mm:ss") + "',counts='"+ dtGrid.Rows[e.RowIndex].Cells["Physical count"].Value.ToString() + "' WHERE id= '" + dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
+                        DBConnect.Execute(SQL);
+
+                    }
                 }
                 else
                 {
@@ -291,11 +308,7 @@ namespace VPOS
                     return;
 
                 }
-                if (MessageBox.Show("YES or No?", "Stock counts Confirmed ?", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                {
-                    // dtGrid_CellEndEdit(sender, e);
-
-                }
+               
             }
         }
     }

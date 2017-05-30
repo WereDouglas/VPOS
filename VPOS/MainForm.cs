@@ -408,5 +408,13 @@ namespace VPOS
         {
 
         }
+
+        private void toolStripButton7_Click_1(object sender, EventArgs e)
+        {
+           StockRecords frm = new StockRecords();
+            frm.MdiParent = this;
+            frm.Dock = DockStyle.Fill;
+            frm.Show();
+        }
     }
 }

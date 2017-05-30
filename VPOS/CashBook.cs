@@ -51,33 +51,36 @@ namespace VPOS
             t.Columns.Add("Ref");//2
             t.Columns.Add("Income");//3
             t.Columns.Add("Expense");//4
-            t.Columns.Add("Balance");//5  
-            
+            t.Columns.Add("Card payment");//5  
+            t.Columns.Add("Cheque");//5  
+            t.Columns.Add("Cash");//5  
+            t.Columns.Add("Total");//5  
+
             _expenseList = Expense.ListExpense().Where(g => g.Created.Contains(date)).ToList();
             printDocument1.DefaultPageSettings.Landscape = true;
             IncomeDictionary.Clear();
             ExpenseDictionary.Clear();
             int count = 0;
             title = "CASH BOOK "+ Helper.Username +" " + date;
-            foreach (Sale h in Sale.ListSale().Where(g => g.Created.Contains(date)))
+            foreach (Payment h in Payment.ListPayment().Where(g => g.Created.Contains(date)))
             {
                 // double amount = (Convert.ToDouble(h.Qty) * Convert.ToDouble(h.Price));
 
                 if (h.Type == "Sale")
                 {
-                    t.Rows.Add(new object[] { h.Date, Global._item.First(p => p.Id.Contains(h.ItemID)).Name, h.No, "", h.Total.ToString(), ""});
-                    IncomeDictionary.Add(h.Id, h.Total);
+                    t.Rows.Add(new object[] { h.Created,"Receipt No.:"+ h.No, h.Method, "", h.Amount.ToString(), "","","",""});
+                    IncomeDictionary.Add(h.Id, h.Amount);
                 }
                 if (h.Type == "Purchase")
                 {
-                    t.Rows.Add(new object[] { h.Date, Global._item.First(p => p.Id.Contains(h.ItemID)).Name, h.No, h.Total.ToString(), "", "" });
-                    ExpenseDictionary.Add(h.Id, h.Total);
+                    t.Rows.Add(new object[] { h.Created,"Invoice No.:"+h.No, h.Method, h.Amount.ToString(), "", "", "", "", "" });
+                    ExpenseDictionary.Add(h.Id, h.Amount);
                 }
 
             }
             foreach (Expense h in _expenseList)
             {
-                t.Rows.Add(new object[] { h.Date, h.ItemID, count++, "", h.Total, "" });
+                t.Rows.Add(new object[] { h.Date, h.ItemID, count++, "", h.Total, "", "", "", "" });
                 ExpenseDictionary.Add(h.Id, h.Total);
             }
       //    

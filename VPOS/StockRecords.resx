@@ -117,14 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="addressLbl.Text" xml:space="preserve">
-    <value>Plot 516 and 844 Najjanankumbi-Entebbe Rd.
-P.O.Box 7483 Kampala-UGANDA
-Tel:+256 414 268 793,+256 782 413 366, Fax: +:+256 414 268 793
- Email: info@wilkenproperties.com  Website:www.wilkenproperties.com
-</value>
-  </data>
-  <metadata name="printDocument1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
 </root>

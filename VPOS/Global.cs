@@ -24,13 +24,14 @@ namespace VPOS
         public static List<Organisation> _org;
         public static List<Expense> _expense;
         public static List<Tax> _taxes;
+        public static List<Taking> _taking;
 
 
         public static void LoadData()
         {
             _roles = new List<Roles>(Roles.ListRoles());
             _category = new List<Category>(Category.ListCategory());
-            _billings = new List<Billing>(Billing.ListBilling());       
+            _billings = new List<Billing>(Billing.ListBilling());
             _item = new List<Item>(Item.ListItem());
             _purchase = new List<Purchase>(Purchase.ListPurchase());
             _quantitys = new List<Quantity>(Quantity.ListQuantity());
@@ -42,9 +43,11 @@ namespace VPOS
             _expense = new List<Expense>(Expense.ListExpense());
             _payment = new List<Payment>(Payment.ListPayment());
             _taxes = new List<Tax>(Tax.ListTax());
+            _taking = new List<Taking>(Taking.ListTaking());
 
         }
-        public static void LoadVital() {
+        public static void LoadVital()
+        {
 
             _item = new List<Item>(Item.ListItem());
             _expense = new List<Expense>(Expense.ListExpense());

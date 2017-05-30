@@ -59,7 +59,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.617978F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 94.38202F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1004, 445);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1004, 496);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupBox1
@@ -70,7 +70,7 @@
             this.groupBox1.Controls.Add(this.label16);
             this.groupBox1.Controls.Add(this.nameTxt);
             this.groupBox1.Controls.Add(this.saveBtn);
-            this.groupBox1.Location = new System.Drawing.Point(3, 28);
+            this.groupBox1.Location = new System.Drawing.Point(3, 30);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(243, 388);
             this.groupBox1.TabIndex = 2;
@@ -154,9 +154,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtGrid.Location = new System.Drawing.Point(253, 28);
+            this.dtGrid.Location = new System.Drawing.Point(253, 30);
             this.dtGrid.Name = "dtGrid";
-            this.dtGrid.Size = new System.Drawing.Size(748, 414);
+            this.dtGrid.Size = new System.Drawing.Size(748, 463);
             this.dtGrid.TabIndex = 3;
             this.dtGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellClick);
             this.dtGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellEndEdit);
@@ -180,7 +180,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1028, 483);
+            this.ClientSize = new System.Drawing.Size(1028, 534);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

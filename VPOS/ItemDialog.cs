@@ -62,6 +62,9 @@ namespace VPOS
             nationalityTxt.AutoCompleteMode = AutoCompleteMode.Suggest;
             nationalityTxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
             nationalityTxt.AutoCompleteCustomSource = AutoItem;
+            foreach (Category c in Global._category) {
+                categoryTxt.Items.Add(c.Name);
+            }
         }
 
 

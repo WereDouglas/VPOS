@@ -163,7 +163,7 @@ namespace VPOS
                 string Query2 = "DELETE from organisation WHERE id ='" + h.Id + "'";
 
                 MainForm._Form1.FeedBack("Uploading Organisation " + h.Name + " " + h.Country);
-                _org = new Organisation(h.Id,h.Name,h.Code,h.Registration,h.Contact, h.Address, h.Tin, h.Vat, h.Email, h.Country, h.Initialpassword, h.Account, h.Status, h.Expires, h.Image,DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),h.Sync,h.Counts);
+                _org = new Organisation(h.Id,h.Name,h.Code,h.Registration,h.Contact, h.Address, h.Tin, h.Vat, h.Email, h.Country, h.Initialpassword, h.Account, h.Status, h.Expires, h.Image,DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),h.Sync,h.Counts,h.Company);
                 string Query = DBConnect.GenerateQuery(_org);
                 // MainForm._Form1.FeedBack("QUERY " + Query);
                 string URL = Helper.genUrl + "api/uploading";

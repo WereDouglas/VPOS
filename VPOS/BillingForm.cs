@@ -24,6 +24,7 @@ namespace VPOS
         private string barcode = string.Empty;
         Dictionary<int, double> TotalDictionary = new Dictionary<int, double>();
         Dictionary<string, string> SumDictionary = new Dictionary<string, string>();
+        Dictionary<string, string> PaymentDictionary = new Dictionary<string, string>();
         Dictionary<string, string> PaidDictionary = new Dictionary<string, string>();
         Dictionary<string, string> BalanceDictionary = new Dictionary<string, string>();
         Dictionary<string, string> BarDictionary = new Dictionary<string, string>();
@@ -51,7 +52,7 @@ namespace VPOS
         List<Item> _itemList = new List<Item>();
         public void LoadItem(string no)
         {
-
+            dtGrid2.RowTemplate.Height = 90;
             t = new DataTable();
             s = new DataTable();
 
@@ -81,7 +82,6 @@ namespace VPOS
                 {
                     t.Rows.Add(new object[] { b, Global._item.First(r => r.Id.Contains(h.ItemID)).Barcode, Global._item.First(r => r.Id.Contains(h.ItemID)).Name + Environment.NewLine + "PRICE:" + Global._item.First(r => r.Id.Contains(h.ItemID)).Sale_price + Environment.NewLine + "MANUFACTURER :" + Global._item.First(r => r.Id.Contains(h.ItemID)).Manufacturer + Environment.NewLine + "EXPIRES:" + Global._item.First(r => r.Id.Contains(h.ItemID)).Expire, h.Qty, Global._item.First(r => r.Id.Contains(h.ItemID)).Image });
                     double TotalCost = (Convert.ToDouble(h.Qty) * Convert.ToDouble(h.Price));
-
                     s.Rows.Add(new object[] { Global._item.First(r => r.Id.Contains(h.ItemID)).Name, h.Qty, Global._item.First(r => r.Id.Contains(h.ItemID)).Sale_price, TotalCost.ToString("n0") });
                     TotalDictionary.Add(c++, TotalCost);
                 }
@@ -100,9 +100,10 @@ namespace VPOS
             dateLbl.Text = Global._billings.First(k => k.No.Contains(no)).Created;
             customerLbl.Text = Global._billings.First(k => k.No.Contains(no)).Reference;
             methodCbx.Text = Global._billings.First(k => k.No.Contains(no)).Method;
-            balanceTxt.Text = Global._billings.First(k => k.No.Contains(no)).Balance;
-            amountTxt.Text = Global._billings.First(k => k.No.Contains(no)).Paid;
+            balanceTxt.Text = (Convert.ToDouble(Global._billings.First(k => k.No.Contains(no)).Total)- Convert.ToDouble(Global._payment.Where(j=>j.No.Contains(no)).Sum(h=>Convert.ToDouble(h.Amount)))).ToString();
+            amountTxt.Text = Global._payment.Where(j => j.No.Contains(no)).Sum(h => Convert.ToDouble(h.Amount)).ToString();
             totalLbl.Text = Global._billings.First(k => k.No.Contains(no)).Total;
+            typeLbl.Text = Global._billings.First(k => k.No.Contains(no)).Type;
 
             dtGrid2.DataSource = t;
             ThreadPool.QueueUserWorkItem(delegate
@@ -123,7 +124,7 @@ namespace VPOS
                 }
             });
             dtGrid2.AllowUserToAddRows = false;
-            dtGrid2.RowTemplate.Height = 90;
+            
             dtGrid2.Columns[1].Visible = false;
             dtGrid2.Columns[4].Visible = false;
             saleGrid.DataSource = s;
@@ -145,19 +146,22 @@ namespace VPOS
             LoadData(date, typeCbx.Text);
         }
         List<Billing> _billList = new List<Billing>();
+        string Transactors = "";
         public void LoadData(string date, string type)
         {
 
             t = new DataTable();
             t.Columns.Add("Select");//1 
             t.Columns.Add("id");//1 
-            t.Columns.Add("Date");//1                 
-            t.Columns.Add("No");//3 
-            t.Columns.Add("Total");//4
-            t.Columns.Add("Amount paid");//4
-            t.Columns.Add("Method");//4              
-            t.Columns.Add("Balance");//5
-            t.Columns.Add("Customer");//5
+            t.Columns.Add("Date");//2                 
+            t.Columns.Add("No");//3           
+            t.Columns.Add("Total");//4 
+            t.Columns.Add("Balance");//4 
+           
+            t.Columns.Add("Payment Date");//8       
+            t.Columns.Add("Amount");//11
+            t.Columns.Add("Method");//12
+            t.Columns.Add("Transactors");//9 
 
             if (type == "All")
             {
@@ -178,7 +182,7 @@ namespace VPOS
             SumDictionary.Clear();
             PaidDictionary.Clear();
             BalanceDictionary.Clear();
-            string Transactors = "";
+           
             foreach (Billing h in _billList)
             {
                 try
@@ -189,8 +193,18 @@ namespace VPOS
                 {
                     Transactors = h.TransactorID;
                 }
+                t.Rows.Add(new object[] { "Select", h.Id, h.Created, h.No, h.Total,(Convert.ToDouble( h.Total) - Global._payment.Where(m => m.No.Contains(h.No)).Sum(y=>Convert.ToDouble(y.Amount))), "Payment(s)" });
+                double payments = 0;
+                foreach (Payment k in Global._payment.Where(m=>m.No.Contains(h.No)))
+                {
+                   // PaymentDictionary.Add(h.Id, h.Total);
+                    payments = payments + Convert.ToDouble(k.Amount);
+                    t.Rows.Add(new object[] { "", "", "", "", "",  "", k.Created, k.Amount, k.Method, k.By });
+                 
+                    //PaidDictionary.Add(h.Id, h.Paid);
+                    //BalanceDictionary.Add(h.Id, h.Balance);
 
-                t.Rows.Add(new object[] { "Select", h.Id, h.Created, h.No, h.Total, h.Paid, h.Method, h.Balance, Transactors });
+                }
                 SumDictionary.Add(h.Id, h.Total);
                 PaidDictionary.Add(h.Id, h.Paid);
                 BalanceDictionary.Add(h.Id, h.Balance);
@@ -235,6 +249,42 @@ namespace VPOS
         private void button2_Click(object sender, EventArgs e)
         {
             Close();
+        }
+        Payment _pay;
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (paymentTxt.Text=="") {
+                paymentTxt.BackColor = Color.Red;
+                MessageBox.Show("No amount specified");
+                return;
+
+            }
+            string ID = Guid.NewGuid().ToString();
+            if (Convert.ToDouble(paymentTxt.Text) > 0)
+            {
+                _pay = new Payment(ID, noLbl.Text, methodCbx.Text, paymentTxt.Text, customerLbl.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, typeLbl.Text);
+                DBConnect.Insert(_pay);
+                string Query = "UPDATE  billing SET balance = '"+newBalanceTxt.Text +"' WHERE no ='" + noLbl.Text + "'";
+                DBConnect.save(Query);
+
+                MessageBox.Show("Information saved");
+                Global._payment.Add(_pay);
+                LoadData(date, typeCbx.Text);
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void paymentTxt_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                newBalanceTxt.Text = (Convert.ToDouble(totalLbl.Text) - (Convert.ToDouble(amountTxt.Text) + Convert.ToDouble(paymentTxt.Text))).ToString();
+            }
+            catch { }
         }
     }
 }

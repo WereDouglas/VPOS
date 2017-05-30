@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,9 @@ namespace VPOS
         Dictionary<string, string> CustomerDictionary = new Dictionary<string, string>();
         Dictionary<string, string> ContactDictionary = new Dictionary<string, string>();
         NpgsqlDataReader Reader = null;
+        private PrintDocument printDocument = new PrintDocument();
+        private static String RECEIPT = Environment.CurrentDirectory + @"\comprovantes\comprovante.txt";
+        private String stringToPrint = "";
         public SaleForm()
         {
             Global.LoadVital();
@@ -41,16 +45,18 @@ namespace VPOS
         {
             foreach (Tax r in Global._taxes)
             {
-               
-                taxLbl.Text = r.Name+ " " + r.Percentage+ "%" ;
-                if (r.Apply =="Yes") {
+
+                taxLbl.Text = r.Name + " " + r.Percentage + "%";
+                if (r.Apply == "Yes")
+                {
                     vatTxt.Text = r.Percentage;
                 }
-                else {
+                else
+                {
                     vatTxt.Text = "0";
                 }
-               
-            }         
+
+            }
 
         }
         private void Profile(string ID)
@@ -469,10 +475,12 @@ namespace VPOS
                 MessageBox.Show("This transaction is already saved !");
                 return;
             }
-            _billing = new Billing(ID, noLbl.Text, "", amountTxt.Text, methodCbx.Text, refTxt.Text, totalLbl.Text, balanceTxt.Text, "", contactTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "Sale", Helper.OrgID, Helper.UserID,vatAmountTxt.Text);
-
-            _pay = new Payment(ID, noLbl.Text, methodCbx.Text, amountTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID,"Sale");
-            DBConnect.Insert(_pay);
+            _billing = new Billing(ID, noLbl.Text, "", amountTxt.Text, methodCbx.Text, refTxt.Text, totalLbl.Text, balanceTxt.Text, "", contactTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "Sale", Helper.OrgID, Helper.UserID, vatAmountTxt.Text);
+            if (Convert.ToDouble(amountTxt.Text) > 0)
+            {
+                _pay = new Payment(ID, noLbl.Text, methodCbx.Text, amountTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, "Sale");
+                DBConnect.Insert(_pay);
+            }
             if (DBConnect.Insert(_billing) != "")
             {
                 Global._billings.Add(_billing);
@@ -492,9 +500,103 @@ namespace VPOS
                     DBConnect.Insert(_sale);
                     Global._sale.Add(_sale);
                 }
-                MessageBox.Show("Information Saved");
+                try
+                {
+                    print();
+                }
+                catch { }
+                MessageBox.Show("Information Saved");             
 
             }
+        }
+        PrintDocument pdoc = null;
+        int ticketNo;
+        DateTime TicketDate;
+        String Source, Destination, DrawnBy;
+        float Amount;
+        public void print()
+        {
+            PrintDialog pd = new PrintDialog();
+            pdoc = new PrintDocument();
+            PrinterSettings ps = new PrinterSettings();
+            Font font = new Font("Courier New", 12);
+
+
+            PaperSize psize = new PaperSize("Custom", 100, 200);
+            //ps.DefaultPageSettings.PaperSize = psize;
+
+            pd.Document = pdoc;
+            pd.Document.DefaultPageSettings.PaperSize = psize;
+            //pdoc.DefaultPageSettings.PaperSize.Height =320;
+            pdoc.DefaultPageSettings.PaperSize.Height = 820;
+
+            pdoc.DefaultPageSettings.PaperSize.Width = 520;
+
+            pdoc.PrintPage += new PrintPageEventHandler(pdoc_PrintPage);
+
+            //DialogResult result = pd.ShowDialog();
+            //if (result == DialogResult.OK)
+            //{
+                PrintPreviewDialog pp = new PrintPreviewDialog();
+                pp.Document = pdoc;
+                //result = pp.ShowDialog();
+                //if (result == DialogResult.OK)
+                //{
+                    pdoc.Print();
+                //}
+            //}
+
+        }
+        void pdoc_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            Graphics graphics = e.Graphics;
+            Font font = new Font("Courier New", 10);
+            float fontHeight = font.GetHeight();
+            int startX = 50;
+            int startY = 55;
+            int Offset = 40;
+            graphics.DrawString("VugaPOS", new Font("Courier New", 12),
+                                new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+            graphics.DrawString("Ticket No:" + noLbl.Text,
+                     new Font("Courier New", 14),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+            graphics.DrawString("Ticket Date :" + DateTime.Now.ToString("dd-MM-yyyy"),
+                     new Font("Courier New", 12),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+            String underLine = "------------------------------------------";
+            foreach (var h in SelectedItems)
+            {
+                double TotalCost = (Convert.ToDouble(h.Value) * Convert.ToDouble(Global._item.First(r => r.Barcode.Contains(h.Key)).Purchase_price));
+
+                Offset = Offset + 10;
+                graphics.DrawString(h.Value + " " + Global._item.First(r => r.Barcode.Contains(h.Key)).Name +" " + Global._item.First(r => r.Barcode.Contains(h.Key)).Sale_price + " " + TotalCost.ToString("n0"), new Font("Courier New", 8),
+                         new SolidBrush(Color.Black), startX, startY + Offset);
+                Offset = Offset + 10;
+
+            }
+            graphics.DrawString(underLine, new Font("Courier New", 9),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+
+            Offset = Offset + 20;
+            String Source = Helper.Username;
+            graphics.DrawString("From " + Source + " To " + Destination, new Font("Courier New", 9),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+
+            Offset = Offset + 20;
+            String Grosstotal = "AMOUNT:" + totalLbl.Text;
+
+            Offset = Offset + 20;
+            underLine = "------------------------------------------";
+            graphics.DrawString(underLine, new Font("Courier New", 10),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+            Offset = Offset + 20;
+
+            graphics.DrawString(Grosstotal, new Font("Courier New", 10),
+                     new SolidBrush(Color.Black), startX, startY + Offset);
+           
         }
 
         private void amountTxt_TextChanged(object sender, EventArgs e)
@@ -503,7 +605,7 @@ namespace VPOS
             {
 
                 balanceTxt.Text = (Convert.ToDouble(totalLbl.Text) - Convert.ToDouble(amountTxt.Text)).ToString();
-              
+
             }
             catch { }
             try

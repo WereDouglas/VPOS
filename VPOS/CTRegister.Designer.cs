@@ -35,7 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lastCountLbl = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.takingDate = new System.Windows.Forms.DateTimePicker();
             this.searchTxt = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
@@ -104,7 +104,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.lastCountLbl);
             this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.dateTimePicker1);
+            this.panel1.Controls.Add(this.takingDate);
             this.panel1.Controls.Add(this.searchTxt);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.label12);
@@ -154,14 +154,14 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // dateTimePicker1
+            // takingDate
             // 
-            this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker1.CalendarMonthBackground = System.Drawing.SystemColors.InactiveCaption;
-            this.dateTimePicker1.Location = new System.Drawing.Point(873, 7);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(134, 21);
-            this.dateTimePicker1.TabIndex = 107;
+            this.takingDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.takingDate.CalendarMonthBackground = System.Drawing.SystemColors.InactiveCaption;
+            this.takingDate.Location = new System.Drawing.Point(873, 7);
+            this.takingDate.Name = "takingDate";
+            this.takingDate.Size = new System.Drawing.Size(134, 21);
+            this.takingDate.TabIndex = 107;
             // 
             // searchTxt
             // 
@@ -253,7 +253,7 @@
         private System.Windows.Forms.TextBox searchTxt;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker takingDate;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label lastCountLbl;
         private System.Windows.Forms.Label label1;

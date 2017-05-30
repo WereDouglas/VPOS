@@ -45,10 +45,11 @@
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton12 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton13 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton18 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton13 = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
             this.cashBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.purchaseLedgerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -219,6 +220,7 @@
             this.toolStripButton12,
             this.toolStripButton13,
             this.toolStripButton18,
+            this.toolStripButton7,
             this.toolStripButton10,
             this.toolStripButton2,
             this.toolStripDropDownButton3,
@@ -266,6 +268,21 @@
             this.toolStripButton12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripButton12.Click += new System.EventHandler(this.toolStripButton12_Click);
             // 
+            // toolStripButton13
+            // 
+            this.toolStripButton13.AutoSize = false;
+            this.toolStripButton13.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStripButton13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton13.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripButton13.Image = global::VPOS.Properties.Resources.Note_Memo_01_32;
+            this.toolStripButton13.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolStripButton13.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton13.Name = "toolStripButton13";
+            this.toolStripButton13.Size = new System.Drawing.Size(143, 35);
+            this.toolStripButton13.Text = "Purchases";
+            this.toolStripButton13.Click += new System.EventHandler(this.toolStripButton13_Click);
+            // 
             // toolStripButton18
             // 
             this.toolStripButton18.AutoSize = false;
@@ -281,6 +298,21 @@
             this.toolStripButton18.Text = "Stock Register";
             this.toolStripButton18.Click += new System.EventHandler(this.toolStripButton18_Click);
             // 
+            // toolStripButton7
+            // 
+            this.toolStripButton7.AutoSize = false;
+            this.toolStripButton7.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStripButton7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripButton7.Image = global::VPOS.Properties.Resources.Flow_Cart_32;
+            this.toolStripButton7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolStripButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton7.Name = "toolStripButton7";
+            this.toolStripButton7.Size = new System.Drawing.Size(143, 35);
+            this.toolStripButton7.Text = "Stock Records";
+            this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click_1);
+            // 
             // toolStripButton10
             // 
             this.toolStripButton10.AutoSize = false;
@@ -293,7 +325,7 @@
             this.toolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton10.Name = "toolStripButton10";
             this.toolStripButton10.Size = new System.Drawing.Size(143, 35);
-            this.toolStripButton10.Text = "Not Register";
+            this.toolStripButton10.Text = "Prices";
             this.toolStripButton10.Click += new System.EventHandler(this.toolStripButton10_Click);
             // 
             // toolStripButton2
@@ -310,21 +342,6 @@
             this.toolStripButton2.Size = new System.Drawing.Size(143, 35);
             this.toolStripButton2.Text = "Billing";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
-            // 
-            // toolStripButton13
-            // 
-            this.toolStripButton13.AutoSize = false;
-            this.toolStripButton13.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripButton13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton13.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.toolStripButton13.Image = global::VPOS.Properties.Resources.Note_Memo_01_32;
-            this.toolStripButton13.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton13.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton13.Name = "toolStripButton13";
-            this.toolStripButton13.Size = new System.Drawing.Size(143, 35);
-            this.toolStripButton13.Text = "Purchases";
-            this.toolStripButton13.Click += new System.EventHandler(this.toolStripButton13_Click);
             // 
             // toolStripDropDownButton3
             // 
@@ -579,5 +596,6 @@
         private System.Windows.Forms.ToolStripStatusLabel lastSyncLbl;
         private System.Windows.Forms.ToolStripMenuItem cashBookToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton6;
+        private System.Windows.Forms.ToolStripButton toolStripButton7;
     }
 }
