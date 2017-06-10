@@ -20,6 +20,8 @@ namespace VPOS.Model
         private string created;
         private string orgID;
         private string userID;
+        private string tax;
+        private string storeID;
 
         public string Id
         {
@@ -164,7 +166,33 @@ namespace VPOS.Model
             }
         }
 
-        public Sale(string id, string no, string itemID, string qty, string date, string price, string type, string created, string orgID, string userID,string total)
+        public string Tax
+        {
+            get
+            {
+                return tax;
+            }
+
+            set
+            {
+                tax = value;
+            }
+        }
+
+        public string StoreID
+        {
+            get
+            {
+                return storeID;
+            }
+
+            set
+            {
+                storeID = value;
+            }
+        }
+
+        public Sale(string id, string no, string itemID, string qty, string date, string price, string type, string created, string orgID, string userID,string total,string tax, string storeID)
         {
             this.Id = id;
             this.No = no;
@@ -177,6 +205,8 @@ namespace VPOS.Model
             this.OrgID = orgID;
             this.UserID = userID;
             this.Total = total;
+            this.Tax = tax;
+            this.StoreID = storeID;
 
         }
 
@@ -189,7 +219,7 @@ namespace VPOS.Model
             NpgsqlDataReader Reader = command.ExecuteReader();
             while (Reader.Read())
             {
-                Sale p = new Sale(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["total"].ToString());
+                Sale p = new Sale(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["total"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString());
                 categories.Add(p);
             }
             DBConnect.CloseConn();

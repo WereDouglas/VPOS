@@ -46,3 +46,7 @@ C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.CashBook.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.CTRegister.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.StockRecords.resources
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.StoreForm.resources
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.StoreDialog.resources
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.ExpenseDialog.resources
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.PartiesDialog.resources

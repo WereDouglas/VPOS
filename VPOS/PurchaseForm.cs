@@ -192,10 +192,12 @@ namespace VPOS
             AutoCompleteStringCollection AutoItem2 = new AutoCompleteStringCollection();
             foreach (Item p in Global._item)
             {
-                AutoItem.Add(p.Name);
-                AutoItem2.Add(p.Barcode);
-                ItemDictionary.Add(p.Barcode, p.Name);
-                BarDictionary.Add(p.Barcode, p.Name);
+                if (!ItemDictionary.ContainsKey(p.Barcode)) {
+                    AutoItem.Add(p.Name);
+                    AutoItem2.Add(p.Barcode);
+                    ItemDictionary.Add(p.Barcode, p.Name);
+                    BarDictionary.Add(p.Barcode, p.Name);
+                }
             }
 
             nameTxt.AutoCompleteMode = AutoCompleteMode.Suggest;
@@ -393,7 +395,7 @@ namespace VPOS
 
                     MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
                     string fullimage = ImageToBase64(stream);
-                    _transactor = new Transactor(customerID, nameTxt.Text, contactTxt.Text, fullimage, "Customer", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), contactTxt.Text, Helper.OrgID);
+                    _transactor = new Transactor(customerID, nameTxt.Text, contactTxt.Text, fullimage, "Customer", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), contactTxt.Text, Helper.OrgID, Helper.StoreID);
 
                     if (DBConnect.Insert(_transactor) != "")
                     {
@@ -455,21 +457,29 @@ namespace VPOS
                 MessageBox.Show("Please select the mode/method of payment !");
                 return;
             }
-            _billing = new Billing(ID, invoiceTxt.Text, "",amountTxt.Text, methodCbx.Text, refTxt.Text, totalLbl.Text, balanceTxt.Text, "", contactTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),"Purchase",Helper.OrgID,Helper.UserID,vatAmountTxt.Text);
+            _billing = new Billing(ID, invoiceTxt.Text, "",amountTxt.Text, methodCbx.Text, refTxt.Text, totalLbl.Text, balanceTxt.Text, "", contactTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),"Purchase",Helper.OrgID,Helper.UserID,vatAmountTxt.Text, Helper.StoreID);
+            
+            if (Convert.ToDouble(amountTxt.Text) > 0)
+            {
+                _pay = new Payment(ID, invoiceTxt.Text, methodCbx.Text, amountTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, "Purchase", Helper.StoreID);
+                DBConnect.Insert(_pay);
+                Global._payment.Add(_pay);
+            }
 
             if (DBConnect.Insert(_billing) != "")
             {
-                if (Convert.ToDouble(amountTxt.Text)>0) {
-                    _pay = new Payment(ID, invoiceTxt.Text, methodCbx.Text, amountTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, "Purchase");
-                    DBConnect.Insert(_pay);
-                }
                 Global._billings.Add(_billing);
                 foreach (var h in SelectedItems)
                 {
                     double TotalCost = (Convert.ToDouble(h.Value) * Convert.ToDouble(Global._item.First(r => r.Barcode.Contains(h.Key)).Purchase_price));
 
                     string IDs = Guid.NewGuid().ToString();
-                    _sale = new Sale(IDs, invoiceTxt.Text, Global._item.First(r => r.Barcode.Contains(h.Key)).Id, h.Value.ToString(), dateLbl.Text, Global._item.First(r => r.Barcode.Contains(h.Key)).Purchase_price,"Purchase", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),Helper.OrgID, Helper.UserID,TotalCost.ToString());
+                    double tax = 0;
+                    if (Global._item.First(r => r.Barcode.Contains(h.Key)).Tax != "0" || String.IsNullOrEmpty(Global._item.First(r => r.Barcode.Contains(h.Key)).Tax))
+                    {
+                        tax = Math.Round((TotalCost) * (100 / (100 + Convert.ToDouble(Global._item.First(r => r.Barcode.Contains(h.Key)).Tax))), 0);
+                    }
+                    _sale = new Sale(IDs, invoiceTxt.Text, Global._item.First(r => r.Barcode.Contains(h.Key)).Id, h.Value.ToString(), dateLbl.Text, Global._item.First(r => r.Barcode.Contains(h.Key)).Purchase_price,"Purchase", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),Helper.OrgID, Helper.UserID,TotalCost.ToString(),tax.ToString(), Helper.StoreID);
 
                     double cQty = Convert.ToDouble(Global._item.First(g => g.Id.Contains(Global._item.First(r => r.Barcode.Contains(h.Key)).Id)).Quantity);
                     double newQty = cQty + h.Value;
@@ -509,6 +519,11 @@ namespace VPOS
                 DBConnect.save(Query2);
                 MessageBox.Show("Information deleted");
             }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

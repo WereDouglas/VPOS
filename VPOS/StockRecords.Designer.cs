@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.searchTxt = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.takingDate = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.dtGrid = new System.Windows.Forms.DataGridView();
-            this.searchTxt = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -64,6 +64,17 @@
             this.splitContainer1.Size = new System.Drawing.Size(1039, 528);
             this.splitContainer1.SplitterDistance = 29;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // searchTxt
+            // 
+            this.searchTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchTxt.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.searchTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.searchTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchTxt.Location = new System.Drawing.Point(193, 7);
+            this.searchTxt.Name = "searchTxt";
+            this.searchTxt.Size = new System.Drawing.Size(382, 15);
+            this.searchTxt.TabIndex = 113;
             // 
             // button2
             // 
@@ -126,17 +137,6 @@
             this.dtGrid.Name = "dtGrid";
             this.dtGrid.Size = new System.Drawing.Size(1011, 466);
             this.dtGrid.TabIndex = 1;
-            // 
-            // searchTxt
-            // 
-            this.searchTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchTxt.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.searchTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.searchTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchTxt.Location = new System.Drawing.Point(193, 7);
-            this.searchTxt.Name = "searchTxt";
-            this.searchTxt.Size = new System.Drawing.Size(382, 15);
-            this.searchTxt.TabIndex = 113;
             // 
             // StockRecords
             // 

@@ -19,7 +19,7 @@ namespace VPOS.Model
         private string created;
         private string orgID;
         private string userID;
-
+        private string storeID;
         public string Id
         {
             get
@@ -150,7 +150,20 @@ namespace VPOS.Model
             }
         }
 
-        public Purchase(string id, string no, string itemID, string qty, string date, string price, string type, string created, string orgID, string userID)
+        public string StoreID
+        {
+            get
+            {
+                return storeID;
+            }
+
+            set
+            {
+                storeID = value;
+            }
+        }
+
+        public Purchase(string id, string no, string itemID, string qty, string date, string price, string type, string created, string orgID, string userID, string storeID)
         {
             this.Id = id;
             this.No = no;
@@ -162,6 +175,7 @@ namespace VPOS.Model
             this.Created = created;
             this.OrgID = orgID;
             this.UserID = userID;
+            this.StoreID = storeID;
         }
 
         public static List<Purchase> ListPurchase()
@@ -173,7 +187,7 @@ namespace VPOS.Model
             NpgsqlDataReader Reader = command.ExecuteReader();
             while (Reader.Read())
             {
-                Purchase p = new Purchase(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString());
+                Purchase p = new Purchase(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["storeid"].ToString());
                 categories.Add(p);
             }
             DBConnect.CloseConn();

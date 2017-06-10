@@ -73,6 +73,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
+            this.storeCbx = new System.Windows.Forms.ComboBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgVideo)).BeginInit();
@@ -83,15 +85,15 @@
             // 
             // addressTxt
             // 
-            this.addressTxt.Location = new System.Drawing.Point(213, 216);
+            this.addressTxt.Location = new System.Drawing.Point(213, 176);
             this.addressTxt.Multiline = true;
             this.addressTxt.Name = "addressTxt";
-            this.addressTxt.Size = new System.Drawing.Size(200, 139);
+            this.addressTxt.Size = new System.Drawing.Size(200, 179);
             this.addressTxt.TabIndex = 16;
             // 
             // passwordTxt
             // 
-            this.passwordTxt.Location = new System.Drawing.Point(213, 56);
+            this.passwordTxt.Location = new System.Drawing.Point(213, 16);
             this.passwordTxt.Name = "passwordTxt";
             this.passwordTxt.PasswordChar = '*';
             this.passwordTxt.Size = new System.Drawing.Size(200, 21);
@@ -100,7 +102,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(213, 80);
+            this.label9.Location = new System.Drawing.Point(213, 40);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(82, 13);
             this.label9.TabIndex = 17;
@@ -142,10 +144,12 @@
             this.flowLayoutPanel1.Controls.Add(this.statusCbx);
             this.flowLayoutPanel1.Controls.Add(this.label5);
             this.flowLayoutPanel1.Controls.Add(this.addressTxt);
+            this.flowLayoutPanel1.Controls.Add(this.label22);
+            this.flowLayoutPanel1.Controls.Add(this.storeCbx);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(310, 39);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(310, 44);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(428, 362);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(428, 410);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // label16
@@ -303,7 +307,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(213, 0);
+            this.label6.Location = new System.Drawing.Point(3, 358);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 13);
             this.label6.TabIndex = 11;
@@ -312,7 +316,7 @@
             // roleCbx
             // 
             this.roleCbx.FormattingEnabled = true;
-            this.roleCbx.Location = new System.Drawing.Point(213, 16);
+            this.roleCbx.Location = new System.Drawing.Point(3, 374);
             this.roleCbx.Name = "roleCbx";
             this.roleCbx.Size = new System.Drawing.Size(200, 21);
             this.roleCbx.TabIndex = 162;
@@ -320,7 +324,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(213, 40);
+            this.label8.Location = new System.Drawing.Point(213, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(53, 13);
             this.label8.TabIndex = 15;
@@ -328,7 +332,7 @@
             // 
             // initialTxt
             // 
-            this.initialTxt.Location = new System.Drawing.Point(213, 96);
+            this.initialTxt.Location = new System.Drawing.Point(213, 56);
             this.initialTxt.Name = "initialTxt";
             this.initialTxt.PasswordChar = '*';
             this.initialTxt.Size = new System.Drawing.Size(200, 21);
@@ -337,7 +341,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(213, 120);
+            this.label12.Location = new System.Drawing.Point(213, 80);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(45, 13);
             this.label12.TabIndex = 23;
@@ -345,7 +349,7 @@
             // 
             // accountTxt
             // 
-            this.accountTxt.Location = new System.Drawing.Point(213, 136);
+            this.accountTxt.Location = new System.Drawing.Point(213, 96);
             this.accountTxt.Name = "accountTxt";
             this.accountTxt.Size = new System.Drawing.Size(200, 21);
             this.accountTxt.TabIndex = 22;
@@ -353,7 +357,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(213, 160);
+            this.label15.Location = new System.Drawing.Point(213, 120);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(37, 13);
             this.label15.TabIndex = 153;
@@ -365,7 +369,7 @@
             this.statusCbx.Items.AddRange(new object[] {
             "Active",
             "Suspended"});
-            this.statusCbx.Location = new System.Drawing.Point(213, 176);
+            this.statusCbx.Location = new System.Drawing.Point(213, 136);
             this.statusCbx.Name = "statusCbx";
             this.statusCbx.Size = new System.Drawing.Size(200, 21);
             this.statusCbx.TabIndex = 30;
@@ -373,7 +377,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(213, 200);
+            this.label5.Location = new System.Drawing.Point(213, 160);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(45, 13);
             this.label5.TabIndex = 10;
@@ -399,7 +403,7 @@
             this.groupBox1.Controls.Add(this.bntCapture);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.fileUrlTxtBx);
-            this.groupBox1.Location = new System.Drawing.Point(3, 39);
+            this.groupBox1.Location = new System.Drawing.Point(3, 44);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(301, 362);
             this.groupBox1.TabIndex = 107;
@@ -506,7 +510,7 @@
             this.fileUrlTxtBx.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.fileUrlTxtBx.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.fileUrlTxtBx.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fileUrlTxtBx.Location = new System.Drawing.Point(100, 289);
+            this.fileUrlTxtBx.Location = new System.Drawing.Point(114, 250);
             this.fileUrlTxtBx.Name = "fileUrlTxtBx";
             this.fileUrlTxtBx.Size = new System.Drawing.Size(114, 19);
             this.fileUrlTxtBx.TabIndex = 151;
@@ -531,7 +535,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.02296F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(741, 454);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(741, 507);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // panel2
@@ -568,7 +572,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button2.Location = new System.Drawing.Point(652, 408);
+            this.button2.Location = new System.Drawing.Point(652, 461);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(87, 33);
@@ -577,12 +581,31 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // label22
+            // 
+            this.label22.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(213, 358);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(32, 13);
+            this.label22.TabIndex = 164;
+            this.label22.Text = "Store";
+            // 
+            // storeCbx
+            // 
+            this.storeCbx.FormattingEnabled = true;
+            this.storeCbx.Location = new System.Drawing.Point(213, 374);
+            this.storeCbx.Name = "storeCbx";
+            this.storeCbx.Size = new System.Drawing.Size(200, 21);
+            this.storeCbx.TabIndex = 165;
+            this.storeCbx.SelectedIndexChanged += new System.EventHandler(this.storeCbx_SelectedIndexChanged);
+            // 
             // UserDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(765, 478);
+            this.BackColor = System.Drawing.Color.DimGray;
+            this.ClientSize = new System.Drawing.Size(765, 531);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -648,5 +671,7 @@
         private System.Windows.Forms.ComboBox genderCbx;
         private System.Windows.Forms.ComboBox roleCbx;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox storeCbx;
     }
 }

@@ -46,7 +46,7 @@ namespace VPOS
             if (Global._users.Count() < 1)
             {
                 string ids = Guid.NewGuid().ToString();
-                _role = new Roles(ids, "Administrator", "All item pos daily purchases merchandise inventory expenses cash flow suppliers users suppliers catgories transactions ledgers logs profile ", "create update delete log ", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID);
+                _role = new Roles(ids, "Administrator", "All item pos daily purchases merchandise inventory expenses cash flow suppliers users suppliers catgories transactions ledgers logs profile ", "create update delete log ", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.StoreID);
 
                 DBConnect.Insert(_role);
                 using (UserDialog form = new UserDialog(""))
@@ -64,11 +64,7 @@ namespace VPOS
         }
         private void autocomplete()
         {
-
             AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
-
-
-
             foreach (Users r in Global._users)
             {
                 AutoItem.Add(r.Contact);
@@ -87,11 +83,11 @@ namespace VPOS
             if (_userList.Count()>0)
             {
                 Helper.UserID = _userList.First().Id;
-                Helper.OrgID = _userList.First().OrgID;
+                Helper.StoreID = _userList.First().StoreID;
+                Helper.OrgID = Global._org.First().Id;
+                Helper.Code = Global._org.First().Code;
                 Helper.Image = _userList.First().Image;
                 Helper.Username = _userList.First().Surname +" " + _userList.First().Lastname ;
-          
-
                 MainForm fm = new MainForm();
                 fm.Show();
             }         

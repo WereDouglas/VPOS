@@ -15,7 +15,7 @@ namespace VPOS.Model
         private string actions;
         private string created;
         private string orgID;
-
+        private string storeID;
         public string Id
         {
             get
@@ -94,7 +94,20 @@ namespace VPOS.Model
             }
         }
 
-        public Roles(string id, string title, string views, string actions, string created, string orgID)
+        public string StoreID
+        {
+            get
+            {
+                return storeID;
+            }
+
+            set
+            {
+                storeID = value;
+            }
+        }
+
+        public Roles(string id, string title, string views, string actions, string created, string orgID, string storeID)
         {
             this.Id = id;
             this.Title = title;
@@ -102,6 +115,7 @@ namespace VPOS.Model
             this.Actions = actions;
             this.Created = created;
             this.OrgID = orgID;
+            this.StoreID = storeID;
         }
 
         public static List<Roles> ListRoles()
@@ -113,7 +127,7 @@ namespace VPOS.Model
             NpgsqlDataReader Reader = command.ExecuteReader();
             while (Reader.Read())
             {
-                Roles p = new Roles(Reader["id"].ToString(), Reader["title"].ToString(), Reader["views"].ToString(), Reader["actions"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString());
+                Roles p = new Roles(Reader["id"].ToString(), Reader["title"].ToString(), Reader["views"].ToString(), Reader["actions"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["storeid"].ToString());
                 categories.Add(p);
             }
             DBConnect.CloseConn();

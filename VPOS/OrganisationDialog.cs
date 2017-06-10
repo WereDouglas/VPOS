@@ -24,7 +24,7 @@ namespace VPOS
             webcam = new WebCam();
             webcam.InitializeWebCam(ref imgVideo);
             autocomplete();
-            LoadData();
+        
             if (orgID != "")
             {
                 OrgID = orgID;
@@ -134,7 +134,7 @@ namespace VPOS
 
             MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
             string fullimage = ImageToBase64(stream);
-            _org = new Organisation(id, nameTxt.Text, codeTxt.Text, registrationTxt.Text, contactTxt.Text, addressTxt.Text, tinTxt.Text, vatTxt.Text, emailTxt.Text, nationalityTxt.Text, password, accountTxt.Text, statusCbx.Text, Convert.ToDateTime(expireDate.Text).ToString("dd-MM-yyyy"), fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),countsTxt.Text,companyCode.Text);
+            _org = new Organisation(id, nameTxt.Text,codeTxt.Text, registrationTxt.Text, contactTxt.Text, addressTxt.Text, tinTxt.Text, vatTxt.Text, emailTxt.Text, nationalityTxt.Text, password, accountTxt.Text, statusCbx.Text, Convert.ToDateTime(expireDate.Text).ToString("dd-MM-yyyy"), fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),countsTxt.Text,companyCode.Text);
             if (OrgID != "")
             {
                 DBConnect.Update(_org, OrgID);
@@ -154,7 +154,7 @@ namespace VPOS
                     {
                         Helper.OrgID = id;
                         string ids = Guid.NewGuid().ToString();
-                        _role = new Roles(ids, "Administrator", "All item pos daily purchases merchandise inventory expenses cash flow suppliers users suppliers catgories transactions ledgers logs profile ", "create update delete log ", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID);
+                        _role = new Roles(ids, "Administrator", "All item pos daily purchases merchandise inventory expenses cash flow suppliers users suppliers catgories transactions ledgers logs profile ", "create update delete log ", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.StoreID);
 
                         DBConnect.Insert(_role);
                         Global._roles.Add(_role);
@@ -216,86 +216,8 @@ namespace VPOS
                 fileUrlTxtBx.Text = open.FileName;
             }
         }
-        Tax _tax;
-        private void Save_Click(object sender, EventArgs e)
-        {
-            if (percentageTxt.Text == "")
-            {
-                percentageTxt.BackColor = Color.Red;
-                return;
-            }
-            if (taxTxt.Text == "")
-            {
-                taxTxt.BackColor = Color.Red;
-                return;
-            }
-            string apply = "";
-            if (applyChk.Checked == true)
-            {
-                apply = "Yes";
-            }
-            else
-            {
-                apply = "No";
-            }
-            string id = Guid.NewGuid().ToString();
-            _tax = new Tax(id, taxTxt.Text, percentageTxt.Text, apply, nationalityTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID);
+       
 
-
-            if (DBConnect.Insert(_tax) != "")
-            {
-                Global._taxes.Add(_tax);
-                percentageTxt.Text = "";
-                taxTxt.Text = "";
-                MessageBox.Show("Information Saved");
-                LoadData();
-
-            }
-        }
-        public void LoadData()
-        {
-
-            t = new DataTable();
-            t.Columns.Add("Name");//2
-            t.Columns.Add("id");//2 
-            t.Columns.Add("Percentage");//
-            t.Columns.Add("Applied");// 
-            t.Columns.Add("Country");//
-            t.Columns.Add("");// 
-
-            foreach (Tax r in Global._taxes)
-            {
-                t.Rows.Add(new object[] { r.Name, r.Id, r.Percentage, r.Apply, r.Country, "Delete" });
-            }
-            dtGrid.DataSource = t;
-            dtGrid.AllowUserToAddRows = false;
-            dtGrid.Columns[1].Visible = false;
-            dtGrid.Columns[4].Visible = false;
-
-        }
-
-        private void dtGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-
-            if (dtGrid.Rows[e.RowIndex].Cells[3].Value.ToString() == "")
-            {
-
-                MessageBox.Show("Please insert Yes or No");
-                return;
-            }
-
-            if (Double.IsNaN(Convert.ToDouble(dtGrid.Rows[e.RowIndex].Cells[2].Value)))
-            {
-                MessageBox.Show("Please  insert a number");
-                return;
-            }
-            string updateID = dtGrid.Rows[e.RowIndex].Cells[1].Value.ToString();
-            _tax = new Tax(dtGrid.Rows[e.RowIndex].Cells[1].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[0].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[2].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[3].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[4].Value.ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID);
-
-            DBConnect.Update(_tax, updateID);
-            Global._taxes.RemoveAll(x => x.Id == updateID);
-            Global._taxes.Add(_tax);
-        }
 
         private void percentageTxt_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -312,20 +234,9 @@ namespace VPOS
             }
         }
 
-        private void dtGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void label17_Click(object sender, EventArgs e)
         {
-            if (e.ColumnIndex == 5)
-            {
 
-                if (MessageBox.Show("YES or No?", "Are you sure you want to delete this information? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                {
-                    DBConnect.Delete("tax", dtGrid.Rows[e.RowIndex].Cells[1].Value.ToString());
-                    MessageBox.Show("Information deleted");
-                    LoadData();
-
-                }
-
-            }
         }
     }
 }

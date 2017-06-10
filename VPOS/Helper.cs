@@ -15,7 +15,9 @@ namespace VPOS
     {
         public static string OrgID;
         public static string UserID;
+        public static string StoreID;
         public static string Username;
+        public static string Code;
         public static string Image;
         public static string lastSync;
         public static string stocktaking;

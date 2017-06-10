@@ -50,17 +50,17 @@ namespace VPOS
             if (Uploading.CheckServer())
             {
                 
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < 15; i++)
                 {
                     FeedBack("PROCESS " + i.ToString());
-                    try
-                    {
+                    //try
+                    //{
                         process(i);
-                    }
-                    catch (Exception c)
-                    {
-                        FeedBack("PROCESSING ERROR " + i.ToString() + " " + c.Message.ToString());
-                    }
+                    //}
+                    //catch (Exception c)
+                    //{
+                    //    FeedBack("PROCESSING ERROR " + i.ToString() + " " + c.Message.ToString());
+                    //}
 
                     bwLite.ReportProgress(i);
                     Thread.Sleep(1500);
@@ -114,7 +114,16 @@ namespace VPOS
                 case 9:
                     Uploading.UploadExpense();
                     break;
-                case 10: 
+                case 10:
+                    Uploading.UploadPayment();
+                    break;
+                case 11:
+                    Uploading.UploadStore();
+                    break;
+                case 12:
+                    Uploading.UploadTaking();
+                    break;
+                case 13: 
                  
                     if (Uploading.CheckServer())
                     {
@@ -130,9 +139,7 @@ namespace VPOS
                         FeedBack("No valid connection ");
 
                     }
-                    break;
-                case 29:
-                    break;
+                    break;              
                 default:
                     FeedBack("Processing");
                     break;
@@ -175,7 +182,7 @@ namespace VPOS
         }
         private void toolStripButton14_Click(object sender, EventArgs e)
         {
-            using (ItemDialog form = new ItemDialog())
+            using (ItemDialog form = new ItemDialog(""))
             {
                 // DentalDialog form1 = new DentalDialog(item.Text, TransactorID);
                 DialogResult dr = form.ShowDialog();
@@ -406,7 +413,10 @@ namespace VPOS
 
         private void toolStripButton6_Click_1(object sender, EventArgs e)
         {
-
+            StoreForm frm = new StoreForm();
+            frm.MdiParent = this;
+            frm.Dock = DockStyle.Fill;
+            frm.Show();
         }
 
         private void toolStripButton7_Click_1(object sender, EventArgs e)

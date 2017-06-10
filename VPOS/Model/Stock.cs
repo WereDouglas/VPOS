@@ -19,6 +19,7 @@ namespace VPOS.Model
         private string created;
         private string orgID;
         private string userID;
+        private string storeID;
 
         public string Id
         {
@@ -150,7 +151,20 @@ namespace VPOS.Model
             }
         }
 
-        public Stock(string id, string itemID, string qty, string sale_price, string purchase_price, string previous_price, string total_value, string created, string orgID, string userID)
+        public string StoreID
+        {
+            get
+            {
+                return storeID;
+            }
+
+            set
+            {
+                storeID = value;
+            }
+        }
+
+        public Stock(string id, string itemID, string qty, string sale_price, string purchase_price, string previous_price, string total_value, string created, string orgID, string userID, string storeID)
         {
             this.Id = id;
             this.ItemID = itemID;
@@ -162,6 +176,7 @@ namespace VPOS.Model
             this.Created = created;
             this.OrgID = orgID;
             this.UserID = userID;
+            this.StoreID = storeID;
         }
 
         public static List<Stock> ListStock()
@@ -173,7 +188,7 @@ namespace VPOS.Model
             NpgsqlDataReader Reader = command.ExecuteReader();
             while (Reader.Read())
             {
-                Stock p = new Stock(Reader["id"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["sale_price"].ToString(), Reader["purchase_price"].ToString(), Reader["previous_price"].ToString(), Reader["total_value"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString());
+                Stock p = new Stock(Reader["id"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["sale_price"].ToString(), Reader["purchase_price"].ToString(), Reader["previous_price"].ToString(), Reader["total_value"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["storeid"].ToString());
                 categories.Add(p);
             }
             DBConnect.CloseConn();

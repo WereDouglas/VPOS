@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VPOS</RootNamespace>
     <AssemblyName>VPOS</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,14 +46,16 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\VHMIS\VHMIS\bin\Debug\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql">
-      <HintPath>..\..\VHMIS\VHMIS\bin\Debug\Npgsql.dll</HintPath>
+    <Reference Include="Npgsql, Version=3.2.2.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\EstateManager\EstateManager\bin\Debug\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="PDUConverter">
       <HintPath>..\..\VHMIS\VHMIS\bin\Debug\PDUConverter.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -115,6 +118,12 @@
       <DependentUpon>DashBoard.cs</DependentUpon>
     </Compile>
     <Compile Include="DBConnect.cs" />
+    <Compile Include="ExpenseDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExpenseDialog.Designer.cs">
+      <DependentUpon>ExpenseDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExpenseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +162,7 @@
     <Compile Include="MerchandiseForm.Designer.cs">
       <DependentUpon>MerchandiseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Store.cs" />
     <Compile Include="Model\Taking.cs" />
     <Compile Include="Model\Tax.cs" />
     <Compile Include="Model\Payment.cs" />
@@ -173,6 +183,12 @@
     </Compile>
     <Compile Include="OrganisationDialog.Designer.cs">
       <DependentUpon>OrganisationDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PartiesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PartiesDialog.Designer.cs">
+      <DependentUpon>PartiesDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -205,6 +221,18 @@
     </Compile>
     <Compile Include="StockRecords.Designer.cs">
       <DependentUpon>StockRecords.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StoreDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StoreDialog.Designer.cs">
+      <DependentUpon>StoreDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StoreForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StoreForm.Designer.cs">
+      <DependentUpon>StoreForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TransactionForm.cs">
       <SubType>Form</SubType>
@@ -250,6 +278,9 @@
     <EmbeddedResource Include="DashBoard.resx">
       <DependentUpon>DashBoard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ExpenseDialog.resx">
+      <DependentUpon>ExpenseDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ExpenseForm.resx">
       <DependentUpon>ExpenseForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -270,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OrganisationDialog.resx">
       <DependentUpon>OrganisationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PartiesDialog.resx">
+      <DependentUpon>PartiesDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -295,6 +329,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StockRecords.resx">
       <DependentUpon>StockRecords.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StoreDialog.resx">
+      <DependentUpon>StoreDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StoreForm.resx">
+      <DependentUpon>StoreForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TransactionForm.resx">
       <DependentUpon>TransactionForm.cs</DependentUpon>
@@ -495,6 +535,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Print-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cancel-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vugapos.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vugap.fw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vugap.fw1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vugap.fw2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

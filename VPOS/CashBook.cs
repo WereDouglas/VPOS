@@ -68,12 +68,12 @@ namespace VPOS
 
                 if (h.Type == "Sale")
                 {
-                    t.Rows.Add(new object[] { h.Created,"Receipt No.:"+ h.No, h.Method, "", h.Amount.ToString(), "","","",""});
+                    t.Rows.Add(new object[] { h.Created,"Receipt No.:"+ h.No,"",  h.Amount.ToString(), "", h.Method, "","",""});
                     IncomeDictionary.Add(h.Id, h.Amount);
                 }
                 if (h.Type == "Purchase")
                 {
-                    t.Rows.Add(new object[] { h.Created,"Invoice No.:"+h.No, h.Method, h.Amount.ToString(), "", "", "", "", "" });
+                    t.Rows.Add(new object[] { h.Created,"Invoice No.:"+h.No, "","", h.Amount.ToString(), "", h.Method,  "", "" });
                     ExpenseDictionary.Add(h.Id, h.Amount);
                 }
 

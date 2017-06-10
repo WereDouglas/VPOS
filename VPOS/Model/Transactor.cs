@@ -17,7 +17,7 @@ namespace VPOS.Model
         private string created;
         private string address;
         private string orgID;
-   
+        private string storeID;
 
         public string Id
         {
@@ -123,7 +123,20 @@ namespace VPOS.Model
             }
         }
 
-        public Transactor(string id, string name, string contact, string image, string type, string created,string address,string orgID)
+        public string StoreID
+        {
+            get
+            {
+                return storeID;
+            }
+
+            set
+            {
+                storeID = value;
+            }
+        }
+
+        public Transactor(string id, string name, string contact, string image, string type, string created,string address,string orgID, string storeID)
         {
             this.Id = id;
             this.Name = name;
@@ -133,6 +146,7 @@ namespace VPOS.Model
             this.Created = created;
             this.Address = address;
             this.OrgID = orgID;
+            this.StoreID = storeID;
         }
 
         public static List<Transactor> ListTransactor()
@@ -144,7 +158,7 @@ namespace VPOS.Model
             NpgsqlDataReader Reader = command.ExecuteReader();
             while (Reader.Read())
             {
-                Transactor p = new Transactor(Reader["id"].ToString(), Reader["name"].ToString(), Reader["contact"].ToString(), Reader["image"].ToString(), Reader["type"].ToString(),Reader["created"].ToString(), Reader["address"].ToString(), Reader["orgID"].ToString());
+                Transactor p = new Transactor(Reader["id"].ToString(), Reader["name"].ToString(), Reader["contact"].ToString(), Reader["image"].ToString(), Reader["type"].ToString(),Reader["created"].ToString(), Reader["address"].ToString(), Reader["orgID"].ToString(), Reader["storeid"].ToString());
                 wards.Add(p);
             }
             DBConnect.CloseConn();

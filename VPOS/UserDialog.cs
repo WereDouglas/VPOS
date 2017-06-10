@@ -18,6 +18,7 @@ namespace VPOS
         WebCam webcam;
         string UserID = "";
         Roles _role;
+        Dictionary<string, string> storeDictionary = new Dictionary<string, string>();
         public UserDialog(string userID)
         {
             InitializeComponent();
@@ -28,7 +29,7 @@ namespace VPOS
             if (Global._roles.Count() < 1)
             {
                 string ids = Guid.NewGuid().ToString();
-                _role = new Roles(ids, "Administrator", "All item pos daily purchases merchandise inventory expenses cash flow suppliers users suppliers catgories transactions ledgers logs profile ", "create update delete log ", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID);
+                _role = new Roles(ids, "Administrator", "All item pos daily purchases merchandise inventory expenses cash flow suppliers users suppliers catgories transactions ledgers logs profile ", "create update delete log ", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.StoreID);
                 DBConnect.Insert(_role);
                 Global._roles.Add(_role);
 
@@ -45,6 +46,12 @@ namespace VPOS
             {
                 UserID = userID;
                 Profile(UserID);
+            }
+            foreach (Store s in Global._store)
+            {
+
+                storeCbx.Items.Add(s.Name);
+                storeDictionary.Add(s.Name, s.Id);
             }
 
         }
@@ -181,6 +188,11 @@ namespace VPOS
                 roleCbx.BackColor = Color.Red;
                 return;
             }
+            if (storeCbx.Text == "")
+            {
+                storeCbx.BackColor = Color.Red;
+                return;
+            }
             if (passwordTxt.Text != "")
             {
                 password = Helper.MD5Hash(passwordTxt.Text);
@@ -192,7 +204,7 @@ namespace VPOS
             string id = Guid.NewGuid().ToString();
             MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
             string fullimage = ImageToBase64(stream);
-            _user = new Users(id, idTxt.Text, primaryTxt.Text, secondaryTxt.Text, surnameTxt.Text, firstnameTxt.Text, othernameTxt.Text, emailTxt.Text, nationalityTxt.Text, addressTxt.Text, password, genderCbx.Text, Helper.OrgID, roleCbx.Text, Helper.MD5Hash(initialTxt.Text), accountTxt.Text, statusCbx.Text, fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"));
+            _user = new Users(id, idTxt.Text, primaryTxt.Text, secondaryTxt.Text, surnameTxt.Text, firstnameTxt.Text, othernameTxt.Text, emailTxt.Text, nationalityTxt.Text, addressTxt.Text, password, genderCbx.Text, Helper.OrgID, roleCbx.Text, Helper.MD5Hash(initialTxt.Text), accountTxt.Text, statusCbx.Text, fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), storeID);
 
             if (UserID != "")
             {
@@ -209,9 +221,19 @@ namespace VPOS
                     Close();
                 }
             }
-
             firstnameTxt.Text = "";
             primaryTxt.Text = "";
+        }
+        string storeID;
+        private void storeCbx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                storeID = "";
+                storeID = storeDictionary[storeCbx.Text];
+            }
+            catch { }
         }
     }
 }

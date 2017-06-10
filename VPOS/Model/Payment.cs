@@ -19,6 +19,7 @@ namespace VPOS.Model
         private string orgID;
         private string userID;
         private string type;
+        private string storeID;
 
         public string Id
         {
@@ -137,7 +138,20 @@ namespace VPOS.Model
             }
         }
 
-        public Payment(string id, string no, string method, string amount, string by, string created, string orgID, string userID,string type)
+        public string StoreID
+        {
+            get
+            {
+                return storeID;
+            }
+
+            set
+            {
+                storeID = value;
+            }
+        }
+
+        public Payment(string id, string no, string method, string amount, string by, string created, string orgID, string userID,string type, string storeID)
         {
             this.Id = id;
             this.No = no;
@@ -148,6 +162,8 @@ namespace VPOS.Model
             this.OrgID = orgID;
             this.UserID = userID;
             this.Type = type;
+            this.OrgID = orgID;
+            this.StoreID = storeID;
         }
 
         public static List<Payment> ListPayment()
@@ -159,7 +175,7 @@ namespace VPOS.Model
             NpgsqlDataReader Reader = command.ExecuteReader();
             while (Reader.Read())
             {
-                Payment p = new Payment(Reader["id"].ToString(), Reader["no"].ToString(), Reader["method"].ToString(), Reader["amount"].ToString(), Reader["by"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["type"].ToString());
+                Payment p = new Payment(Reader["id"].ToString(), Reader["no"].ToString(), Reader["method"].ToString(), Reader["amount"].ToString(), Reader["by"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["type"].ToString(), Reader["storeid"].ToString());
                 payment.Add(p);
             }
             DBConnect.CloseConn();

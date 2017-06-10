@@ -19,14 +19,56 @@ namespace VPOS
         private Dictionary<TextBox, TextBox> TextBoxOrder = new Dictionary<TextBox, TextBox>();
         Item _item;
         WebCam webcam;
-
+        string ItemID = "";
         private delegate void SetTextDeleg(string text);
-        public ItemDialog()
+        Dictionary<string, string> storeDictionary = new Dictionary<string, string>();
+        public ItemDialog(string itemID)
         {
             InitializeComponent();
             webcam = new WebCam();
             webcam.InitializeWebCam(ref imgVideo);
             autocomplete();
+            if (!String.IsNullOrEmpty(itemID))
+            {
+                ItemID = itemID;
+                LoadItem(ItemID);
+            }
+            foreach (Store s in Global._store)
+            {
+                storeCbx.Items.Add(s.Name);
+                storeDictionary.Add(s.Name, s.Id);
+            }
+
+        }
+        private void LoadItem(string ID)
+        {
+            //  _item = new Item(Helper.OrgID, qtyTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "false", taxTxt.Text);
+
+            nameTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Name;
+            codeTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Code;
+            descriptionTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Description;
+            manufactureTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Manufacturer;
+            nationalityTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Country;
+            barcodeTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Barcode;
+            purchaseTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Purchase_price;
+            saleTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Sale_price;
+            compositionTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Composition;
+            expireDate.Text = Global._item.First(k => k.Id.Contains(ID)).Expire;
+            categoryTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Category;
+            formulationCbx.Text = Global._item.First(k => k.Id.Contains(ID)).Formulation;
+            manufactureDate.Text = Global._item.First(k => k.Id.Contains(ID)).Date_manufactured;
+            genericTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Generic;
+            qtyTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Quantity;
+            minTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Min_qty;
+            taxTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Tax;
+            takingTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Taking;
+
+
+            Image img = Base64ToImage(Global._item.First(k => k.Id.Contains(ID)).Image);
+            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img);
+            //Bitmap bps = new Bitmap(bmp, 50, 50);
+            imgCapture.Image = bmp;
+            imgCapture.SizeMode = PictureBoxSizeMode.StretchImage;
         }
         static string base64String = null;
         public System.Drawing.Image Base64ToImage(string bases)
@@ -62,11 +104,25 @@ namespace VPOS
             nationalityTxt.AutoCompleteMode = AutoCompleteMode.Suggest;
             nationalityTxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
             nationalityTxt.AutoCompleteCustomSource = AutoItem;
-            foreach (Category c in Global._category) {
+            foreach (Category c in Global._category)
+            {
                 categoryTxt.Items.Add(c.Name);
             }
         }
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
 
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -121,39 +177,54 @@ namespace VPOS
             if (barcodeTxt.Text == "")
             {
                 barcodeTxt.Text = id;
-
-            }           
+            }
+            if (Helper.StoreID == "")
+            {
+                storeCbx.BackColor = Color.Red;
+                return;
+            }
 
             MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
             string fullimage = ImageToBase64(stream);
-            _item = new Item(id, nameTxt.Text, codeTxt.Text, descriptionTxt.Text,manufactureTxt.Text,nationalityTxt.Text,barcodeTxt.Text,purchaseTxt.Text,saleTxt.Text,compositionTxt.Text,Convert.ToDateTime(expireDate.Text).ToString("dd-MM-yyyy"),categoryTxt.Text,formulationCbx.Text,barcodeTxt.Text,fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),"",Convert.ToDateTime(manufactureDate.Text).ToString("dd-MM-yyyy"),genericTxt.Text,"",qtyTxt.Text,minTxt.Text,Helper.OrgID,qtyTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),"false");
+            _item = new Item(id, nameTxt.Text, codeTxt.Text, descriptionTxt.Text, manufactureTxt.Text, nationalityTxt.Text, barcodeTxt.Text, purchaseTxt.Text, saleTxt.Text, compositionTxt.Text, Convert.ToDateTime(expireDate.Text).ToString("dd-MM-yyyy"), categoryTxt.Text, formulationCbx.Text, barcodeTxt.Text, fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "", Convert.ToDateTime(manufactureDate.Text).ToString("dd-MM-yyyy"), genericTxt.Text, "", qtyTxt.Text, minTxt.Text, Helper.OrgID, qtyTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "false", taxTxt.Text, storeID, promoPriceTxt.Text, Convert.ToDateTime(promoStart.Text).ToString("dd-MM-yyyy"), Convert.ToDateTime(promoEnd.Text).ToString("dd-MM-yyyy"));
+            int index = Global._item.FindIndex(g => g.Name.Contains(nameTxt.Text));
+            if (index >= 0)
+            {
+                MessageBox.Show("Item of the same exact name already exists ");
+                nameTxt.BackColor = Color.Red;
+                return;
+            }
 
+            int bar = Global._item.FindIndex(g => g.Barcode.Contains(barcodeTxt.Text));
+            if (bar >= 0)
+            {
+                MessageBox.Show("Item of the same exact bar code already exists");
+                barcodeTxt.BackColor = Color.Red;
+                return;
+            }
             if (DBConnect.Insert(_item) != "")
             {
                 double totalValue = Convert.ToDouble(qtyTxt.Text) * Convert.ToDouble(saleTxt.Text);
-                _stk = new Stock(id, id, qtyTxt.Text, saleTxt.Text, purchaseTxt.Text, saleTxt.Text, totalValue.ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID);
+                _stk = new Stock(id, id, qtyTxt.Text, saleTxt.Text, purchaseTxt.Text, saleTxt.Text, totalValue.ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, Helper.StoreID);
                 DBConnect.Insert(_stk);
                 //string query = "insert into transactor (id, transactorNo,contact,surname,lastname,email,dob,nationality,address,kin,kincontact,gender,created) values ('"+ id + "', '"+ transactorNoTxt.Text + "', '"+ contactTxt.Text + "', '" + surnameTxt.Text + "', '" + lastnameTxt.Text + "', '" + emailTxt.Text + "', '" +Convert.ToDateTime(dobdateTimePicker1.Text).ToString("dd-MM-yyyy") + "', '" + nationalityTxt.Text + "', '" + addressTxt.Text + "', '" + kinTxt.Text + "','" + kincontactTxt.Text + "', '" + genderCbx.Text + "','"+DateTime.Now.ToString("dd-MM-yyyy H:m:s")+"');";
                 Global._item.Add(_item);
-
-
-                _qty = new Quantity(id, id, "0", qtyTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, DateTime.Now.ToString("dd-MM-yyyy"));
+                _qty = new Quantity(id, id, "0", qtyTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, DateTime.Now.ToString("dd-MM-yyyy"), Helper.StoreID);
                 DBConnect.Insert(_qty);
                 MessageBox.Show("Information Saved");
-                
+                this.DialogResult = DialogResult.OK;
+                this.Dispose();
             }
             else
             {
-
-
+                MessageBox.Show("Error Inserting data ");
+                return;
             }
+
             nameTxt.Text = "";
             codeTxt.Text = "";
         }
         private string barcode = string.Empty;
-
-       
-
         private void ItemDialog_Load(object sender, EventArgs e)
         {
             //_serialPort = new SerialPort("COM10", 19200, Parity.None, 8, StopBits.One);
@@ -172,7 +243,7 @@ namespace VPOS
 
         private void si_DataReceived(string data)
         {
-          barcodeTxt.Text = data.Trim();
+            barcodeTxt.Text = data.Trim();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -204,17 +275,7 @@ namespace VPOS
 
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
 
-            barcodeTxt.Text = "";
-            if (e.KeyChar == '\r')
-            {
-                barcodeTxt.Text = barcode;
-                barcode = string.Empty;
-            }
-            barcode += e.KeyChar;
-        }
 
         private void bntStart_Click(object sender, EventArgs e)
         {
@@ -249,6 +310,38 @@ namespace VPOS
                 imgCapture.Image = new Bitmap(open.FileName);
                 imgCapture.SizeMode = PictureBoxSizeMode.StretchImage;
                 fileUrlTxtBx.Text = open.FileName;
+            }
+        }
+        string storeID;
+        private void storeCbx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                storeID = "";
+                storeID = storeDictionary[storeCbx.Text];
+            }
+            catch { }
+        }
+
+        private void Update_Click(object sender, EventArgs e)
+        {
+            MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
+            string fullimage = ImageToBase64(stream);
+            _item = new Item(ItemID, nameTxt.Text, codeTxt.Text, descriptionTxt.Text, manufactureTxt.Text, nationalityTxt.Text, barcodeTxt.Text, purchaseTxt.Text, saleTxt.Text, compositionTxt.Text, Convert.ToDateTime(expireDate.Text).ToString("dd-MM-yyyy"), categoryTxt.Text, formulationCbx.Text, barcodeTxt.Text, fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "", Convert.ToDateTime(manufactureDate.Text).ToString("dd-MM-yyyy"), genericTxt.Text, "", qtyTxt.Text, minTxt.Text, Helper.OrgID, qtyTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "false", taxTxt.Text, Helper.StoreID, promoPriceTxt.Text, Convert.ToDateTime(promoStart.Text).ToString("dd-MM-yyyy"), Convert.ToDateTime(promoEnd.Text).ToString("dd-MM-yyyy"));
+
+            if (ItemID != "")
+            {
+                DBConnect.Update(_item, ItemID);
+              
+                Global._item.RemoveAll(x => x.Id == ItemID);
+                Global._item.Add(_item);
+                MessageBox.Show("Information Updated ");
+                this.DialogResult = DialogResult.OK;
+                this.Dispose();
+                MerchandiseForm frm = new MerchandiseForm();
+                frm.MdiParent = MainForm.ActiveForm;
+                frm.Dock = DockStyle.Fill;
+                frm.Show();
             }
         }
     }

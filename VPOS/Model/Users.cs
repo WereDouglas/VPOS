@@ -28,6 +28,7 @@ namespace VPOS.Model
         private string status;
         private string image;
         private string created;
+        private string storeID;
 
         public string Id
         {
@@ -276,7 +277,20 @@ namespace VPOS.Model
             }
         }
 
-        public Users(string id, string idNo, string contact, string contact2, string surname, string lastname, string othername, string email, string nationality, string address, string passwords, string gender, string orgID, string roles, string initialPassword, string account, string status, string image, string created)
+        public string StoreID
+        {
+            get
+            {
+                return storeID;
+            }
+
+            set
+            {
+                storeID = value;
+            }
+        }
+
+        public Users(string id, string idNo, string contact, string contact2, string surname, string lastname, string othername, string email, string nationality, string address, string passwords, string gender, string orgID, string roles, string initialPassword, string account, string status, string image, string created,string storeID)
         {
             this.Id = id;
             this.IdNo = idNo;
@@ -297,6 +311,7 @@ namespace VPOS.Model
             this.Status = status;
             this.Image = image;
             this.Created = created;
+            this.StoreID = storeID;
         }
 
         public static List<Users> ListUsers()
@@ -308,7 +323,7 @@ namespace VPOS.Model
             NpgsqlDataReader Reader = command.ExecuteReader();
             while (Reader.Read())
             {
-                Users p = new Users(Reader["id"].ToString(), Reader["idno"].ToString(), Reader["contact"].ToString(), Reader["contact2"].ToString(), Reader["surname"].ToString(),Reader["lastname"].ToString(), Reader["othername"].ToString(), Reader["email"].ToString(), Reader["nationality"].ToString(), Reader["address"].ToString(), Reader["passwords"].ToString(), Reader["gender"].ToString(), Reader["orgID"].ToString(), Reader["roles"].ToString(), Reader["initialpassword"].ToString(), Reader["account"].ToString(), Reader["status"].ToString(), Reader["image"].ToString(), Reader["created"].ToString());
+                Users p = new Users(Reader["id"].ToString(), Reader["idno"].ToString(), Reader["contact"].ToString(), Reader["contact2"].ToString(), Reader["surname"].ToString(),Reader["lastname"].ToString(), Reader["othername"].ToString(), Reader["email"].ToString(), Reader["nationality"].ToString(), Reader["address"].ToString(), Reader["passwords"].ToString(), Reader["gender"].ToString(), Reader["orgID"].ToString(), Reader["roles"].ToString(), Reader["initialpassword"].ToString(), Reader["account"].ToString(), Reader["status"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["storeid"].ToString());
                 wards.Add(p);
             }
             DBConnect.CloseConn();

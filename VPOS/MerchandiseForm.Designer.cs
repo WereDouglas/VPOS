@@ -35,6 +35,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.dtGrid = new System.Windows.Forms.DataGridView();
+            this.searchCbx = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -67,6 +69,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.searchCbx);
             this.panel1.Controls.Add(this.searchTxt);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.button2);
@@ -143,6 +147,31 @@
             this.dtGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellClick);
             this.dtGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellEndEdit);
             // 
+            // searchCbx
+            // 
+            this.searchCbx.FormattingEnabled = true;
+            this.searchCbx.Items.AddRange(new object[] {
+            "Name",
+            "Category",
+            "Country",
+            "Code"});
+            this.searchCbx.Location = new System.Drawing.Point(735, 3);
+            this.searchCbx.Name = "searchCbx";
+            this.searchCbx.Size = new System.Drawing.Size(220, 21);
+            this.searchCbx.TabIndex = 7;
+            this.searchCbx.SelectedIndexChanged += new System.EventHandler(this.searchCbx_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label1.Location = new System.Drawing.Point(631, 2);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(95, 26);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Search by";
+            // 
             // MerchandiseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -174,5 +203,7 @@
         private System.Windows.Forms.DataGridView dtGrid;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox searchTxt;
+        private System.Windows.Forms.ComboBox searchCbx;
+        private System.Windows.Forms.Label label1;
     }
 }

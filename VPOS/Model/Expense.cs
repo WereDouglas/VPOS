@@ -20,7 +20,7 @@ namespace VPOS.Model
         private string created;
         private string orgID;
         private string userID;
-
+        private string storeID;
         public string Id
         {
             get
@@ -164,7 +164,20 @@ namespace VPOS.Model
             }
         }
 
-        public Expense(string id, string no, string itemID, string qty, string date, string price, string type, string created, string orgID, string userID,string total)
+        public string StoreID
+        {
+            get
+            {
+                return storeID;
+            }
+
+            set
+            {
+                storeID = value;
+            }
+        }
+
+        public Expense(string id, string no, string itemID, string qty, string date, string price, string type, string created, string orgID, string userID,string total, string storeID)
         {
             this.Id = id;
             this.No = no;
@@ -177,6 +190,7 @@ namespace VPOS.Model
             this.OrgID = orgID;
             this.UserID = userID;
             this.Total = total;
+            this.StoreID = storeID;
 
         }
 
@@ -189,7 +203,7 @@ namespace VPOS.Model
             NpgsqlDataReader Reader = command.ExecuteReader();
             while (Reader.Read())
             {
-                Expense p = new Expense(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["total"].ToString());
+                Expense p = new Expense(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["total"].ToString(), Reader["storeid"].ToString());
                 categories.Add(p);
             }
             DBConnect.CloseConn();

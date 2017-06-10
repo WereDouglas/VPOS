@@ -62,7 +62,7 @@ namespace VPOS
             }
 
             string id = Guid.NewGuid().ToString();
-            _category = new Category(id, nameTxt.Text, descriptionTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),Helper.OrgID);
+            _category = new Category(id, nameTxt.Text, descriptionTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),Helper.OrgID, Helper.StoreID);
 
             if (DBConnect.Insert(_category) != "")
             {
@@ -102,7 +102,7 @@ namespace VPOS
         private void dtGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
           string  updateID = dtGrid.Rows[e.RowIndex].Cells[1].Value.ToString();
-            _category = new Category(dtGrid.Rows[e.RowIndex].Cells[1].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[2].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[3].Value.ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),Helper.OrgID);
+            _category = new Category(dtGrid.Rows[e.RowIndex].Cells[1].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[2].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[3].Value.ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),Helper.OrgID, Helper.StoreID);
             DBConnect.Update(_category, updateID);
             Global._category.RemoveAll(x => x.Id == updateID);
             Global._category.Add(_category);

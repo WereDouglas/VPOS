@@ -23,7 +23,7 @@ namespace VPOS
         {
             InitializeComponent();
             webcam = new WebCam();
-            webcam.InitializeWebCam(ref imgVideo);
+         
             autocomplete();
             LoadData();
         }
@@ -103,14 +103,7 @@ namespace VPOS
         }
         private void autocomplete()
         {
-            AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
-            for (int w = 0; w < CountryArrays.Names.Count(); w++)
-            {
-                AutoItem.Add(CountryArrays.Names[w]);
-            }
-            nationalityTxt.AutoCompleteMode = AutoCompleteMode.Suggest;
-            nationalityTxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            nationalityTxt.AutoCompleteCustomSource = AutoItem;
+            
         }
      
         public string ImageToBase64(MemoryStream images)
@@ -153,62 +146,8 @@ namespace VPOS
             webcam.Continue();
         }
 
-        private void bntCapture_Click(object sender, EventArgs e)
-        {
-            imgCapture.Image = imgVideo.Image;
-            imgCapture.SizeMode = PictureBoxSizeMode.StretchImage;
-        }
+     
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            // open file dialog 
-            OpenFileDialog open = new OpenFileDialog();
-            // image filters
-            open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
-            if (open.ShowDialog() == DialogResult.OK)
-            {
-                // display image in picture box
-                imgCapture.Image = new Bitmap(open.FileName);
-                imgCapture.SizeMode = PictureBoxSizeMode.StretchImage;
-                fileUrlTxtBx.Text = open.FileName;
-            }
-        }
-
-        private void saveBtn_Click(object sender, EventArgs e)
-        {
-            if (surnameTxt.Text == "")
-            {            
-                surnameTxt.BackColor = Color.Red;
-                return;
-            }
-            if (contactTxt.Text == "")
-            {
-
-                contactTxt.BackColor = Color.Red;
-                return;
-            }
-
-            string id = Guid.NewGuid().ToString();
-
-            MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
-            string fullimage = ImageToBase64(stream);
-            _transactor = new Transactor(id, surnameTxt.Text, contactTxt.Text,fullimage, typeCbx.Text,DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),addressTxt.Text, Helper.OrgID);
-
-            if (DBConnect.Insert(_transactor) != "")
-            {
-                //string query = "insert into transactor (id, transactorNo,contact,surname,lastname,email,dob,nationality,address,kin,kincontact,gender,created) values ('"+ id + "', '"+ transactorNoTxt.Text + "', '"+ contactTxt.Text + "', '" + surnameTxt.Text + "', '" + lastnameTxt.Text + "', '" + emailTxt.Text + "', '" +Convert.ToDateTime(dobdateTimePicker1.Text).ToString("dd-MM-yyyy") + "', '" + nationalityTxt.Text + "', '" + addressTxt.Text + "', '" + kinTxt.Text + "','" + kincontactTxt.Text + "', '" + genderCbx.Text + "','"+DateTime.Now.ToString("dd-MM-yyyy H:m:s")+"');";
-                Global._transactor.Add(_transactor);
-                MessageBox.Show("Information Saved");
-                LoadData();
-            }
-            else
-            {
-
-
-            }
-            surnameTxt.Text = "";
-            contactTxt.Text = "";
-        }
 
         private void dtGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -229,11 +168,31 @@ namespace VPOS
         {
 
           string  updateID = dtGrid.Rows[e.RowIndex].Cells[1].Value.ToString();
-            _transactor = new Transactor(updateID, dtGrid.Rows[e.RowIndex].Cells[3].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[4].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[6].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[5].Value.ToString(),DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), dtGrid.Rows[e.RowIndex].Cells[7].Value.ToString(), Helper.OrgID);
+            _transactor = new Transactor(updateID, dtGrid.Rows[e.RowIndex].Cells[3].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[4].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[6].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[5].Value.ToString(),DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), dtGrid.Rows[e.RowIndex].Cells[7].Value.ToString(), Helper.OrgID, Helper.StoreID);
 
             DBConnect.Update(_transactor, updateID);
             Global._transactor.RemoveAll(x => x.Id == updateID);
             Global._transactor.Add(_transactor);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            using (PartiesDialog form = new PartiesDialog())
+            {
+                // DentalDialog form1 = new DentalDialog(item.Text, TransactorID);
+                DialogResult dr = form.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    // MessageBox.Show(form.state);
+                    LoadData();
+                }
+            }
+
         }
     }
 }

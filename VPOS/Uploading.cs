@@ -38,15 +38,15 @@ namespace VPOS
             try
             {
 
-                string Query3 = "UPDATE organisation SET sync='" + DateTime.Now.AddMinutes(-10).ToString("yyyy-MM-dd HH:mm:ss") + "'";
+                string Query3 = "UPDATE organisation SET sync='" + DateTime.Now.AddMinutes(-10).ToString("dd-MM-yyyy HH:mm:ss") + "'";
                 DBConnect.save(Query3);
                 Helper.lastSync = DateTime.Now.AddMinutes(-10).ToString("yyyy-MM-dd HH:mm:ss");
             }
             catch
             {
-                string Query3 = "UPDATE organisation SET sync='" + DateTime.Now.AddMinutes(-10).ToString("yyyy-MM-dd HH:mm:ss") + "'";
+                string Query3 = "UPDATE organisation SET sync='" + DateTime.Now.AddMinutes(-10).ToString("dd-MM-yyyy HH:mm:ss") + "'";
                 DBConnect.save(Query3);
-                Helper.lastSync = DateTime.Now.AddMinutes(-10).ToString("yyyy-MM-dd HH:mm:ss");
+                Helper.lastSync = DateTime.Now.AddMinutes(-10).ToString("dd-MM-yyyy HH:mm:ss");
             }
         }
        static Users _user;
@@ -56,7 +56,7 @@ namespace VPOS
                 string Query2 = "DELETE from users WHERE id ='" + h.Id + "'";
               
                 MainForm._Form1.FeedBack("Uploading users " + h.Surname + " " + h.Contact);
-                   _user = new Users(h.Id, h.IdNo, h.Contact,h.Contact2,h.Surname,h.Lastname,h.Othername,h.Email,h.Nationality,h.Address,h.Passwords,h.Gender,h.OrgID,h.Roles,h.InitialPassword,h.Account,h.Status,h.Image, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"));
+                   _user = new Users(h.Id, h.IdNo, h.Contact,h.Contact2,h.Surname,h.Lastname,h.Othername,h.Email,h.Nationality,h.Address,h.Passwords,h.Gender,h.OrgID,h.Roles,h.InitialPassword,h.Account,h.Status,h.Image, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),h.StoreID);
                 string Query = DBConnect.GenerateQuery(_user);
                // MainForm._Form1.FeedBack("QUERY " + Query);
                 string URL = Helper.genUrl + "api/uploading";
@@ -83,7 +83,7 @@ namespace VPOS
                 string Query2 = "DELETE from billing WHERE id ='" + h.Id + "'";
 
                 MainForm._Form1.FeedBack("Uploading Billing " + h.No + " " + h.Method);
-                _bill = new Billing(h.Id, h.No,h.Pos, h.Paid,h.Method, h.Reference, h.Total, h.Balance, h.Bank, h.Account, h.TransactorID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),h.Type,h.OrgID,h.UserID,h.Tax);
+                _bill = new Billing(h.Id, h.No,h.Pos, h.Paid,h.Method, h.Reference, h.Total, h.Balance, h.Bank, h.Account, h.TransactorID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),h.Type,h.OrgID,h.UserID,h.Tax, Helper.StoreID);
                 string Query = DBConnect.GenerateQuery(_bill);
                 // MainForm._Form1.FeedBack("QUERY " + Query);
                 string URL = Helper.genUrl + "api/uploading";
@@ -110,7 +110,7 @@ namespace VPOS
                 string Query2 = "DELETE from sale WHERE id ='" + h.Id + "'";
 
                 MainForm._Form1.FeedBack("Uploading Sale " + h.No + " " + h.Type);
-                _sale = new Sale(h.Id, h.No,h.ItemID, h.Qty, h.Date, h.Price, h.Type, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), h.OrgID, h.UserID,h.Total);
+                _sale = new Sale(h.Id, h.No,h.ItemID, h.Qty, h.Date, h.Price, h.Type, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), h.OrgID, h.UserID,h.Total,h.Tax, Helper.StoreID);
                 string Query = DBConnect.GenerateQuery(_sale);
                 // MainForm._Form1.FeedBack("QUERY " + Query);
                 string URL = Helper.genUrl + "api/uploading";
@@ -127,7 +127,88 @@ namespace VPOS
                     MainForm._Form1.FeedBack("Uploading failed " + h.No + " "+ h.Type);
                 }
             }
-            MainForm._Form1.FeedBack("Uploading users complete ");
+            MainForm._Form1.FeedBack("Uploading sales complete ");
+        }
+        static Store _store;
+        public static void UploadStore()
+        {
+            foreach (var h in Global._store.Where(e => Convert.ToDateTime(e.Created) > Convert.ToDateTime(Helper.lastSync)))
+            {
+                string Query2 = "DELETE from store WHERE id ='" + h.Id + "'";
+
+                MainForm._Form1.FeedBack("Uploading Stores " + h.Name + " " + h.Location);
+                _store = new Store(h.Id,h.Name, h.Location, h.Address, h.Contact, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), h.OrgID, h.Code);
+                string Query = DBConnect.GenerateQuery(_store);
+                // MainForm._Form1.FeedBack("QUERY " + Query);
+                string URL = Helper.genUrl + "api/uploading";
+                NameValueCollection formData = new NameValueCollection();
+                formData["save"] = Query;
+                formData["delete"] = Query2;
+                string results = Helper.send(URL, formData);
+                if (results == "true")
+                {
+                    MainForm._Form1.FeedBack("Uploading Successful " + h.Name + " " + h.Location);
+                }
+                else
+                {
+                    MainForm._Form1.FeedBack("Uploading failed "+ h.Name + " " + h.Location);
+                }
+            }
+            MainForm._Form1.FeedBack("Uploading stores complete ");
+        }
+        static Taking _take;
+        public static void UploadTaking()
+        {
+            foreach (var h in Global._taking.Where(e => Convert.ToDateTime(e.Created) > Convert.ToDateTime(Helper.lastSync)))
+            {
+                string Query2 = "DELETE from taking WHERE id ='" + h.Id + "'";
+
+                MainForm._Form1.FeedBack("Uploading Stock records " + h.Created + " ");
+                _take = new Taking(h.Id, h.Damages, h.ItemID,h.Bf, h.Purchases,h.Sales,h.Total_stock,h.System_stock,h.Variance,h.Purchase_amount,h.Sale_amount,h.Profit,h.Physical_count,h.Damages,h.Shrinkable,h.OrgID,h.UserID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), h.StoreID);
+                string Query = DBConnect.GenerateQuery(_take);
+                // MainForm._Form1.FeedBack("QUERY " + Query);
+                string URL = Helper.genUrl + "api/uploading";
+                NameValueCollection formData = new NameValueCollection();
+                formData["save"] = Query;
+                formData["delete"] = Query2;
+                string results = Helper.send(URL, formData);
+                if (results == "true")
+                {
+                    MainForm._Form1.FeedBack("Uploading Successful " + h.Created + " ");
+                }
+                else
+                {
+                    MainForm._Form1.FeedBack("Uploading failed " + h.Created + " ");
+                }
+            }
+            MainForm._Form1.FeedBack("Uploading stock records complete ");
+        }
+        static Payment _pay;
+        public static void UploadPayment()
+        {
+            foreach (var h in Global._payment.Where(e => Convert.ToDateTime(e.Created) > Convert.ToDateTime(Helper.lastSync)))
+            {
+                string Query2 = "DELETE from payment WHERE id ='" + h.Id + "'";
+
+                MainForm._Form1.FeedBack("Uploading payment " + h.No + " " + h.Type);
+                _pay= new Payment(h.Id, h.No,h.Method, h.Amount,h.By, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), h.OrgID, h.UserID, h.Type, Helper.StoreID);
+                string Query = DBConnect.GenerateQuery(_pay);
+                // MainForm._Form1.FeedBack("QUERY " + Query);
+                string URL = Helper.genUrl + "api/uploading";
+                NameValueCollection formData = new NameValueCollection();
+                formData["save"] = Query;
+                formData["delete"] = Query2;
+                string results = Helper.send(URL, formData);
+                if (results == "true")
+                {
+                    MainForm._Form1.FeedBack("Uploading Successful " + h.No + " " + h.Type);
+                }
+                else
+                {
+                    MainForm._Form1.FeedBack("Uploading failed " + h.No + " " + h.Type);
+                }
+            }
+            MainForm._Form1.FeedBack("Uploading payments complete ");
         }
         static Item _item;
         public static void UploadItem()
@@ -136,7 +217,7 @@ namespace VPOS
             {
                 string Query2 = "DELETE from item WHERE id ='" + h.Id + "'";
                 MainForm._Form1.FeedBack("Uploading item " + h.Name + " " + h.Description);
-                _item = new Item(h.Id, h.Name, h.Code, h.Description, h.Manufacturer, h.Country, h.Batch, h.Purchase_price,h.Sale_price,h.Composition,h.Expire,h.Category,h.Formulation,h.Barcode,h.Image,DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),h.Department,h.Date_manufactured,h.Generic,h.Strength,h.Quantity,h.Min_qty, h.OrgID,h.Counts,h.Taking,h.Valid);
+                _item = new Item(h.Id, h.Name, h.Code, h.Description, h.Manufacturer, h.Country, h.Batch, h.Purchase_price,h.Sale_price,h.Composition,h.Expire,h.Category,h.Formulation,h.Barcode,h.Image,DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),h.Department,h.Date_manufactured,h.Generic,h.Strength,h.Quantity,h.Min_qty, h.OrgID,h.Counts,h.Taking,h.Valid,h.Tax,h.StoreID,h.Promo_price,h.Promo_start,h.Promo_end);
                 string Query = DBConnect.GenerateQuery(_item);
                 // MainForm._Form1.FeedBack("QUERY " + Query);
                 string URL = Helper.genUrl + "api/uploading";
@@ -190,7 +271,7 @@ namespace VPOS
                 string Query2 = "DELETE from roles WHERE id ='" + h.Id + "'";
 
                 MainForm._Form1.FeedBack("Uploading Sale " + h.Title + " ");
-                _role = new Roles(h.Id, h.Title, h.Views, h.Actions, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),h.OrgID);
+                _role = new Roles(h.Id, h.Title, h.Views, h.Actions, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),h.OrgID, Helper.StoreID);
                 string Query = DBConnect.GenerateQuery(_role);
                 // MainForm._Form1.FeedBack("QUERY " + Query);
                 string URL = Helper.genUrl + "api/uploading";
@@ -216,7 +297,7 @@ namespace VPOS
             {
                 string Query2 = "DELETE from transactor WHERE id ='" + h.Id + "'";
                 MainForm._Form1.FeedBack("Uploading transactor " + h.Name + " ");
-                _trans = new Transactor(h.Id, h.Name, h.Contact, h.Image, h.Type,DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),h.Address, h.OrgID);
+                _trans = new Transactor(h.Id, h.Name, h.Contact, h.Image, h.Type,DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),h.Address, h.OrgID, Helper.StoreID);
                 string Query = DBConnect.GenerateQuery(_trans);
                 // MainForm._Form1.FeedBack("QUERY " + Query);
                 string URL = Helper.genUrl + "api/uploading";
@@ -242,7 +323,7 @@ namespace VPOS
             {
                 string Query2 = "DELETE from category WHERE id ='" + h.Id + "'";
                 MainForm._Form1.FeedBack("Uploading transactor " + h.Name + " ");
-                _cat = new Category(h.Id,h.Name,h.Description, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),h.OrgID);
+                _cat = new Category(h.Id,h.Name,h.Description, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),h.OrgID, Helper.StoreID);
                 string Query = DBConnect.GenerateQuery(_cat);
                 // MainForm._Form1.FeedBack("QUERY " + Query);
                 string URL = Helper.genUrl + "api/uploading";
@@ -269,7 +350,7 @@ namespace VPOS
                 string Query2 = "DELETE from expense WHERE id ='" + h.Id + "'";
 
                 MainForm._Form1.FeedBack("Uploading Expense " + h.No + " " + h.Type);
-                _exp = new Expense(h.Id, h.No, h.ItemID, h.Qty, h.Date, h.Price, h.Type, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), h.OrgID, h.UserID, h.Total);
+                _exp = new Expense(h.Id, h.No, h.ItemID, h.Qty, h.Date, h.Price, h.Type, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), h.OrgID, h.UserID, h.Total, Helper.StoreID);
                 string Query = DBConnect.GenerateQuery(_exp);
                 // MainForm._Form1.FeedBack("QUERY " + Query);
                 string URL = Helper.genUrl + "api/uploading";

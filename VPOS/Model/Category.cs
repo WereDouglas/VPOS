@@ -14,7 +14,8 @@ namespace VPOS.Model
         private string description;   
         private string created;
         private string orgID;
-       
+        private string storeID;
+
 
         public string Id
         {
@@ -81,13 +82,27 @@ namespace VPOS.Model
             }
         }
 
-        public Category(string id, string name, string description, string created,string orgID)
+        public string StoreID
+        {
+            get
+            {
+                return storeID;
+            }
+
+            set
+            {
+                storeID = value;
+            }
+        }
+
+        public Category(string id, string name, string description, string created,string orgID,string storeID)
         {
             this.Id = id;
             this.Name = name;
             this.Description = description;
             this.Created = created;
             this.OrgID = orgID;
+            this.StoreID = storeID;
         }
 
         public static List<Category> ListCategory()
@@ -99,7 +114,7 @@ namespace VPOS.Model
             NpgsqlDataReader Reader = command.ExecuteReader();
             while (Reader.Read())
             {
-                Category p = new Category(Reader["id"].ToString(), Reader["name"].ToString(), Reader["description"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString());
+                Category p = new Category(Reader["id"].ToString(), Reader["name"].ToString(), Reader["description"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(),Reader["storeID"].ToString());
                 categories.Add(p);
             }
             DBConnect.CloseConn();

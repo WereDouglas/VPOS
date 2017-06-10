@@ -69,6 +69,7 @@ namespace VPOS
             pictureBox1.Image = bmp;
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
+        Dictionary<int, double> TaxDictionary = new Dictionary<int, double>();
 
         public void LoadItem()
         {
@@ -87,9 +88,11 @@ namespace VPOS
 
             /*******************/
             s.Columns.Add("Name");//3 
+            s.Columns.Add("barcode");//1    
             s.Columns.Add("Quantity");//4              
             s.Columns.Add("Unit Cost");//5
-            s.Columns.Add("Total Cost");//6           
+            s.Columns.Add("Total Cost");//6  
+            s.Columns.Add("Tax");//6          
 
             Bitmap b = new Bitmap(50, 50);
 
@@ -98,16 +101,23 @@ namespace VPOS
                 g.DrawString("Loading...", this.Font, new SolidBrush(Color.Gray), 00, 00);
             }
             TotalDictionary.Clear();
+            TaxDictionary.Clear();
             int c = 0;
             foreach (var h in SelectedItems)
             {
                 t.Rows.Add(new object[] { b, Global._item.First(r => r.Barcode.Contains(h.Key)).Barcode, Global._item.First(r => r.Barcode.Contains(h.Key)).Name + Environment.NewLine + "PRICE:" + Global._item.First(r => r.Barcode.Contains(h.Key)).Sale_price + Environment.NewLine + "MANUFACTURER :" + Global._item.First(r => r.Barcode.Contains(h.Key)).Manufacturer + Environment.NewLine + "EXPIRES:" + Global._item.First(r => r.Barcode.Contains(h.Key)).Expire, h.Value, Global._item.First(r => r.Barcode.Contains(h.Key)).Image, "Remove" });
                 double TotalCost = (Convert.ToDouble(h.Value) * Convert.ToDouble(Global._item.First(r => r.Barcode.Contains(h.Key)).Sale_price));
+                double tax = 0;
+                if (Global._item.First(r => r.Barcode.Contains(h.Key)).Tax != "0" || String.IsNullOrEmpty(Global._item.First(r => r.Barcode.Contains(h.Key)).Tax))
+                {
+                    tax = Math.Round((TotalCost) * (100 / (100 + Convert.ToDouble(Global._item.First(r => r.Barcode.Contains(h.Key)).Tax))), 0);
+                }
 
-                s.Rows.Add(new object[] { Global._item.First(r => r.Barcode.Contains(h.Key)).Name, h.Value, Global._item.First(r => r.Barcode.Contains(h.Key)).Sale_price, TotalCost.ToString("n0") });
+                s.Rows.Add(new object[] { Global._item.First(r => r.Barcode.Contains(h.Key)).Name, Global._item.First(r => r.Barcode.Contains(h.Key)).Barcode, h.Value, Global._item.First(r => r.Barcode.Contains(h.Key)).Sale_price, TotalCost.ToString("n0"), tax });
                 TotalDictionary.Add(c++, TotalCost);
+                TaxDictionary.Add(c++, tax);
             }
-            dtGrid2.DataSource = t;
+           // dtGrid2.DataSource = t;
             ThreadPool.QueueUserWorkItem(delegate
             {
                 foreach (DataRow row in t.Rows)
@@ -128,15 +138,14 @@ namespace VPOS
                     }
                 }
             });
-            dtGrid2.AllowUserToAddRows = false;
-            dtGrid2.Columns[5].DefaultCellStyle.BackColor = Color.Orange;
-            dtGrid2.RowTemplate.Height = 90;
-            dtGrid2.Columns[1].Visible = false;
-            dtGrid2.Columns[4].Visible = false;
+           
+           
+           
             saleGrid.DataSource = s;
+            saleGrid.AllowUserToAddRows = false;
             totalLbl.Text = TotalDictionary.Sum(p => Convert.ToDouble(p.Value)).ToString("n0");
-
-
+            vatAmountTxt.Text = TaxDictionary.Sum(p => Convert.ToDouble(p.Value)).ToString("n0");
+            saleGrid.Columns["barcode"].Visible = false;
         }
         static string base64String = null;
         public System.Drawing.Image Base64ToImage(string bases)
@@ -218,10 +227,12 @@ namespace VPOS
             AutoCompleteStringCollection AutoItem2 = new AutoCompleteStringCollection();
             foreach (Item p in Global._item)
             {
-                AutoItem.Add(p.Name);
-                AutoItem2.Add(p.Barcode);
-                ItemDictionary.Add(p.Barcode, p.Name);
-                BarDictionary.Add(p.Barcode, p.Name);
+                if (!ItemDictionary.ContainsKey(p.Barcode)) {
+                    AutoItem.Add(p.Name);
+                    AutoItem2.Add(p.Barcode);
+                    ItemDictionary.Add(p.Barcode, p.Name);
+                    BarDictionary.Add(p.Barcode, p.Name);
+                }
             }
 
             nameTxt.AutoCompleteMode = AutoCompleteMode.Suggest;
@@ -258,6 +269,8 @@ namespace VPOS
 
         public void LoadItem(string name)
         {
+            _itemList = new List<Item>();
+            listView1.Clear();
             m = new DataTable();
             m.Columns.Add("Name");//2  
             m.Columns.Add("id");//1     
@@ -266,17 +279,39 @@ namespace VPOS
             m.Columns.Add("Add");//6         
             if (name == "")
             {
-
                 _itemList = Global._item;
             }
             else
             {
-
                 _itemList = Global._item.Where(e => e.Name.Contains(name)).ToList();
             }
+            ImageList il = new ImageList();
+            foreach (Item h in _itemList)
+            {
+                Image img = Base64ToImage(h.Image);
+                try
+                {
+                    System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img);
+                    imgCapture.Image = bmp;
+                    imgCapture.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+                catch { }
+                il.Images.Add(img);
+            }
+            il.ImageSize = new Size(60, 60);
+            int count = 0;
+            listView1.LargeImageList = il;
             foreach (Item h in _itemList)
             {
                 m.Rows.Add(new object[] { h.Name + Environment.NewLine + "PRICE:" + h.Sale_price + Environment.NewLine + "MANUFACTURER :" + h.Manufacturer, h.Barcode, h.Department, h.Description, "Add" });
+
+                ListViewItem lst = new ListViewItem();
+                lst.Text = h.Name + "\n\r" + h.Department + "\n\r" + h.Description;
+                lst.ForeColor = Color.DimGray;
+                lst.Tag = h.Barcode;
+                lst.ImageIndex = count++;
+                listView1.Items.Add(lst);
+
 
             }
             itemGrid.DataSource = m;
@@ -336,31 +371,7 @@ namespace VPOS
 
         }
 
-        private void dtGrid2_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 5 || e.ColumnIndex == 0)
-            {
-                barcode = (dtGrid2.Rows[e.RowIndex].Cells[1].Value.ToString()).Replace("\r\n", "").Replace("\r", "").Replace("\n", "").Replace(" ", "");
-                if (SelectedItems.ContainsKey(barcode))
-                {
-                    int count = SelectedItems[barcode];
-                    if (count > 1)
-                    {
-                        SelectedItems.Remove(barcode);
-                        SelectedItems.Add(barcode, (count - 1));
-                        LoadItem();
-
-                    }
-                    else
-                    {
-                        SelectedItems.Remove(barcode);
-                        LoadItem();
-                    }
-
-                }
-            }
-
-        }
+       
 
         private void barSearch_TextChanged(object sender, EventArgs e)
         {
@@ -419,7 +430,7 @@ namespace VPOS
 
                     MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
                     string fullimage = ImageToBase64(stream);
-                    _transactor = new Transactor(customerID, nameTxt.Text, contactTxt.Text, fullimage, "Customer", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), contactTxt.Text, Helper.OrgID);
+                    _transactor = new Transactor(customerID, nameTxt.Text, contactTxt.Text, fullimage, "Customer", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), contactTxt.Text, Helper.OrgID,Helper.StoreID);
 
                     if (DBConnect.Insert(_transactor) != "")
                     {
@@ -475,11 +486,12 @@ namespace VPOS
                 MessageBox.Show("This transaction is already saved !");
                 return;
             }
-            _billing = new Billing(ID, noLbl.Text, "", amountTxt.Text, methodCbx.Text, refTxt.Text, totalLbl.Text, balanceTxt.Text, "", contactTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "Sale", Helper.OrgID, Helper.UserID, vatAmountTxt.Text);
+            _billing = new Billing(ID, noLbl.Text, "", amountTxt.Text, methodCbx.Text, refTxt.Text, totalLbl.Text, balanceTxt.Text, "", contactTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "Sale", Helper.OrgID, Helper.UserID, vatAmountTxt.Text, Helper.StoreID);
             if (Convert.ToDouble(amountTxt.Text) > 0)
             {
-                _pay = new Payment(ID, noLbl.Text, methodCbx.Text, amountTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, "Sale");
+                _pay = new Payment(ID, noLbl.Text, methodCbx.Text, amountTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, "Sale", Helper.StoreID);
                 DBConnect.Insert(_pay);
+                Global._payment.Add(_pay);
             }
             if (DBConnect.Insert(_billing) != "")
             {
@@ -489,7 +501,12 @@ namespace VPOS
                     double TotalCost = (Convert.ToDouble(h.Value) * Convert.ToDouble(Global._item.First(r => r.Barcode.Contains(h.Key)).Purchase_price));
 
                     string IDs = Guid.NewGuid().ToString();
-                    _sale = new Sale(IDs, noLbl.Text, Global._item.First(r => r.Barcode.Contains(h.Key)).Id, h.Value.ToString(), dateLbl.Text, Global._item.First(r => r.Barcode.Contains(h.Key)).Sale_price, "Sale", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, TotalCost.ToString());
+                    double tax = 0;
+                    if (Global._item.First(r => r.Barcode.Contains(h.Key)).Tax != "0" || String.IsNullOrEmpty(Global._item.First(r => r.Barcode.Contains(h.Key)).Tax))
+                    {
+                        tax = Math.Round((TotalCost) * (100 / (100 + Convert.ToDouble(Global._item.First(r => r.Barcode.Contains(h.Key)).Tax))), 0);
+                    }
+                    _sale = new Sale(IDs, noLbl.Text, Global._item.First(r => r.Barcode.Contains(h.Key)).Id, h.Value.ToString(), dateLbl.Text, Global._item.First(r => r.Barcode.Contains(h.Key)).Sale_price, "Sale", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, TotalCost.ToString(), tax.ToString(), Helper.StoreID);
 
                     double cQty = Convert.ToDouble(Global._item.First(g => g.Id.Contains(Global._item.First(r => r.Barcode.Contains(h.Key)).Id)).Quantity);
                     double newQty = cQty - h.Value;
@@ -505,7 +522,7 @@ namespace VPOS
                     print();
                 }
                 catch { }
-                MessageBox.Show("Information Saved");             
+                MessageBox.Show("Information Saved");
 
             }
         }
@@ -537,13 +554,13 @@ namespace VPOS
             //DialogResult result = pd.ShowDialog();
             //if (result == DialogResult.OK)
             //{
-                PrintPreviewDialog pp = new PrintPreviewDialog();
-                pp.Document = pdoc;
-                //result = pp.ShowDialog();
-                //if (result == DialogResult.OK)
-                //{
-                    pdoc.Print();
-                //}
+            PrintPreviewDialog pp = new PrintPreviewDialog();
+            pp.Document = pdoc;
+            //result = pp.ShowDialog();
+            //if (result == DialogResult.OK)
+            //{
+            pdoc.Print();
+            //}
             //}
 
         }
@@ -572,7 +589,7 @@ namespace VPOS
                 double TotalCost = (Convert.ToDouble(h.Value) * Convert.ToDouble(Global._item.First(r => r.Barcode.Contains(h.Key)).Purchase_price));
 
                 Offset = Offset + 10;
-                graphics.DrawString(h.Value + " " + Global._item.First(r => r.Barcode.Contains(h.Key)).Name +" " + Global._item.First(r => r.Barcode.Contains(h.Key)).Sale_price + " " + TotalCost.ToString("n0"), new Font("Courier New", 8),
+                graphics.DrawString(h.Value + " " + Global._item.First(r => r.Barcode.Contains(h.Key)).Name + " " + Global._item.First(r => r.Barcode.Contains(h.Key)).Sale_price + " " + TotalCost.ToString("n0"), new Font("Courier New", 8),
                          new SolidBrush(Color.Black), startX, startY + Offset);
                 Offset = Offset + 10;
 
@@ -596,7 +613,7 @@ namespace VPOS
 
             graphics.DrawString(Grosstotal, new Font("Courier New", 10),
                      new SolidBrush(Color.Black), startX, startY + Offset);
-           
+
         }
 
         private void amountTxt_TextChanged(object sender, EventArgs e)
@@ -619,6 +636,78 @@ namespace VPOS
         private void button2_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void listView1_Click(object sender, EventArgs e)
+        {
+            // Acquire SelectedItems reference.
+            var selectedItems = listView1.SelectedItems;
+            if (selectedItems.Count > 0)
+            {
+                // Display text of first item selected.
+                this.Text = selectedItems[0].Text;
+                //  MessageBox.Show(selectedItems[0].Tag.ToString());
+
+
+                barcodeTxt.Text = "";
+                barcode = (selectedItems[0].Tag.ToString()).Replace("\r\n", "").Replace("\r", "").Replace("\n", "").Replace(" ", "");
+                barcodeTxt.Text = barcode;
+                barcode = barcode.Replace("\r\n", "").Replace("\r", "").Replace("\n", "").Replace(" ", "");
+                if (SelectedItems.ContainsKey(barcode))
+                {
+                    int count = SelectedItems[barcode];
+                    SelectedItems.Remove(barcode);
+                    SelectedItems.Add(barcode, (count + 1));
+                    LoadItem();
+                }
+                else
+                {
+                    SelectedItems.Add(barcode, 1);
+                    LoadItem();
+                }
+
+                barcode = string.Empty;
+            }
+            else
+            {
+                // Display default string.
+                this.Text = "Empty";
+            }
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saleGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.ColumnIndex == 3 || e.ColumnIndex == 2 || e.ColumnIndex == 1 || e.ColumnIndex == 0)
+                {
+                    barcode = (saleGrid.Rows[e.RowIndex].Cells["barcode"].Value.ToString()).Replace("\r\n", "").Replace("\r", "").Replace("\n", "").Replace(" ", "");
+                    if (SelectedItems.ContainsKey(barcode))
+                    {
+                        int count = SelectedItems[barcode];
+                        if (count > 1)
+                        {
+                            SelectedItems.Remove(barcode);
+                            SelectedItems.Add(barcode, (count - 1));
+                            LoadItem();
+
+                        }
+                        else
+                        {
+                            SelectedItems.Remove(barcode);
+                            LoadItem();
+                        }
+
+                    }
+                }
+            }
+            catch { }
+
         }
 
         private void button3_Click(object sender, EventArgs e)

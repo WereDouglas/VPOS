@@ -193,7 +193,7 @@ namespace VPOS
                 {
                     Transactors = h.TransactorID;
                 }
-                t.Rows.Add(new object[] { "Select", h.Id, h.Created, h.No, h.Total,(Convert.ToDouble( h.Total) - Global._payment.Where(m => m.No.Contains(h.No)).Sum(y=>Convert.ToDouble(y.Amount))), "Payment(s)" });
+                t.Rows.Add(new object[] { "Select", h.Id, h.Created, h.No, h.Total,(Convert.ToDouble( h.Total) - Global._payment.Where(m => m.No.Contains(h.No)).Sum(y=>Convert.ToDouble(y.Amount))), " " });
                 double payments = 0;
                 foreach (Payment k in Global._payment.Where(m=>m.No.Contains(h.No)))
                 {
@@ -262,7 +262,7 @@ namespace VPOS
             string ID = Guid.NewGuid().ToString();
             if (Convert.ToDouble(paymentTxt.Text) > 0)
             {
-                _pay = new Payment(ID, noLbl.Text, methodCbx.Text, paymentTxt.Text, customerLbl.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, typeLbl.Text);
+                _pay = new Payment(ID, noLbl.Text, methodCbx.Text, paymentTxt.Text, customerLbl.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, typeLbl.Text, Helper.StoreID);
                 DBConnect.Insert(_pay);
                 string Query = "UPDATE  billing SET balance = '"+newBalanceTxt.Text +"' WHERE no ='" + noLbl.Text + "'";
                 DBConnect.save(Query);

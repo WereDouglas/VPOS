@@ -58,6 +58,10 @@ namespace VPOS
             t.Columns.Add("Last Stock Count");//25
             t.Columns.Add("Date of stock taking");//26
             t.Columns.Add("Validity");//26
+            t.Columns.Add("Tax");//26
+            t.Columns.Add("Promo Price");//26
+            t.Columns.Add("Promo Start");//26
+            t.Columns.Add("Promo End");//26
 
             Bitmap b = new Bitmap(50, 50);
 
@@ -68,7 +72,7 @@ namespace VPOS
             foreach (Item h in Global._item)
             {
 
-                t.Rows.Add(new object[] { false, h.Id, b, h.Name, h.Code, h.Description, h.Manufacturer, h.Country, h.Batch, h.Purchase_price, h.Sale_price, h.Composition, h.Expire, h.Category, h.Formulation, h.Barcode, h.Image, h.Created, h.Department, h.Date_manufactured, h.Generic, h.Strength, "Delete", h.Quantity, h.Min_qty,h.Counts,h.Taking,h.Valid });
+                t.Rows.Add(new object[] { false, h.Id, b, h.Name, h.Code, h.Description, h.Manufacturer, h.Country, h.Batch, h.Purchase_price, h.Sale_price, h.Composition, h.Expire, h.Category, h.Formulation, h.Barcode, h.Image, h.Created, h.Department, h.Date_manufactured, h.Generic, h.Strength, "Delete", h.Quantity, h.Min_qty,h.Counts,h.Taking,h.Valid,h.Tax ,h.Promo_price,h.Promo_start,h.Promo_end});
 
             }
             dtGrid.DataSource = t;
@@ -98,7 +102,7 @@ namespace VPOS
             dtGrid.Columns[1].Visible = false;
             dtGrid.Columns[16].Visible = false;
         }
-        static string base64String = null;
+    
         public System.Drawing.Image Base64ToImage(string bases)
         {
             byte[] imageBytes = Convert.FromBase64String(bases);
@@ -159,14 +163,14 @@ namespace VPOS
 
         private void button2_Click(object sender, EventArgs e)
         {
-            using (ItemDialog form = new ItemDialog())
+            using (ItemDialog form = new ItemDialog(""))
             {
                 // DentalDialog form1 = new DentalDialog(item.Text, ItemID);
                 DialogResult dr = form.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
                     // MessageBox.Show(form.state);
-
+                    LoadData();
                 }
             }
         }
@@ -177,30 +181,53 @@ namespace VPOS
             {
                 if (MessageBox.Show("YES or No?", "Are you sure you want to delete this information? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    DBConnect.Delete("item", dtGrid.Rows[e.RowIndex].Cells[1].Value.ToString());
+                    DBConnect.Delete("item", dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
                     MessageBox.Show("Information deleted");
                     LoadData();
 
                 }
+            }
+            if (e.ColumnIndex == 0)
+            {
+                using (ItemDialog form = new ItemDialog(dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString()))
+                {
+
+                    this.Close();
+                    // DentalDialog form1 = new DentalDialog(item.Text, TransactorID);
+                    DialogResult dr = form.ShowDialog();
+                    if (dr == DialogResult.OK)
+                    {
+                        // MessageBox.Show(form.state);
+                        LoadData();
+                    }
+                }
+
             }
 
         }
 
         private void dtGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (!Regex.IsMatch(dtGrid.Rows[e.RowIndex].Cells[23].Value.ToString(), @"^\d+$"))
+            if (!Regex.IsMatch(dtGrid.Rows[e.RowIndex].Cells["Quantity"].Value.ToString(), @"^\d+$"))
             {
 
                 MessageBox.Show("Quantity is not a numnber ");
                 return;
 
             }
+        
+          
             string updateID = dtGrid.Rows[e.RowIndex].Cells[1].Value.ToString();
-            _item = new Item(updateID, dtGrid.Rows[e.RowIndex].Cells[3].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[4].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[5].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[6].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[7].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[8].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[9].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[10].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[11].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[12].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[13].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[14].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[15].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[16].Value.ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), dtGrid.Rows[e.RowIndex].Cells[18].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[19].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[20].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[21].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[23].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[24].Value.ToString(),Helper.OrgID, dtGrid.Rows[e.RowIndex].Cells[25].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[26].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[27].Value.ToString());
+            _item = new Item(updateID, dtGrid.Rows[e.RowIndex].Cells[3].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[4].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[5].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[6].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[7].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[8].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[9].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[10].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[11].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[12].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[13].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[14].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[15].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[16].Value.ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), dtGrid.Rows[e.RowIndex].Cells[18].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[19].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[20].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[21].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[23].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[24].Value.ToString(),Helper.OrgID, dtGrid.Rows[e.RowIndex].Cells[25].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[26].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[27].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[28].Value.ToString(),Helper.StoreID, dtGrid.Rows[e.RowIndex].Cells["Promo Price"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Promo Start"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Promo End"].Value.ToString());
 
             DBConnect.Update(_item, updateID);
             Global._item.RemoveAll(x => x.Id == updateID);
             Global._item.Add(_item);
+        }
+
+        private void searchCbx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filterField = searchCbx.Text;
         }
     }
 }

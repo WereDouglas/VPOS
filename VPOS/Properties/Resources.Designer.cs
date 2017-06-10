@@ -133,6 +133,16 @@ namespace VPOS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Cancel_16 {
+            get {
+                object obj = ResourceManager.GetObject("Cancel-16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Cancel_24 {
             get {
                 object obj = ResourceManager.GetObject("Cancel-24", resourceCulture);
@@ -616,6 +626,46 @@ namespace VPOS.Properties {
         internal static System.Drawing.Bitmap View_List_32 {
             get {
                 object obj = ResourceManager.GetObject("View-List-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap vugap_fw {
+            get {
+                object obj = ResourceManager.GetObject("vugap.fw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap vugap1 {
+            get {
+                object obj = ResourceManager.GetObject("vugap1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap vugap2 {
+            get {
+                object obj = ResourceManager.GetObject("vugap2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap vugapos {
+            get {
+                object obj = ResourceManager.GetObject("vugapos", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

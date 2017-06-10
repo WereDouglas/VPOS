@@ -25,7 +25,7 @@ namespace VPOS.Model
         private string orgID;
         private string userID;
         private string tax;
-
+        private string storeID;
         public string Id
         {
             get
@@ -234,7 +234,20 @@ namespace VPOS.Model
             }
         }
 
-        public Billing(string id, string no, string pos, string paid, string method, string reference, string total, string balance, string bank, string account, string transactorID, string created,string type,string orgID,string userID,string tax)
+        public string StoreID
+        {
+            get
+            {
+                return storeID;
+            }
+
+            set
+            {
+                storeID = value;
+            }
+        }
+
+        public Billing(string id, string no, string pos, string paid, string method, string reference, string total, string balance, string bank, string account, string transactorID, string created,string type,string orgID,string userID,string tax, string storeID)
         {
             this.Id = id;
             this.No = no;
@@ -252,6 +265,7 @@ namespace VPOS.Model
             this.OrgID = orgID;
             this.UserID = userID;
             this.Tax = tax;
+            this.StoreID = storeID;
         }
 
         public static List<Billing> ListBilling()
@@ -263,7 +277,7 @@ namespace VPOS.Model
             NpgsqlDataReader Reader = command.ExecuteReader();
             while (Reader.Read())
             {
-                Billing p = new Billing(Reader["id"].ToString(), Reader["no"].ToString(), Reader["pos"].ToString(), Reader["paid"].ToString(), Reader["method"].ToString(), Reader["reference"].ToString(), Reader["total"].ToString(), Reader["balance"].ToString(), Reader["bank"].ToString(), Reader["account"].ToString(), Reader["transactorID"].ToString(), Reader["created"].ToString(), Reader["type"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["tax"].ToString());
+                Billing p = new Billing(Reader["id"].ToString(), Reader["no"].ToString(), Reader["pos"].ToString(), Reader["paid"].ToString(), Reader["method"].ToString(), Reader["reference"].ToString(), Reader["total"].ToString(), Reader["balance"].ToString(), Reader["bank"].ToString(), Reader["account"].ToString(), Reader["transactorID"].ToString(), Reader["created"].ToString(), Reader["type"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString());
                 billing.Add(p);
             }
             DBConnect.CloseConn();

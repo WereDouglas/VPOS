@@ -25,6 +25,7 @@ namespace VPOS
         public static List<Expense> _expense;
         public static List<Tax> _taxes;
         public static List<Taking> _taking;
+        public static List<Store> _store;
 
 
         public static void LoadData()
@@ -44,6 +45,7 @@ namespace VPOS
             _payment = new List<Payment>(Payment.ListPayment());
             _taxes = new List<Tax>(Tax.ListTax());
             _taking = new List<Taking>(Taking.ListTaking());
+            _store = new List<Store>(Store.ListStore());
 
         }
         public static void LoadVital()

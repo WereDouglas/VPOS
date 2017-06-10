@@ -35,6 +35,11 @@ namespace VPOS.Model
         private string counts;
         private string taking;
         private string valid;
+        private string tax;
+        private string storeID;
+        private string promo_price;
+        private string promo_start;
+        private string promo_end;
 
         public string Id
         {
@@ -374,7 +379,72 @@ namespace VPOS.Model
             }
         }
 
-        public Item(string id, string name, string code, string description, string manufacturer, string country, string batch, string purchase_price, string sale_price, string composition, string expire, string category, string formulation, string barcode, string image, string created, string department, string date_manufactured, string generic, string strength,string quantity,string min_qty,string orgID,string counts,string taking,string valid)
+        public string Tax
+        {
+            get
+            {
+                return tax;
+            }
+
+            set
+            {
+                tax = value;
+            }
+        }
+
+        public string StoreID
+        {
+            get
+            {
+                return storeID;
+            }
+
+            set
+            {
+                storeID = value;
+            }
+        }
+
+        public string Promo_price
+        {
+            get
+            {
+                return promo_price;
+            }
+
+            set
+            {
+                promo_price = value;
+            }
+        }
+
+        public string Promo_start
+        {
+            get
+            {
+                return promo_start;
+            }
+
+            set
+            {
+                promo_start = value;
+            }
+        }
+
+        public string Promo_end
+        {
+            get
+            {
+                return promo_end;
+            }
+
+            set
+            {
+                promo_end = value;
+            }
+        }
+
+        public Item(string id, string name, string code, string description, string manufacturer, string country, string batch, string purchase_price, string sale_price, string composition, string expire, string category, string formulation, string barcode, string image, string created, string department, string date_manufactured, string generic, string strength,string quantity,string min_qty,string orgID,string counts,string taking,string valid,string tax,string storeID,string promo_price,string promo_start,string promo_end)
         {
             this.Id = id;
             this.Name = name;
@@ -402,6 +472,11 @@ namespace VPOS.Model
             this.Counts = counts;
             this.Taking = taking;
             this.Valid = valid;
+            this.Tax = tax;
+            this.StoreID = storeID;
+            this.Promo_price = promo_price;
+            this.Promo_start = promo_start;
+            this.Promo_end = promo_end;
         }
 
         public static List<Item> ListItem()
@@ -413,7 +488,7 @@ namespace VPOS.Model
             NpgsqlDataReader Reader = command.ExecuteReader();
             while (Reader.Read())
             {
-                Item p = new Item(Reader["id"].ToString(), Reader["name"].ToString(), Reader["code"].ToString(), Reader["description"].ToString(), Reader["manufacturer"].ToString(), Reader["country"].ToString(), Reader["batch"].ToString(), Reader["purchase_price"].ToString(), Reader["sale_price"].ToString(), Reader["composition"].ToString(), Reader["expire"].ToString(), Reader["category"].ToString(), Reader["formulation"].ToString(), Reader["barcode"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["department"].ToString(), Reader["date_manufactured"].ToString(), Reader["generic"].ToString(), Reader["strength"].ToString(), Reader["quantity"].ToString(), Reader["min_qty"].ToString(), Reader["orgID"].ToString(), Reader["counts"].ToString(), Reader["taking"].ToString(), Reader["valid"].ToString());
+                Item p = new Item(Reader["id"].ToString(), Reader["name"].ToString(), Reader["code"].ToString(), Reader["description"].ToString(), Reader["manufacturer"].ToString(), Reader["country"].ToString(), Reader["batch"].ToString(), Reader["purchase_price"].ToString(), Reader["sale_price"].ToString(), Reader["composition"].ToString(), Reader["expire"].ToString(), Reader["category"].ToString(), Reader["formulation"].ToString(), Reader["barcode"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["department"].ToString(), Reader["date_manufactured"].ToString(), Reader["generic"].ToString(), Reader["strength"].ToString(), Reader["quantity"].ToString(), Reader["min_qty"].ToString(), Reader["orgID"].ToString(), Reader["counts"].ToString(), Reader["taking"].ToString(), Reader["valid"].ToString(),Reader["tax"].ToString(), Reader["storeid"].ToString(), Reader["promo_price"].ToString(), Reader["promo_start"].ToString(), Reader["promo_end"].ToString());
                 wards.Add(p);
             }
             DBConnect.CloseConn();

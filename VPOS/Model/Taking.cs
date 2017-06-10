@@ -27,7 +27,7 @@ namespace VPOS.Model
         private string orgID;
         private string userID;
         private string created;
-
+        private string storeID;
         public string Id
         {
             get
@@ -262,7 +262,20 @@ namespace VPOS.Model
             }
         }
 
-        public Taking(string id, string date, string itemID, string bf, string purchases, string sales, string total_stock, string system_stock, string variance, string purchase_amount, string sale_amount, string profit, string physical_count, string damages, string shrinkable, string orgID, string userID, string created)
+        public string StoreID
+        {
+            get
+            {
+                return storeID;
+            }
+
+            set
+            {
+                storeID = value;
+            }
+        }
+
+        public Taking(string id, string date, string itemID, string bf, string purchases, string sales, string total_stock, string system_stock, string variance, string purchase_amount, string sale_amount, string profit, string physical_count, string damages, string shrinkable, string orgID, string userID, string created, string storeID)
         {
             this.Id = id;
             this.Date = date;
@@ -282,6 +295,7 @@ namespace VPOS.Model
             this.OrgID = orgID;
             this.UserID = userID;
             this.Created = created;
+            this.StoreID = storeID;
         }
 
         public static List<Taking> ListTaking()
@@ -293,7 +307,7 @@ namespace VPOS.Model
             NpgsqlDataReader Reader = command.ExecuteReader();
             while (Reader.Read())
             {
-                Taking p = new Taking(Reader["id"].ToString(), Reader["date"].ToString(), Reader["itemID"].ToString(), Reader["bf"].ToString(), Reader["purchases"].ToString(), Reader["sales"].ToString(), Reader["total_stock"].ToString(), Reader["system_stock"].ToString(), Reader["variance"].ToString(), Reader["purchase_amount"].ToString(), Reader["sale_amount"].ToString(), Reader["profit"].ToString(), Reader["physical_count"].ToString(), Reader["damages"].ToString(), Reader["shrinkable"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["created"].ToString());
+                Taking p = new Taking(Reader["id"].ToString(), Reader["date"].ToString(), Reader["itemID"].ToString(), Reader["bf"].ToString(), Reader["purchases"].ToString(), Reader["sales"].ToString(), Reader["total_stock"].ToString(), Reader["system_stock"].ToString(), Reader["variance"].ToString(), Reader["purchase_amount"].ToString(), Reader["sale_amount"].ToString(), Reader["profit"].ToString(), Reader["physical_count"].ToString(), Reader["damages"].ToString(), Reader["shrinkable"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["created"].ToString(), Reader["storeid"].ToString());
                 categories.Add(p);
             }
             DBConnect.CloseConn();

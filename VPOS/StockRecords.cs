@@ -28,7 +28,7 @@ namespace VPOS
             t = new DataTable();
             t.Columns.Add(new DataColumn("Select", typeof(bool)));
             t.Columns.Add("id");//1
-            t.Columns.Add(new DataColumn("Img", typeof(Bitmap)));//   2     
+          
             t.Columns.Add("Date");//3    
             t.Columns.Add("Name");//3 
             t.Columns.Add("Balance B/F");//4              
@@ -58,7 +58,7 @@ namespace VPOS
             foreach (Taking h in Global._taking)
             {
 
-                t.Rows.Add(new object[] { false, h.Id, b,h.Date,Global._item.First(j=>j.Id.Contains(h.ItemID)).Name, h.Bf, h.Purchases, h.Sales, h.Total_stock, h.System_stock, h.Variance, h.Purchase_amount, h.Sale_amount, h.Profit, h.Physical_count, h.Damages, h.Shrinkable,h.OrgID, h.UserID, h.Created, Global._item.First(j => j.Id.Contains(h.ItemID)).Image, "Delete"});
+                t.Rows.Add(new object[] { false, h.Id,h.Date,Global._item.First(j=>j.Id.Contains(h.ItemID)).Name, h.Bf, h.Purchases, h.Sales, h.Total_stock, h.System_stock, h.Variance, h.Purchase_amount, h.Sale_amount, h.Profit, h.Physical_count, h.Damages, h.Shrinkable,h.OrgID, h.UserID, h.Created, Global._item.First(j => j.Id.Contains(h.ItemID)).Image, "Delete"});
 
             }
             dtGrid.DataSource = t;
@@ -84,7 +84,7 @@ namespace VPOS
             });
             dtGrid.AllowUserToAddRows = false;
             dtGrid.Columns[19].DefaultCellStyle.BackColor = Color.Orange;
-            dtGrid.RowTemplate.Height = 60;
+            //dtGrid.RowTemplate.Height = 60;
             dtGrid.Columns["id"].Visible = false;
             dtGrid.Columns["image"].Visible = false;
             dtGrid.Columns["userid"].Visible = false;

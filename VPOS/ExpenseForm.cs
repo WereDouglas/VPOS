@@ -23,27 +23,17 @@ namespace VPOS
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string ID = Guid.NewGuid().ToString();
-
-            if (totalTxt.Text == "0")
+            using (ExpenseDialog form = new ExpenseDialog())
             {
-                totalTxt.BackColor = Color.Red;
-                MessageBox.Show("You cant have spent nothing !");
-                return;
+                // DentalDialog form1 = new DentalDialog(item.Text, TransactorID);
+                DialogResult dr = form.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    // MessageBox.Show(form.state);
+                    LoadData(date);
+                }
             }
-            if (typeCbx.Text == "")
-            {
-                typeCbx.BackColor = Color.Red;
-                MessageBox.Show("what type of expense is this  !");
-                return;
-            }
-
-            _exp = new Expense(ID, particularTxt.Text, detailTxt.Text, qtyTxt.Text, Convert.ToDateTime(dateTimePicker1.Text).ToString("dd-MM-yyyy"), priceTxt.Text, typeCbx.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, totalTxt.Text);
-            DBConnect.Insert(_exp);
-            Global._expense.Add(_exp);
-            MessageBox.Show("Information Saved");
-            totalTxt.Text = "0";
-            LoadData(date);
+          
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -90,15 +80,6 @@ namespace VPOS
 
             t.Rows.Add(new object[] { "", "", "", "", "", "Total", SumDictionary.Sum(m => Convert.ToDouble(m.Value)).ToString("n0") });
             itemGrid.Columns[7].DefaultCellStyle.BackColor = Color.OrangeRed;
-        }
-
-        private void qtyTxt_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                totalTxt.Text = (Convert.ToDouble(qtyTxt.Text) * Convert.ToDouble(priceTxt.Text)).ToString();
-            }
-            catch { }
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)

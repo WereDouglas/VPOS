@@ -100,13 +100,13 @@ namespace VPOS
         string currentID;
         private void dtGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            qtyTxt.Text = "0";
+            qtyLbl.Text = "0";
             nameLbl.Text = "0";
             purchaseTxt.Text = "0";
             saleTxt.Text = "0";
             qtyLbl.Text = "0";
             previousLbl.Text = "0";
-            stockBalanceLbl.Text = "0";
+      
          
             if (e.ColumnIndex == 0)
             {
@@ -118,16 +118,10 @@ namespace VPOS
                 qtyLbl.Text = dtGrid.Rows[e.RowIndex].Cells[9].Value.ToString();
                 previousLbl.Text = dtGrid.Rows[e.RowIndex].Cells[6].Value.ToString();
 
-                saleQtyLbl.Text = Global._sale.Where(m => m.Date.Contains(date) && m.Type.Contains("Sale") && m.ItemID.Contains(currentID)).Sum(p => Convert.ToDouble(p.Qty)).ToString("n0");
-                purchaseQtyLbl.Text = Global._sale.Where(m => m.Date.Contains(date) && m.Type.Contains("Purchase") && m.ItemID.Contains(currentID)).Sum(p => Convert.ToDouble(p.Qty)).ToString("n0");
-
-                // purchaseamountLbl.Text = "Purchase today: " + Global._sale.Where(m => m.Date.Contains(date) && m.Type.Contains("Purchase")).Sum(p => Convert.ToDouble(p.Total)).ToString("n0");
-                saleAmountLbl.Text = (Convert.ToDouble(saleQtyLbl.Text) * Convert.ToDouble(saleTxt.Text)).ToString("n0");
-                purchaseAmountLbl.Text = (Convert.ToDouble(purchaseQtyLbl.Text) * Convert.ToDouble(purchaseTxt.Text)).ToString("n0");
 
                 try
                 {
-                    stockBalanceLbl.Text = (Convert.ToDouble(qtyLbl.Text) + Convert.ToDouble(purchaseQtyLbl.Text) - Convert.ToDouble(saleQtyLbl.Text)).ToString();
+                    //stockBalanceLbl.Text = (Convert.ToDouble(qtyLbl.Text) + Convert.ToDouble(purchaseQtyLbl.Text) - Convert.ToDouble(saleQtyLbl.Text)).ToString();
                 }
                 catch { }
 
@@ -147,42 +141,15 @@ namespace VPOS
         Stock _stk;
         private void button3_Click(object sender, EventArgs e)
         {
-            if (qtyTxt.Text == "0")
-            {
-                qtyTxt.BackColor = Color.Red;
-                MessageBox.Show("Please input values");
-                return;
-            }
-            if (qtySold.Text == "0")
-            {
-                qtySold.BackColor = Color.Red;
-                MessageBox.Show("Please Quantity sold");
-                return;
-            }
+            
 
             string id = Guid.NewGuid().ToString();
             _qtyList = Quantity.ListQuantity();
             if (_qtyList.Where(t => t.Created.Contains(Convert.ToDateTime(dateTimePicker1.Text).ToString("dd-MM-yyyy")) && t.ItemID.Contains(currentID)).Count() < 1)
             {
-                string Query = "UPDATE item SET  purchase_price='" + purchaseTxt.Text + "' ,sale_price='" + saleTxt.Text + "' ,quantity = '" + qtyTxt.Text + "'  WHERE id ='" + currentID + "'";
+                string Query = "UPDATE item SET  purchase_price='" + purchaseTxt.Text + "' ,sale_price='" + saleTxt.Text + "' ,quantity = '" + qtyLbl.Text + "'  WHERE id ='" + currentID + "'";
                 DBConnect.save(Query);
 
-                if (!Helper.ExistsAnd("quantity", "date", "itemid", date, currentID))
-                {
-                    _qty = new Quantity(id, currentID, qtySold.Text, qtyPurchased.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, date);
-                    DBConnect.Insert(_qty);
-                    double totalValue = Convert.ToDouble(qtyTxt.Text) * Convert.ToDouble(saleTxt.Text);
-                    string Query2 = "UPDATE stock SET  qty='" + qtyTxt.Text + "' ,sale_price='" + saleTxt.Text + "' ,purchase_price = '" + purchaseTxt.Text + "',previous_price ='" + previousLbl.Text + "',total_value = '" + totalValue.ToString() + "',created = '" + DateTime.Now.ToString("dd-MM-yyyy H:mm:ss") + "'  WHERE itemID ='" + currentID + "'";
-                    DBConnect.save(Query2);
-                    MessageBox.Show("Information Saved");
-
-                    qtySold.Text = "0";
-                    qtyPurchased.Text = "0";
-                }
-                else
-                {
-                    MessageBox.Show("Stock taking already done today ");
-                }
             }
             else
             {
@@ -205,11 +172,7 @@ namespace VPOS
             
             try
             {  
-                purchaseCountAmountLbl.Text = (Convert.ToDouble(qtyPurchased.Text) * Convert.ToDouble(purchaseTxt.Text)).ToString("n0"); ;
-                saleCountAmountLbl.Text = (Convert.ToDouble(qtySold.Text) * Convert.ToDouble(saleTxt.Text)).ToString("n0");
-
-                noReceiptSaleTxt.Text = (Convert.ToDouble(qtySold.Text) - Convert.ToDouble(saleQtyLbl.Text)).ToString("n0");
-                noReceiptPurchaseTxt.Text = (Convert.ToDouble(qtyPurchased.Text) - Convert.ToDouble(purchaseQtyLbl.Text)).ToString("n0");
+               
             }
             catch { }
         }
@@ -225,13 +188,7 @@ namespace VPOS
 
         private void qtyTxt_TextChanged(object sender, EventArgs e)
         {
-            offsetLbl.Text = "0";           
-            try
-            {
-                offsetLbl.Text = (Convert.ToDouble(stockBalanceLbl.Text) - Convert.ToDouble(qtyTxt.Text)).ToString();
-                  }
-            catch { }
-           
+            
 
         }
       

@@ -17,7 +17,7 @@ namespace VPOS.Model
         private string orgID;
         private string userID;
         private string date;
-
+        private string storeID;
         public string Id
         {
             get
@@ -122,7 +122,20 @@ namespace VPOS.Model
             }
         }
 
-        public Quantity(string id, string itemID, string sale_qty, string purchase_qty, string created, string orgID, string userID,string date)
+        public string StoreID
+        {
+            get
+            {
+                return storeID;
+            }
+
+            set
+            {
+                storeID = value;
+            }
+        }
+
+        public Quantity(string id, string itemID, string sale_qty, string purchase_qty, string created, string orgID, string userID,string date, string storeID)
         {
             this.Id = id;
             this.ItemID = itemID;
@@ -132,6 +145,7 @@ namespace VPOS.Model
             this.OrgID = orgID;
             this.UserID = userID;
             this.Date = date;
+            this.StoreID = storeID;
         }
 
         public static List<Quantity> ListQuantity()
@@ -143,7 +157,7 @@ namespace VPOS.Model
             NpgsqlDataReader Reader = command.ExecuteReader();
             while (Reader.Read())
             {
-                Quantity p = new Quantity(Reader["id"].ToString(), Reader["itemID"].ToString(), Reader["sale_qty"].ToString(), Reader["purchase_qty"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(),Reader["date"].ToString());
+                Quantity p = new Quantity(Reader["id"].ToString(), Reader["itemID"].ToString(), Reader["sale_qty"].ToString(), Reader["purchase_qty"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(),Reader["date"].ToString(), Reader["storeid"].ToString());
                 categories.Add(p);
             }
             DBConnect.CloseConn();
