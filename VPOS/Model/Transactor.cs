@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace VPOS.Model
         private string address;
         private string orgID;
         private string storeID;
-
+        static SQLiteDataReader Reader;
         public string Id
         {
             get
@@ -135,7 +136,7 @@ namespace VPOS.Model
                 storeID = value;
             }
         }
-
+        public Transactor() { }
         public Transactor(string id, string name, string contact, string image, string type, string created,string address,string orgID, string storeID)
         {
             this.Id = id;
@@ -162,6 +163,22 @@ namespace VPOS.Model
                 wards.Add(p);
             }
             DBConnect.CloseConn();
+            return wards;
+
+        }
+        public static List<Transactor> ListTransactorLite()
+        {
+            
+            List<Transactor> wards = new List<Transactor>();
+            string SQL = "SELECT * FROM transactor";
+            Reader = DBConnect.ReadingLite(SQL);
+            while (Reader.Read())
+            {
+                Transactor p = new Transactor(Reader["id"].ToString(), Reader["name"].ToString(), Reader["contact"].ToString(), Reader["image"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["address"].ToString(), Reader["orgID"].ToString(), Reader["storeid"].ToString());
+                wards.Add(p);
+            }
+            Reader.Close();
+          
             return wards;
 
         }

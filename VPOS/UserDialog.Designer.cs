@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserDialog));
             this.addressTxt = new System.Windows.Forms.TextBox();
             this.passwordTxt = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -59,6 +60,8 @@
             this.label15 = new System.Windows.Forms.Label();
             this.statusCbx = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.storeCbx = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.bntStart = new System.Windows.Forms.Button();
@@ -73,8 +76,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.label22 = new System.Windows.Forms.Label();
-            this.storeCbx = new System.Windows.Forms.ComboBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgVideo)).BeginInit();
@@ -383,6 +384,25 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "Address";
             // 
+            // label22
+            // 
+            this.label22.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(213, 358);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(32, 13);
+            this.label22.TabIndex = 164;
+            this.label22.Text = "Store";
+            // 
+            // storeCbx
+            // 
+            this.storeCbx.FormattingEnabled = true;
+            this.storeCbx.Location = new System.Drawing.Point(213, 374);
+            this.storeCbx.Name = "storeCbx";
+            this.storeCbx.Size = new System.Drawing.Size(200, 21);
+            this.storeCbx.TabIndex = 165;
+            this.storeCbx.SelectedIndexChanged += new System.EventHandler(this.storeCbx_SelectedIndexChanged);
+            // 
             // label17
             // 
             this.label17.AutoSize = true;
@@ -581,25 +601,6 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // label22
-            // 
-            this.label22.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(213, 358);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(32, 13);
-            this.label22.TabIndex = 164;
-            this.label22.Text = "Store";
-            // 
-            // storeCbx
-            // 
-            this.storeCbx.FormattingEnabled = true;
-            this.storeCbx.Location = new System.Drawing.Point(213, 374);
-            this.storeCbx.Name = "storeCbx";
-            this.storeCbx.Size = new System.Drawing.Size(200, 21);
-            this.storeCbx.TabIndex = 165;
-            this.storeCbx.SelectedIndexChanged += new System.EventHandler(this.storeCbx_SelectedIndexChanged);
-            // 
             // UserDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -609,6 +610,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UserDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "UserDialog";

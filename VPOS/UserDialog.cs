@@ -188,7 +188,7 @@ namespace VPOS
                 roleCbx.BackColor = Color.Red;
                 return;
             }
-            if (storeCbx.Text == "")
+            if (String.IsNullOrEmpty(storeID))
             {
                 storeCbx.BackColor = Color.Red;
                 return;
@@ -204,11 +204,15 @@ namespace VPOS
             string id = Guid.NewGuid().ToString();
             MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
             string fullimage = ImageToBase64(stream);
-            _user = new Users(id, idTxt.Text, primaryTxt.Text, secondaryTxt.Text, surnameTxt.Text, firstnameTxt.Text, othernameTxt.Text, emailTxt.Text, nationalityTxt.Text, addressTxt.Text, password, genderCbx.Text, Helper.OrgID, roleCbx.Text, Helper.MD5Hash(initialTxt.Text), accountTxt.Text, statusCbx.Text, fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), storeID);
+            _user = new Users(id, idTxt.Text, primaryTxt.Text, secondaryTxt.Text, surnameTxt.Text, firstnameTxt.Text, othernameTxt.Text, emailTxt.Text, nationalityTxt.Text, addressTxt.Text, password, genderCbx.Text, Helper.OrgID, roleCbx.Text, Helper.MD5Hash(initialTxt.Text), accountTxt.Text, statusCbx.Text, fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),Helper.StoreID);
 
             if (UserID != "")
             {
+                _user = new Users(UserID, idTxt.Text, primaryTxt.Text, secondaryTxt.Text, surnameTxt.Text, firstnameTxt.Text, othernameTxt.Text, emailTxt.Text, nationalityTxt.Text, addressTxt.Text, password, genderCbx.Text, Helper.OrgID, roleCbx.Text, Helper.MD5Hash(initialTxt.Text), accountTxt.Text, statusCbx.Text, fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.StoreID);
+
                 DBConnect.Update(_user, UserID);
+                Global._users.RemoveAll(x => x.Id == UserID);
+                Global._users.Add(_user);
                 MessageBox.Show("Information Updated ");
                 Close();
             }
@@ -217,6 +221,7 @@ namespace VPOS
                 if (DBConnect.Insert(_user) != "")
                 {
                     Global._users.Add(_user);
+                    
                     MessageBox.Show("Information Saved");
                     Close();
                 }

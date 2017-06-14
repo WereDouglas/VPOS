@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace VPOS.Model
         private string orgID;
         private string userID;
         private string storeID;
+        static SQLiteDataReader Reader;
         public string Id
         {
             get
@@ -176,7 +178,7 @@ namespace VPOS.Model
                 storeID = value;
             }
         }
-
+        public Expense() { }
         public Expense(string id, string no, string itemID, string qty, string date, string price, string type, string created, string orgID, string userID,string total, string storeID)
         {
             this.Id = id;
@@ -207,6 +209,21 @@ namespace VPOS.Model
                 categories.Add(p);
             }
             DBConnect.CloseConn();
+            return categories;
+
+        }
+        public static List<Expense> ListExpenseLite()
+        {
+            DBConnect.OpenConn();
+            List<Expense> categories = new List<Expense>();
+            string SQL = "SELECT * FROM expense";
+            Reader = DBConnect.ReadingLite(SQL);
+            while (Reader.Read())
+            {
+                Expense p = new Expense(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["total"].ToString(), Reader["storeid"].ToString());
+                categories.Add(p);
+            }
+            Reader.Close();
             return categories;
 
         }

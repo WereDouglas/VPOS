@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace VPOS.Model
         private string userID;
         private string type;
         private string storeID;
-
+        static SQLiteDataReader Reader;
         public string Id
         {
             get
@@ -150,7 +151,7 @@ namespace VPOS.Model
                 storeID = value;
             }
         }
-
+        public Payment() { }
         public Payment(string id, string no, string method, string amount, string by, string created, string orgID, string userID,string type, string storeID)
         {
             this.Id = id;
@@ -179,6 +180,21 @@ namespace VPOS.Model
                 payment.Add(p);
             }
             DBConnect.CloseConn();
+            return payment;
+
+        }
+        public static List<Payment> ListPaymentLite()
+        {
+            DBConnect.OpenConn();
+            List<Payment> payment = new List<Payment>();
+            string SQL = "SELECT * FROM payment";
+            Reader = DBConnect.ReadingLite(SQL);
+            while (Reader.Read())
+            {
+                Payment p = new Payment(Reader["id"].ToString(), Reader["no"].ToString(), Reader["method"].ToString(), Reader["amount"].ToString(), Reader["by"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["type"].ToString(), Reader["storeid"].ToString());
+                payment.Add(p);
+            }
+            Reader.Close();
             return payment;
 
         }

@@ -17,8 +17,11 @@ namespace VPOS
         public static string UserID;
         public static string StoreID;
         public static string Username;
+        public static string ServerName;
+        public static string ServerIP;
         public static string Code;
         public static string Image;
+        public static string Type;
         public static string lastSync;
         public static string stocktaking;
         //  public static string genUrl = "http://caseprofessional.org/index.php/";

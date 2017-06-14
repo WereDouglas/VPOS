@@ -34,34 +34,20 @@ namespace VPOS
             t.Columns.Add("id");//1
             t.Columns.Add(new DataColumn("Img", typeof(Bitmap)));//   2        
             t.Columns.Add("Name");//3 
+            t.Columns.Add("Generic name");//4     
             t.Columns.Add("Code");//4              
             t.Columns.Add("Description");//5
             t.Columns.Add("Manufacturer");//6
-            t.Columns.Add("Country");//7
-            t.Columns.Add("Batch No.");//8
-            t.Columns.Add("Purchase price");//9
-            t.Columns.Add("Sale price");//10
-            t.Columns.Add("Composition");//11
-            t.Columns.Add("Date of Expiry");//12
-            t.Columns.Add("Category");//13
-            t.Columns.Add("Formulation");//14
+            t.Columns.Add("Country");//7          
+            t.Columns.Add("Composition");//11           
+            t.Columns.Add("Category");//13          
             t.Columns.Add("Barcode");//15
             t.Columns.Add("image");//16  
-            t.Columns.Add("Created");//17
-            t.Columns.Add("Department");//18
-            t.Columns.Add("Date Manufactured");//19
-            t.Columns.Add("Generic");//20
+            t.Columns.Add("Created");//17           
             t.Columns.Add("Strength");//21
-            t.Columns.Add("Delete");//22
-            t.Columns.Add("Quantity");//23
-            t.Columns.Add("Min Threshold");//24
-            t.Columns.Add("Last Stock Count");//25
-            t.Columns.Add("Date of stock taking");//26
+            t.Columns.Add("Delete");//22           
             t.Columns.Add("Validity");//26
-            t.Columns.Add("Tax");//26
-            t.Columns.Add("Promo Price");//26
-            t.Columns.Add("Promo Start");//26
-            t.Columns.Add("Promo End");//26
+          
 
             Bitmap b = new Bitmap(50, 50);
 
@@ -72,7 +58,7 @@ namespace VPOS
             foreach (Item h in Global._item)
             {
 
-                t.Rows.Add(new object[] { false, h.Id, b, h.Name, h.Code, h.Description, h.Manufacturer, h.Country, h.Batch, h.Purchase_price, h.Sale_price, h.Composition, h.Expire, h.Category, h.Formulation, h.Barcode, h.Image, h.Created, h.Department, h.Date_manufactured, h.Generic, h.Strength, "Delete", h.Quantity, h.Min_qty,h.Counts,h.Taking,h.Valid,h.Tax ,h.Promo_price,h.Promo_start,h.Promo_end});
+                t.Rows.Add(new object[] { false, h.Id, b, h.Name,h.Generic, h.Code, h.Description, h.Manufacturer, h.Country, h.Composition,h.Category, h.Barcode, h.Image, h.Created, h.Strength, "Delete",h.Valid});
 
             }
             dtGrid.DataSource = t;
@@ -97,10 +83,10 @@ namespace VPOS
                 }
             });
             dtGrid.AllowUserToAddRows = false;
-            dtGrid.Columns[22].DefaultCellStyle.BackColor = Color.Orange;
+            dtGrid.Columns["Delete"].DefaultCellStyle.BackColor = Color.Orange;
             dtGrid.RowTemplate.Height = 60;
-            dtGrid.Columns[1].Visible = false;
-            dtGrid.Columns[16].Visible = false;
+            dtGrid.Columns["id"].Visible = false;
+            dtGrid.Columns["image"].Visible = false;
         }
     
         public System.Drawing.Image Base64ToImage(string bases)
@@ -208,17 +194,17 @@ namespace VPOS
 
         private void dtGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (!Regex.IsMatch(dtGrid.Rows[e.RowIndex].Cells["Quantity"].Value.ToString(), @"^\d+$"))
+            if (String.IsNullOrEmpty(dtGrid.Rows[e.RowIndex].Cells["Name"].Value.ToString()))
             {
 
-                MessageBox.Show("Quantity is not a numnber ");
+                MessageBox.Show("Please input a name ");
                 return;
 
             }
         
           
-            string updateID = dtGrid.Rows[e.RowIndex].Cells[1].Value.ToString();
-            _item = new Item(updateID, dtGrid.Rows[e.RowIndex].Cells[3].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[4].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[5].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[6].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[7].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[8].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[9].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[10].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[11].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[12].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[13].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[14].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[15].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[16].Value.ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), dtGrid.Rows[e.RowIndex].Cells[18].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[19].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[20].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[21].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[23].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[24].Value.ToString(),Helper.OrgID, dtGrid.Rows[e.RowIndex].Cells[25].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[26].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[27].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[28].Value.ToString(),Helper.StoreID, dtGrid.Rows[e.RowIndex].Cells["Promo Price"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Promo Start"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Promo End"].Value.ToString());
+            string updateID = dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString();
+            _item = new Item(updateID,dtGrid.Rows[e.RowIndex].Cells["name"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Generic name"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Code"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Description"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Manufacturer"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Country"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Composition"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Category"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Barcode"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["image"].Value.ToString(),DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), dtGrid.Rows[e.RowIndex].Cells["Strength"].Value.ToString(),Helper.OrgID, dtGrid.Rows[e.RowIndex].Cells["Validity"].Value.ToString());
 
             DBConnect.Update(_item, updateID);
             Global._item.RemoveAll(x => x.Id == updateID);

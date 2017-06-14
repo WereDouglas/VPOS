@@ -50,7 +50,7 @@ namespace VPOS
             if (Uploading.CheckServer())
             {
                 
-                for (int i = 0; i < 15; i++)
+                for (int i = 0; i < 16; i++)
                 {
                     FeedBack("PROCESS " + i.ToString());
                     //try
@@ -123,7 +123,10 @@ namespace VPOS
                 case 12:
                     Uploading.UploadTaking();
                     break;
-                case 13: 
+                case 13:
+                    Uploading.UploadStock();
+                    break;
+                case 14: 
                  
                     if (Uploading.CheckServer())
                     {
@@ -425,6 +428,11 @@ namespace VPOS
             frm.MdiParent = this;
             frm.Dock = DockStyle.Fill;
             frm.Show();
+        }
+
+        private void toolStripButton3_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

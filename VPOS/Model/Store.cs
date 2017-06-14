@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,12 +14,12 @@ namespace VPOS.Model
         private string name;
         private string location;
         private string address;
-
         private string contact;
         private string created;
         private string orgID;
         private string code;
-
+        private string current;
+      
 
         public string Id
         {
@@ -124,7 +125,20 @@ namespace VPOS.Model
             }
         }
 
-        public Store(string id, string name, string location, string address, string contact, string created, string orgID,string code)
+        public string Current
+        {
+            get
+            {
+                return current;
+            }
+
+            set
+            {
+                current = value;
+            }
+        }
+        public Store() { }
+        public Store(string id, string name, string location, string address, string contact, string created, string orgID,string code,string current)
         {
             this.Id = id;
             this.Name = name;
@@ -134,6 +148,7 @@ namespace VPOS.Model
             this.Created = created;
             this.OrgID = orgID;
             this.Code = code;
+            this.Current = current;
             
 
         }
@@ -147,7 +162,23 @@ namespace VPOS.Model
             NpgsqlDataReader Reader = command.ExecuteReader();
             while (Reader.Read())
             {
-                Store p = new Store(Reader["id"].ToString(), Reader["name"].ToString(), Reader["location"].ToString(), Reader["address"].ToString(), Reader["contact"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(),Reader["code"].ToString());
+                Store p = new Store(Reader["id"].ToString(), Reader["name"].ToString(), Reader["location"].ToString(), Reader["address"].ToString(), Reader["contact"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(),Reader["code"].ToString(), Reader["current"].ToString());
+                categories.Add(p);
+            }
+            DBConnect.CloseConn();
+            return categories;
+
+        }
+        static SQLiteDataReader Reader;
+        public static List<Store> ListStoreLite()
+        {
+            DBConnect.OpenConn();
+            List<Store> categories = new List<Store>();
+            string SQL = "SELECT * FROM store";
+            Reader = DBConnect.ReadingLite(SQL);
+            while (Reader.Read())
+            {
+                Store p = new Store(Reader["id"].ToString(), Reader["name"].ToString(), Reader["location"].ToString(), Reader["address"].ToString(), Reader["contact"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["code"].ToString(), Reader["current"].ToString());
                 categories.Add(p);
             }
             DBConnect.CloseConn();

@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,35 +12,20 @@ namespace VPOS.Model
     {
         private string id;
         private string name;
+        private string generic;
         private string code;
         private string description;
         private string manufacturer;
-        private string country;
-        private string batch;
-        private string purchase_price;
-        private string sale_price;
-        private string composition;
-        private string expire;
-        private string category;
-        private string formulation;
+        private string country;       
+        private string composition;       
+        private string category;       
         private string barcode;
         private string image;
-        private string created;
-        private string department;
-        private string date_manufactured;//for age
-        private string generic;
-        private string strength;
-        private string quantity;
-        private string min_qty;
-        private string orgID;
-        private string counts;
-        private string taking;
+        private string created;      
+        private string strength;       
+        private string orgID;      
         private string valid;
-        private string tax;
-        private string storeID;
-        private string promo_price;
-        private string promo_start;
-        private string promo_end;
+        static SQLiteDataReader Reader;
 
         public string Id
         {
@@ -64,6 +50,19 @@ namespace VPOS.Model
             set
             {
                 name = value;
+            }
+        }
+
+        public string Generic
+        {
+            get
+            {
+                return generic;
+            }
+
+            set
+            {
+                generic = value;
             }
         }
 
@@ -119,45 +118,6 @@ namespace VPOS.Model
             }
         }
 
-        public string Batch
-        {
-            get
-            {
-                return batch;
-            }
-
-            set
-            {
-                batch = value;
-            }
-        }
-
-        public string Purchase_price
-        {
-            get
-            {
-                return purchase_price;
-            }
-
-            set
-            {
-                purchase_price = value;
-            }
-        }
-
-        public string Sale_price
-        {
-            get
-            {
-                return sale_price;
-            }
-
-            set
-            {
-                sale_price = value;
-            }
-        }
-
         public string Composition
         {
             get
@@ -171,19 +131,6 @@ namespace VPOS.Model
             }
         }
 
-        public string Expire
-        {
-            get
-            {
-                return expire;
-            }
-
-            set
-            {
-                expire = value;
-            }
-        }
-
         public string Category
         {
             get
@@ -194,19 +141,6 @@ namespace VPOS.Model
             set
             {
                 category = value;
-            }
-        }
-
-        public string Formulation
-        {
-            get
-            {
-                return formulation;
-            }
-
-            set
-            {
-                formulation = value;
             }
         }
 
@@ -249,45 +183,6 @@ namespace VPOS.Model
             }
         }
 
-        public string Department
-        {
-            get
-            {
-                return department;
-            }
-
-            set
-            {
-                department = value;
-            }
-        }
-
-        public string Date_manufactured
-        {
-            get
-            {
-                return date_manufactured;
-            }
-
-            set
-            {
-                date_manufactured = value;
-            }
-        }
-
-        public string Generic
-        {
-            get
-            {
-                return generic;
-            }
-
-            set
-            {
-                generic = value;
-            }
-        }
-
         public string Strength
         {
             get
@@ -298,32 +193,6 @@ namespace VPOS.Model
             set
             {
                 strength = value;
-            }
-        }
-
-        public string Quantity
-        {
-            get
-            {
-                return quantity;
-            }
-
-            set
-            {
-                quantity = value;
-            }
-        }
-
-        public string Min_qty
-        {
-            get
-            {
-                return min_qty;
-            }
-
-            set
-            {
-                min_qty = value;
             }
         }
 
@@ -340,32 +209,6 @@ namespace VPOS.Model
             }
         }
 
-        public string Counts
-        {
-            get
-            {
-                return counts;
-            }
-
-            set
-            {
-                counts = value;
-            }
-        }
-
-        public string Taking
-        {
-            get
-            {
-                return taking;
-            }
-
-            set
-            {
-                taking = value;
-            }
-        }
-
         public string Valid
         {
             get
@@ -378,105 +221,24 @@ namespace VPOS.Model
                 valid = value;
             }
         }
-
-        public string Tax
-        {
-            get
-            {
-                return tax;
-            }
-
-            set
-            {
-                tax = value;
-            }
-        }
-
-        public string StoreID
-        {
-            get
-            {
-                return storeID;
-            }
-
-            set
-            {
-                storeID = value;
-            }
-        }
-
-        public string Promo_price
-        {
-            get
-            {
-                return promo_price;
-            }
-
-            set
-            {
-                promo_price = value;
-            }
-        }
-
-        public string Promo_start
-        {
-            get
-            {
-                return promo_start;
-            }
-
-            set
-            {
-                promo_start = value;
-            }
-        }
-
-        public string Promo_end
-        {
-            get
-            {
-                return promo_end;
-            }
-
-            set
-            {
-                promo_end = value;
-            }
-        }
-
-        public Item(string id, string name, string code, string description, string manufacturer, string country, string batch, string purchase_price, string sale_price, string composition, string expire, string category, string formulation, string barcode, string image, string created, string department, string date_manufactured, string generic, string strength,string quantity,string min_qty,string orgID,string counts,string taking,string valid,string tax,string storeID,string promo_price,string promo_start,string promo_end)
+        public Item() { }
+        public Item(string id, string name, string generic, string code, string description, string manufacturer, string country, string composition, string category, string barcode, string image, string created, string strength, string orgID, string valid)
         {
             this.Id = id;
             this.Name = name;
+            this.Generic = generic;
             this.Code = code;
             this.Description = description;
             this.Manufacturer = manufacturer;
             this.Country = country;
-            this.Batch = batch;
-            this.Purchase_price = purchase_price;
-            this.Sale_price = sale_price;
             this.Composition = composition;
-            this.Expire = expire;
             this.Category = category;
-            this.Formulation = formulation;
             this.Barcode = barcode;
             this.Image = image;
             this.Created = created;
-            this.Department = department;
-            this.Date_manufactured = date_manufactured;
-            this.Generic = generic;
             this.Strength = strength;
-            this.Quantity = quantity;
-            this.Min_qty = min_qty;
             this.OrgID = orgID;
-            this.Counts = counts;
-            this.Taking = taking;
             this.Valid = valid;
-            this.Tax = tax;
-            this.StoreID = storeID;
-            this.Promo_price = promo_price;
-            this.Promo_start = promo_start;
-            this.Promo_end = promo_end;
         }
 
         public static List<Item> ListItem()
@@ -488,10 +250,25 @@ namespace VPOS.Model
             NpgsqlDataReader Reader = command.ExecuteReader();
             while (Reader.Read())
             {
-                Item p = new Item(Reader["id"].ToString(), Reader["name"].ToString(), Reader["code"].ToString(), Reader["description"].ToString(), Reader["manufacturer"].ToString(), Reader["country"].ToString(), Reader["batch"].ToString(), Reader["purchase_price"].ToString(), Reader["sale_price"].ToString(), Reader["composition"].ToString(), Reader["expire"].ToString(), Reader["category"].ToString(), Reader["formulation"].ToString(), Reader["barcode"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["department"].ToString(), Reader["date_manufactured"].ToString(), Reader["generic"].ToString(), Reader["strength"].ToString(), Reader["quantity"].ToString(), Reader["min_qty"].ToString(), Reader["orgID"].ToString(), Reader["counts"].ToString(), Reader["taking"].ToString(), Reader["valid"].ToString(),Reader["tax"].ToString(), Reader["storeid"].ToString(), Reader["promo_price"].ToString(), Reader["promo_start"].ToString(), Reader["promo_end"].ToString());
+                Item p = new Item(Reader["id"].ToString(), Reader["name"].ToString(), Reader["generic"].ToString(), Reader["code"].ToString(), Reader["description"].ToString(), Reader["manufacturer"].ToString(), Reader["country"].ToString(), Reader["composition"].ToString(), Reader["category"].ToString(), Reader["barcode"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(),Reader["strength"].ToString(),Reader["orgID"].ToString(),Reader["valid"].ToString());
                 wards.Add(p);
             }
             DBConnect.CloseConn();
+            return wards;
+
+        }
+        public static List<Item> ListItemLite()
+        {
+            DBConnect.OpenConn();
+            List<Item> wards = new List<Item>();
+            string SQL = "SELECT * FROM item";
+            Reader = DBConnect.ReadingLite(SQL);
+            while (Reader.Read())
+            {
+                Item p = new Item(Reader["id"].ToString(), Reader["name"].ToString(), Reader["generic"].ToString(), Reader["code"].ToString(), Reader["description"].ToString(), Reader["manufacturer"].ToString(), Reader["country"].ToString(), Reader["composition"].ToString(), Reader["category"].ToString(), Reader["barcode"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["strength"].ToString(), Reader["orgID"].ToString(), Reader["valid"].ToString());
+                wards.Add(p);
+            }
+            Reader.Close();
             return wards;
 
         }

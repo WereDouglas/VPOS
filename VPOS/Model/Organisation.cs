@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +29,8 @@ namespace VPOS.Model
         private string sync;
         private string counts;
         private string company;
-
+        private string storeID;
+   
         public string Id
         {
             get
@@ -276,7 +278,20 @@ namespace VPOS.Model
             }
         }
 
-        public Organisation(string id, string name, string code, string registration, string contact, string address, string tin, string vat, string email, string country, string initialpassword, string account, string status, string expires, string image, string created,string sync,string counts,string company)
+        public string StoreID
+        {
+            get
+            {
+                return storeID;
+            }
+
+            set
+            {
+                storeID = value;
+            }
+        }
+        public Organisation() { }
+        public Organisation(string id, string name, string code, string registration, string contact, string address, string tin, string vat, string email, string country, string initialpassword, string account, string status, string expires, string image, string created,string sync,string counts,string company,string storeID)
         {
             this.Id = id;
             this.Name = name;
@@ -297,6 +312,7 @@ namespace VPOS.Model
             this.Sync = sync;
             this.Counts = counts;
             this.Company = company;
+            this.StoreID = storeID;
         }
 
         public static List<Organisation> ListOrganisation()
@@ -308,9 +324,26 @@ namespace VPOS.Model
             NpgsqlDataReader Reader = command.ExecuteReader();
             while (Reader.Read())
             {
-                Organisation p = new Organisation(Reader["id"].ToString(), Reader["name"].ToString(), Reader["code"].ToString(), Reader["registration"].ToString(), Reader["contact"].ToString(),Reader["address"].ToString(), Reader["tin"].ToString(), Reader["vat"].ToString(), Reader["email"].ToString(), Reader["country"].ToString(), Reader["initialpassword"].ToString(), Reader["account"].ToString(), Reader["status"].ToString(), Reader["expires"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["sync"].ToString(), Reader["counts"].ToString(),Reader["company"].ToString());
+                Organisation p = new Organisation(Reader["id"].ToString(), Reader["name"].ToString(), Reader["code"].ToString(), Reader["registration"].ToString(), Reader["contact"].ToString(),Reader["address"].ToString(), Reader["tin"].ToString(), Reader["vat"].ToString(), Reader["email"].ToString(), Reader["country"].ToString(), Reader["initialpassword"].ToString(), Reader["account"].ToString(), Reader["status"].ToString(), Reader["expires"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["sync"].ToString(), Reader["counts"].ToString(),Reader["company"].ToString(), Reader["storeID"].ToString());
                 wards.Add(p);
             }
+            DBConnect.CloseConn();
+            return wards;
+
+        }
+        static SQLiteDataReader Reader;
+        public static List<Organisation> ListOrganisationLite()
+        {
+            DBConnect.OpenConn();
+            List<Organisation> wards = new List<Organisation>();
+            string SQL = "SELECT * FROM organisation LIMIT 1";
+            Reader = DBConnect.ReadingLite(SQL);
+            while (Reader.Read())
+            {
+                Organisation p = new Organisation(Reader["id"].ToString(), Reader["name"].ToString(), Reader["code"].ToString(), Reader["registration"].ToString(), Reader["contact"].ToString(), Reader["address"].ToString(), Reader["tin"].ToString(), Reader["vat"].ToString(), Reader["email"].ToString(), Reader["country"].ToString(), Reader["initialpassword"].ToString(), Reader["account"].ToString(), Reader["status"].ToString(), Reader["expires"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["sync"].ToString(), Reader["counts"].ToString(), Reader["company"].ToString(), Reader["storeID"].ToString());
+                wards.Add(p);
+            }
+            Reader.Close();
             DBConnect.CloseConn();
             return wards;
 

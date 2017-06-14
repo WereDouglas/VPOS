@@ -14,8 +14,10 @@ namespace VPOS
     public partial class StoreDialog : Form
     {
         DataTable t;
+        
         public StoreDialog(string id)
         {
+           
             InitializeComponent();
             codeTxt.Text = Helper.Code;
         }
@@ -40,8 +42,14 @@ namespace VPOS
                 return;
 
             }
+            if (currentCbx.Text == "")
+            {
+                currentCbx.BackColor = Color.OrangeRed;
+                return;
+
+            }
             string id = Guid.NewGuid().ToString();
-            _store = new Store(id, nameTxt.Text, locationTxt.Text, addressTxt.Text, contactTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, codeTxt.Text);
+            _store = new Store(id, nameTxt.Text, locationTxt.Text, addressTxt.Text, contactTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, codeTxt.Text,currentCbx.Text);
 
 
             if (DBConnect.Insert(_store) != "")

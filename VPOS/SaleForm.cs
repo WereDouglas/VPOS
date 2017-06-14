@@ -105,15 +105,15 @@ namespace VPOS
             int c = 0;
             foreach (var h in SelectedItems)
             {
-                t.Rows.Add(new object[] { b, Global._item.First(r => r.Barcode.Contains(h.Key)).Barcode, Global._item.First(r => r.Barcode.Contains(h.Key)).Name + Environment.NewLine + "PRICE:" + Global._item.First(r => r.Barcode.Contains(h.Key)).Sale_price + Environment.NewLine + "MANUFACTURER :" + Global._item.First(r => r.Barcode.Contains(h.Key)).Manufacturer + Environment.NewLine + "EXPIRES:" + Global._item.First(r => r.Barcode.Contains(h.Key)).Expire, h.Value, Global._item.First(r => r.Barcode.Contains(h.Key)).Image, "Remove" });
-                double TotalCost = (Convert.ToDouble(h.Value) * Convert.ToDouble(Global._item.First(r => r.Barcode.Contains(h.Key)).Sale_price));
+                t.Rows.Add(new object[] { b, Global._item.First(r => r.Barcode.Contains(h.Key)).Barcode, Global._item.First(r => r.Barcode.Contains(h.Key)).Name + Environment.NewLine + "PRICE:" + Global._stock.First(r => r.Barcode.Contains(h.Key)).Sale_price + Environment.NewLine + "MANUFACTURER :" + Global._item.First(r => r.Barcode.Contains(h.Key)).Manufacturer + Environment.NewLine + "EXPIRES:" + Global._stock.First(r => r.Barcode.Contains(h.Key)).Expire, h.Value, Global._item.First(r => r.Barcode.Contains(h.Key)).Image, "Remove" });
+                double TotalCost = (Convert.ToDouble(h.Value) * Convert.ToDouble(Global._stock.First(r => r.Barcode.Contains(h.Key)).Sale_price));
                 double tax = 0;
-                if (Global._item.First(r => r.Barcode.Contains(h.Key)).Tax != "0" || String.IsNullOrEmpty(Global._item.First(r => r.Barcode.Contains(h.Key)).Tax))
+                if (Global._stock.First(r => r.Barcode.Contains(h.Key)).Tax != "0" || String.IsNullOrEmpty(Global._stock.First(r => r.Barcode.Contains(h.Key)).Tax))
                 {
-                    tax = Math.Round((TotalCost) * (100 / (100 + Convert.ToDouble(Global._item.First(r => r.Barcode.Contains(h.Key)).Tax))), 0);
+                    tax = Math.Round((TotalCost) * (100 / (100 + Convert.ToDouble(Global._stock.First(r => r.Barcode.Contains(h.Key)).Tax))), 0);
                 }
 
-                s.Rows.Add(new object[] { Global._item.First(r => r.Barcode.Contains(h.Key)).Name, Global._item.First(r => r.Barcode.Contains(h.Key)).Barcode, h.Value, Global._item.First(r => r.Barcode.Contains(h.Key)).Sale_price, TotalCost.ToString("n0"), tax });
+                s.Rows.Add(new object[] { Global._item.First(r => r.Barcode.Contains(h.Key)).Name, Global._item.First(r => r.Barcode.Contains(h.Key)).Barcode, h.Value, Global._stock.First(r => r.Barcode.Contains(h.Key)).Sale_price, TotalCost.ToString("n0"), tax });
                 TotalDictionary.Add(c++, TotalCost);
                 TaxDictionary.Add(c++, tax);
             }
@@ -303,10 +303,10 @@ namespace VPOS
             listView1.LargeImageList = il;
             foreach (Item h in _itemList)
             {
-                m.Rows.Add(new object[] { h.Name + Environment.NewLine + "PRICE:" + h.Sale_price + Environment.NewLine + "MANUFACTURER :" + h.Manufacturer, h.Barcode, h.Department, h.Description, "Add" });
+                m.Rows.Add(new object[] { h.Name + Environment.NewLine + "PRICE:" + Global._stock.First(r => r.ItemID.Contains(h.Id)).Purchase_price + Environment.NewLine + "MANUFACTURER :" + h.Manufacturer, h.Barcode, h.Category, h.Description, "Add" });
 
                 ListViewItem lst = new ListViewItem();
-                lst.Text = h.Name + "\n\r" + h.Department + "\n\r" + h.Description;
+                lst.Text = h.Name + "\n\r" + h.Category + "\n\r" + h.Description;
                 lst.ForeColor = Color.DimGray;
                 lst.Tag = h.Barcode;
                 lst.ImageIndex = count++;
@@ -464,6 +464,7 @@ namespace VPOS
             return ms;
         }
         Billing _billing;
+       
         Sale _sale;
         Payment _pay;
         private void button1_Click(object sender, EventArgs e)
@@ -486,7 +487,7 @@ namespace VPOS
                 MessageBox.Show("This transaction is already saved !");
                 return;
             }
-            _billing = new Billing(ID, noLbl.Text, "", amountTxt.Text, methodCbx.Text, refTxt.Text, totalLbl.Text, balanceTxt.Text, "", contactTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "Sale", Helper.OrgID, Helper.UserID, vatAmountTxt.Text, Helper.StoreID);
+            _billing = new Billing(ID, noLbl.Text, "", amountTxt.Text, methodCbx.Text, refTxt.Text,Convert.ToDouble(totalLbl.Text).ToString(), balanceTxt.Text, "", contactTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "Sale", Helper.OrgID, Helper.UserID, vatAmountTxt.Text, Helper.StoreID);
             if (Convert.ToDouble(amountTxt.Text) > 0)
             {
                 _pay = new Payment(ID, noLbl.Text, methodCbx.Text, amountTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, "Sale", Helper.StoreID);
@@ -498,20 +499,20 @@ namespace VPOS
                 Global._billings.Add(_billing);
                 foreach (var h in SelectedItems)
                 {
-                    double TotalCost = (Convert.ToDouble(h.Value) * Convert.ToDouble(Global._item.First(r => r.Barcode.Contains(h.Key)).Purchase_price));
+                    double TotalCost = (Convert.ToDouble(h.Value) * Convert.ToDouble(Global._stock.First(r => r.Barcode.Contains(h.Key)).Purchase_price));
 
                     string IDs = Guid.NewGuid().ToString();
                     double tax = 0;
-                    if (Global._item.First(r => r.Barcode.Contains(h.Key)).Tax != "0" || String.IsNullOrEmpty(Global._item.First(r => r.Barcode.Contains(h.Key)).Tax))
+                    if (Global._stock.First(r => r.Barcode.Contains(h.Key)).Tax != "0" || String.IsNullOrEmpty(Global._stock.First(r => r.Barcode.Contains(h.Key)).Tax))
                     {
-                        tax = Math.Round((TotalCost) * (100 / (100 + Convert.ToDouble(Global._item.First(r => r.Barcode.Contains(h.Key)).Tax))), 0);
+                        tax = Math.Round((TotalCost) * (100 / (100 + Convert.ToDouble(Global._stock.First(r => r.Barcode.Contains(h.Key)).Tax))), 0);
                     }
-                    _sale = new Sale(IDs, noLbl.Text, Global._item.First(r => r.Barcode.Contains(h.Key)).Id, h.Value.ToString(), dateLbl.Text, Global._item.First(r => r.Barcode.Contains(h.Key)).Sale_price, "Sale", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, TotalCost.ToString(), tax.ToString(), Helper.StoreID);
+                    _sale = new Sale(IDs, noLbl.Text, Global._item.First(r => r.Barcode.Contains(h.Key)).Id, h.Value.ToString(), dateLbl.Text, Global._stock.First(r => r.Barcode.Contains(h.Key)).Sale_price, "Sale", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, TotalCost.ToString(), tax.ToString(), Helper.StoreID);
 
-                    double cQty = Convert.ToDouble(Global._item.First(g => g.Id.Contains(Global._item.First(r => r.Barcode.Contains(h.Key)).Id)).Quantity);
+                    double cQty = Convert.ToDouble(Global._stock.First(g => g.Id.Contains(Global._stock.First(r => r.Barcode.Contains(h.Key)).Id)).Quantity);
                     double newQty = cQty - h.Value;
 
-                    string Query2 = "UPDATE item SET  quantity='" + newQty + "',created = '" + DateTime.Now.ToString("dd-MM-yyyy H:mm:ss") + "'  WHERE id ='" + Global._item.First(r => r.Barcode.Contains(h.Key)).Id + "'";
+                    string Query2 = "UPDATE stock SET  quantity='" + newQty + "',created = '" + DateTime.Now.ToString("dd-MM-yyyy H:mm:ss") + "'  WHERE itemID ='" + Global._item.First(r => r.Barcode.Contains(h.Key)).Id + "'";
                     DBConnect.save(Query2);
 
                     DBConnect.Insert(_sale);
@@ -586,10 +587,10 @@ namespace VPOS
             String underLine = "------------------------------------------";
             foreach (var h in SelectedItems)
             {
-                double TotalCost = (Convert.ToDouble(h.Value) * Convert.ToDouble(Global._item.First(r => r.Barcode.Contains(h.Key)).Purchase_price));
+                double TotalCost = (Convert.ToDouble(h.Value) * Convert.ToDouble(Global._stock.First(r => r.Barcode.Contains(h.Key)).Purchase_price));
 
                 Offset = Offset + 10;
-                graphics.DrawString(h.Value + " " + Global._item.First(r => r.Barcode.Contains(h.Key)).Name + " " + Global._item.First(r => r.Barcode.Contains(h.Key)).Sale_price + " " + TotalCost.ToString("n0"), new Font("Courier New", 8),
+                graphics.DrawString(h.Value + " " + Global._item.First(r => r.Barcode.Contains(h.Key)).Name + " " + Global._stock.First(r => r.Barcode.Contains(h.Key)).Sale_price + " " + TotalCost.ToString("n0"), new Font("Courier New", 8),
                          new SolidBrush(Color.Black), startX, startY + Offset);
                 Offset = Offset + 10;
 

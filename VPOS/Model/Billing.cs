@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -246,7 +247,7 @@ namespace VPOS.Model
                 storeID = value;
             }
         }
-
+        public Billing() { }
         public Billing(string id, string no, string pos, string paid, string method, string reference, string total, string balance, string bank, string account, string transactorID, string created,string type,string orgID,string userID,string tax, string storeID)
         {
             this.Id = id;
@@ -281,6 +282,22 @@ namespace VPOS.Model
                 billing.Add(p);
             }
             DBConnect.CloseConn();
+            return billing;
+
+        }
+        static SQLiteDataReader Reader;
+        public static List<Billing> ListBillingLite()
+        {
+            DBConnect.OpenConn();
+            List<Billing> billing = new List<Billing>();
+            string SQL = "SELECT * FROM billing";
+            Reader = DBConnect.ReadingLite(SQL);
+            while (Reader.Read())
+            {
+                Billing p = new Billing(Reader["id"].ToString(), Reader["no"].ToString(), Reader["pos"].ToString(), Reader["paid"].ToString(), Reader["method"].ToString(), Reader["reference"].ToString(), Reader["total"].ToString(), Reader["balance"].ToString(), Reader["bank"].ToString(), Reader["account"].ToString(), Reader["transactorID"].ToString(), Reader["created"].ToString(), Reader["type"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString());
+                billing.Add(p);
+            }
+            Reader.Close();
             return billing;
 
         }

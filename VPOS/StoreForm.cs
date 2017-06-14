@@ -37,12 +37,13 @@ namespace VPOS
             t.Columns.Add("Location");//
             t.Columns.Add("Address");// 
             t.Columns.Add("created");// 
+            t.Columns.Add("current");// 
 
             foreach (Store r in Global._store)
             {
                 byte[] MyData = new byte[0];
 
-                t.Rows.Add(new object[] { r.Id, false, r.Name, r.Contact, r.Location, r.Address, r.Created });
+                t.Rows.Add(new object[] { r.Id, false, r.Name, r.Contact, r.Location, r.Address, r.Created,r.Current });
 
             }
             dtGrid.DataSource = t;
@@ -76,7 +77,7 @@ namespace VPOS
 
             }
             string updateID = dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString();
-            _store = new Store(updateID, dtGrid.Rows[e.RowIndex].Cells["Name"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Location"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Address"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Contact"].Value.ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),Helper.OrgID, Helper.Code);
+            _store = new Store(updateID, dtGrid.Rows[e.RowIndex].Cells["Name"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Location"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Address"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Contact"].Value.ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),Helper.OrgID, Helper.Code, dtGrid.Rows[e.RowIndex].Cells["Current"].Value.ToString());
 
             DBConnect.Update(_store, updateID);
             Global._store.RemoveAll(x => x.Id == updateID);

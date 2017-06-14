@@ -50,3 +50,12 @@ C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.StoreDialog.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.ExpenseDialog.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.PartiesDialog.resources
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\EntityFramework.dll
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\EntityFramework.xml
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\System.Data.SQLite.dll
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\System.Data.SQLite.xml
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.SettingDialog.resources

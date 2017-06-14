@@ -18,6 +18,7 @@ namespace VPOS
         SerialPort _serialPort;
         private Dictionary<TextBox, TextBox> TextBoxOrder = new Dictionary<TextBox, TextBox>();
         Item _item;
+        Stock _stock;
         WebCam webcam;
         string ItemID = "";
         private delegate void SetTextDeleg(string text);
@@ -50,18 +51,19 @@ namespace VPOS
             manufactureTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Manufacturer;
             nationalityTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Country;
             barcodeTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Barcode;
-            purchaseTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Purchase_price;
-            saleTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Sale_price;
+            purchaseTxt.Text = Global._stock.First(k => k.ItemID.Contains(ID)).Purchase_price;
+            saleTxt.Text = Global._stock.First(k => k.Id.Contains(ID)).Sale_price;
             compositionTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Composition;
-            expireDate.Text = Global._item.First(k => k.Id.Contains(ID)).Expire;
+            expireDate.Text = Global._stock.First(k => k.Id.Contains(ID)).Expire;
             categoryTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Category;
-            formulationCbx.Text = Global._item.First(k => k.Id.Contains(ID)).Formulation;
-            manufactureDate.Text = Global._item.First(k => k.Id.Contains(ID)).Date_manufactured;
+            formulationCbx.Text = Global._stock.First(k => k.Id.Contains(ID)).Packing;
+            unitsTxt.Text = Global._stock.First(k => k.Id.Contains(ID)).Units;
+            manufactureDate.Text = Global._stock.First(k => k.Id.Contains(ID)).Date_manufactured;
             genericTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Generic;
-            qtyTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Quantity;
-            minTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Min_qty;
-            taxTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Tax;
-            takingTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Taking;
+            qtyTxt.Text = Global._stock.First(k => k.Id.Contains(ID)).Quantity;
+            minTxt.Text = Global._stock.First(k => k.Id.Contains(ID)).Min_qty;
+            taxTxt.Text = Global._stock.First(k => k.Id.Contains(ID)).Tax;
+            takingTxt.Text = Global._stock.First(k => k.Id.Contains(ID)).Taking;
 
 
             Image img = Base64ToImage(Global._item.First(k => k.Id.Contains(ID)).Image);
@@ -186,7 +188,7 @@ namespace VPOS
 
             MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
             string fullimage = ImageToBase64(stream);
-            _item = new Item(id, nameTxt.Text, codeTxt.Text, descriptionTxt.Text, manufactureTxt.Text, nationalityTxt.Text, barcodeTxt.Text, purchaseTxt.Text, saleTxt.Text, compositionTxt.Text, Convert.ToDateTime(expireDate.Text).ToString("dd-MM-yyyy"), categoryTxt.Text, formulationCbx.Text, barcodeTxt.Text, fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "", Convert.ToDateTime(manufactureDate.Text).ToString("dd-MM-yyyy"), genericTxt.Text, "", qtyTxt.Text, minTxt.Text, Helper.OrgID, qtyTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "false", taxTxt.Text, storeID, promoPriceTxt.Text, Convert.ToDateTime(promoStart.Text).ToString("dd-MM-yyyy"), Convert.ToDateTime(promoEnd.Text).ToString("dd-MM-yyyy"));
+            _item = new Item(id, nameTxt.Text,genericTxt.Text,codeTxt.Text, descriptionTxt.Text, manufactureTxt.Text, nationalityTxt.Text,compositionTxt.Text,categoryTxt.Text, barcodeTxt.Text,fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), strengthTxt.Text, Helper.OrgID, "false");
             int index = Global._item.FindIndex(g => g.Name.Contains(nameTxt.Text));
             if (index >= 0)
             {
@@ -205,10 +207,11 @@ namespace VPOS
             if (DBConnect.Insert(_item) != "")
             {
                 double totalValue = Convert.ToDouble(qtyTxt.Text) * Convert.ToDouble(saleTxt.Text);
-                _stk = new Stock(id, id, qtyTxt.Text, saleTxt.Text, purchaseTxt.Text, saleTxt.Text, totalValue.ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, Helper.StoreID);
+                _stk = new Stock(id, id, qtyTxt.Text, saleTxt.Text, purchaseTxt.Text, saleTxt.Text, totalValue.ToString(),batchTxt.Text, Convert.ToDateTime(expireDate.Text).ToString("dd-MM-yyyy"),formulationCbx.Text,unitsTxt.Text,barcodeTxt.Text, Convert.ToDateTime(manufactureDate.Text).ToString("dd-MM-yyyy"),qtyTxt.Text,minTxt.Text,qtyTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),taxTxt.Text,promoPriceTxt.Text, Convert.ToDateTime(promoStart.Text).ToString("dd-MM-yyyy"), Convert.ToDateTime(promoEnd.Text).ToString("dd-MM-yyyy"), DateTime.Now.ToString("dd-MM-yyyy H:m:s"),Helper.StoreID, Helper.OrgID, Helper.UserID);
                 DBConnect.Insert(_stk);
                 //string query = "insert into transactor (id, transactorNo,contact,surname,lastname,email,dob,nationality,address,kin,kincontact,gender,created) values ('"+ id + "', '"+ transactorNoTxt.Text + "', '"+ contactTxt.Text + "', '" + surnameTxt.Text + "', '" + lastnameTxt.Text + "', '" + emailTxt.Text + "', '" +Convert.ToDateTime(dobdateTimePicker1.Text).ToString("dd-MM-yyyy") + "', '" + nationalityTxt.Text + "', '" + addressTxt.Text + "', '" + kinTxt.Text + "','" + kincontactTxt.Text + "', '" + genderCbx.Text + "','"+DateTime.Now.ToString("dd-MM-yyyy H:m:s")+"');";
                 Global._item.Add(_item);
+                Global._stock.Add(_stk);
                 _qty = new Quantity(id, id, "0", qtyTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, DateTime.Now.ToString("dd-MM-yyyy"), Helper.StoreID);
                 DBConnect.Insert(_qty);
                 MessageBox.Show("Information Saved");
@@ -327,7 +330,7 @@ namespace VPOS
         {
             MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
             string fullimage = ImageToBase64(stream);
-            _item = new Item(ItemID, nameTxt.Text, codeTxt.Text, descriptionTxt.Text, manufactureTxt.Text, nationalityTxt.Text, barcodeTxt.Text, purchaseTxt.Text, saleTxt.Text, compositionTxt.Text, Convert.ToDateTime(expireDate.Text).ToString("dd-MM-yyyy"), categoryTxt.Text, formulationCbx.Text, barcodeTxt.Text, fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "", Convert.ToDateTime(manufactureDate.Text).ToString("dd-MM-yyyy"), genericTxt.Text, "", qtyTxt.Text, minTxt.Text, Helper.OrgID, qtyTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "false", taxTxt.Text, Helper.StoreID, promoPriceTxt.Text, Convert.ToDateTime(promoStart.Text).ToString("dd-MM-yyyy"), Convert.ToDateTime(promoEnd.Text).ToString("dd-MM-yyyy"));
+            _item = new Item(ItemID, nameTxt.Text, genericTxt.Text, codeTxt.Text, descriptionTxt.Text, manufactureTxt.Text, nationalityTxt.Text, compositionTxt.Text, categoryTxt.Text, barcodeTxt.Text, fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), strengthTxt.Text, Helper.OrgID, "false");
 
             if (ItemID != "")
             {

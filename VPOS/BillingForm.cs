@@ -80,18 +80,18 @@ namespace VPOS
             {
                 if (h.Type == "Sale")
                 {
-                    t.Rows.Add(new object[] { b, Global._item.First(r => r.Id.Contains(h.ItemID)).Barcode, Global._item.First(r => r.Id.Contains(h.ItemID)).Name + Environment.NewLine + "PRICE:" + Global._item.First(r => r.Id.Contains(h.ItemID)).Sale_price + Environment.NewLine + "MANUFACTURER :" + Global._item.First(r => r.Id.Contains(h.ItemID)).Manufacturer + Environment.NewLine + "EXPIRES:" + Global._item.First(r => r.Id.Contains(h.ItemID)).Expire, h.Qty, Global._item.First(r => r.Id.Contains(h.ItemID)).Image });
+                    t.Rows.Add(new object[] { b, Global._item.First(r => r.Id.Contains(h.ItemID)).Barcode, Global._item.First(r => r.Id.Contains(h.ItemID)).Name + Environment.NewLine + "PRICE:" + Global._stock.First(r => r.Id.Contains(h.ItemID)).Sale_price + Environment.NewLine + "MANUFACTURER :" + Global._item.First(r => r.Id.Contains(h.ItemID)).Manufacturer + Environment.NewLine + "EXPIRES:" + Global._stock.First(r => r.Id.Contains(h.ItemID)).Expire, h.Qty, Global._item.First(r => r.Id.Contains(h.ItemID)).Image });
                     double TotalCost = (Convert.ToDouble(h.Qty) * Convert.ToDouble(h.Price));
-                    s.Rows.Add(new object[] { Global._item.First(r => r.Id.Contains(h.ItemID)).Name, h.Qty, Global._item.First(r => r.Id.Contains(h.ItemID)).Sale_price, TotalCost.ToString("n0") });
+                    s.Rows.Add(new object[] { Global._item.First(r => r.Id.Contains(h.ItemID)).Name, h.Qty, Global._stock.First(r => r.Id.Contains(h.ItemID)).Sale_price, TotalCost.ToString("n0") });
                     TotalDictionary.Add(c++, TotalCost);
                 }
 
                 if (h.Type == "Purchase")
                 {
-                    t.Rows.Add(new object[] { b, Global._item.First(r => r.Id.Contains(h.ItemID)).Barcode, Global._item.First(r => r.Id.Contains(h.ItemID)).Name + Environment.NewLine + "PRICE:" + Global._item.First(r => r.Id.Contains(h.ItemID)).Purchase_price + Environment.NewLine + "MANUFACTURER :" + Global._item.First(r => r.Id.Contains(h.ItemID)).Manufacturer + Environment.NewLine + "EXPIRES:" + Global._item.First(r => r.Id.Contains(h.ItemID)).Expire, h.Qty, Global._item.First(r => r.Id.Contains(h.ItemID)).Image });
+                    t.Rows.Add(new object[] { b, Global._item.First(r => r.Id.Contains(h.ItemID)).Barcode, Global._item.First(r => r.Id.Contains(h.ItemID)).Name + Environment.NewLine + "PRICE:" + Global._stock.First(r => r.Id.Contains(h.ItemID)).Purchase_price + Environment.NewLine + "MANUFACTURER :" + Global._item.First(r => r.Id.Contains(h.ItemID)).Manufacturer + Environment.NewLine + "EXPIRES:" + Global._stock.First(r => r.Id.Contains(h.ItemID)).Expire, h.Qty, Global._item.First(r => r.Id.Contains(h.ItemID)).Image });
                     double TotalCost = (Convert.ToDouble(h.Qty) * Convert.ToDouble(h.Price));
 
-                    s.Rows.Add(new object[] { Global._item.First(r => r.Id.Contains(h.ItemID)).Name, h.Qty, Global._item.First(r => r.Id.Contains(h.ItemID)).Purchase_price, TotalCost.ToString("n0") });
+                    s.Rows.Add(new object[] { Global._item.First(r => r.Id.Contains(h.ItemID)).Name, h.Qty, Global._stock.First(r => r.Id.Contains(h.ItemID)).Purchase_price, TotalCost.ToString("n0") });
                     TotalDictionary.Add(c++, TotalCost);
                 }
 

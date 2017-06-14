@@ -32,7 +32,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.imgCapture = new System.Windows.Forms.PictureBox();
             this.customerTxt = new System.Windows.Forms.TextBox();
             this.contactTxt = new System.Windows.Forms.TextBox();
@@ -74,6 +73,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.nameTxt = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.barcodeTxt = new System.Windows.Forms.TextBox();
@@ -148,28 +148,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.BackColor = System.Drawing.Color.DarkOrange;
             this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label7.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label7.Location = new System.Drawing.Point(156, 7);
+            this.label7.Location = new System.Drawing.Point(156, -3);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(370, 13);
+            this.label7.Size = new System.Drawing.Size(373, 23);
             this.label7.TabIndex = 103;
             this.label7.Text = "CUSTOMER";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackgroundImage = global::VPOS.Properties.Resources.Cancel_24;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(16, 7);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(21, 15);
-            this.button2.TabIndex = 102;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // imgCapture
             // 
@@ -185,23 +171,23 @@
             // 
             // customerTxt
             // 
-            this.customerTxt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(163)))), ((int)(((byte)(198)))));
-            this.customerTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.customerTxt.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerTxt.BackColor = System.Drawing.Color.White;
+            this.customerTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.customerTxt.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customerTxt.Location = new System.Drawing.Point(156, 22);
             this.customerTxt.Name = "customerTxt";
-            this.customerTxt.Size = new System.Drawing.Size(373, 20);
+            this.customerTxt.Size = new System.Drawing.Size(373, 22);
             this.customerTxt.TabIndex = 22;
             this.customerTxt.Leave += new System.EventHandler(this.contactTxt_Leave);
             // 
             // contactTxt
             // 
-            this.contactTxt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(163)))), ((int)(((byte)(198)))));
-            this.contactTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.contactTxt.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.contactTxt.BackColor = System.Drawing.Color.White;
+            this.contactTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.contactTxt.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.contactTxt.Location = new System.Drawing.Point(156, 46);
             this.contactTxt.Name = "contactTxt";
-            this.contactTxt.Size = new System.Drawing.Size(373, 20);
+            this.contactTxt.Size = new System.Drawing.Size(373, 22);
             this.contactTxt.TabIndex = 24;
             this.contactTxt.Leave += new System.EventHandler(this.contactTxt_Leave);
             // 
@@ -694,6 +680,20 @@
             this.nameTxt.TextChanged += new System.EventHandler(this.nameTxt_TextChanged);
             this.nameTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nameTxt_KeyPress);
             this.nameTxt.Leave += new System.EventHandler(this.nameTxt_Leave);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.BackgroundImage = global::VPOS.Properties.Resources.Cancel_24;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(16, 7);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(21, 15);
+            this.button2.TabIndex = 102;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // textBox1
             // 

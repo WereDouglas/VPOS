@@ -30,22 +30,48 @@ namespace VPOS
 
         public static void LoadData()
         {
-            _roles = new List<Roles>(Roles.ListRoles());
-            _category = new List<Category>(Category.ListCategory());
-            _billings = new List<Billing>(Billing.ListBilling());
-            _item = new List<Item>(Item.ListItem());
-            _purchase = new List<Purchase>(Purchase.ListPurchase());
-            _quantitys = new List<Quantity>(Quantity.ListQuantity());
-            _sale = new List<Sale>(Sale.ListSale());
-            _stock = new List<Stock>(Stock.ListStock());
-            _transactor = new List<Transactor>(Transactor.ListTransactor());
-            _users = new List<Users>(Users.ListUsers());
-            _org = new List<Organisation>(Organisation.ListOrganisation());
-            _expense = new List<Expense>(Expense.ListExpense());
-            _payment = new List<Payment>(Payment.ListPayment());
-            _taxes = new List<Tax>(Tax.ListTax());
-            _taking = new List<Taking>(Taking.ListTaking());
-            _store = new List<Store>(Store.ListStore());
+           
+            if (Helper.Type.Contains("Lite"))
+            {
+                _users = new List<Users>(Users.ListUsersLite());
+                _org = new List<Organisation>(Organisation.ListOrganisationLite());
+                _store = new List<Store>(Store.ListStoreLite());
+                _roles = new List<Roles>(Roles.ListRolesLite());
+                _category = new List<Category>(Category.ListCategoryLite());
+                _billings = new List<Billing>(Billing.ListBillingLite());
+                _item = new List<Item>(Item.ListItemLite());
+                _purchase = new List<Purchase>(Purchase.ListPurchaseLite());
+                _quantitys = new List<Quantity>(Quantity.ListQuantityLite());
+                _sale = new List<Sale>(Sale.ListSaleLite());
+                _stock = new List<Stock>(Stock.ListStockLite());
+                _transactor = new List<Transactor>(Transactor.ListTransactorLite());
+                _org = new List<Organisation>(Organisation.ListOrganisationLite());
+                _expense = new List<Expense>(Expense.ListExpenseLite());
+                _payment = new List<Payment>(Payment.ListPaymentLite());
+                _taxes = new List<Tax>(Tax.ListTaxLite());
+                _taking = new List<Taking>(Taking.ListTakingLite());
+                _store = new List<Store>(Store.ListStoreLite());
+
+            }
+            else {
+                _users = new List<Users>(Users.ListUsers());
+                _roles = new List<Roles>(Roles.ListRoles());
+                _category = new List<Category>(Category.ListCategory());
+                _billings = new List<Billing>(Billing.ListBilling());
+                _item = new List<Item>(Item.ListItem());
+                _purchase = new List<Purchase>(Purchase.ListPurchase());
+                _quantitys = new List<Quantity>(Quantity.ListQuantity());
+                _sale = new List<Sale>(Sale.ListSale());
+                _stock = new List<Stock>(Stock.ListStock());
+                _transactor = new List<Transactor>(Transactor.ListTransactor());
+                _org = new List<Organisation>(Organisation.ListOrganisation());
+                _expense = new List<Expense>(Expense.ListExpense());
+                _payment = new List<Payment>(Payment.ListPayment());
+                _taxes = new List<Tax>(Tax.ListTax());
+                _taking = new List<Taking>(Taking.ListTaking());
+                _store = new List<Store>(Store.ListStore());
+
+            }
 
         }
         public static void LoadVital()

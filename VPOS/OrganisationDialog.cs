@@ -18,6 +18,7 @@ namespace VPOS
         WebCam webcam;
         string OrgID = "";
         DataTable t;
+        Dictionary<string, string> storeDictionary = new Dictionary<string, string>();
         public OrganisationDialog(string orgID)
         {
             InitializeComponent();
@@ -30,6 +31,17 @@ namespace VPOS
                 OrgID = orgID;
                 Profile(OrgID);
             }
+            LoadStores();
+        }
+        private void LoadStores() {
+
+            foreach (Store s in Global._store)
+            {
+                storeCbx.Items.Add(s.Name);
+                storeDictionary.Add(s.Name, s.Id);
+            }
+
+
         }
         private void Profile(string ID)
         {
@@ -47,8 +59,11 @@ namespace VPOS
             accountTxt.Text = Global._org.First(k => k.Id.Contains(ID)).Account;
             statusCbx.Text = Global._org.First(k => k.Id.Contains(ID)).Status;
             expireDate.Text = Global._org.First(k => k.Id.Contains(ID)).Expires;
-
-
+            syncDate.Text = Global._org.First(k => k.Id.Contains(ID)).Sync;
+            try {
+                storeCbx.Text = Global._store.First(p => p.Id.Contains(Global._org.First(k => k.Id.Contains(ID)).StoreID)).Name;
+            }
+            catch { }
             Image img = Base64ToImage(Global._org.First(k => k.Id.Contains(ID)).Image);
             System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img);
             //Bitmap bps = new Bitmap(bmp, 50, 50);
@@ -110,6 +125,8 @@ namespace VPOS
         string originalPassword;
         private void button2_Click(object sender, EventArgs e)
         {
+          
+           // Helper.StoreID = "";
             string password = "";
 
             if (nameTxt.Text == "")
@@ -134,7 +151,7 @@ namespace VPOS
 
             MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
             string fullimage = ImageToBase64(stream);
-            _org = new Organisation(id, nameTxt.Text,codeTxt.Text, registrationTxt.Text, contactTxt.Text, addressTxt.Text, tinTxt.Text, vatTxt.Text, emailTxt.Text, nationalityTxt.Text, password, accountTxt.Text, statusCbx.Text, Convert.ToDateTime(expireDate.Text).ToString("dd-MM-yyyy"), fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),countsTxt.Text,companyCode.Text);
+            _org = new Organisation(id, nameTxt.Text,codeTxt.Text, registrationTxt.Text, contactTxt.Text, addressTxt.Text, tinTxt.Text, vatTxt.Text, emailTxt.Text, nationalityTxt.Text, password, accountTxt.Text, statusCbx.Text, Convert.ToDateTime(expireDate.Text).ToString("dd-MM-yyyy"), fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Convert.ToDateTime(syncDate.Text).ToString("dd-MM-yyyy H:mm:ss"), countsTxt.Text,companyCode.Text,Helper.StoreID);
             if (OrgID != "")
             {
                 DBConnect.Update(_org, OrgID);
@@ -237,6 +254,47 @@ namespace VPOS
         private void label17_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            using (StoreDialog form = new StoreDialog(""))
+            {
+                // DentalDialog form1 = new DentalDialog(item.Text, TransactorID);
+                DialogResult dr = form.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    // MessageBox.Show(form.state);
+                    LoadStores();
+                }
+            }
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            if (storeCbx.Text =="") {
+                storeCbx.BackColor = Color.PaleVioletRed;
+                return;
+            }
+            MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
+            string fullimage = ImageToBase64(stream);
+            _org = new Organisation(OrgID, nameTxt.Text, codeTxt.Text, registrationTxt.Text, contactTxt.Text, addressTxt.Text, tinTxt.Text, vatTxt.Text, emailTxt.Text, nationalityTxt.Text, initialTxt.Text, accountTxt.Text, statusCbx.Text,Convert.ToDateTime(expireDate.Text).ToString("dd-MM-yyyy"), fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Convert.ToDateTime(syncDate.Text).ToString("dd-MM-yyyy H:mm:ss"), countsTxt.Text, companyCode.Text, StoreID);
+            if (OrgID != "")
+            {
+                DBConnect.Update(_org, OrgID);
+                MessageBox.Show("Information Updated ");
+                Close();
+            }
+        }
+        string StoreID="";
+        private void storeCbx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            StoreID = storeDictionary[storeCbx.Text];
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+          
         }
     }
 }

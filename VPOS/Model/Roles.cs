@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace VPOS.Model
         private string created;
         private string orgID;
         private string storeID;
+       
         public string Id
         {
             get
@@ -106,7 +108,7 @@ namespace VPOS.Model
                 storeID = value;
             }
         }
-
+        public Roles() { }
         public Roles(string id, string title, string views, string actions, string created, string orgID, string storeID)
         {
             this.Id = id;
@@ -134,8 +136,21 @@ namespace VPOS.Model
             return categories;
 
         }
+        static SQLiteDataReader Reader;
+        public static List<Roles> ListRolesLite()
+        {
+            DBConnect.OpenConn();
+            List<Roles> categories = new List<Roles>();
+            string SQL = "SELECT * FROM roles";
+            Reader = DBConnect.ReadingLite(SQL);
+            while (Reader.Read())
+            {
+                Roles p = new Roles(Reader["id"].ToString(), Reader["title"].ToString(), Reader["views"].ToString(), Reader["actions"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["storeid"].ToString());
+                categories.Add(p);
+            }
+            DBConnect.CloseConn();
+            return categories;
+
+        }
     }
-
-
-
 }

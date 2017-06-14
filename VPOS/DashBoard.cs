@@ -21,7 +21,11 @@ namespace VPOS
         {
             InitializeComponent();
             date = DateTime.Now.ToString("dd-MM-yyyy");
-            LoadData();
+            try
+            {
+                LoadData();
+            }
+            catch { }
             BarExample(); //Show bar chart
             SplineChartExample();
         }

@@ -30,13 +30,16 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.imageDropDown = new System.Windows.Forms.ToolStripDropDownButton();
+            this.myProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.companyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.rolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButton15 = new System.Windows.Forms.ToolStripButton();
             this.nameLbl = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.processLbl = new System.Windows.Forms.TextBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.lastSyncLbl = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton12 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton13 = new System.Windows.Forms.ToolStripButton();
@@ -57,15 +60,13 @@
             this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.imageDropDown = new System.Windows.Forms.ToolStripDropDownButton();
-            this.myProfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.companyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.rolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButton15 = new System.Windows.Forms.ToolStripButton();
+            this.processLbl = new System.Windows.Forms.TextBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.lastSyncLbl = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -87,6 +88,87 @@
             this.toolStrip1.Size = new System.Drawing.Size(1132, 47);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.AutoSize = false;
+            this.toolStripButton5.BackgroundImage = global::VPOS.Properties.Resources.vugap1;
+            this.toolStripButton5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(145, 60);
+            this.toolStripButton5.Text = "toolStripButton5";
+            // 
+            // imageDropDown
+            // 
+            this.imageDropDown.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.imageDropDown.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.myProfileToolStripMenuItem,
+            this.companyToolStripMenuItem});
+            this.imageDropDown.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.imageDropDown.Image = global::VPOS.Properties.Resources.temp;
+            this.imageDropDown.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.imageDropDown.Name = "imageDropDown";
+            this.imageDropDown.Size = new System.Drawing.Size(54, 44);
+            this.imageDropDown.Text = "Profile";
+            this.imageDropDown.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.imageDropDown.Click += new System.EventHandler(this.toolStripDropDownButton2_Click);
+            // 
+            // myProfileToolStripMenuItem
+            // 
+            this.myProfileToolStripMenuItem.Name = "myProfileToolStripMenuItem";
+            this.myProfileToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.myProfileToolStripMenuItem.Text = "My Profile";
+            this.myProfileToolStripMenuItem.Click += new System.EventHandler(this.myProfileToolStripMenuItem_Click);
+            // 
+            // companyToolStripMenuItem
+            // 
+            this.companyToolStripMenuItem.Name = "companyToolStripMenuItem";
+            this.companyToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.companyToolStripMenuItem.Text = "Company";
+            this.companyToolStripMenuItem.Click += new System.EventHandler(this.companyToolStripMenuItem_Click);
+            // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rolesToolStripMenuItem,
+            this.usersToolStripMenuItem});
+            this.toolStripDropDownButton1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.toolStripDropDownButton1.Image = global::VPOS.Properties.Resources.Date_48__1_;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(45, 44);
+            this.toolStripDropDownButton1.Text = "Logs";
+            this.toolStripDropDownButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripDropDownButton1.Click += new System.EventHandler(this.toolStripDropDownButton1_Click);
+            // 
+            // rolesToolStripMenuItem
+            // 
+            this.rolesToolStripMenuItem.Name = "rolesToolStripMenuItem";
+            this.rolesToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.rolesToolStripMenuItem.Text = "Roles";
+            this.rolesToolStripMenuItem.Click += new System.EventHandler(this.rolesToolStripMenuItem_Click);
+            // 
+            // usersToolStripMenuItem
+            // 
+            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.usersToolStripMenuItem.Text = "Users";
+            this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
+            // 
+            // toolStripButton15
+            // 
+            this.toolStripButton15.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton15.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.toolStripButton15.Image = global::VPOS.Properties.Resources.User_Group_24;
+            this.toolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton15.Name = "toolStripButton15";
+            this.toolStripButton15.Size = new System.Drawing.Size(63, 44);
+            this.toolStripButton15.Text = "Add users";
+            this.toolStripButton15.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripButton15.Click += new System.EventHandler(this.toolStripButton15_Click);
             // 
             // nameLbl
             // 
@@ -116,6 +198,7 @@
             this.toolStripButton9,
             this.toolStripButton4,
             this.toolStripButton8,
+            this.toolStripButton3,
             this.toolStripButton6});
             this.toolStrip2.Location = new System.Drawing.Point(0, 47);
             this.toolStrip2.Name = "toolStrip2";
@@ -123,50 +206,6 @@
             this.toolStrip2.Size = new System.Drawing.Size(145, 650);
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
-            // 
-            // processLbl
-            // 
-            this.processLbl.BackColor = System.Drawing.SystemColors.Desktop;
-            this.processLbl.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.processLbl.ForeColor = System.Drawing.SystemColors.Info;
-            this.processLbl.Location = new System.Drawing.Point(148, 525);
-            this.processLbl.Multiline = true;
-            this.processLbl.Name = "processLbl";
-            this.processLbl.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.processLbl.Size = new System.Drawing.Size(538, 147);
-            this.processLbl.TabIndex = 7;
-            this.processLbl.Visible = false;
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripProgressBar1,
-            this.lastSyncLbl});
-            this.statusStrip1.Location = new System.Drawing.Point(145, 675);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(987, 22);
-            this.statusStrip1.TabIndex = 8;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(62, 17);
-            this.toolStripStatusLabel1.Text = "Uploading";
-            this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
-            // 
-            // toolStripProgressBar1
-            // 
-            this.toolStripProgressBar1.Maximum = 29;
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(400, 16);
-            // 
-            // lastSyncLbl
-            // 
-            this.lastSyncLbl.Name = "lastSyncLbl";
-            this.lastSyncLbl.Size = new System.Drawing.Size(28, 17);
-            this.lastSyncLbl.Text = "Info";
             // 
             // toolStripButton1
             // 
@@ -411,6 +450,21 @@
             this.toolStripButton8.Size = new System.Drawing.Size(143, 35);
             this.toolStripButton8.Text = "Transactions";
             // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.AutoSize = false;
+            this.toolStripButton3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStripButton3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripButton3.Image = global::VPOS.Properties.Resources.Desktop_32;
+            this.toolStripButton3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(143, 35);
+            this.toolStripButton3.Text = "Stock transfer";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click_1);
+            // 
             // toolStripButton6
             // 
             this.toolStripButton6.AutoSize = false;
@@ -426,86 +480,49 @@
             this.toolStripButton6.Text = "Stores";
             this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click_1);
             // 
-            // toolStripButton5
+            // processLbl
             // 
-            this.toolStripButton5.AutoSize = false;
-            this.toolStripButton5.BackgroundImage = global::VPOS.Properties.Resources.vugap1;
-            this.toolStripButton5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(145, 60);
-            this.toolStripButton5.Text = "toolStripButton5";
+            this.processLbl.BackColor = System.Drawing.SystemColors.Desktop;
+            this.processLbl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.processLbl.ForeColor = System.Drawing.SystemColors.Info;
+            this.processLbl.Location = new System.Drawing.Point(148, 525);
+            this.processLbl.Multiline = true;
+            this.processLbl.Name = "processLbl";
+            this.processLbl.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.processLbl.Size = new System.Drawing.Size(538, 147);
+            this.processLbl.TabIndex = 7;
+            this.processLbl.Visible = false;
             // 
-            // imageDropDown
+            // statusStrip1
             // 
-            this.imageDropDown.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.imageDropDown.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.myProfileToolStripMenuItem,
-            this.companyToolStripMenuItem});
-            this.imageDropDown.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.imageDropDown.Image = global::VPOS.Properties.Resources.temp;
-            this.imageDropDown.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.imageDropDown.Name = "imageDropDown";
-            this.imageDropDown.Size = new System.Drawing.Size(54, 44);
-            this.imageDropDown.Text = "Profile";
-            this.imageDropDown.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.imageDropDown.Click += new System.EventHandler(this.toolStripDropDownButton2_Click);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripProgressBar1,
+            this.lastSyncLbl});
+            this.statusStrip1.Location = new System.Drawing.Point(145, 675);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(987, 22);
+            this.statusStrip1.TabIndex = 8;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // myProfileToolStripMenuItem
+            // toolStripStatusLabel1
             // 
-            this.myProfileToolStripMenuItem.Name = "myProfileToolStripMenuItem";
-            this.myProfileToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            this.myProfileToolStripMenuItem.Text = "My Profile";
-            this.myProfileToolStripMenuItem.Click += new System.EventHandler(this.myProfileToolStripMenuItem_Click);
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(62, 17);
+            this.toolStripStatusLabel1.Text = "Uploading";
+            this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
             // 
-            // companyToolStripMenuItem
+            // toolStripProgressBar1
             // 
-            this.companyToolStripMenuItem.Name = "companyToolStripMenuItem";
-            this.companyToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            this.companyToolStripMenuItem.Text = "Company";
-            this.companyToolStripMenuItem.Click += new System.EventHandler(this.companyToolStripMenuItem_Click);
+            this.toolStripProgressBar1.Maximum = 29;
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(400, 16);
             // 
-            // toolStripDropDownButton1
+            // lastSyncLbl
             // 
-            this.toolStripDropDownButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rolesToolStripMenuItem,
-            this.usersToolStripMenuItem});
-            this.toolStripDropDownButton1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.toolStripDropDownButton1.Image = global::VPOS.Properties.Resources.Date_48__1_;
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(45, 44);
-            this.toolStripDropDownButton1.Text = "Logs";
-            this.toolStripDropDownButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripDropDownButton1.Click += new System.EventHandler(this.toolStripDropDownButton1_Click);
-            // 
-            // rolesToolStripMenuItem
-            // 
-            this.rolesToolStripMenuItem.Name = "rolesToolStripMenuItem";
-            this.rolesToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
-            this.rolesToolStripMenuItem.Text = "Roles";
-            this.rolesToolStripMenuItem.Click += new System.EventHandler(this.rolesToolStripMenuItem_Click);
-            // 
-            // usersToolStripMenuItem
-            // 
-            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
-            this.usersToolStripMenuItem.Text = "Users";
-            this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
-            // 
-            // toolStripButton15
-            // 
-            this.toolStripButton15.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton15.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.toolStripButton15.Image = global::VPOS.Properties.Resources.User_Group_24;
-            this.toolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton15.Name = "toolStripButton15";
-            this.toolStripButton15.Size = new System.Drawing.Size(63, 44);
-            this.toolStripButton15.Text = "Add users";
-            this.toolStripButton15.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton15.Click += new System.EventHandler(this.toolStripButton15_Click);
+            this.lastSyncLbl.Name = "lastSyncLbl";
+            this.lastSyncLbl.Size = new System.Drawing.Size(28, 17);
+            this.lastSyncLbl.Text = "Info";
             // 
             // MainForm
             // 
@@ -519,6 +536,7 @@
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
@@ -577,5 +595,6 @@
         private System.Windows.Forms.ToolStripMenuItem generalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem accountsPayableToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton8;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
     }
 }

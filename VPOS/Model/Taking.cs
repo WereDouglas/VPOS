@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace VPOS.Model
         private string userID;
         private string created;
         private string storeID;
+        static SQLiteDataReader Reader;
         public string Id
         {
             get
@@ -274,7 +276,7 @@ namespace VPOS.Model
                 storeID = value;
             }
         }
-
+        public Taking() { }
         public Taking(string id, string date, string itemID, string bf, string purchases, string sales, string total_stock, string system_stock, string variance, string purchase_amount, string sale_amount, string profit, string physical_count, string damages, string shrinkable, string orgID, string userID, string created, string storeID)
         {
             this.Id = id;
@@ -311,6 +313,20 @@ namespace VPOS.Model
                 categories.Add(p);
             }
             DBConnect.CloseConn();
+            return categories;
+
+        }
+        public static List<Taking> ListTakingLite()
+        {            
+            List<Taking> categories = new List<Taking>();
+            string SQL = "SELECT * FROM taking";
+            Reader = DBConnect.ReadingLite(SQL);
+            while (Reader.Read())
+            {
+                Taking p = new Taking(Reader["id"].ToString(), Reader["date"].ToString(), Reader["itemID"].ToString(), Reader["bf"].ToString(), Reader["purchases"].ToString(), Reader["sales"].ToString(), Reader["total_stock"].ToString(), Reader["system_stock"].ToString(), Reader["variance"].ToString(), Reader["purchase_amount"].ToString(), Reader["sale_amount"].ToString(), Reader["profit"].ToString(), Reader["physical_count"].ToString(), Reader["damages"].ToString(), Reader["shrinkable"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["created"].ToString(), Reader["storeid"].ToString());
+                categories.Add(p);
+            }
+        
             return categories;
 
         }

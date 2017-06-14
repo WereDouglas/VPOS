@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace VPOS.Model
         private string country;       
         private string created;       
         private string orgID;
-
+        static SQLiteDataReader Reader;
         public string Id
         {
             get
@@ -107,7 +108,7 @@ namespace VPOS.Model
                 orgID = value;
             }
         }
-
+        public Tax() { }
         public Tax(string id, string name, string percentage, string apply, string country, string created, string orgID)
         {
             this.Id = id;

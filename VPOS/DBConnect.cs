@@ -1,15 +1,19 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using VPOS.SQLite;
 
 namespace VPOS
 {
     public static class DBConnect
     {
+        static Connection dbobject = new Connection();
+        static SQLiteConnection SQLconnect = new SQLiteConnection();
         public static NpgsqlConnection conn = new NpgsqlConnection("Server=127.0.0.1;Port=5432;User Id=pos;Password=admin;Database=pos;");
 
 
@@ -57,26 +61,70 @@ namespace VPOS
             return Readers;
 
         }
+        static SQLiteDataReader Reader;
+        public static SQLiteDataReader ReadingLite(string query)
+        {
+
+            try
+            {
+                SQLconnect.ConnectionString = dbobject.datalocation();
+                SQLconnect.Open();
+            }
+            catch
+            {
+
+            }
+            SQLiteCommand cmd = new SQLiteCommand();
+            cmd = SQLconnect.CreateCommand();
+            cmd.CommandText = query;
+            Reader = cmd.ExecuteReader();
+            return Reader;
+        }
+       
         public static string save(string query)
         {
-            //try
-            //{
+            Int32 rowsaffected = 0;
+            if (!Helper.Type.Contains("Lite")) {
+                //try
+                //{
                 OpenConn();
 
                 NpgsqlCommand command = new NpgsqlCommand(query, conn);
-                Int32 rowsaffected = command.ExecuteNonQuery();
+                 rowsaffected = command.ExecuteNonQuery();
 
                 CloseConn();
-                return rowsaffected.ToString();
-            //}
-            //catch (Exception c)
-            //{
-            //    Console.WriteLine("Errr on insert!" + c.Message);
-            //    return "";
-            //}
+               // return rowsaffected.ToString();
+                //}
+                //catch (Exception c)
+                //{
+                //    Console.WriteLine("Errr on insert!" + c.Message);
+                //    return "";
+                //}
+            }
+            else {
+                try
+                {
+                    SQLconnect.ConnectionString = dbobject.datalocation();
+                    SQLconnect.Open();
+                }
+                catch
+                {
+
+                }
+
+                SQLiteCommand cmd = new SQLiteCommand();
+                cmd = SQLconnect.CreateCommand();
+                cmd.CommandText = query;
+
+               rowsaffected = cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                SQLconnect.Close();
+            }
+            return rowsaffected.ToString();
         }
         public static string Insert(Object objGen)
         {
+            Int32 rowsaffected = 0;
             //try
             //{
             OpenConn();
@@ -133,11 +181,80 @@ namespace VPOS
             SQL += ");";
 
             // Execute command
-            NpgsqlCommand command = new NpgsqlCommand(SQL, conn);
-            Int32 rowsaffected = command.ExecuteNonQuery();
+            if (!Helper.Type.Contains("Lite"))
+            {
+                NpgsqlCommand command = new NpgsqlCommand(SQL, conn);
+                 rowsaffected = command.ExecuteNonQuery();
 
-            CloseConn();
+                CloseConn();
+                return rowsaffected.ToString();
+                //}
+                //catch (Exception c)
+                //{
+                //    Console.WriteLine("Errr on insert!" + c.Message);
+                //    return "";
+                //}
+            }
+            else
+            {
+                try
+                {
+                    SQLconnect.ConnectionString = dbobject.datalocation();
+                    SQLconnect.Open();
+                }
+                catch
+                {
+
+                }
+
+                SQLiteCommand cmd = new SQLiteCommand();
+                cmd = SQLconnect.CreateCommand();
+                cmd.CommandText = SQL;
+
+                rowsaffected = cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                SQLconnect.Close();
+            }
             return rowsaffected.ToString();
+        }
+
+        public static string CreateDBSQL(Object objGen)
+        {
+            //try
+            //{
+            OpenConn();
+
+            // Get type and properties (vector)
+            Type typeObj = objGen.GetType();
+            PropertyInfo[] properties = typeObj.GetProperties();
+
+            // Get table
+            string[] type = typeObj.ToString().Split('.');
+            string table = type[2].ToLower();
+
+            // Start mounting string to insert           
+            string SQL = "CREATE TABLE IF NOT  EXISTS " + table + "  (";
+
+            // It goes from second until second to last
+            for (int i = 0; i < properties.Length - 1; i++)
+            {
+                //object propValue = properties[i].GetValue(objGen, null);
+                string[] typeValue = properties[i].ToString().Split(' ');
+                SQL += "" + typeValue[1].ToString() + " varchar(255),";               
+               
+            }
+
+            // get last attribute here           
+            string[] lastType = properties[properties.Length - 1].ToString().Split(' ');
+
+            SQL += "" + lastType[1].ToString() + " varchar(255)";
+           
+
+            // Ends string builder
+            SQL += ");";
+
+
+            return SQL;
             //}
             //catch (Exception c)
             //{
@@ -206,9 +323,10 @@ namespace VPOS
         }
         public static void Update(Object objGen, string idValue)
         {
-            //try
-            //{
-            OpenConn();
+            Int32 rowsaffected = 0;
+           //try
+           //{
+           OpenConn();
 
             // Get table
             string[] type = objGen.GetType().ToString().Split('.');
@@ -262,16 +380,48 @@ namespace VPOS
             // Ends string builder
             SQL += " WHERE id = '" + idValue + "';";
 
-            // Execute query
-            NpgsqlCommand command = new NpgsqlCommand(SQL, conn);
-            Int32 rowsaffected = command.ExecuteNonQuery();
-
-            CloseConn();
+          
             //}
             //catch (Exception)
             //{
             //    Console.WriteLine("Errr on update!");
             //}
+
+            if (!Helper.Type.Contains("Lite"))
+            {
+                NpgsqlCommand command = new NpgsqlCommand(SQL, conn);
+                rowsaffected = command.ExecuteNonQuery();
+
+                CloseConn();
+              
+                //}
+                //catch (Exception c)
+                //{
+                //    Console.WriteLine("Errr on insert!" + c.Message);
+                //    return "";
+                //}
+            }
+            else
+            {
+                try
+                {
+                    SQLconnect.ConnectionString = dbobject.datalocation();
+                    SQLconnect.Open();
+                }
+                catch
+                {
+
+                }
+
+                SQLiteCommand cmd = new SQLiteCommand();
+                cmd = SQLconnect.CreateCommand();
+                cmd.CommandText = SQL;
+
+                rowsaffected = cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                SQLconnect.Close();
+            }
+           
         }
         public static void Execute(string query)
         {
