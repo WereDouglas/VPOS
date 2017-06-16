@@ -36,6 +36,7 @@ namespace VPOS.Model
         private string orgID;
         private string userID;
         static SQLiteDataReader Reader;
+
         public string Id
         {
             get
@@ -360,7 +361,9 @@ namespace VPOS.Model
                 userID = value;
             }
         }
+
         public Stock() { }
+
         public Stock(string id, string itemID, string qty, string sale_price, string purchase_price, string previous_price, string total_value, string batch, string expire, string packing, string units, string barcode, string date_manufactured, string quantity, string min_qty, string counts, string taking, string tax, string promo_price, string promo_start, string promo_end, string created, string storeID, string orgID, string userID)
         {
             this.Id = id;
@@ -390,40 +393,40 @@ namespace VPOS.Model
             this.UserID = userID;
         }
 
-
-
         public static List<Stock> ListStock()
         {
-            DBConnect.OpenConn();
-            List<Stock> categories = new List<Stock>();
-            string SQL = "SELECT * FROM stock";
-            NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
-            NpgsqlDataReader Reader = command.ExecuteReader();
-            while (Reader.Read())
-            {
-                Stock p = new Stock(Reader["id"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["sale_price"].ToString(), Reader["purchase_price"].ToString(), Reader["previous_price"].ToString(), Reader["total_value"].ToString(), Reader["batch"].ToString(), Reader["expire"].ToString(), Reader["packaging"].ToString(), Reader["units"].ToString(), Reader["barcode"].ToString(),Reader["date_manufactured"].ToString(), Reader["quantity"].ToString(), Reader["min_qty"].ToString(), Reader["counts"].ToString(), Reader["taking"].ToString(),Reader["tax"].ToString(), Reader["storeid"].ToString(), Reader["promo_price"].ToString(), Reader["promo_start"].ToString(), Reader["promo_end"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString());
-                categories.Add(p);
+            if (Helper.Type!="Lite") {
+
+                DBConnect.OpenConn();
+                List<Stock> categories = new List<Stock>();
+                string SQL = "SELECT * FROM stock";
+                NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
+                NpgsqlDataReader Reader = command.ExecuteReader();
+                while (Reader.Read())
+                {
+                    Stock p = new Stock(Reader["id"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["sale_price"].ToString(), Reader["purchase_price"].ToString(), Reader["previous_price"].ToString(), Reader["total_value"].ToString(), Reader["batch"].ToString(), Reader["expire"].ToString(), Reader["packaging"].ToString(), Reader["units"].ToString(), Reader["barcode"].ToString(), Reader["date_manufactured"].ToString(), Reader["quantity"].ToString(), Reader["min_qty"].ToString(), Reader["counts"].ToString(), Reader["taking"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString(), Reader["promo_price"].ToString(), Reader["promo_start"].ToString(), Reader["promo_end"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString());
+                    categories.Add(p);
+                }
+                DBConnect.CloseConn();
+                return categories;
             }
-            DBConnect.CloseConn();
-            return categories;
+            else {
+
+                List<Stock> categories = new List<Stock>();
+                string SQL = "SELECT * FROM stock";
+                Reader = DBConnect.ReadingLite(SQL);
+                while (Reader.Read())
+                {
+                    Stock p = new Stock(Reader["id"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["sale_price"].ToString(), Reader["purchase_price"].ToString(), Reader["previous_price"].ToString(), Reader["total_value"].ToString(), Reader["batch"].ToString(), Reader["expire"].ToString(), Reader["packing"].ToString(), Reader["units"].ToString(), Reader["barcode"].ToString(), Reader["date_manufactured"].ToString(), Reader["quantity"].ToString(), Reader["min_qty"].ToString(), Reader["counts"].ToString(), Reader["taking"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString(), Reader["promo_price"].ToString(), Reader["promo_start"].ToString(), Reader["promo_end"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString());
+                    categories.Add(p);
+                }
+                Reader.Close();
+                return categories;
+
+            }
 
         }
-        public static List<Stock> ListStockLite()
-        {
-            DBConnect.OpenConn();
-            List<Stock> categories = new List<Stock>();
-            string SQL = "SELECT * FROM stock";
-            Reader = DBConnect.ReadingLite(SQL);
-            while (Reader.Read())
-            {
-                Stock p = new Stock(Reader["id"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["sale_price"].ToString(), Reader["purchase_price"].ToString(), Reader["previous_price"].ToString(), Reader["total_value"].ToString(), Reader["batch"].ToString(), Reader["expire"].ToString(), Reader["packaging"].ToString(), Reader["units"].ToString(), Reader["barcode"].ToString(), Reader["date_manufactured"].ToString(), Reader["quantity"].ToString(), Reader["min_qty"].ToString(), Reader["counts"].ToString(), Reader["taking"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString(), Reader["promo_price"].ToString(), Reader["promo_start"].ToString(), Reader["promo_end"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString());
-                categories.Add(p);
-            }
-            Reader.Close();
-            return categories;
-
-        }
-
+      
 
     }
 

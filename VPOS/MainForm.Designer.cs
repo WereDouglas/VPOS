@@ -56,6 +56,7 @@
             this.incomeStatementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accountsPayableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.profitAndLossToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton17 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
@@ -210,9 +211,9 @@
             // toolStripButton1
             // 
             this.toolStripButton1.AutoSize = false;
-            this.toolStripButton1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripButton1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripButton1.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton1.Image = global::VPOS.Properties.Resources.Desktop_32;
             this.toolStripButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -225,9 +226,9 @@
             // toolStripButton12
             // 
             this.toolStripButton12.AutoSize = false;
-            this.toolStripButton12.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripButton12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton12.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripButton12.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton12.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton12.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton12.Image = global::VPOS.Properties.Resources.Counting_Machine_32;
             this.toolStripButton12.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripButton12.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -241,9 +242,9 @@
             // toolStripButton13
             // 
             this.toolStripButton13.AutoSize = false;
-            this.toolStripButton13.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripButton13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton13.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripButton13.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton13.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton13.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton13.Image = global::VPOS.Properties.Resources.Note_Memo_01_32;
             this.toolStripButton13.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripButton13.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -256,9 +257,9 @@
             // toolStripButton11
             // 
             this.toolStripButton11.AutoSize = false;
-            this.toolStripButton11.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripButton11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton11.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripButton11.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton11.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton11.Image = global::VPOS.Properties.Resources.Book_Shelf_32;
             this.toolStripButton11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripButton11.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -271,9 +272,9 @@
             // toolStripButton2
             // 
             this.toolStripButton2.AutoSize = false;
-            this.toolStripButton2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripButton2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripButton2.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton2.Image = global::VPOS.Properties.Resources.Shopping_Basket_01_32;
             this.toolStripButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -286,9 +287,9 @@
             // toolStripButton18
             // 
             this.toolStripButton18.AutoSize = false;
-            this.toolStripButton18.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripButton18.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton18.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripButton18.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton18.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton18.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton18.Image = global::VPOS.Properties.Resources.Flow_Cart_32;
             this.toolStripButton18.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripButton18.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -301,9 +302,9 @@
             // toolStripButton7
             // 
             this.toolStripButton7.AutoSize = false;
-            this.toolStripButton7.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripButton7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton7.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripButton7.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton7.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton7.Image = global::VPOS.Properties.Resources.QR_Code_32__1_;
             this.toolStripButton7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -316,9 +317,9 @@
             // toolStripButton10
             // 
             this.toolStripButton10.AutoSize = false;
-            this.toolStripButton10.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripButton10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton10.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripButton10.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton10.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton10.Image = global::VPOS.Properties.Resources.Bill_32;
             this.toolStripButton10.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripButton10.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -331,7 +332,7 @@
             // toolStripDropDownButton3
             // 
             this.toolStripDropDownButton3.AutoSize = false;
-            this.toolStripDropDownButton3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.toolStripDropDownButton3.BackColor = System.Drawing.Color.GhostWhite;
             this.toolStripDropDownButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cashBookToolStripMenuItem,
             this.purchaseLedgerToolStripMenuItem,
@@ -339,7 +340,10 @@
             this.cashFlowStatementToolStripMenuItem,
             this.incomeStatementToolStripMenuItem,
             this.generalToolStripMenuItem,
-            this.accountsPayableToolStripMenuItem});
+            this.accountsPayableToolStripMenuItem,
+            this.profitAndLossToolStripMenuItem});
+            this.toolStripDropDownButton3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripDropDownButton3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripDropDownButton3.Image = global::VPOS.Properties.Resources.Table_32;
             this.toolStripDropDownButton3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripDropDownButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -351,52 +355,59 @@
             // cashBookToolStripMenuItem
             // 
             this.cashBookToolStripMenuItem.Name = "cashBookToolStripMenuItem";
-            this.cashBookToolStripMenuItem.Size = new System.Drawing.Size(225, 26);
+            this.cashBookToolStripMenuItem.Size = new System.Drawing.Size(214, 24);
             this.cashBookToolStripMenuItem.Text = "Cash Book ";
             this.cashBookToolStripMenuItem.Click += new System.EventHandler(this.cashBookToolStripMenuItem_Click);
             // 
             // purchaseLedgerToolStripMenuItem
             // 
             this.purchaseLedgerToolStripMenuItem.Name = "purchaseLedgerToolStripMenuItem";
-            this.purchaseLedgerToolStripMenuItem.Size = new System.Drawing.Size(225, 26);
+            this.purchaseLedgerToolStripMenuItem.Size = new System.Drawing.Size(214, 24);
             this.purchaseLedgerToolStripMenuItem.Text = "Purchase";
             // 
             // salesToolStripMenuItem
             // 
             this.salesToolStripMenuItem.Name = "salesToolStripMenuItem";
-            this.salesToolStripMenuItem.Size = new System.Drawing.Size(225, 26);
+            this.salesToolStripMenuItem.Size = new System.Drawing.Size(214, 24);
             this.salesToolStripMenuItem.Text = "Sales";
             // 
             // cashFlowStatementToolStripMenuItem
             // 
             this.cashFlowStatementToolStripMenuItem.Name = "cashFlowStatementToolStripMenuItem";
-            this.cashFlowStatementToolStripMenuItem.Size = new System.Drawing.Size(225, 26);
+            this.cashFlowStatementToolStripMenuItem.Size = new System.Drawing.Size(214, 24);
             this.cashFlowStatementToolStripMenuItem.Text = "Cash Flow Statement";
             // 
             // incomeStatementToolStripMenuItem
             // 
             this.incomeStatementToolStripMenuItem.Name = "incomeStatementToolStripMenuItem";
-            this.incomeStatementToolStripMenuItem.Size = new System.Drawing.Size(225, 26);
+            this.incomeStatementToolStripMenuItem.Size = new System.Drawing.Size(214, 24);
             this.incomeStatementToolStripMenuItem.Text = "Income Statement";
             // 
             // generalToolStripMenuItem
             // 
             this.generalToolStripMenuItem.Name = "generalToolStripMenuItem";
-            this.generalToolStripMenuItem.Size = new System.Drawing.Size(225, 26);
+            this.generalToolStripMenuItem.Size = new System.Drawing.Size(214, 24);
             this.generalToolStripMenuItem.Text = "General";
             // 
             // accountsPayableToolStripMenuItem
             // 
             this.accountsPayableToolStripMenuItem.Name = "accountsPayableToolStripMenuItem";
-            this.accountsPayableToolStripMenuItem.Size = new System.Drawing.Size(225, 26);
+            this.accountsPayableToolStripMenuItem.Size = new System.Drawing.Size(214, 24);
             this.accountsPayableToolStripMenuItem.Text = "Accounts Payable";
+            // 
+            // profitAndLossToolStripMenuItem
+            // 
+            this.profitAndLossToolStripMenuItem.Name = "profitAndLossToolStripMenuItem";
+            this.profitAndLossToolStripMenuItem.Size = new System.Drawing.Size(214, 24);
+            this.profitAndLossToolStripMenuItem.Text = "Profit and Loss";
+            this.profitAndLossToolStripMenuItem.Click += new System.EventHandler(this.profitAndLossToolStripMenuItem_Click);
             // 
             // toolStripButton17
             // 
             this.toolStripButton17.AutoSize = false;
-            this.toolStripButton17.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripButton17.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton17.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripButton17.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton17.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton17.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton17.Image = global::VPOS.Properties.Resources.Debit_Card_32;
             this.toolStripButton17.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripButton17.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -409,9 +420,9 @@
             // toolStripButton9
             // 
             this.toolStripButton9.AutoSize = false;
-            this.toolStripButton9.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripButton9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton9.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripButton9.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton9.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton9.Image = global::VPOS.Properties.Resources.User_Group_32__3_;
             this.toolStripButton9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripButton9.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -424,9 +435,9 @@
             // toolStripButton4
             // 
             this.toolStripButton4.AutoSize = false;
-            this.toolStripButton4.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripButton4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripButton4.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton4.Image = global::VPOS.Properties.Resources.Brick_32;
             this.toolStripButton4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -439,9 +450,9 @@
             // toolStripButton8
             // 
             this.toolStripButton8.AutoSize = false;
-            this.toolStripButton8.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripButton8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripButton8.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton8.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton8.Image = global::VPOS.Properties.Resources.View_List_32;
             this.toolStripButton8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripButton8.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -453,9 +464,9 @@
             // toolStripButton3
             // 
             this.toolStripButton3.AutoSize = false;
-            this.toolStripButton3.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripButton3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripButton3.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton3.Image = global::VPOS.Properties.Resources.Desktop_32;
             this.toolStripButton3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -468,9 +479,9 @@
             // toolStripButton6
             // 
             this.toolStripButton6.AutoSize = false;
-            this.toolStripButton6.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.toolStripButton6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton6.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripButton6.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton6.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton6.Image = global::VPOS.Properties.Resources.Desktop_32;
             this.toolStripButton6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
@@ -596,5 +607,6 @@
         private System.Windows.Forms.ToolStripMenuItem accountsPayableToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton8;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripMenuItem profitAndLossToolStripMenuItem;
     }
 }

@@ -243,34 +243,35 @@ namespace VPOS.Model
 
         public static List<Item> ListItem()
         {
-            DBConnect.OpenConn();
-            List<Item> wards = new List<Item>();
-            string SQL = "SELECT * FROM item";
-            NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
-            NpgsqlDataReader Reader = command.ExecuteReader();
-            while (Reader.Read())
-            {
-                Item p = new Item(Reader["id"].ToString(), Reader["name"].ToString(), Reader["generic"].ToString(), Reader["code"].ToString(), Reader["description"].ToString(), Reader["manufacturer"].ToString(), Reader["country"].ToString(), Reader["composition"].ToString(), Reader["category"].ToString(), Reader["barcode"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(),Reader["strength"].ToString(),Reader["orgID"].ToString(),Reader["valid"].ToString());
-                wards.Add(p);
+            if (Helper.Type !="Lite") {
+                DBConnect.OpenConn();
+                List<Item> wards = new List<Item>();
+                string SQL = "SELECT * FROM item";
+                NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
+                NpgsqlDataReader Reader = command.ExecuteReader();
+                while (Reader.Read())
+                {
+                    Item p = new Item(Reader["id"].ToString(), Reader["name"].ToString(), Reader["generic"].ToString(), Reader["code"].ToString(), Reader["description"].ToString(), Reader["manufacturer"].ToString(), Reader["country"].ToString(), Reader["composition"].ToString(), Reader["category"].ToString(), Reader["barcode"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["strength"].ToString(), Reader["orgID"].ToString(), Reader["valid"].ToString());
+                    wards.Add(p);
+                }
+                DBConnect.CloseConn();
+                return wards;
             }
-            DBConnect.CloseConn();
-            return wards;
+            else {
+                List<Item> wards = new List<Item>();
+                string SQL = "SELECT * FROM item";
+                Reader = DBConnect.ReadingLite(SQL);
+                while (Reader.Read())
+                {
+                    Item p = new Item(Reader["id"].ToString(), Reader["name"].ToString(), Reader["generic"].ToString(), Reader["code"].ToString(), Reader["description"].ToString(), Reader["manufacturer"].ToString(), Reader["country"].ToString(), Reader["composition"].ToString(), Reader["category"].ToString(), Reader["barcode"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["strength"].ToString(), Reader["orgID"].ToString(), Reader["valid"].ToString());
+                    wards.Add(p);
+                }
+                Reader.Close();
+                return wards;
+
+            }
 
         }
-        public static List<Item> ListItemLite()
-        {
-            DBConnect.OpenConn();
-            List<Item> wards = new List<Item>();
-            string SQL = "SELECT * FROM item";
-            Reader = DBConnect.ReadingLite(SQL);
-            while (Reader.Read())
-            {
-                Item p = new Item(Reader["id"].ToString(), Reader["name"].ToString(), Reader["generic"].ToString(), Reader["code"].ToString(), Reader["description"].ToString(), Reader["manufacturer"].ToString(), Reader["country"].ToString(), Reader["composition"].ToString(), Reader["category"].ToString(), Reader["barcode"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["strength"].ToString(), Reader["orgID"].ToString(), Reader["valid"].ToString());
-                wards.Add(p);
-            }
-            Reader.Close();
-            return wards;
-
-        }
+       
     }
 }

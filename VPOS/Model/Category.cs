@@ -11,11 +11,12 @@ namespace VPOS.Model
     public class Category
     {
         private string id;
-        private string name;      
-        private string description;   
+        private string name;
+        private string description;
         private string created;
         private string orgID;
         private string storeID;
+        private string image;
 
 
         public string Id
@@ -95,8 +96,22 @@ namespace VPOS.Model
                 storeID = value;
             }
         }
+
+        public string Image
+        {
+            get
+            {
+                return image;
+            }
+
+            set
+            {
+                image = value;
+            }
+        }
+
         public Category() { }
-        public Category(string id, string name, string description, string created,string orgID,string storeID)
+        public Category(string id, string name, string description, string created, string orgID, string storeID, string image)
         {
             this.Id = id;
             this.Name = name;
@@ -104,40 +119,45 @@ namespace VPOS.Model
             this.Created = created;
             this.OrgID = orgID;
             this.StoreID = storeID;
-        }
-
-        public static List<Category> ListCategory()
-        {
-            DBConnect.OpenConn();
-            List<Category> categories = new List<Category>();
-            string SQL = "SELECT * FROM category";
-            NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
-            NpgsqlDataReader Reader = command.ExecuteReader();
-            while (Reader.Read())
-            {
-                Category p = new Category(Reader["id"].ToString(), Reader["name"].ToString(), Reader["description"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(),Reader["storeID"].ToString());
-                categories.Add(p);
-            }
-            DBConnect.CloseConn();
-            return categories;
-
+            this.Image = image;
         }
         static SQLiteDataReader Reader;
-        public static List<Category> ListCategoryLite()
+        public static List<Category> ListCategory()
         {
-            DBConnect.OpenConn();
-            List<Category> categories = new List<Category>();
-            string SQL = "SELECT * FROM category";
-            Reader = DBConnect.ReadingLite(SQL);
-            while (Reader.Read())
+            if (Helper.Type != "Lite")
             {
-                Category p = new Category(Reader["id"].ToString(), Reader["name"].ToString(), Reader["description"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["storeID"].ToString());
-                categories.Add(p);
+                DBConnect.OpenConn();
+                List<Category> categories = new List<Category>();
+                string SQL = "SELECT * FROM category";
+                NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
+                NpgsqlDataReader Reader = command.ExecuteReader();
+                while (Reader.Read())
+                {
+                    Category p = new Category(Reader["id"].ToString(), Reader["name"].ToString(), Reader["description"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["storeID"].ToString(), Reader["image"].ToString());
+                    categories.Add(p);
+                }
+                DBConnect.CloseConn();
+                return categories;
             }
-            Reader.Close();
-            return categories;
+            else
+            {
+                DBConnect.OpenConn();
+                List<Category> categories = new List<Category>();
+                string SQL = "SELECT * FROM category";
+                Reader = DBConnect.ReadingLite(SQL);
+                while (Reader.Read())
+                {
+                    Category p = new Category(Reader["id"].ToString(), Reader["name"].ToString(), Reader["description"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["storeID"].ToString(), Reader["image"].ToString());
+                    categories.Add(p);
+                }
+                Reader.Close();
+                return categories;
+
+            }
 
         }
+
+
     }
 
 

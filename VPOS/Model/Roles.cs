@@ -122,35 +122,36 @@ namespace VPOS.Model
 
         public static List<Roles> ListRoles()
         {
-            DBConnect.OpenConn();
-            List<Roles> categories = new List<Roles>();
-            string SQL = "SELECT * FROM roles";
-            NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
-            NpgsqlDataReader Reader = command.ExecuteReader();
-            while (Reader.Read())
-            {
-                Roles p = new Roles(Reader["id"].ToString(), Reader["title"].ToString(), Reader["views"].ToString(), Reader["actions"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["storeid"].ToString());
-                categories.Add(p);
+            if (Helper.Type!="Lite") {
+                DBConnect.OpenConn();
+                List<Roles> categories = new List<Roles>();
+                string SQL = "SELECT * FROM roles";
+                NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
+                NpgsqlDataReader Reader = command.ExecuteReader();
+                while (Reader.Read())
+                {
+                    Roles p = new Roles(Reader["id"].ToString(), Reader["title"].ToString(), Reader["views"].ToString(), Reader["actions"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["storeid"].ToString());
+                    categories.Add(p);
+                }
+                DBConnect.CloseConn();
+                return categories;
             }
-            DBConnect.CloseConn();
-            return categories;
+            else {
+                List<Roles> categories = new List<Roles>();
+                string SQL = "SELECT * FROM roles";
+                Reader = DBConnect.ReadingLite(SQL);
+                while (Reader.Read())
+                {
+                    Roles p = new Roles(Reader["id"].ToString(), Reader["title"].ToString(), Reader["views"].ToString(), Reader["actions"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["storeid"].ToString());
+                    categories.Add(p);
+                }
+                DBConnect.CloseConn();
+                return categories;
+
+            }
 
         }
         static SQLiteDataReader Reader;
-        public static List<Roles> ListRolesLite()
-        {
-            DBConnect.OpenConn();
-            List<Roles> categories = new List<Roles>();
-            string SQL = "SELECT * FROM roles";
-            Reader = DBConnect.ReadingLite(SQL);
-            while (Reader.Read())
-            {
-                Roles p = new Roles(Reader["id"].ToString(), Reader["title"].ToString(), Reader["views"].ToString(), Reader["actions"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["storeid"].ToString());
-                categories.Add(p);
-            }
-            DBConnect.CloseConn();
-            return categories;
-
-        }
+       
     }
 }

@@ -38,9 +38,13 @@
             this.saveBtn = new System.Windows.Forms.Button();
             this.dtGrid = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
+            this.imgCapture = new System.Windows.Forms.PictureBox();
+            this.fileUrlTxtBx = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -64,6 +68,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.fileUrlTxtBx);
+            this.groupBox1.Controls.Add(this.imgCapture);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.descriptionTxt);
             this.groupBox1.Controls.Add(this.button2);
@@ -72,7 +79,7 @@
             this.groupBox1.Controls.Add(this.saveBtn);
             this.groupBox1.Location = new System.Drawing.Point(3, 30);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(243, 388);
+            this.groupBox1.Size = new System.Drawing.Size(243, 463);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Add new category";
@@ -104,7 +111,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.Snow;
-            this.button2.Location = new System.Drawing.Point(146, 187);
+            this.button2.Location = new System.Drawing.Point(146, 423);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(65, 35);
@@ -138,7 +145,7 @@
             this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveBtn.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveBtn.ForeColor = System.Drawing.Color.Snow;
-            this.saveBtn.Location = new System.Drawing.Point(26, 187);
+            this.saveBtn.Location = new System.Drawing.Point(30, 423);
             this.saveBtn.Margin = new System.Windows.Forms.Padding(2);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(59, 35);
@@ -175,6 +182,43 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // imgCapture
+            // 
+            this.imgCapture.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.imgCapture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.imgCapture.Image = global::VPOS.Properties.Resources.images;
+            this.imgCapture.Location = new System.Drawing.Point(31, 173);
+            this.imgCapture.Name = "imgCapture";
+            this.imgCapture.Size = new System.Drawing.Size(180, 114);
+            this.imgCapture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imgCapture.TabIndex = 140;
+            this.imgCapture.TabStop = false;
+            // 
+            // fileUrlTxtBx
+            // 
+            this.fileUrlTxtBx.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.fileUrlTxtBx.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.fileUrlTxtBx.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fileUrlTxtBx.Location = new System.Drawing.Point(31, 308);
+            this.fileUrlTxtBx.Name = "fileUrlTxtBx";
+            this.fileUrlTxtBx.Size = new System.Drawing.Size(180, 19);
+            this.fileUrlTxtBx.TabIndex = 152;
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button4.Location = new System.Drawing.Point(31, 292);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(180, 24);
+            this.button4.TabIndex = 153;
+            this.button4.Text = "Browse";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // CategoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -190,6 +234,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -206,5 +251,8 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox nameTxt;
         private System.Windows.Forms.Button saveBtn;
+        private System.Windows.Forms.PictureBox imgCapture;
+        private System.Windows.Forms.TextBox fileUrlTxtBx;
+        private System.Windows.Forms.Button button4;
     }
 }

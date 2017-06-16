@@ -53,8 +53,7 @@ namespace VPOS
 
 
             if (DBConnect.Insert(_store) != "")
-
-                Global._store.Add(_store);
+            Global._store.Add(_store);
             nameTxt.Text = "";
             addressTxt.Text = "";
             locationTxt.Text = "";

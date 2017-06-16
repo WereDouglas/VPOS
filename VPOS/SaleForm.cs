@@ -39,26 +39,9 @@ namespace VPOS
             autocomplete();
             autocustomer();
             Profile(Helper.OrgID);
-            LoadTaxes();
+           
         }
-        public void LoadTaxes()
-        {
-            foreach (Tax r in Global._taxes)
-            {
-
-                taxLbl.Text = r.Name + " " + r.Percentage + "%";
-                if (r.Apply == "Yes")
-                {
-                    vatTxt.Text = r.Percentage;
-                }
-                else
-                {
-                    vatTxt.Text = "0";
-                }
-
-            }
-
-        }
+       
         private void Profile(string ID)
         {
 
@@ -107,10 +90,12 @@ namespace VPOS
             {
                 t.Rows.Add(new object[] { b, Global._item.First(r => r.Barcode.Contains(h.Key)).Barcode, Global._item.First(r => r.Barcode.Contains(h.Key)).Name + Environment.NewLine + "PRICE:" + Global._stock.First(r => r.Barcode.Contains(h.Key)).Sale_price + Environment.NewLine + "MANUFACTURER :" + Global._item.First(r => r.Barcode.Contains(h.Key)).Manufacturer + Environment.NewLine + "EXPIRES:" + Global._stock.First(r => r.Barcode.Contains(h.Key)).Expire, h.Value, Global._item.First(r => r.Barcode.Contains(h.Key)).Image, "Remove" });
                 double TotalCost = (Convert.ToDouble(h.Value) * Convert.ToDouble(Global._stock.First(r => r.Barcode.Contains(h.Key)).Sale_price));
+                double valueBeforeTax = 0;
                 double tax = 0;
                 if (Global._stock.First(r => r.Barcode.Contains(h.Key)).Tax != "0" || String.IsNullOrEmpty(Global._stock.First(r => r.Barcode.Contains(h.Key)).Tax))
                 {
-                    tax = Math.Round((TotalCost) * (100 / (100 + Convert.ToDouble(Global._stock.First(r => r.Barcode.Contains(h.Key)).Tax))), 0);
+                    valueBeforeTax = Math.Round((TotalCost) * (100 / (100 + Convert.ToDouble(Global._stock.First(r => r.Barcode.Contains(h.Key)).Tax))), 0);
+                    tax = TotalCost - valueBeforeTax;
                 }
 
                 s.Rows.Add(new object[] { Global._item.First(r => r.Barcode.Contains(h.Key)).Name, Global._item.First(r => r.Barcode.Contains(h.Key)).Barcode, h.Value, Global._stock.First(r => r.Barcode.Contains(h.Key)).Sale_price, TotalCost.ToString("n0"), tax });
@@ -303,8 +288,11 @@ namespace VPOS
             listView1.LargeImageList = il;
             foreach (Item h in _itemList)
             {
-                m.Rows.Add(new object[] { h.Name + Environment.NewLine + "PRICE:" + Global._stock.First(r => r.ItemID.Contains(h.Id)).Purchase_price + Environment.NewLine + "MANUFACTURER :" + h.Manufacturer, h.Barcode, h.Category, h.Description, "Add" });
-
+                try
+                {
+                    m.Rows.Add(new object[] { h.Name + Environment.NewLine + "PRICE:" + Global._stock.First(r => r.ItemID.Contains(h.Id)).Purchase_price + Environment.NewLine + "MANUFACTURER :" + h.Manufacturer, h.Barcode, h.Category, h.Description, "Add" });
+                }
+                catch { }
                 ListViewItem lst = new ListViewItem();
                 lst.Text = h.Name + "\n\r" + h.Category + "\n\r" + h.Description;
                 lst.ForeColor = Color.DimGray;

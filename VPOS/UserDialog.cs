@@ -29,7 +29,7 @@ namespace VPOS
             if (Global._roles.Count() < 1)
             {
                 string ids = Guid.NewGuid().ToString();
-                _role = new Roles(ids, "Administrator", "All item pos daily purchases merchandise inventory expenses cash flow suppliers users suppliers catgories transactions ledgers logs profile ", "create update delete log ", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.StoreID);
+                _role = new Roles(ids, "Administrator", "All item pos daily purchases merchandise inventory expenses cash flow suppliers users suppliers catgories transactions ledgers logs profile ", "create update delete log ", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, "");
                 DBConnect.Insert(_role);
                 Global._roles.Add(_role);
 
@@ -172,6 +172,11 @@ namespace VPOS
         string originalPassword = "";
         private void button2_Click(object sender, EventArgs e)
         {
+         if (Store.ListStore().Count() < 1)
+            {
+                MessageBox.Show("Please add the name of the store");
+                return;
+            }
             string password = "";
             if (firstnameTxt.Text == "")
             {
@@ -188,7 +193,7 @@ namespace VPOS
                 roleCbx.BackColor = Color.Red;
                 return;
             }
-            if (String.IsNullOrEmpty(storeID))
+            if (String.IsNullOrEmpty(Helper.StoreID))
             {
                 storeCbx.BackColor = Color.Red;
                 return;
@@ -236,7 +241,8 @@ namespace VPOS
             {
 
                 storeID = "";
-                storeID = storeDictionary[storeCbx.Text];
+                storeID = 
+                Helper.StoreID= storeDictionary[storeCbx.Text];
             }
             catch { }
         }

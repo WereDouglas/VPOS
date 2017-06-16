@@ -14,7 +14,7 @@ namespace VPOS.Model
         private string name;
         private string contact;
         private string image;
-        private string type;       
+        private string type;
         private string created;
         private string address;
         private string orgID;
@@ -137,7 +137,7 @@ namespace VPOS.Model
             }
         }
         public Transactor() { }
-        public Transactor(string id, string name, string contact, string image, string type, string created,string address,string orgID, string storeID)
+        public Transactor(string id, string name, string contact, string image, string type, string created, string address, string orgID, string storeID)
         {
             this.Id = id;
             this.Name = name;
@@ -152,35 +152,35 @@ namespace VPOS.Model
 
         public static List<Transactor> ListTransactor()
         {
-            DBConnect.OpenConn();
-            List<Transactor> wards = new List<Transactor>();
-            string SQL = "SELECT * FROM transactor";
-            NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
-            NpgsqlDataReader Reader = command.ExecuteReader();
-            while (Reader.Read())
+            if (Helper.Type != "Lite")
             {
-                Transactor p = new Transactor(Reader["id"].ToString(), Reader["name"].ToString(), Reader["contact"].ToString(), Reader["image"].ToString(), Reader["type"].ToString(),Reader["created"].ToString(), Reader["address"].ToString(), Reader["orgID"].ToString(), Reader["storeid"].ToString());
-                wards.Add(p);
+                DBConnect.OpenConn();
+                List<Transactor> wards = new List<Transactor>();
+                string SQL = "SELECT * FROM transactor";
+                NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
+                NpgsqlDataReader Reader = command.ExecuteReader();
+                while (Reader.Read())
+                {
+                    Transactor p = new Transactor(Reader["id"].ToString(), Reader["name"].ToString(), Reader["contact"].ToString(), Reader["image"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["address"].ToString(), Reader["orgID"].ToString(), Reader["storeid"].ToString());
+                    wards.Add(p);
+                }
+                DBConnect.CloseConn();
+                return wards;
             }
-            DBConnect.CloseConn();
-            return wards;
-
-        }
-        public static List<Transactor> ListTransactorLite()
-        {
-            
-            List<Transactor> wards = new List<Transactor>();
-            string SQL = "SELECT * FROM transactor";
-            Reader = DBConnect.ReadingLite(SQL);
-            while (Reader.Read())
+            else
             {
-                Transactor p = new Transactor(Reader["id"].ToString(), Reader["name"].ToString(), Reader["contact"].ToString(), Reader["image"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["address"].ToString(), Reader["orgID"].ToString(), Reader["storeid"].ToString());
-                wards.Add(p);
-            }
-            Reader.Close();
-          
-            return wards;
+                List<Transactor> wards = new List<Transactor>();
+                string SQL = "SELECT * FROM transactor";
+                Reader = DBConnect.ReadingLite(SQL);
+                while (Reader.Read())
+                {
+                    Transactor p = new Transactor(Reader["id"].ToString(), Reader["name"].ToString(), Reader["contact"].ToString(), Reader["image"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["address"].ToString(), Reader["orgID"].ToString(), Reader["storeid"].ToString());
+                    wards.Add(p);
+                }
+                Reader.Close();
 
+                return wards;
+            }
         }
     }
 }

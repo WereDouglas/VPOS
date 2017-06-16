@@ -20,9 +20,9 @@ namespace VPOS.Model
         private string balance;
         private string bank;
         private string account;
-        private string transactorID;        
+        private string transactorID;
         private string created;
-        private string type;       
+        private string type;
         private string orgID;
         private string userID;
         private string tax;
@@ -248,7 +248,7 @@ namespace VPOS.Model
             }
         }
         public Billing() { }
-        public Billing(string id, string no, string pos, string paid, string method, string reference, string total, string balance, string bank, string account, string transactorID, string created,string type,string orgID,string userID,string tax, string storeID)
+        public Billing(string id, string no, string pos, string paid, string method, string reference, string total, string balance, string bank, string account, string transactorID, string created, string type, string orgID, string userID, string tax, string storeID)
         {
             this.Id = id;
             this.No = no;
@@ -268,38 +268,75 @@ namespace VPOS.Model
             this.Tax = tax;
             this.StoreID = storeID;
         }
-
-        public static List<Billing> ListBilling()
-        {
-            DBConnect.OpenConn();
-            List<Billing> billing = new List<Billing>();
-            string SQL = "SELECT * FROM billing";
-            NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
-            NpgsqlDataReader Reader = command.ExecuteReader();
-            while (Reader.Read())
-            {
-                Billing p = new Billing(Reader["id"].ToString(), Reader["no"].ToString(), Reader["pos"].ToString(), Reader["paid"].ToString(), Reader["method"].ToString(), Reader["reference"].ToString(), Reader["total"].ToString(), Reader["balance"].ToString(), Reader["bank"].ToString(), Reader["account"].ToString(), Reader["transactorID"].ToString(), Reader["created"].ToString(), Reader["type"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString());
-                billing.Add(p);
-            }
-            DBConnect.CloseConn();
-            return billing;
-
-        }
         static SQLiteDataReader Reader;
-        public static List<Billing> ListBillingLite()
+        public static List<Billing> ListBilling(string start, string end)
         {
-            DBConnect.OpenConn();
-            List<Billing> billing = new List<Billing>();
-            string SQL = "SELECT * FROM billing";
-            Reader = DBConnect.ReadingLite(SQL);
-            while (Reader.Read())
+            if (Helper.Type != "Lite")
             {
-                Billing p = new Billing(Reader["id"].ToString(), Reader["no"].ToString(), Reader["pos"].ToString(), Reader["paid"].ToString(), Reader["method"].ToString(), Reader["reference"].ToString(), Reader["total"].ToString(), Reader["balance"].ToString(), Reader["bank"].ToString(), Reader["account"].ToString(), Reader["transactorID"].ToString(), Reader["created"].ToString(), Reader["type"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString());
-                billing.Add(p);
+                DBConnect.OpenConn();
+                List<Billing> billing = new List<Billing>();
+                string SQL = "SELECT * FROM billing WHERE created::date >= '" + start + "'::date AND  created::date <= '" + end + "'::date";
+                NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
+                NpgsqlDataReader Reader = command.ExecuteReader();
+                while (Reader.Read())
+                {
+                    Billing p = new Billing(Reader["id"].ToString(), Reader["no"].ToString(), Reader["pos"].ToString(), Reader["paid"].ToString(), Reader["method"].ToString(), Reader["reference"].ToString(), Reader["total"].ToString(), Reader["balance"].ToString(), Reader["bank"].ToString(), Reader["account"].ToString(), Reader["transactorID"].ToString(), Reader["created"].ToString(), Reader["type"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString());
+                    billing.Add(p);
+                }
+                DBConnect.CloseConn();
+                return billing;
             }
-            Reader.Close();
-            return billing;
+            else
+            {
+                List<Billing> billing = new List<Billing>();
+               // string SQL = "SELECT * FROM billing WHERE strftime('%s', created) >= strftime('%s','" + start + "') AND  strftime('%s',created) <= strftime('%s','" + end + "')";
+                //string SQL = "SELECT *, (substr(created, 7, 4) || '-' || substr(created, 1, 2) || '-' || substr(created, 4, 2)) AS SomeDate FROM billing WHERE somedate BETWEEN DATE('" + start + "') AND DATE('now', '+1 day')";
+                string SQL = "SELECT * FROM billing";
+                Reader = DBConnect.ReadingLite(SQL);
+                while (Reader.Read())
+                {
+                    Billing p = new Billing(Reader["id"].ToString(), Reader["no"].ToString(), Reader["pos"].ToString(), Reader["paid"].ToString(), Reader["method"].ToString(), Reader["reference"].ToString(), Reader["total"].ToString(), Reader["balance"].ToString(), Reader["bank"].ToString(), Reader["account"].ToString(), Reader["transactorID"].ToString(), Reader["created"].ToString(), Reader["type"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString());
+                    billing.Add(p);
+                }
+                Reader.Close();
+                return billing;
+
+            }
 
         }
+        public static List<Billing> ListWhere(string no)
+        {
+            if (Helper.Type != "Lite")
+            {
+                DBConnect.OpenConn();
+                List<Billing> billing = new List<Billing>();
+                string SQL = "SELECT * FROM billing WHERE no = '" + no + "'";
+                NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
+                NpgsqlDataReader Reader = command.ExecuteReader();
+                while (Reader.Read())
+                {
+                    Billing p = new Billing(Reader["id"].ToString(), Reader["no"].ToString(), Reader["pos"].ToString(), Reader["paid"].ToString(), Reader["method"].ToString(), Reader["reference"].ToString(), Reader["total"].ToString(), Reader["balance"].ToString(), Reader["bank"].ToString(), Reader["account"].ToString(), Reader["transactorID"].ToString(), Reader["created"].ToString(), Reader["type"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString());
+                    billing.Add(p);
+                }
+                DBConnect.CloseConn();
+                return billing;
+            }
+            else
+            {
+                List<Billing> billing = new List<Billing>();
+                  string SQL = "SELECT * FROM billing WHERE no = '" + no + "'";
+                Reader = DBConnect.ReadingLite(SQL);
+                while (Reader.Read())
+                {
+                    Billing p = new Billing(Reader["id"].ToString(), Reader["no"].ToString(), Reader["pos"].ToString(), Reader["paid"].ToString(), Reader["method"].ToString(), Reader["reference"].ToString(), Reader["total"].ToString(), Reader["balance"].ToString(), Reader["bank"].ToString(), Reader["account"].ToString(), Reader["transactorID"].ToString(), Reader["created"].ToString(), Reader["type"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString());
+                    billing.Add(p);
+                }
+                Reader.Close();
+                return billing;
+
+            }
+
+        }
+
     }
 }

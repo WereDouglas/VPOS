@@ -2,12 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Data.SQLite;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using VPOS.SQLite;
 
 namespace VPOS
 {
@@ -24,8 +26,24 @@ namespace VPOS
         public static string Type;
         public static string lastSync;
         public static string stocktaking;
-        //  public static string genUrl = "http://caseprofessional.org/index.php/";
-        public static string genUrl = "http://localhost/pos/index.php/";
+        public static string username;
+        public static string contact;
+        public static string designation;
+        public static string email ;
+        public static string image;
+        public static string actions;
+        public static string views;
+        public static string permissions ;
+
+        public static string genUrl = "http://vugapos.pro/index.php/";
+        public static string fileUrl = "http://vugapos.pro/file/";
+
+        //public static string genUrl = "http://localhost/pos/index.php/";
+        //public static string fileUrl = "http://localhost/pos/file/";
+       
+        static Connection dbobject = new Connection();
+        static SQLiteConnection SQLconnect = new SQLiteConnection();
+
 
         public static string CalculateYourAge(DateTime Dob)
         {
@@ -102,19 +120,55 @@ namespace VPOS
 
             string exists = "";
             string query = "SELECT * FROM " + table + " WHERE " + field + "= '" + value + "'";
-            Reader = DBConnect.Reading(query);
-            while (Reader.Read())
+
+            if (!Helper.Type.Contains("Lite"))
             {
-                exists = Reader.IsDBNull(0) ? "" : Reader.GetString(0);
-            }
-            Reader.Close();
-            if (exists != "")
-            {
-                return true;
+              
+                Reader = DBConnect.Reading(query);
+                while (Reader.Read())
+                {
+                    exists = Reader.IsDBNull(0) ? "" : Reader.GetString(0);
+                }
+                Reader.Close();
+                if (exists != "")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
-                return false;
+                try
+                {
+                    SQLconnect.ConnectionString = dbobject.datalocation();
+                    SQLconnect.Open();
+                }
+                catch
+                {
+
+                }
+
+                SQLiteCommand cmd = new SQLiteCommand();
+                cmd = SQLconnect.CreateCommand();
+                cmd.CommandText = query;
+                while (Reader.Read())
+                {
+                    exists = Reader.IsDBNull(0) ? "" : Reader.GetString(0);
+                }
+                Reader.Close();
+
+                if (exists != "")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }           
+              
             }
 
         }
@@ -122,24 +176,60 @@ namespace VPOS
         {
             string exists = "";
             string SQL = "SELECT * FROM " + table + " WHERE " + field1 + "= '" + value1 + "' AND " + field2 + "= '" + value2 + "'";
-            Reader = DBConnect.Reading(SQL);
-            while (Reader.Read())
-            {
-                exists = Reader.IsDBNull(0) ? "" : Reader.GetString(0);
-            }
-            Reader.Close();
-            DBConnect.CloseConn();
-
-            if (exists != "")
+           
+            if (!Helper.Type.Contains("Lite"))
             {
 
-                return true;
+                Reader = DBConnect.Reading(SQL);
+                while (Reader.Read())
+                {
+                    exists = Reader.IsDBNull(0) ? "" : Reader.GetString(0);
+                }
+                Reader.Close();
+                DBConnect.CloseConn();
+
+                if (exists != "")
+                {
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+              
             }
             else
             {
+                try
+                {
+                    SQLconnect.ConnectionString = dbobject.datalocation();
+                    SQLconnect.Open();
+                }
+                catch
+                {
 
+                }
 
-                return false;
+                SQLiteCommand cmd = new SQLiteCommand();
+                cmd = SQLconnect.CreateCommand();
+                cmd.CommandText = SQL;
+                while (Reader.Read())
+                {
+                    exists = Reader.IsDBNull(0) ? "" : Reader.GetString(0);
+                }
+                Reader.Close();
+
+                if (exists != "")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
             }
         }
 

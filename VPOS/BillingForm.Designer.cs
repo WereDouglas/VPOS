@@ -43,11 +43,6 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.saleGrid = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.refTxt = new System.Windows.Forms.TextBox();
-            this.methodCbx = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.totalLbl = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -55,6 +50,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.balanceTxt = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.refTxt = new System.Windows.Forms.TextBox();
+            this.methodCbx = new System.Windows.Forms.ComboBox();
             this.addressLbl = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.noLbl = new System.Windows.Forms.Label();
@@ -63,6 +63,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.typeLbl = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -71,13 +72,13 @@
             this.paymentTxt = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.endDate = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.itemGrid = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.startDate = new System.Windows.Forms.DateTimePicker();
             this.typeCbx = new System.Windows.Forms.ComboBox();
             this.dtGrid2 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -85,8 +86,8 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.saleGrid)).BeginInit();
-            this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel7.SuspendLayout();
@@ -99,9 +100,9 @@
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.99663F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.00337F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 171F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.8736F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.12639F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
             this.tableLayoutPanel1.Controls.Add(this.panel6, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.panel7, 1, 3);
@@ -114,7 +115,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 93.92523F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 409F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 88F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1360, 527);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1549, 527);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // panel6
@@ -128,7 +129,7 @@
             this.panel6.Controls.Add(this.label7);
             this.panel6.Location = new System.Drawing.Point(3, 4);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1354, 22);
+            this.panel6.Size = new System.Drawing.Size(1543, 22);
             this.panel6.TabIndex = 105;
             // 
             // button5
@@ -138,7 +139,7 @@
             this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(1332, 1);
+            this.button5.Location = new System.Drawing.Point(1521, 1);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(19, 19);
             this.button5.TabIndex = 104;
@@ -153,7 +154,7 @@
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(1721, 7);
+            this.button2.Location = new System.Drawing.Point(1910, 7);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(21, 15);
             this.button2.TabIndex = 102;
@@ -169,7 +170,7 @@
             this.label7.ForeColor = System.Drawing.Color.LightSeaGreen;
             this.label7.Location = new System.Drawing.Point(0, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(1354, 22);
+            this.label7.Size = new System.Drawing.Size(1543, 22);
             this.label7.TabIndex = 103;
             this.label7.Text = "BILLINGS";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -179,9 +180,9 @@
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.panel1);
-            this.panel2.Location = new System.Drawing.Point(692, 32);
+            this.panel2.Location = new System.Drawing.Point(946, 32);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(493, 403);
+            this.panel2.Size = new System.Drawing.Size(483, 403);
             this.panel2.TabIndex = 2;
             // 
             // panel1
@@ -197,7 +198,7 @@
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(3, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(487, 400);
+            this.panel1.Size = new System.Drawing.Size(477, 400);
             this.panel1.TabIndex = 1;
             // 
             // customerLbl
@@ -266,7 +267,7 @@
             this.saleGrid.Location = new System.Drawing.Point(3, 3);
             this.saleGrid.Name = "saleGrid";
             this.saleGrid.RowHeadersVisible = false;
-            this.saleGrid.Size = new System.Drawing.Size(469, 169);
+            this.saleGrid.Size = new System.Drawing.Size(462, 169);
             this.saleGrid.TabIndex = 3;
             // 
             // panel5
@@ -279,69 +280,6 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(475, 6);
             this.panel5.TabIndex = 253;
-            // 
-            // tableLayoutPanel5
-            // 
-            this.tableLayoutPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel5.ColumnCount = 2;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Controls.Add(this.label12, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.label11, 0, 1);
-            this.tableLayoutPanel5.Controls.Add(this.refTxt, 1, 1);
-            this.tableLayoutPanel5.Controls.Add(this.methodCbx, 1, 0);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(26, 197);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 2;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45.61404F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 54.38596F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(201, 62);
-            this.tableLayoutPanel5.TabIndex = 254;
-            // 
-            // label12
-            // 
-            this.label12.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 7);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(44, 13);
-            this.label12.TabIndex = 4;
-            this.label12.Text = "Method";
-            // 
-            // label11
-            // 
-            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 38);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(55, 13);
-            this.label11.TabIndex = 5;
-            this.label11.Text = "Reference";
-            // 
-            // refTxt
-            // 
-            this.refTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.refTxt.BackColor = System.Drawing.Color.PeachPuff;
-            this.refTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.refTxt.Location = new System.Drawing.Point(103, 38);
-            this.refTxt.Name = "refTxt";
-            this.refTxt.Size = new System.Drawing.Size(95, 14);
-            this.refTxt.TabIndex = 19;
-            // 
-            // methodCbx
-            // 
-            this.methodCbx.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.methodCbx.FormattingEnabled = true;
-            this.methodCbx.Items.AddRange(new object[] {
-            "Cash",
-            "Cheque",
-            "Mobile Money",
-            "Other",
-            "Card"});
-            this.methodCbx.Location = new System.Drawing.Point(103, 3);
-            this.methodCbx.Name = "methodCbx";
-            this.methodCbx.Size = new System.Drawing.Size(95, 21);
-            this.methodCbx.TabIndex = 20;
             // 
             // tableLayoutPanel4
             // 
@@ -431,6 +369,69 @@
             this.label10.Size = new System.Drawing.Size(74, 29);
             this.label10.TabIndex = 5;
             this.label10.Text = "Balance due";
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel5.ColumnCount = 2;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Controls.Add(this.label12, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.label11, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.refTxt, 1, 1);
+            this.tableLayoutPanel5.Controls.Add(this.methodCbx, 1, 0);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(26, 197);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 2;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45.61404F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 54.38596F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(201, 62);
+            this.tableLayoutPanel5.TabIndex = 254;
+            // 
+            // label12
+            // 
+            this.label12.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(3, 7);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(44, 13);
+            this.label12.TabIndex = 4;
+            this.label12.Text = "Method";
+            // 
+            // label11
+            // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 38);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(55, 13);
+            this.label11.TabIndex = 5;
+            this.label11.Text = "Reference";
+            // 
+            // refTxt
+            // 
+            this.refTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.refTxt.BackColor = System.Drawing.Color.PeachPuff;
+            this.refTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.refTxt.Location = new System.Drawing.Point(103, 38);
+            this.refTxt.Name = "refTxt";
+            this.refTxt.Size = new System.Drawing.Size(95, 14);
+            this.refTxt.TabIndex = 19;
+            // 
+            // methodCbx
+            // 
+            this.methodCbx.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.methodCbx.FormattingEnabled = true;
+            this.methodCbx.Items.AddRange(new object[] {
+            "Cash",
+            "Cheque",
+            "Mobile Money",
+            "Other",
+            "Card"});
+            this.methodCbx.Location = new System.Drawing.Point(103, 3);
+            this.methodCbx.Name = "methodCbx";
+            this.methodCbx.Size = new System.Drawing.Size(95, 21);
+            this.methodCbx.TabIndex = 20;
             // 
             // addressLbl
             // 
@@ -523,10 +524,20 @@
             this.panel7.Controls.Add(this.button4);
             this.panel7.Controls.Add(this.paymentTxt);
             this.panel7.Controls.Add(this.button3);
-            this.panel7.Location = new System.Drawing.Point(692, 441);
+            this.panel7.Location = new System.Drawing.Point(946, 441);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(490, 83);
+            this.panel7.Size = new System.Drawing.Size(483, 83);
             this.panel7.TabIndex = 256;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(128, 23);
+            this.label1.TabIndex = 261;
+            this.label1.Text = "Clear balances ";
             // 
             // typeLbl
             // 
@@ -563,7 +574,7 @@
             this.newBalanceTxt.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.newBalanceTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.newBalanceTxt.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newBalanceTxt.Location = new System.Drawing.Point(283, 29);
+            this.newBalanceTxt.Location = new System.Drawing.Point(279, 29);
             this.newBalanceTxt.Name = "newBalanceTxt";
             this.newBalanceTxt.Size = new System.Drawing.Size(201, 20);
             this.newBalanceTxt.TabIndex = 258;
@@ -589,7 +600,7 @@
             this.paymentTxt.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.paymentTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.paymentTxt.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paymentTxt.Location = new System.Drawing.Point(283, 3);
+            this.paymentTxt.Location = new System.Drawing.Point(279, 3);
             this.paymentTxt.Name = "paymentTxt";
             this.paymentTxt.Size = new System.Drawing.Size(201, 20);
             this.paymentTxt.TabIndex = 256;
@@ -612,21 +623,29 @@
             // 
             // panel8
             // 
+            this.panel8.Controls.Add(this.endDate);
             this.panel8.Controls.Add(this.label6);
             this.panel8.Controls.Add(this.itemGrid);
             this.panel8.Controls.Add(this.label4);
-            this.panel8.Controls.Add(this.dateTimePicker1);
+            this.panel8.Controls.Add(this.startDate);
             this.panel8.Controls.Add(this.typeCbx);
             this.panel8.Location = new System.Drawing.Point(3, 32);
             this.panel8.Name = "panel8";
             this.tableLayoutPanel1.SetRowSpan(this.panel8, 2);
-            this.panel8.Size = new System.Drawing.Size(683, 492);
+            this.panel8.Size = new System.Drawing.Size(937, 492);
             this.panel8.TabIndex = 257;
+            // 
+            // endDate
+            // 
+            this.endDate.Location = new System.Drawing.Point(217, 10);
+            this.endDate.Name = "endDate";
+            this.endDate.Size = new System.Drawing.Size(149, 21);
+            this.endDate.TabIndex = 23;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(196, 13);
+            this.label6.Location = new System.Drawing.Point(471, 13);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 13);
             this.label6.TabIndex = 22;
@@ -644,7 +663,7 @@
             this.itemGrid.Location = new System.Drawing.Point(6, 41);
             this.itemGrid.Name = "itemGrid";
             this.itemGrid.RowHeadersVisible = false;
-            this.itemGrid.Size = new System.Drawing.Size(674, 448);
+            this.itemGrid.Size = new System.Drawing.Size(928, 448);
             this.itemGrid.TabIndex = 4;
             this.itemGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemGrid_CellClick);
             // 
@@ -653,17 +672,17 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(9, 13);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(30, 13);
+            this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 21;
-            this.label4.Text = "Date";
+            this.label4.Text = "Period";
             // 
-            // dateTimePicker1
+            // startDate
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(45, 10);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(149, 21);
-            this.dateTimePicker1.TabIndex = 5;
-            this.dateTimePicker1.CloseUp += new System.EventHandler(this.dateTimePicker1_CloseUp);
+            this.startDate.Location = new System.Drawing.Point(62, 10);
+            this.startDate.Name = "startDate";
+            this.startDate.Size = new System.Drawing.Size(149, 21);
+            this.startDate.TabIndex = 5;
+            this.startDate.CloseUp += new System.EventHandler(this.dateTimePicker1_CloseUp);
             // 
             // typeCbx
             // 
@@ -672,7 +691,7 @@
             "Sale",
             "Purchase",
             "All"});
-            this.typeCbx.Location = new System.Drawing.Point(231, 10);
+            this.typeCbx.Location = new System.Drawing.Point(506, 10);
             this.typeCbx.Name = "typeCbx";
             this.typeCbx.Size = new System.Drawing.Size(163, 21);
             this.typeCbx.TabIndex = 6;
@@ -693,22 +712,12 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dtGrid2.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dtGrid2.Location = new System.Drawing.Point(1191, 32);
+            this.dtGrid2.Location = new System.Drawing.Point(1435, 32);
             this.dtGrid2.Name = "dtGrid2";
             this.dtGrid2.RowHeadersVisible = false;
             this.tableLayoutPanel1.SetRowSpan(this.dtGrid2, 2);
-            this.dtGrid2.Size = new System.Drawing.Size(166, 492);
+            this.dtGrid2.Size = new System.Drawing.Size(111, 492);
             this.dtGrid2.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(128, 23);
-            this.label1.TabIndex = 261;
-            this.label1.Text = "Clear balances ";
             // 
             // BillingForm
             // 
@@ -731,10 +740,10 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.saleGrid)).EndInit();
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel5.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -753,7 +762,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView dtGrid2;
         private System.Windows.Forms.DataGridView itemGrid;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker startDate;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox typeCbx;
@@ -797,5 +806,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label typeLbl;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker endDate;
     }
 }

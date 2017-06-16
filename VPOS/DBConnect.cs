@@ -15,8 +15,6 @@ namespace VPOS
         static Connection dbobject = new Connection();
         static SQLiteConnection SQLconnect = new SQLiteConnection();
         public static NpgsqlConnection conn = new NpgsqlConnection("Server=127.0.0.1;Port=5432;User Id=pos;Password=admin;Database=pos;");
-
-
         public static void OpenConn()
         {
             try
@@ -116,7 +114,7 @@ namespace VPOS
                 cmd = SQLconnect.CreateCommand();
                 cmd.CommandText = query;
 
-               rowsaffected = cmd.ExecuteNonQuery();
+                rowsaffected = cmd.ExecuteNonQuery();
                 cmd.Dispose();
                 SQLconnect.Close();
             }
@@ -127,7 +125,7 @@ namespace VPOS
             Int32 rowsaffected = 0;
             //try
             //{
-            OpenConn();
+         
 
             // Get type and properties (vector)
             Type typeObj = objGen.GetType();
@@ -183,6 +181,7 @@ namespace VPOS
             // Execute command
             if (!Helper.Type.Contains("Lite"))
             {
+                OpenConn();
                 NpgsqlCommand command = new NpgsqlCommand(SQL, conn);
                  rowsaffected = command.ExecuteNonQuery();
 
@@ -222,7 +221,7 @@ namespace VPOS
         {
             //try
             //{
-            OpenConn();
+           // OpenConn();
 
             // Get type and properties (vector)
             Type typeObj = objGen.GetType();
@@ -326,7 +325,7 @@ namespace VPOS
             Int32 rowsaffected = 0;
            //try
            //{
-           OpenConn();
+          
 
             // Get table
             string[] type = objGen.GetType().ToString().Split('.');
@@ -389,6 +388,7 @@ namespace VPOS
 
             if (!Helper.Type.Contains("Lite"))
             {
+                OpenConn();
                 NpgsqlCommand command = new NpgsqlCommand(SQL, conn);
                 rowsaffected = command.ExecuteNonQuery();
 
@@ -427,16 +427,47 @@ namespace VPOS
         {
             //try
             //{
-            OpenConn();
-            NpgsqlCommand command = new NpgsqlCommand(query, conn);
-            Int32 rowsaffected = command.ExecuteNonQuery();
-
-            CloseConn();
+           
             //}
             //catch (Exception c)
             //{
             //    Console.WriteLine("Errr on update!" + c.Message.ToString());
             //}
+
+            if (!Helper.Type.Contains("Lite"))
+            {
+                OpenConn();
+                NpgsqlCommand command = new NpgsqlCommand(query, conn);
+                Int32 rowsaffected = command.ExecuteNonQuery();
+
+                CloseConn();
+
+                //}
+                //catch (Exception c)
+                //{
+                //    Console.WriteLine("Errr on insert!" + c.Message);
+                //    return "";
+                //}
+            }
+            else
+            {
+                try
+                {
+                    SQLconnect.ConnectionString = dbobject.datalocation();
+                    SQLconnect.Open();
+                }
+                catch
+                {
+
+                }
+
+                SQLiteCommand cmd = new SQLiteCommand();
+                cmd = SQLconnect.CreateCommand();
+                cmd.CommandText = query;
+
+                cmd.Dispose();
+                SQLconnect.Close();
+            }
 
         }
         public static void Delete(string table, string idValue)

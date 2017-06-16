@@ -349,7 +349,7 @@ namespace VPOS
             {
                 string Query2 = "DELETE from category WHERE id ='" + h.Id + "'";
                 MainForm._Form1.FeedBack("Uploading transactor " + h.Name + " ");
-                _cat = new Category(h.Id,h.Name,h.Description, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),h.OrgID, Helper.StoreID);
+                _cat = new Category(h.Id,h.Name,h.Description, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),h.OrgID, Helper.StoreID,h.Image);
                 string Query = DBConnect.GenerateQuery(_cat);
                 // MainForm._Form1.FeedBack("QUERY " + Query);
                 string URL = Helper.genUrl + "api/uploading";

@@ -213,35 +213,36 @@ namespace VPOS.Model
 
         public static List<Sale> ListSale()
         {
-            DBConnect.OpenConn();
-            List<Sale> categories = new List<Sale>();
-            string SQL = "SELECT * FROM sale";
-            NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
-            NpgsqlDataReader Reader = command.ExecuteReader();
-            while (Reader.Read())
-            {
-                Sale p = new Sale(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["total"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString());
-                categories.Add(p);
+            if (Helper.Type!="Lite") {
+                DBConnect.OpenConn();
+                List<Sale> categories = new List<Sale>();
+                string SQL = "SELECT * FROM sale";
+                NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
+                NpgsqlDataReader Reader = command.ExecuteReader();
+                while (Reader.Read())
+                {
+                    Sale p = new Sale(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["total"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString());
+                    categories.Add(p);
+                }
+                DBConnect.CloseConn();
+                return categories;
             }
-            DBConnect.CloseConn();
-            return categories;
+            else {
+                List<Sale> categories = new List<Sale>();
+                string SQL = "SELECT * FROM sale";
+                Reader = DBConnect.ReadingLite(SQL);
+                while (Reader.Read())
+                {
+                    Sale p = new Sale(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["total"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString());
+                    categories.Add(p);
+                }
+                Reader.Close();
+                return categories;
+
+            }
 
         }
-        public static List<Sale> ListSaleLite()
-        {
-            DBConnect.OpenConn();
-            List<Sale> categories = new List<Sale>();
-            string SQL = "SELECT * FROM sale";
-            Reader = DBConnect.ReadingLite(SQL);
-            while (Reader.Read())
-            {
-                Sale p = new Sale(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["total"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString());
-                categories.Add(p);
-            }
-            Reader.Close();
-            return categories;
-
-        }
+       
     }
 
 

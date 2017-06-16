@@ -347,5 +347,18 @@ namespace VPOS
                 frm.Show();
             }
         }
+
+        private void categoryTxt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Image img = Base64ToImage(Global._category.First(k => k.Name.Contains(categoryTxt.Text)).Image);
+                System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img);
+                //Bitmap bps = new Bitmap(bmp, 50, 50);
+                imgCapture.Image = bmp;
+                imgCapture.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+            catch { }
+        }
     }
 }

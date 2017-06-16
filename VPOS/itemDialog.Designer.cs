@@ -174,8 +174,6 @@
             this.flowLayoutPanel1.Controls.Add(this.barcodeTxt);
             this.flowLayoutPanel1.Controls.Add(this.label13);
             this.flowLayoutPanel1.Controls.Add(this.compositionTxt);
-            this.flowLayoutPanel1.Controls.Add(this.label14);
-            this.flowLayoutPanel1.Controls.Add(this.categoryTxt);
             this.flowLayoutPanel1.Controls.Add(this.label30);
             this.flowLayoutPanel1.Controls.Add(this.strengthTxt);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(292, 32);
@@ -367,24 +365,25 @@
             // label14
             // 
             this.label14.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label14.Location = new System.Drawing.Point(3, 316);
+            this.label14.Location = new System.Drawing.Point(6, 65);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(93, 13);
+            this.label14.Size = new System.Drawing.Size(88, 20);
             this.label14.TabIndex = 27;
             this.label14.Text = "Category";
             // 
             // categoryTxt
             // 
             this.categoryTxt.FormattingEnabled = true;
-            this.categoryTxt.Location = new System.Drawing.Point(102, 312);
+            this.categoryTxt.Location = new System.Drawing.Point(114, 65);
             this.categoryTxt.Name = "categoryTxt";
-            this.categoryTxt.Size = new System.Drawing.Size(180, 21);
+            this.categoryTxt.Size = new System.Drawing.Size(138, 21);
             this.categoryTxt.TabIndex = 30;
+            this.categoryTxt.SelectedIndexChanged += new System.EventHandler(this.categoryTxt_SelectedIndexChanged);
             // 
             // label30
             // 
             this.label30.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label30.Location = new System.Drawing.Point(3, 343);
+            this.label30.Location = new System.Drawing.Point(3, 316);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(93, 13);
             this.label30.TabIndex = 166;
@@ -392,7 +391,7 @@
             // 
             // strengthTxt
             // 
-            this.strengthTxt.Location = new System.Drawing.Point(102, 339);
+            this.strengthTxt.Location = new System.Drawing.Point(102, 312);
             this.strengthTxt.Name = "strengthTxt";
             this.strengthTxt.Size = new System.Drawing.Size(180, 21);
             this.strengthTxt.TabIndex = 165;
@@ -409,6 +408,8 @@
             this.groupBox1.Controls.Add(this.bntCapture);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.fileUrlTxtBx);
+            this.groupBox1.Controls.Add(this.categoryTxt);
+            this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Location = new System.Drawing.Point(3, 32);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(283, 418);
@@ -433,7 +434,7 @@
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button3.Location = new System.Drawing.Point(6, 161);
+            this.button3.Location = new System.Drawing.Point(6, 238);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(88, 23);
             this.button3.TabIndex = 23;
@@ -449,7 +450,7 @@
             this.bntStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bntStart.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.bntStart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bntStart.Location = new System.Drawing.Point(6, 50);
+            this.bntStart.Location = new System.Drawing.Point(6, 127);
             this.bntStart.Name = "bntStart";
             this.bntStart.Size = new System.Drawing.Size(88, 23);
             this.bntStart.TabIndex = 20;
@@ -463,7 +464,7 @@
             this.bntContinue.FlatAppearance.BorderSize = 0;
             this.bntContinue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bntContinue.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.bntContinue.Location = new System.Drawing.Point(6, 124);
+            this.bntContinue.Location = new System.Drawing.Point(6, 201);
             this.bntContinue.Name = "bntContinue";
             this.bntContinue.Size = new System.Drawing.Size(88, 23);
             this.bntContinue.TabIndex = 22;
@@ -477,7 +478,7 @@
             this.bntStop.FlatAppearance.BorderSize = 0;
             this.bntStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bntStop.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.bntStop.Location = new System.Drawing.Point(6, 87);
+            this.bntStop.Location = new System.Drawing.Point(6, 164);
             this.bntStop.Name = "bntStop";
             this.bntStop.Size = new System.Drawing.Size(88, 23);
             this.bntStop.TabIndex = 21;
@@ -489,9 +490,9 @@
             // 
             this.imgVideo.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.imgVideo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.imgVideo.Location = new System.Drawing.Point(114, 46);
+            this.imgVideo.Location = new System.Drawing.Point(114, 96);
             this.imgVideo.Name = "imgVideo";
-            this.imgVideo.Size = new System.Drawing.Size(138, 152);
+            this.imgVideo.Size = new System.Drawing.Size(138, 113);
             this.imgVideo.TabIndex = 104;
             this.imgVideo.TabStop = false;
             this.imgVideo.Click += new System.EventHandler(this.imgVideo_Click);
@@ -514,7 +515,7 @@
             this.bntCapture.FlatAppearance.BorderSize = 0;
             this.bntCapture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bntCapture.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.bntCapture.Location = new System.Drawing.Point(6, 198);
+            this.bntCapture.Location = new System.Drawing.Point(6, 275);
             this.bntCapture.Name = "bntCapture";
             this.bntCapture.Size = new System.Drawing.Size(88, 23);
             this.bntCapture.TabIndex = 23;
@@ -528,7 +529,7 @@
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button4.Location = new System.Drawing.Point(6, 235);
+            this.button4.Location = new System.Drawing.Point(6, 312);
             this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(88, 24);
@@ -542,7 +543,7 @@
             this.fileUrlTxtBx.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.fileUrlTxtBx.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.fileUrlTxtBx.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fileUrlTxtBx.Location = new System.Drawing.Point(6, 391);
+            this.fileUrlTxtBx.Location = new System.Drawing.Point(9, 391);
             this.fileUrlTxtBx.Name = "fileUrlTxtBx";
             this.fileUrlTxtBx.Size = new System.Drawing.Size(246, 19);
             this.fileUrlTxtBx.TabIndex = 151;

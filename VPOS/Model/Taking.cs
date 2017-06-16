@@ -302,34 +302,38 @@ namespace VPOS.Model
 
         public static List<Taking> ListTaking()
         {
-            DBConnect.OpenConn();
-            List<Taking> categories = new List<Taking>();
-            string SQL = "SELECT * FROM taking";
-            NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
-            NpgsqlDataReader Reader = command.ExecuteReader();
-            while (Reader.Read())
+            if (Helper.Type != "Lite")
             {
-                Taking p = new Taking(Reader["id"].ToString(), Reader["date"].ToString(), Reader["itemID"].ToString(), Reader["bf"].ToString(), Reader["purchases"].ToString(), Reader["sales"].ToString(), Reader["total_stock"].ToString(), Reader["system_stock"].ToString(), Reader["variance"].ToString(), Reader["purchase_amount"].ToString(), Reader["sale_amount"].ToString(), Reader["profit"].ToString(), Reader["physical_count"].ToString(), Reader["damages"].ToString(), Reader["shrinkable"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["created"].ToString(), Reader["storeid"].ToString());
-                categories.Add(p);
+                DBConnect.OpenConn();
+                List<Taking> categories = new List<Taking>();
+                string SQL = "SELECT * FROM taking";
+                NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
+                NpgsqlDataReader Reader = command.ExecuteReader();
+                while (Reader.Read())
+                {
+                    Taking p = new Taking(Reader["id"].ToString(), Reader["date"].ToString(), Reader["itemID"].ToString(), Reader["bf"].ToString(), Reader["purchases"].ToString(), Reader["sales"].ToString(), Reader["total_stock"].ToString(), Reader["system_stock"].ToString(), Reader["variance"].ToString(), Reader["purchase_amount"].ToString(), Reader["sale_amount"].ToString(), Reader["profit"].ToString(), Reader["physical_count"].ToString(), Reader["damages"].ToString(), Reader["shrinkable"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["created"].ToString(), Reader["storeid"].ToString());
+                    categories.Add(p);
+                }
+                DBConnect.CloseConn();
+                return categories;
             }
-            DBConnect.CloseConn();
-            return categories;
+            else
+            {
+                List<Taking> categories = new List<Taking>();
+                string SQL = "SELECT * FROM taking";
+                Reader = DBConnect.ReadingLite(SQL);
+                while (Reader.Read())
+                {
+                    Taking p = new Taking(Reader["id"].ToString(), Reader["date"].ToString(), Reader["itemID"].ToString(), Reader["bf"].ToString(), Reader["purchases"].ToString(), Reader["sales"].ToString(), Reader["total_stock"].ToString(), Reader["system_stock"].ToString(), Reader["variance"].ToString(), Reader["purchase_amount"].ToString(), Reader["sale_amount"].ToString(), Reader["profit"].ToString(), Reader["physical_count"].ToString(), Reader["damages"].ToString(), Reader["shrinkable"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["created"].ToString(), Reader["storeid"].ToString());
+                    categories.Add(p);
+                }
+
+                return categories;
+
+            }
 
         }
-        public static List<Taking> ListTakingLite()
-        {            
-            List<Taking> categories = new List<Taking>();
-            string SQL = "SELECT * FROM taking";
-            Reader = DBConnect.ReadingLite(SQL);
-            while (Reader.Read())
-            {
-                Taking p = new Taking(Reader["id"].ToString(), Reader["date"].ToString(), Reader["itemID"].ToString(), Reader["bf"].ToString(), Reader["purchases"].ToString(), Reader["sales"].ToString(), Reader["total_stock"].ToString(), Reader["system_stock"].ToString(), Reader["variance"].ToString(), Reader["purchase_amount"].ToString(), Reader["sale_amount"].ToString(), Reader["profit"].ToString(), Reader["physical_count"].ToString(), Reader["damages"].ToString(), Reader["shrinkable"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["created"].ToString(), Reader["storeid"].ToString());
-                categories.Add(p);
-            }
-        
-            return categories;
 
-        }
     }
 
 

@@ -267,7 +267,7 @@
             // customerLbl
             // 
             this.customerLbl.AutoSize = true;
-            this.customerLbl.Location = new System.Drawing.Point(14, 91);
+            this.customerLbl.Location = new System.Drawing.Point(7, 87);
             this.customerLbl.Name = "customerLbl";
             this.customerLbl.Size = new System.Drawing.Size(12, 13);
             this.customerLbl.TabIndex = 22;
@@ -285,13 +285,13 @@
             this.tableLayoutPanel3.Controls.Add(this.panel5, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel5, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 1, 2);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 133);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 107);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 93.75F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 129F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(563, 349);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(563, 375);
             this.tableLayoutPanel3.TabIndex = 252;
             this.tableLayoutPanel3.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel3_Paint);
             // 
@@ -302,9 +302,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel3.SetColumnSpan(this.panel4, 2);
             this.panel4.Controls.Add(this.saleGrid);
-            this.panel4.Location = new System.Drawing.Point(3, 16);
+            this.panel4.Location = new System.Drawing.Point(3, 18);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(557, 200);
+            this.panel4.Size = new System.Drawing.Size(557, 224);
             this.panel4.TabIndex = 0;
             // 
             // saleGrid
@@ -319,7 +319,7 @@
             this.saleGrid.Location = new System.Drawing.Point(3, 3);
             this.saleGrid.Name = "saleGrid";
             this.saleGrid.RowHeadersVisible = false;
-            this.saleGrid.Size = new System.Drawing.Size(551, 194);
+            this.saleGrid.Size = new System.Drawing.Size(551, 218);
             this.saleGrid.TabIndex = 3;
             this.saleGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.saleGrid_CellClick);
             // 
@@ -346,7 +346,7 @@
             this.tableLayoutPanel5.Controls.Add(this.methodCbx, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.vatTxt, 1, 2);
             this.tableLayoutPanel5.Controls.Add(this.label8, 0, 2);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(17, 222);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(17, 248);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 3;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.42857F));
@@ -439,7 +439,7 @@
             this.tableLayoutPanel4.Controls.Add(this.label9, 0, 2);
             this.tableLayoutPanel4.Controls.Add(this.totalLbl, 1, 2);
             this.tableLayoutPanel4.Controls.Add(this.beforeTxt, 1, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(251, 222);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(251, 248);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 5;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -578,7 +578,7 @@
             this.addressLbl.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addressLbl.Location = new System.Drawing.Point(13, 5);
             this.addressLbl.Name = "addressLbl";
-            this.addressLbl.Size = new System.Drawing.Size(316, 60);
+            this.addressLbl.Size = new System.Drawing.Size(345, 54);
             this.addressLbl.TabIndex = 223;
             this.addressLbl.Text = resources.GetString("addressLbl.Text");
             this.addressLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -593,7 +593,7 @@
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.dateLbl, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.label2, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(389, 86);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(391, 65);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53.33333F));
@@ -648,9 +648,9 @@
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Image = global::VPOS.Properties.Resources.vugapos;
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(389, 8);
+            this.pictureBox1.Location = new System.Drawing.Point(441, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(171, 72);
+            this.pictureBox1.Size = new System.Drawing.Size(116, 57);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 248;
             this.pictureBox1.TabStop = false;

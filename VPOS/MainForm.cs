@@ -434,5 +434,10 @@ namespace VPOS
         {
 
         }
+
+        private void profitAndLossToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

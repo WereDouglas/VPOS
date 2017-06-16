@@ -155,36 +155,38 @@ namespace VPOS.Model
 
         public static List<Store> ListStore()
         {
-            DBConnect.OpenConn();
-            List<Store> categories = new List<Store>();
-            string SQL = "SELECT * FROM store";
-            NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
-            NpgsqlDataReader Reader = command.ExecuteReader();
-            while (Reader.Read())
+            if (Helper.Type != "Lite")
             {
-                Store p = new Store(Reader["id"].ToString(), Reader["name"].ToString(), Reader["location"].ToString(), Reader["address"].ToString(), Reader["contact"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(),Reader["code"].ToString(), Reader["current"].ToString());
-                categories.Add(p);
+                DBConnect.OpenConn();
+                List<Store> categories = new List<Store>();
+                string SQL = "SELECT * FROM store";
+                NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
+                NpgsqlDataReader Reader = command.ExecuteReader();
+                while (Reader.Read())
+                {
+                    Store p = new Store(Reader["id"].ToString(), Reader["name"].ToString(), Reader["location"].ToString(), Reader["address"].ToString(), Reader["contact"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["code"].ToString(), Reader["current"].ToString());
+                    categories.Add(p);
+                }
+                DBConnect.CloseConn();
+                return categories;
             }
-            DBConnect.CloseConn();
-            return categories;
+            else {
+
+                List<Store> categories = new List<Store>();
+                string SQL = "SELECT * FROM store";
+                Reader = DBConnect.ReadingLite(SQL);
+                while (Reader.Read())
+                {
+                    Store p = new Store(Reader["id"].ToString(), Reader["name"].ToString(), Reader["location"].ToString(), Reader["address"].ToString(), Reader["contact"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["code"].ToString(), Reader["current"].ToString());
+                    categories.Add(p);
+                }
+                DBConnect.CloseConn();
+                return categories;
+            }
 
         }
         static SQLiteDataReader Reader;
-        public static List<Store> ListStoreLite()
-        {
-            DBConnect.OpenConn();
-            List<Store> categories = new List<Store>();
-            string SQL = "SELECT * FROM store";
-            Reader = DBConnect.ReadingLite(SQL);
-            while (Reader.Read())
-            {
-                Store p = new Store(Reader["id"].ToString(), Reader["name"].ToString(), Reader["location"].ToString(), Reader["address"].ToString(), Reader["contact"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["code"].ToString(), Reader["current"].ToString());
-                categories.Add(p);
-            }
-            DBConnect.CloseConn();
-            return categories;
-
-        }
+       
 
     }
    

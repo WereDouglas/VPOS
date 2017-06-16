@@ -252,8 +252,11 @@ namespace VPOS
             }
             foreach (Item h in _itemList)
             {
-                m.Rows.Add(new object[] { h.Name + Environment.NewLine + "COST:" + Global._stock.First(n => n.ItemID.Contains(h.Id)).Purchase_price + Environment.NewLine + "MANUFACTURER :" + h.Manufacturer, h.Barcode, Global._stock.First(n => n.ItemID.Contains(h.Id)).Barcode, h.Description, "Add" });
-
+                try
+                {
+                    m.Rows.Add(new object[] { h.Name + Environment.NewLine + "COST:" + Global._stock.First(n => n.ItemID.Contains(h.Id)).Purchase_price + Environment.NewLine + "MANUFACTURER :" + h.Manufacturer, h.Barcode, Global._stock.First(n => n.ItemID.Contains(h.Id)).Barcode, h.Description, "Add" });
+                }
+                catch { }
             }
             itemGrid.DataSource = m;
             itemGrid.AllowUserToAddRows = false;

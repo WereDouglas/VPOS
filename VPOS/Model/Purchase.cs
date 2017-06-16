@@ -182,35 +182,37 @@ namespace VPOS.Model
 
         public static List<Purchase> ListPurchase()
         {
-            DBConnect.OpenConn();
-            List<Purchase> categories = new List<Purchase>();
-            string SQL = "SELECT * FROM purchase";
-            NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
-            NpgsqlDataReader Reader = command.ExecuteReader();
-            while (Reader.Read())
-            {
-                Purchase p = new Purchase(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["storeid"].ToString());
-                categories.Add(p);
+            if (Helper.Type!="Lite") {
+                DBConnect.OpenConn();
+                List<Purchase> categories = new List<Purchase>();
+                string SQL = "SELECT * FROM purchase";
+                NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
+                NpgsqlDataReader Reader = command.ExecuteReader();
+                while (Reader.Read())
+                {
+                    Purchase p = new Purchase(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["storeid"].ToString());
+                    categories.Add(p);
+                }
+                DBConnect.CloseConn();
+                return categories;
             }
-            DBConnect.CloseConn();
-            return categories;
+            else {
+                List<Purchase> categories = new List<Purchase>();
+                string SQL = "SELECT * FROM purchase";
+                Reader = DBConnect.ReadingLite(SQL);
+                while (Reader.Read())
+                {
+                    Purchase p = new Purchase(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["storeid"].ToString());
+                    categories.Add(p);
+                }
+                Reader.Close();
+                return categories;
+
+
+            }
 
         }
-        public static List<Purchase> ListPurchaseLite()
-        {
-            DBConnect.OpenConn();
-            List<Purchase> categories = new List<Purchase>();
-            string SQL = "SELECT * FROM purchase";
-            Reader = DBConnect.ReadingLite(SQL);
-            while (Reader.Read())
-            {
-                Purchase p = new Purchase(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["storeid"].ToString());
-                categories.Add(p);
-            }
-            Reader.Close();
-            return categories;
-
-        }
+      
     }
 
 

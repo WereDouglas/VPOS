@@ -198,35 +198,40 @@ namespace VPOS.Model
 
         public static List<Expense> ListExpense()
         {
-            DBConnect.OpenConn();
-            List<Expense> categories = new List<Expense>();
-            string SQL = "SELECT * FROM expense";
-            NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
-            NpgsqlDataReader Reader = command.ExecuteReader();
-            while (Reader.Read())
+            if (Helper.Type != "Lite")
             {
-                Expense p = new Expense(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["total"].ToString(), Reader["storeid"].ToString());
-                categories.Add(p);
+                DBConnect.OpenConn();
+                List<Expense> categories = new List<Expense>();
+                string SQL = "SELECT * FROM expense";
+                NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
+                NpgsqlDataReader Reader = command.ExecuteReader();
+                while (Reader.Read())
+                {
+                    Expense p = new Expense(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["total"].ToString(), Reader["storeid"].ToString());
+                    categories.Add(p);
+                }
+                DBConnect.CloseConn();
+                return categories;
             }
-            DBConnect.CloseConn();
-            return categories;
+            else {
+
+                List<Expense> categories = new List<Expense>();
+                string SQL = "SELECT * FROM expense";
+                Reader = DBConnect.ReadingLite(SQL);
+                while (Reader.Read())
+                {
+                    Expense p = new Expense(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["total"].ToString(), Reader["storeid"].ToString());
+                    categories.Add(p);
+                }
+                Reader.Close();
+                return categories;
+
+
+
+            }
 
         }
-        public static List<Expense> ListExpenseLite()
-        {
-            DBConnect.OpenConn();
-            List<Expense> categories = new List<Expense>();
-            string SQL = "SELECT * FROM expense";
-            Reader = DBConnect.ReadingLite(SQL);
-            while (Reader.Read())
-            {
-                Expense p = new Expense(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["total"].ToString(), Reader["storeid"].ToString());
-                categories.Add(p);
-            }
-            Reader.Close();
-            return categories;
-
-        }
+       
     }
 
 

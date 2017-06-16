@@ -119,10 +119,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtGrid2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dtGrid2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(255)))), ((int)(((byte)(239)))));
+            this.dtGrid2.BackgroundColor = System.Drawing.Color.White;
             this.dtGrid2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dtGrid2.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dtGrid2.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dtGrid2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtGrid2.ColumnHeadersVisible = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -329,9 +330,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel3.SetColumnSpan(this.panel4, 2);
             this.panel4.Controls.Add(this.saleGrid);
-            this.panel4.Location = new System.Drawing.Point(3, 22);
+            this.panel4.Location = new System.Drawing.Point(3, 15);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(373, 234);
+            this.panel4.Size = new System.Drawing.Size(373, 267);
             this.panel4.TabIndex = 0;
             // 
             // saleGrid
@@ -346,7 +347,7 @@
             this.saleGrid.Location = new System.Drawing.Point(3, 3);
             this.saleGrid.Name = "saleGrid";
             this.saleGrid.RowHeadersVisible = false;
-            this.saleGrid.Size = new System.Drawing.Size(367, 228);
+            this.saleGrid.Size = new System.Drawing.Size(367, 261);
             this.saleGrid.TabIndex = 3;
             // 
             // panel5
@@ -516,7 +517,7 @@
             // customerLbl
             // 
             this.customerLbl.AutoSize = true;
-            this.customerLbl.Location = new System.Drawing.Point(22, 88);
+            this.customerLbl.Location = new System.Drawing.Point(22, 66);
             this.customerLbl.Name = "customerLbl";
             this.customerLbl.Size = new System.Drawing.Size(12, 13);
             this.customerLbl.TabIndex = 22;
@@ -535,10 +536,10 @@
             this.tableLayoutPanel3.Location = new System.Drawing.Point(4, 88);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.594937F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.40506F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.210526F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 95.78947F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 135F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(379, 395);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(379, 421);
             this.tableLayoutPanel3.TabIndex = 252;
             // 
             // tableLayoutPanel5
@@ -553,7 +554,7 @@
             this.tableLayoutPanel5.Controls.Add(this.refTxt, 1, 1);
             this.tableLayoutPanel5.Controls.Add(this.methodCbx, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.vatTxt, 1, 2);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 262);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 288);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 4;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.15385F));
@@ -601,7 +602,7 @@
             this.tableLayoutPanel4.Controls.Add(this.label10, 0, 4);
             this.tableLayoutPanel4.Controls.Add(this.amountTxt, 1, 3);
             this.tableLayoutPanel4.Controls.Add(this.label5, 0, 3);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(194, 262);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(194, 288);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 5;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -685,7 +686,7 @@
             this.itemGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.itemGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.itemGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(255)))), ((int)(((byte)(239)))));
+            this.itemGrid.BackgroundColor = System.Drawing.Color.White;
             this.itemGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.itemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableLayoutPanel1.SetColumnSpan(this.itemGrid, 2);
@@ -759,7 +760,7 @@
             // 
             this.barSearch.Location = new System.Drawing.Point(397, 34);
             this.barSearch.Name = "barSearch";
-            this.barSearch.Size = new System.Drawing.Size(194, 21);
+            this.barSearch.Size = new System.Drawing.Size(191, 21);
             this.barSearch.TabIndex = 20;
             this.barSearch.TextChanged += new System.EventHandler(this.barSearch_TextChanged);
             // 
@@ -799,7 +800,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(255)))), ((int)(((byte)(239)))));
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1268, 657);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

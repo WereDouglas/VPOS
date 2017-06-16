@@ -61,7 +61,7 @@
             this.dtGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtGrid.Location = new System.Drawing.Point(0, 0);
             this.dtGrid.Name = "dtGrid";
-            this.dtGrid.Size = new System.Drawing.Size(767, 499);
+            this.dtGrid.Size = new System.Drawing.Size(749, 476);
             this.dtGrid.TabIndex = 0;
             this.dtGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellContentClick);
             // 
@@ -79,7 +79,7 @@
             this.groupBox1.Controls.Add(this.actionTxt);
             this.groupBox1.Location = new System.Drawing.Point(9, 21);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(207, 475);
+            this.groupBox1.Size = new System.Drawing.Size(201, 313);
             this.groupBox1.TabIndex = 125;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Add/Update";
@@ -177,8 +177,11 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.BackColor = System.Drawing.Color.LightGray;
+            this.splitContainer1.Location = new System.Drawing.Point(12, 12);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -191,8 +194,8 @@
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(994, 529);
-            this.splitContainer1.SplitterDistance = 26;
+            this.splitContainer1.Size = new System.Drawing.Size(970, 505);
+            this.splitContainer1.SplitterDistance = 25;
             this.splitContainer1.TabIndex = 3;
             // 
             // button1
@@ -202,7 +205,7 @@
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(946, 2);
+            this.button1.Location = new System.Drawing.Point(922, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(36, 21);
             this.button1.TabIndex = 1;
@@ -233,15 +236,15 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.dtGrid);
-            this.splitContainer2.Size = new System.Drawing.Size(994, 499);
-            this.splitContainer2.SplitterDistance = 223;
+            this.splitContainer2.Size = new System.Drawing.Size(970, 476);
+            this.splitContainer2.SplitterDistance = 217;
             this.splitContainer2.TabIndex = 126;
             // 
             // RoleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BackColor = System.Drawing.Color.DimGray;
             this.ClientSize = new System.Drawing.Size(994, 529);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -31,12 +32,14 @@ namespace VPOS
         Dictionary<string, string> CustomerDictionary = new Dictionary<string, string>();
         Dictionary<string, string> ContactDictionary = new Dictionary<string, string>();
         Dictionary<string, int> SelectedItems = new Dictionary<string, int>();
-        string date;
+        string start;
+        string end;
         public BillingForm()
         {
             InitializeComponent();
-            date = DateTime.Now.ToString("dd-MM-yyyy");
-            LoadData(date, "All");
+            start = DateTime.Now.ToString("dd-MM-yyyy");
+            end = DateTime.Now.ToString("dd-MM-yyyy");
+            LoadData(start, end, "All");
             Profile(Helper.OrgID);
         }
         private void Profile(string ID)
@@ -80,30 +83,46 @@ namespace VPOS
             {
                 if (h.Type == "Sale")
                 {
-                    t.Rows.Add(new object[] { b, Global._item.First(r => r.Id.Contains(h.ItemID)).Barcode, Global._item.First(r => r.Id.Contains(h.ItemID)).Name + Environment.NewLine + "PRICE:" + Global._stock.First(r => r.Id.Contains(h.ItemID)).Sale_price + Environment.NewLine + "MANUFACTURER :" + Global._item.First(r => r.Id.Contains(h.ItemID)).Manufacturer + Environment.NewLine + "EXPIRES:" + Global._stock.First(r => r.Id.Contains(h.ItemID)).Expire, h.Qty, Global._item.First(r => r.Id.Contains(h.ItemID)).Image });
+                    try
+                    {
+                        t.Rows.Add(new object[] { b, Global._item.First(r => r.Id.Contains(h.ItemID)).Barcode, Global._item.First(r => r.Id.Contains(h.ItemID)).Name + Environment.NewLine + "PRICE:" + Global._stock.First(r => r.Id.Contains(h.ItemID)).Sale_price + Environment.NewLine + "MANUFACTURER :" + Global._item.First(r => r.Id.Contains(h.ItemID)).Manufacturer + Environment.NewLine + "EXPIRES:" + Global._stock.First(r => r.Id.Contains(h.ItemID)).Expire, h.Qty, Global._item.First(r => r.Id.Contains(h.ItemID)).Image });
+                    }
+                    catch { }
                     double TotalCost = (Convert.ToDouble(h.Qty) * Convert.ToDouble(h.Price));
-                    s.Rows.Add(new object[] { Global._item.First(r => r.Id.Contains(h.ItemID)).Name, h.Qty, Global._stock.First(r => r.Id.Contains(h.ItemID)).Sale_price, TotalCost.ToString("n0") });
+                    try
+                    {
+                        s.Rows.Add(new object[] { Global._item.First(r => r.Id.Contains(h.ItemID)).Name, h.Qty, Global._stock.First(r => r.Id.Contains(h.ItemID)).Sale_price, TotalCost.ToString("n0") });
+
+                    }
+                    catch { }
                     TotalDictionary.Add(c++, TotalCost);
                 }
 
                 if (h.Type == "Purchase")
                 {
-                    t.Rows.Add(new object[] { b, Global._item.First(r => r.Id.Contains(h.ItemID)).Barcode, Global._item.First(r => r.Id.Contains(h.ItemID)).Name + Environment.NewLine + "PRICE:" + Global._stock.First(r => r.Id.Contains(h.ItemID)).Purchase_price + Environment.NewLine + "MANUFACTURER :" + Global._item.First(r => r.Id.Contains(h.ItemID)).Manufacturer + Environment.NewLine + "EXPIRES:" + Global._stock.First(r => r.Id.Contains(h.ItemID)).Expire, h.Qty, Global._item.First(r => r.Id.Contains(h.ItemID)).Image });
+                    try
+                    {
+                        t.Rows.Add(new object[] { b, Global._item.First(r => r.Id.Contains(h.ItemID)).Barcode, Global._item.First(r => r.Id.Contains(h.ItemID)).Name + Environment.NewLine + "PRICE:" + Global._stock.First(r => r.Id.Contains(h.ItemID)).Purchase_price + Environment.NewLine + "MANUFACTURER :" + Global._item.First(r => r.Id.Contains(h.ItemID)).Manufacturer + Environment.NewLine + "EXPIRES:" + Global._stock.First(r => r.Id.Contains(h.ItemID)).Expire, h.Qty, Global._item.First(r => r.Id.Contains(h.ItemID)).Image });
+                    }
+                    catch { }
                     double TotalCost = (Convert.ToDouble(h.Qty) * Convert.ToDouble(h.Price));
-
-                    s.Rows.Add(new object[] { Global._item.First(r => r.Id.Contains(h.ItemID)).Name, h.Qty, Global._stock.First(r => r.Id.Contains(h.ItemID)).Purchase_price, TotalCost.ToString("n0") });
+                    try
+                    {
+                        s.Rows.Add(new object[] { Global._item.First(r => r.Id.Contains(h.ItemID)).Name, h.Qty, Global._stock.First(r => r.Id.Contains(h.ItemID)).Purchase_price, TotalCost.ToString("n0") });
+                    }
+                    catch { }
                     TotalDictionary.Add(c++, TotalCost);
                 }
 
             }
             noLbl.Text = no;
-            dateLbl.Text = Global._billings.First(k => k.No.Contains(no)).Created;
-            customerLbl.Text = Global._billings.First(k => k.No.Contains(no)).Reference;
-            methodCbx.Text = Global._billings.First(k => k.No.Contains(no)).Method;
-            balanceTxt.Text = (Convert.ToDouble(Global._billings.First(k => k.No.Contains(no)).Total)- Convert.ToDouble(Global._payment.Where(j=>j.No.Contains(no)).Sum(h=>Convert.ToDouble(h.Amount)))).ToString();
+            dateLbl.Text = Billing.ListWhere(no).First(k => k.No.Contains(no)).Created;
+            customerLbl.Text = Billing.ListWhere(no).First(k => k.No.Contains(no)).Reference;
+            methodCbx.Text = Billing.ListWhere(no).First(k => k.No.Contains(no)).Method;
+            balanceTxt.Text = (Convert.ToDouble(Billing.ListWhere(no).First(k => k.No.Contains(no)).Total) - Convert.ToDouble(Global._payment.Where(j => j.No.Contains(no)).Sum(h => Convert.ToDouble(h.Amount)))).ToString();
             amountTxt.Text = Global._payment.Where(j => j.No.Contains(no)).Sum(h => Convert.ToDouble(h.Amount)).ToString();
-            totalLbl.Text = Global._billings.First(k => k.No.Contains(no)).Total;
-            typeLbl.Text = Global._billings.First(k => k.No.Contains(no)).Type;
+            totalLbl.Text = Billing.ListWhere(no).First(k => k.No.Contains(no)).Total;
+            typeLbl.Text = Billing.ListWhere(no).First(k => k.No.Contains(no)).Type;
 
             dtGrid2.DataSource = t;
             ThreadPool.QueueUserWorkItem(delegate
@@ -124,7 +143,7 @@ namespace VPOS
                 }
             });
             dtGrid2.AllowUserToAddRows = false;
-            
+
             dtGrid2.Columns[1].Visible = false;
             dtGrid2.Columns[4].Visible = false;
             saleGrid.DataSource = s;
@@ -142,22 +161,24 @@ namespace VPOS
         }
         private void dateTimePicker1_CloseUp(object sender, EventArgs e)
         {
-            date = Convert.ToDateTime(dateTimePicker1.Text).ToString("dd-MM-yyyy");
-            LoadData(date, typeCbx.Text);
+            start = Convert.ToDateTime(startDate.Text).ToString("dd-MM-yyyy");
+            end = Convert.ToDateTime(endDate.Text).ToString("dd-MM-yyyy");
+            LoadData(start, end, typeCbx.Text);
         }
         List<Billing> _billList = new List<Billing>();
         string Transactors = "";
-        public void LoadData(string date, string type)
+        public void LoadData(string start, string end, string type)
         {
 
             t = new DataTable();
             t.Columns.Add("Select");//1 
+            t.Columns.Add("Count");//1 
             t.Columns.Add("id");//1 
             t.Columns.Add("Date");//2                 
             t.Columns.Add("No");//3           
             t.Columns.Add("Total");//4 
             t.Columns.Add("Balance");//4 
-           
+
             t.Columns.Add("Payment Date");//8       
             t.Columns.Add("Amount");//11
             t.Columns.Add("Method");//12
@@ -165,24 +186,24 @@ namespace VPOS
 
             if (type == "All")
             {
-                _billList = Billing.ListBilling().Where(g => g.Created.Contains(date)).ToList();
+                _billList = Billing.ListBilling(start, end).ToList();
             }
             if (type == "")
             {
-                _billList = Billing.ListBilling().Where(g => g.Created.Contains(date)).ToList();
+                _billList = Billing.ListBilling(start, end).ToList();
             }
             if (type == "Sale")
             {
-                _billList = Billing.ListBilling().Where(g => g.Created.Contains(date) && g.Type.Contains("Sale")).ToList();
+                _billList = Billing.ListBilling(start, end).Where(g => g.Type.Contains("Sale")).ToList();
             }
             if (type == "Purchase")
             {
-                _billList = Billing.ListBilling().Where(g => g.Created.Contains(date) && g.Type.Contains("Purchase")).ToList();
+                _billList = Billing.ListBilling(start, end).Where(g => g.Type.Contains("Purchase")).ToList();
             }
             SumDictionary.Clear();
             PaidDictionary.Clear();
             BalanceDictionary.Clear();
-           
+            int count= 1;
             foreach (Billing h in _billList)
             {
                 try
@@ -193,14 +214,14 @@ namespace VPOS
                 {
                     Transactors = h.TransactorID;
                 }
-                t.Rows.Add(new object[] { "Select", h.Id, h.Created, h.No, h.Total,(Convert.ToDouble( h.Total) - Global._payment.Where(m => m.No.Contains(h.No)).Sum(y=>Convert.ToDouble(y.Amount))), " " });
+                t.Rows.Add(new object[] { "Select",count++, h.Id, h.Created, h.No, h.Total, (Convert.ToDouble(h.Total) - Global._payment.Where(m => m.No.Contains(h.No)).Sum(y => Convert.ToDouble(y.Amount))), " " });
                 double payments = 0;
-                foreach (Payment k in Global._payment.Where(m=>m.No.Contains(h.No)))
+                foreach (Payment k in Global._payment.Where(m => m.No.Contains(h.No)))
                 {
-                   // PaymentDictionary.Add(h.Id, h.Total);
+                    // PaymentDictionary.Add(h.Id, h.Total);
                     payments = payments + Convert.ToDouble(k.Amount);
-                    t.Rows.Add(new object[] { "", "", "", "", "",  "", k.Created, k.Amount, k.Method, k.By });
-                 
+                    t.Rows.Add(new object[] {"", "", "", "", "", "", "", k.Created, k.Amount, k.Method, k.By });
+
                     //PaidDictionary.Add(h.Id, h.Paid);
                     //BalanceDictionary.Add(h.Id, h.Balance);
 
@@ -209,29 +230,76 @@ namespace VPOS
                 PaidDictionary.Add(h.Id, h.Paid);
                 BalanceDictionary.Add(h.Id, h.Balance);
 
-            }
-            itemGrid.DataSource = t;
-            itemGrid.AllowUserToAddRows = false;
-            itemGrid.Columns[1].Visible = false;
+            }           
+            
             t.Rows.Add(new object[] { "", "", "", "", "", "", "", "", "" });
 
-            t.Rows.Add(new object[] { "", "Total", "", "", SumDictionary.Sum(m => Convert.ToDouble(m.Value)).ToString("n0"), PaidDictionary.Sum(m => Convert.ToDouble(m.Value)).ToString("n0"), "", BalanceDictionary.Sum(m => Convert.ToDouble(m.Value)).ToString("n0"), "" });
-            itemGrid.Columns[0].DefaultCellStyle.BackColor = Color.Turquoise;
+            t.Rows.Add(new object[] { "","", "Total", "", "", SumDictionary.Sum(m => Convert.ToDouble(m.Value)).ToString("n0"), PaidDictionary.Sum(m => Convert.ToDouble(m.Value)).ToString("n0"), "", BalanceDictionary.Sum(m => Convert.ToDouble(m.Value)).ToString("n0"), "" });
+            itemGrid.DataSource = t;
+           // itemGrid.AllowUserToAddRows = false;
+            itemGrid.Columns["id"].Visible = false;
+
+            string balance = "";
+            string amount = "";
+            string Select = "";
+            foreach (DataGridViewRow row in itemGrid.Rows)
+            {
+                //myDGV.Rows[theRowIndex].Cells[7].Value
+                try
+                {
+                    balance = row.Cells["Balance"].Value.ToString();
+                    amount = row.Cells["Amount"].Value.ToString();
+
+                    if (balance != "0")
+                    {
+                        row.DefaultCellStyle.ForeColor = Color.Red;
+                        row.DefaultCellStyle.Font = new Font("Calibri", 12.5F, FontStyle.Regular, GraphicsUnit.Pixel);
+
+                    }
+                    else {
+
+                        row.DefaultCellStyle.ForeColor = Color.Green;
+                        row.DefaultCellStyle.Font = new Font("Calibri", 10.5F, FontStyle.Regular, GraphicsUnit.Pixel);
+                    }
+                    if (amount != "")
+                    {
+                        row.DefaultCellStyle.ForeColor = Color.Black;
+                        row.DefaultCellStyle.Font = new Font("Calibri", 12.5F, FontStyle.Regular, GraphicsUnit.Pixel);
+
+                    }
+                }
+                catch { }
+
+                try
+                {
+                    Select = row.Cells["Select"].Value.ToString();
+
+                    if (Select == "Select")
+                    {
+                        row.DefaultCellStyle.BackColor = Color.GhostWhite;
+                       
+                        row.DefaultCellStyle.Font = new Font("Calibri", 10.5F, FontStyle.Regular, GraphicsUnit.Pixel);
+                       // itemGrid.Columns["Select"].DefaultCellStyle.BackColor =;
+                    }                   
+                }
+                catch { }
+            }
         }
 
         private void itemGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {
-                LoadItem(itemGrid.Rows[e.RowIndex].Cells[3].Value.ToString());
+                LoadItem(itemGrid.Rows[e.RowIndex].Cells["No"].Value.ToString());
 
             }
         }
 
         private void typeCbx_SelectedIndexChanged(object sender, EventArgs e)
         {
-            date = Convert.ToDateTime(dateTimePicker1.Text).ToString("dd-MM-yyyy");
-            LoadData(date, typeCbx.Text);
+            start = Convert.ToDateTime(startDate.Text).ToString("dd-MM-yyyy");
+            end = Convert.ToDateTime(endDate.Text).ToString("dd-MM-yyyy");
+            LoadData(start, end, typeCbx.Text);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -253,7 +321,8 @@ namespace VPOS
         Payment _pay;
         private void button4_Click(object sender, EventArgs e)
         {
-            if (paymentTxt.Text=="") {
+            if (paymentTxt.Text == "")
+            {
                 paymentTxt.BackColor = Color.Red;
                 MessageBox.Show("No amount specified");
                 return;
@@ -264,12 +333,12 @@ namespace VPOS
             {
                 _pay = new Payment(ID, noLbl.Text, methodCbx.Text, paymentTxt.Text, customerLbl.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, typeLbl.Text, Helper.StoreID);
                 DBConnect.Insert(_pay);
-                string Query = "UPDATE  billing SET balance = '"+newBalanceTxt.Text +"' WHERE no ='" + noLbl.Text + "'";
+                string Query = "UPDATE  billing SET balance = '" + newBalanceTxt.Text + "' WHERE no ='" + noLbl.Text + "'";
                 DBConnect.save(Query);
 
                 MessageBox.Show("Information saved");
                 Global._payment.Add(_pay);
-                LoadData(date, typeCbx.Text);
+                LoadData(start, end, typeCbx.Text);
             }
         }
 

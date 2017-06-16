@@ -169,34 +169,37 @@ namespace VPOS.Model
 
         public static List<Payment> ListPayment()
         {
-            DBConnect.OpenConn();
-            List<Payment> payment = new List<Payment>();
-            string SQL = "SELECT * FROM payment";
-            NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
-            NpgsqlDataReader Reader = command.ExecuteReader();
-            while (Reader.Read())
+            if (Helper.Type != "Lite")
             {
-                Payment p = new Payment(Reader["id"].ToString(), Reader["no"].ToString(), Reader["method"].ToString(), Reader["amount"].ToString(), Reader["by"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["type"].ToString(), Reader["storeid"].ToString());
-                payment.Add(p);
+                DBConnect.OpenConn();
+                List<Payment> payment = new List<Payment>();
+                string SQL = "SELECT * FROM payment";
+                NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
+                NpgsqlDataReader Reader = command.ExecuteReader();
+                while (Reader.Read())
+                {
+                    Payment p = new Payment(Reader["id"].ToString(), Reader["no"].ToString(), Reader["method"].ToString(), Reader["amount"].ToString(), Reader["by"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["type"].ToString(), Reader["storeid"].ToString());
+                    payment.Add(p);
+                }
+                DBConnect.CloseConn();
+                return payment;
             }
-            DBConnect.CloseConn();
-            return payment;
+            else {
+
+                List<Payment> payment = new List<Payment>();
+                string SQL = "SELECT * FROM payment";
+                Reader = DBConnect.ReadingLite(SQL);
+                while (Reader.Read())
+                {
+                    Payment p = new Payment(Reader["id"].ToString(), Reader["no"].ToString(), Reader["method"].ToString(), Reader["amount"].ToString(), Reader["by"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["type"].ToString(), Reader["storeid"].ToString());
+                    payment.Add(p);
+                }
+                Reader.Close();
+                return payment;
+
+            }
 
         }
-        public static List<Payment> ListPaymentLite()
-        {
-            DBConnect.OpenConn();
-            List<Payment> payment = new List<Payment>();
-            string SQL = "SELECT * FROM payment";
-            Reader = DBConnect.ReadingLite(SQL);
-            while (Reader.Read())
-            {
-                Payment p = new Payment(Reader["id"].ToString(), Reader["no"].ToString(), Reader["method"].ToString(), Reader["amount"].ToString(), Reader["by"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["type"].ToString(), Reader["storeid"].ToString());
-                payment.Add(p);
-            }
-            Reader.Close();
-            return payment;
-
-        }
+       
     }
 }
