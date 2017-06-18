@@ -503,6 +503,7 @@
             this.processLbl.Size = new System.Drawing.Size(538, 147);
             this.processLbl.TabIndex = 7;
             this.processLbl.Visible = false;
+            this.processLbl.TextChanged += new System.EventHandler(this.processLbl_TextChanged);
             // 
             // statusStrip1
             // 

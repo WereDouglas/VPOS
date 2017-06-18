@@ -439,5 +439,11 @@ namespace VPOS
         {
 
         }
+
+        private void processLbl_TextChanged(object sender, EventArgs e)
+        {
+            processLbl.SelectionStart = processLbl.Text.Length;
+            processLbl.ScrollToCaret();
+        }
     }
 }

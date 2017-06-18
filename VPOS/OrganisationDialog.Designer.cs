@@ -441,7 +441,7 @@
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.SeaGreen;
-            this.label17.Location = new System.Drawing.Point(14, 13);
+            this.label17.Location = new System.Drawing.Point(3, 10);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(216, 19);
             this.label17.TabIndex = 12;
@@ -689,7 +689,7 @@
             // 
             this.panel3.Location = new System.Drawing.Point(3, 399);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(276, 26);
+            this.panel3.Size = new System.Drawing.Size(286, 26);
             this.panel3.TabIndex = 153;
             // 
             // OrganisationDialog

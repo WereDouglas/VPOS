@@ -552,17 +552,42 @@ namespace VPOS
                 DialogResult dr = form.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
+                    LoadSettings();
                     // MessageBox.Show(form.state);
                     autocomplete();
+                   
                 }
             }
 
         }
-
+        //
         private void Form1_Load(object sender, EventArgs e)
         {
             AutoUpdater.Start(Helper.fileUrl + "update.xml");
 
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            // DBConnect.save(string query);
+            if (MessageBox.Show("YES or No?", "Are you sure you want to delete all database information? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_users));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_bill));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_cat));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_exp));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_item));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_organisation));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_pay));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_purchase));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_qty));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_roles));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_sale));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_stock));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_take));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_trans));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_store));
+            }
         }
     }
 }

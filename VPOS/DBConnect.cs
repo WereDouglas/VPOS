@@ -262,6 +262,37 @@ namespace VPOS
             //}
         }
 
+
+        public static string EmptyDBSQL(Object objGen)
+        {
+            //try
+            //{
+            // OpenConn();
+
+            // Get type and properties (vector)
+            Type typeObj = objGen.GetType();
+            PropertyInfo[] properties = typeObj.GetProperties();
+
+            // Get table
+            string[] type = typeObj.ToString().Split('.');
+            string table = type[2].ToLower();
+
+            // Start mounting string to insert           
+            string SQL = "DELETE FROM " + table + "";
+
+            
+
+
+            return SQL;
+            //}
+            //catch (Exception c)
+            //{
+            //    Console.WriteLine("Errr on insert!" + c.Message);
+            //    return "";
+            //}
+        }
+
+
         public static string GenerateQuery(Object objGen)
         {
             //try

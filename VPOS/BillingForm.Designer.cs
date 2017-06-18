@@ -164,15 +164,14 @@
             // label7
             // 
             this.label7.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label7.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.LightSeaGreen;
-            this.label7.Location = new System.Drawing.Point(0, 0);
+            this.label7.Location = new System.Drawing.Point(2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(1543, 22);
+            this.label7.Size = new System.Drawing.Size(174, 22);
             this.label7.TabIndex = 103;
-            this.label7.Text = "BILLINGS";
+            this.label7.Text = "Transactions";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel2

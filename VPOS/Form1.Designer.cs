@@ -48,6 +48,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -111,6 +112,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel3.Controls.Add(this.button7);
             this.panel3.Controls.Add(this.button5);
             this.panel3.Controls.Add(this.uploadTxt);
             this.panel3.Controls.Add(this.processLbl);
@@ -141,7 +143,7 @@
             this.button5.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.button5.Image = global::VPOS.Properties.Resources.Note_Memo_01_32;
             this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(212, 335);
+            this.button5.Location = new System.Drawing.Point(155, 335);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(114, 28);
             this.button5.TabIndex = 24;
@@ -159,7 +161,7 @@
             this.uploadTxt.Location = new System.Drawing.Point(17, 219);
             this.uploadTxt.Multiline = true;
             this.uploadTxt.Name = "uploadTxt";
-            this.uploadTxt.Size = new System.Drawing.Size(518, 98);
+            this.uploadTxt.Size = new System.Drawing.Size(518, 89);
             this.uploadTxt.TabIndex = 23;
             this.uploadTxt.Visible = false;
             this.uploadTxt.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -197,14 +199,14 @@
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button4.ForeColor = System.Drawing.Color.ForestGreen;
             this.button4.Image = global::VPOS.Properties.Resources.View_List_32;
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(423, 335);
+            this.button4.Location = new System.Drawing.Point(298, 335);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(110, 30);
             this.button4.TabIndex = 11;
-            this.button4.Text = "Reset";
+            this.button4.Text = "Refresh";
             this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -319,6 +321,23 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button7
+            // 
+            this.button7.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button7.BackColor = System.Drawing.Color.Crimson;
+            this.button7.FlatAppearance.BorderSize = 0;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button7.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button7.Location = new System.Drawing.Point(439, 335);
+            this.button7.Margin = new System.Windows.Forms.Padding(2);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(96, 28);
+            this.button7.TabIndex = 107;
+            this.button7.Text = "Reset Database";
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -364,6 +383,7 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.TextBox uploadTxt;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button7;
     }
 }
 

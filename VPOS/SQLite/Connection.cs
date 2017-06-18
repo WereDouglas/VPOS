@@ -9,26 +9,33 @@ using System.Windows.Forms;
 
 namespace VPOS.SQLite
 {
-   public class Connection
+    public class Connection
     {
-       static Connection dbobject = new Connection();
-       static SQLiteConnection SQLconnect = new SQLiteConnection();
+        static Connection dbobject = new Connection();
+        static SQLiteConnection SQLconnect = new SQLiteConnection();
         public string datalocation()
         {
             string path = System.Reflection.Assembly.GetExecutingAssembly().Location;
             string appPath = Path.GetDirectoryName(Application.ExecutablePath);
             //   string fullFilePath = Path.Combine(appPath, "casesLite.txt");
-
-
-            //  string dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            /// return "Data Source=" + dir + "\\cases.bbs;";
-
-            return "Data Source=" + appPath + "\\pos.bbs;";
+            string dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            return "Data Source=" + dir + "\\pos.bbs;";
+            /// 
+            // Helper.GrantAccess(appPath + "\\pos.bbs;");
+            // return "Data Source=" + appPath + "\\pos.bbs;";
+        }
+        public static string XMLFile()
+        {
+            string path = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string appPath = Path.GetDirectoryName(Application.ExecutablePath);          
+            string dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            return  dir + "\\LocalXMLFile.xml";
+           
         }
         public static void createSQLLiteDB(String SQL)
         {
 
-          
+
             // string fullFilePath = Path.Combine(appPath, "casesLite.txt");
 
             //try
@@ -52,7 +59,7 @@ namespace VPOS.SQLite
             //    MessageBox.Show(p.Message.ToString());
 
             //}
-       
+
 
         }
 

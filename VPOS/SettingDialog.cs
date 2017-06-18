@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using VPOS.SQLite;
 
 namespace VPOS
 {
@@ -18,13 +22,31 @@ namespace VPOS
             InitializeComponent();
             LoadSettings();
         }
+        private static void GrantAccess(string file)
+        {
+            bool exists = System.IO.Directory.Exists(file);
+
+            if (exists)
+            {
+                DirectoryInfo di = System.IO.Directory.CreateDirectory(file);
+                Console.WriteLine("The Folder is created Sucessfully");
+            }
+            else
+            {
+                Console.WriteLine("The Folder already exists");
+            }
+            DirectoryInfo dInfo = new DirectoryInfo(file);
+            DirectorySecurity dSecurity = dInfo.GetAccessControl();
+            dSecurity.AddAccessRule(new FileSystemAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null), FileSystemRights.FullControl, InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit, PropagationFlags.NoPropagateInherit, AccessControlType.Allow));
+            dInfo.SetAccessControl(dSecurity);
+
+        }
         private void LoadSettings()
         {
+           // GrantAccess("LocalXMLFile.xml");
             try
             {
-                XDocument xmlDoc = XDocument.Load("LocalXMLFile.xml");
-
-
+                XDocument xmlDoc = XDocument.Load(Connection.XMLFile());
                 var servers = from person in xmlDoc.Descendants("Server")
                               select new
                               {
@@ -32,8 +54,6 @@ namespace VPOS
                                   Type = person.Element("Type").Value
                                  
                               };
-
-
                 foreach (var server in servers)
                 {
                     serverTxt.Text = server.Name;
@@ -56,6 +76,7 @@ namespace VPOS
 
         private void button1_Click(object sender, EventArgs e)
         {
+           // GrantAccess("LocalXMLFile.xml");
             if (typeCbx.Text  =="") {
                 typeCbx.BackColor = Color.Red;
                 MessageBox.Show("Please select the application type");
@@ -69,7 +90,7 @@ namespace VPOS
            )
            );
 
-            xml.Save("LocalXMLFile.xml");
+            xml.Save(Connection.XMLFile());
             MessageBox.Show("Information Saved");
             this.DialogResult = DialogResult.OK;
             this.Dispose();

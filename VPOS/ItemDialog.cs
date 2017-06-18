@@ -165,6 +165,11 @@ namespace VPOS
                 nameTxt.BackColor = Color.Red;
                 return;
             }
+            if (categoryTxt.Text == "")
+            {
+                categoryTxt.BackColor = Color.Red;
+                return;
+            }
             if (codeTxt.Text == "")
             {
                 codeTxt.BackColor = Color.Red;

@@ -52,8 +52,6 @@
             this.barcodeTxt = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.compositionTxt = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.categoryTxt = new System.Windows.Forms.ComboBox();
             this.label30 = new System.Windows.Forms.Label();
             this.strengthTxt = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -67,6 +65,8 @@
             this.bntCapture = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.fileUrlTxtBx = new System.Windows.Forms.TextBox();
+            this.categoryTxt = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.label27 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -362,24 +362,6 @@
             this.compositionTxt.Size = new System.Drawing.Size(180, 21);
             this.compositionTxt.TabIndex = 24;
             // 
-            // label14
-            // 
-            this.label14.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label14.Location = new System.Drawing.Point(6, 65);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(88, 20);
-            this.label14.TabIndex = 27;
-            this.label14.Text = "Category";
-            // 
-            // categoryTxt
-            // 
-            this.categoryTxt.FormattingEnabled = true;
-            this.categoryTxt.Location = new System.Drawing.Point(114, 65);
-            this.categoryTxt.Name = "categoryTxt";
-            this.categoryTxt.Size = new System.Drawing.Size(138, 21);
-            this.categoryTxt.TabIndex = 30;
-            this.categoryTxt.SelectedIndexChanged += new System.EventHandler(this.categoryTxt_SelectedIndexChanged);
-            // 
             // label30
             // 
             this.label30.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -548,6 +530,24 @@
             this.fileUrlTxtBx.Size = new System.Drawing.Size(246, 19);
             this.fileUrlTxtBx.TabIndex = 151;
             // 
+            // categoryTxt
+            // 
+            this.categoryTxt.FormattingEnabled = true;
+            this.categoryTxt.Location = new System.Drawing.Point(114, 65);
+            this.categoryTxt.Name = "categoryTxt";
+            this.categoryTxt.Size = new System.Drawing.Size(138, 21);
+            this.categoryTxt.TabIndex = 30;
+            this.categoryTxt.SelectedIndexChanged += new System.EventHandler(this.categoryTxt_SelectedIndexChanged);
+            // 
+            // label14
+            // 
+            this.label14.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label14.Location = new System.Drawing.Point(6, 65);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(88, 20);
+            this.label14.TabIndex = 27;
+            this.label14.Text = "Category";
+            // 
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.Controls.Add(this.label27);
@@ -621,7 +621,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(152, 13);
             this.label8.TabIndex = 15;
-            this.label8.Text = "Batch No.";
+            this.label8.Text = "Batch No/LOT No:.";
             // 
             // batchTxt
             // 
