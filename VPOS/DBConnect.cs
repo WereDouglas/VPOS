@@ -62,7 +62,6 @@ namespace VPOS
         static SQLiteDataReader Reader;
         public static SQLiteDataReader ReadingLite(string query)
         {
-
             try
             {
                 SQLconnect.ConnectionString = dbobject.datalocation();

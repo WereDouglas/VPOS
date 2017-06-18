@@ -318,12 +318,10 @@ namespace VPOS.Model
 
         public static List<Users> ListUsers()
         {
+            string SQL = "SELECT * FROM users";
+            List<Users> wards = new List<Users>();
             if (Helper.Type != "Lite")
-            {
-                DBConnect.OpenConn();
-                List<Users> wards = new List<Users>();
-                string SQL = "SELECT * FROM users";
-
+            {                
                 NpgsqlDataReader Reader = DBConnect.Reading(SQL);
                 while (Reader.Read())
                 {
@@ -331,29 +329,22 @@ namespace VPOS.Model
                     wards.Add(p);
                 }
                 Reader.Close();
-                DBConnect.CloseConn();
-                return wards;
+                DBConnect.CloseConn();              
             }
             else
-            {
-
-
-                List<Users> wards = new List<Users>();
-                string SQL = "SELECT * FROM users";
-
-                Reader = DBConnect.ReadingLite(SQL);
+            {              
+                SQLiteDataReader Reader = DBConnect.ReadingLite(SQL);
                 while (Reader.Read())
                 {
                     Users p = new Users(Reader["id"].ToString(), Reader["idno"].ToString(), Reader["contact"].ToString(), Reader["contact2"].ToString(), Reader["surname"].ToString(), Reader["lastname"].ToString(), Reader["othername"].ToString(), Reader["email"].ToString(), Reader["nationality"].ToString(), Reader["address"].ToString(), Reader["passwords"].ToString(), Reader["gender"].ToString(), Reader["orgID"].ToString(), Reader["roles"].ToString(), Reader["initialpassword"].ToString(), Reader["account"].ToString(), Reader["status"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["storeid"].ToString());
                     wards.Add(p);
                 }
                 Reader.Close();
-                DBConnect.CloseConn();
-                return wards;
+                            
             }
-
+            return wards;
         }
-        static SQLiteDataReader Reader;
+       
         
     }
 }
