@@ -39,7 +39,7 @@ namespace VPOS
             t.Columns.Add("created");// 
             t.Columns.Add("current");// 
 
-            foreach (Store r in Global._store)
+            foreach (Store r in Global.store)
             {
                 byte[] MyData = new byte[0];
 
@@ -80,8 +80,8 @@ namespace VPOS
             _store = new Store(updateID, dtGrid.Rows[e.RowIndex].Cells["Name"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Location"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Address"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Contact"].Value.ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),Helper.OrgID, Helper.Code, dtGrid.Rows[e.RowIndex].Cells["Current"].Value.ToString());
 
             DBConnect.Update(_store, updateID);
-            Global._store.RemoveAll(x => x.Id == updateID);
-            Global._store.Add(_store);
+            Global.store.RemoveAll(x => x.Id == updateID);
+            Global.store.Add(_store);
         }
     }
 }

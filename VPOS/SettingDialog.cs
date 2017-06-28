@@ -43,7 +43,7 @@ namespace VPOS
         }
         private void LoadSettings()
         {
-           // GrantAccess("LocalXMLFile.xml");
+            //GrantAccess(Connection.XMLFile());
             try
             {
                 XDocument xmlDoc = XDocument.Load(Connection.XMLFile());

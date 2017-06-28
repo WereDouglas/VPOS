@@ -34,7 +34,7 @@ namespace VPOS
                 ItemID = itemID;
                 LoadItem(ItemID);
             }
-            foreach (Store s in Global._store)
+            foreach (Store s in Global.store)
             {
                 storeCbx.Items.Add(s.Name);
                 storeDictionary.Add(s.Name, s.Id);
@@ -45,28 +45,16 @@ namespace VPOS
         {
             //  _item = new Item(Helper.OrgID, qtyTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "false", taxTxt.Text);
 
-            nameTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Name;
-            codeTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Code;
-            descriptionTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Description;
-            manufactureTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Manufacturer;
-            nationalityTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Country;
-            barcodeTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Barcode;
-            purchaseTxt.Text = Global._stock.First(k => k.ItemID.Contains(ID)).Purchase_price;
-            saleTxt.Text = Global._stock.First(k => k.Id.Contains(ID)).Sale_price;
-            compositionTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Composition;
-            expireDate.Text = Global._stock.First(k => k.Id.Contains(ID)).Expire;
-            categoryTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Category;
-            formulationCbx.Text = Global._stock.First(k => k.Id.Contains(ID)).Packing;
-            unitsTxt.Text = Global._stock.First(k => k.Id.Contains(ID)).Units;
-            manufactureDate.Text = Global._stock.First(k => k.Id.Contains(ID)).Date_manufactured;
-            genericTxt.Text = Global._item.First(k => k.Id.Contains(ID)).Generic;
-            qtyTxt.Text = Global._stock.First(k => k.Id.Contains(ID)).Quantity;
-            minTxt.Text = Global._stock.First(k => k.Id.Contains(ID)).Min_qty;
-            taxTxt.Text = Global._stock.First(k => k.Id.Contains(ID)).Tax;
-            takingTxt.Text = Global._stock.First(k => k.Id.Contains(ID)).Taking;
-
-
-            Image img = Base64ToImage(Global._item.First(k => k.Id.Contains(ID)).Image);
+            nameTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Name;
+            codeTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Code;
+            descriptionTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Description;
+            manufactureTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Manufacturer;
+            nationalityTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Country;
+            barcodeTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Barcode;           
+            compositionTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Composition;         
+            categoryTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Category;       
+            genericTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Generic;
+            Image img = Base64ToImage(Global.item.First(k => k.Id.Contains(ID)).Image);
             System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img);
             //Bitmap bps = new Bitmap(bmp, 50, 50);
             imgCapture.Image = bmp;
@@ -106,7 +94,7 @@ namespace VPOS
             nationalityTxt.AutoCompleteMode = AutoCompleteMode.Suggest;
             nationalityTxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
             nationalityTxt.AutoCompleteCustomSource = AutoItem;
-            foreach (Category c in Global._category)
+            foreach (Category c in Global.category)
             {
                 categoryTxt.Items.Add(c.Name);
             }
@@ -128,7 +116,8 @@ namespace VPOS
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Close();
+            this.DialogResult = DialogResult.OK;
+            this.Dispose();
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)
@@ -175,11 +164,7 @@ namespace VPOS
                 codeTxt.BackColor = Color.Red;
                 return;
             }
-            if (saleTxt.Text == "")
-            {
-                saleTxt.BackColor = Color.Red;
-                return;
-            }
+           
             string id = Guid.NewGuid().ToString();
             if (barcodeTxt.Text == "")
             {
@@ -193,8 +178,8 @@ namespace VPOS
 
             MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
             string fullimage = ImageToBase64(stream);
-            _item = new Item(id, nameTxt.Text,genericTxt.Text,codeTxt.Text, descriptionTxt.Text, manufactureTxt.Text, nationalityTxt.Text,compositionTxt.Text,categoryTxt.Text, barcodeTxt.Text,fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), strengthTxt.Text, Helper.OrgID, "false");
-            int index = Global._item.FindIndex(g => g.Name.Contains(nameTxt.Text));
+            _item = new Item(id, nameTxt.Text,genericTxt.Text,codeTxt.Text, descriptionTxt.Text, manufactureTxt.Text, nationalityTxt.Text,compositionTxt.Text,categoryTxt.Text, barcodeTxt.Text,fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), strengthTxt.Text, Helper.OrgID, "false",subCbx.Text);
+            int index = Global.item.FindIndex(g => g.Name.Contains(nameTxt.Text));
             if (index >= 0)
             {
                 MessageBox.Show("Item of the same exact name already exists ");
@@ -202,7 +187,7 @@ namespace VPOS
                 return;
             }
 
-            int bar = Global._item.FindIndex(g => g.Barcode.Contains(barcodeTxt.Text));
+            int bar = Global.item.FindIndex(g => g.Barcode.Contains(barcodeTxt.Text));
             if (bar >= 0)
             {
                 MessageBox.Show("Item of the same exact bar code already exists");
@@ -211,17 +196,14 @@ namespace VPOS
             }
             if (DBConnect.Insert(_item) != "")
             {
-                double totalValue = Convert.ToDouble(qtyTxt.Text) * Convert.ToDouble(saleTxt.Text);
-                _stk = new Stock(id, id, qtyTxt.Text, saleTxt.Text, purchaseTxt.Text, saleTxt.Text, totalValue.ToString(),batchTxt.Text, Convert.ToDateTime(expireDate.Text).ToString("dd-MM-yyyy"),formulationCbx.Text,unitsTxt.Text,barcodeTxt.Text, Convert.ToDateTime(manufactureDate.Text).ToString("dd-MM-yyyy"),qtyTxt.Text,minTxt.Text,qtyTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),taxTxt.Text,promoPriceTxt.Text, Convert.ToDateTime(promoStart.Text).ToString("dd-MM-yyyy"), Convert.ToDateTime(promoEnd.Text).ToString("dd-MM-yyyy"), DateTime.Now.ToString("dd-MM-yyyy H:m:s"),Helper.StoreID, Helper.OrgID, Helper.UserID);
-                DBConnect.Insert(_stk);
-                //string query = "insert into transactor (id, transactorNo,contact,surname,lastname,email,dob,nationality,address,kin,kincontact,gender,created) values ('"+ id + "', '"+ transactorNoTxt.Text + "', '"+ contactTxt.Text + "', '" + surnameTxt.Text + "', '" + lastnameTxt.Text + "', '" + emailTxt.Text + "', '" +Convert.ToDateTime(dobdateTimePicker1.Text).ToString("dd-MM-yyyy") + "', '" + nationalityTxt.Text + "', '" + addressTxt.Text + "', '" + kinTxt.Text + "','" + kincontactTxt.Text + "', '" + genderCbx.Text + "','"+DateTime.Now.ToString("dd-MM-yyyy H:m:s")+"');";
-                Global._item.Add(_item);
-                Global._stock.Add(_stk);
-                _qty = new Quantity(id, id, "0", qtyTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, DateTime.Now.ToString("dd-MM-yyyy"), Helper.StoreID);
-                DBConnect.Insert(_qty);
-                MessageBox.Show("Information Saved");
-                this.DialogResult = DialogResult.OK;
-                this.Dispose();
+                using (StockDialog form = new StockDialog(id))
+                {
+                    DialogResult dr = form.ShowDialog();
+                    if (dr == DialogResult.OK)
+                    {
+                       
+                    }
+                }
             }
             else
             {
@@ -335,14 +317,14 @@ namespace VPOS
         {
             MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
             string fullimage = ImageToBase64(stream);
-            _item = new Item(ItemID, nameTxt.Text, genericTxt.Text, codeTxt.Text, descriptionTxt.Text, manufactureTxt.Text, nationalityTxt.Text, compositionTxt.Text, categoryTxt.Text, barcodeTxt.Text, fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), strengthTxt.Text, Helper.OrgID, "false");
+            _item = new Item(ItemID, nameTxt.Text, genericTxt.Text, codeTxt.Text, descriptionTxt.Text, manufactureTxt.Text, nationalityTxt.Text, compositionTxt.Text, categoryTxt.Text, barcodeTxt.Text, fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), strengthTxt.Text, Helper.OrgID, "false",subCbx.Text);
 
             if (ItemID != "")
             {
                 DBConnect.Update(_item, ItemID);
               
-                Global._item.RemoveAll(x => x.Id == ItemID);
-                Global._item.Add(_item);
+                Global.item.RemoveAll(x => x.Id == ItemID);
+                Global.item.Add(_item);
                 MessageBox.Show("Information Updated ");
                 this.DialogResult = DialogResult.OK;
                 this.Dispose();
@@ -357,13 +339,25 @@ namespace VPOS
         {
             try
             {
-                Image img = Base64ToImage(Global._category.First(k => k.Name.Contains(categoryTxt.Text)).Image);
+                Image img = Base64ToImage(Global.category.First(k => k.Name.Contains(categoryTxt.Text)).Image);
                 System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img);
                 //Bitmap bps = new Bitmap(bmp, 50, 50);
                 imgCapture.Image = bmp;
                 imgCapture.SizeMode = PictureBoxSizeMode.StretchImage;
             }
             catch { }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            using (StockDialog form = new StockDialog(ItemID))
+            {
+                DialogResult dr = form.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+
+                }
+            }
         }
     }
 }

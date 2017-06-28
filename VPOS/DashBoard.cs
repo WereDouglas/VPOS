@@ -40,20 +40,20 @@ namespace VPOS
 
             try
             {
-                double Pay = (double)Global._payment.Where(m => m.Created.Contains(date) && m.Type.Contains("Purchase")).Sum(p => Convert.ToDouble(p.Amount));
+                double Pay = (double)Global.payment.Where(m => m.Created.Contains(date)).Sum(p => Convert.ToDouble(p.Amount));
                 series.Points.AddXY("Purchases:" + Pay.ToString("n0"), Pay);
             }
             catch (Exception c) { MessageBox.Show("Payment:"+c.Message.ToString()); }
             try
             {
-                double Spend = (double)Global._expense.Where(m => m.Date.Contains(date)).Sum(p => Convert.ToDouble(p.Total));
+                double Spend = (double)Global.expense.Where(m => m.Date.Contains(date)).Sum(p => Convert.ToDouble(p.Total));
 
                 series.Points.AddXY("Expenses:" + Spend.ToString("n0"), Spend);
             }
             catch (Exception c) { MessageBox.Show("Expense:" + c.Message.ToString()); }
             try
             {
-                double Sale = (double)Global._payment.Where(m => m.Created.Contains(date) && m.Type.Contains("Sale")).Sum(p => Convert.ToDouble(p.Amount));
+                double Sale = (double)Global.payment.Where(m => m.Created.Contains(date) && m.Type.Contains("Sale")).Sum(p => Convert.ToDouble(p.Amount));
 
                 series.Points.AddXY("Sale:" + Sale.ToString("n0"), Sale);
             }
@@ -77,13 +77,13 @@ namespace VPOS
             var dates = Enumerable.Range(0, 7).Select(days => monday.AddDays(days)).ToList();
 
 
-            double mon = (double)Global._sale.Where(m => m.Date.Contains(dates[0].Date.ToString("dd-MM-yyyy")) && m.Type.Contains("Purchase")).Sum(p => Convert.ToDouble(p.Total));
-            double tue = (double)Global._sale.Where(m => m.Date.Contains(dates[1].Date.ToString("dd-MM-yyyy")) && m.Type.Contains("Purchase")).Sum(p => Convert.ToDouble(p.Total));
-            double wed = (double)Global._sale.Where(m => m.Date.Contains(dates[2].Date.ToString("dd-MM-yyyy")) && m.Type.Contains("Purchase")).Sum(p => Convert.ToDouble(p.Total));
-            double thur = (double)Global._sale.Where(m => m.Date.Contains(dates[3].Date.ToString("dd-MM-yyyy")) && m.Type.Contains("Purchase")).Sum(p => Convert.ToDouble(p.Total));
-            double fri = (double)Global._sale.Where(m => m.Date.Contains(dates[4].Date.ToString("dd-MM-yyyy")) && m.Type.Contains("Purchase")).Sum(p => Convert.ToDouble(p.Total));
-            double sat = (double)Global._sale.Where(m => m.Date.Contains(dates[5].Date.ToString("dd-MM-yyyy")) && m.Type.Contains("Purchase")).Sum(p => Convert.ToDouble(p.Total));
-            double sun = (double)Global._sale.Where(m => m.Date.Contains(dates[6].Date.ToString("dd-MM-yyyy")) && m.Type.Contains("Purchase")).Sum(p => Convert.ToDouble(p.Total));
+            double mon = (double)Global.sale.Where(m => m.Date.Contains(dates[0].Date.ToString("dd-MM-yyyy"))).Sum(p => Convert.ToDouble(p.Total));
+            double tue = (double)Global.sale.Where(m => m.Date.Contains(dates[1].Date.ToString("dd-MM-yyyy")) ).Sum(p => Convert.ToDouble(p.Total));
+            double wed = (double)Global.sale.Where(m => m.Date.Contains(dates[2].Date.ToString("dd-MM-yyyy")) ).Sum(p => Convert.ToDouble(p.Total));
+            double thur = (double)Global.sale.Where(m => m.Date.Contains(dates[3].Date.ToString("dd-MM-yyyy")) ).Sum(p => Convert.ToDouble(p.Total));
+            double fri = (double)Global.sale.Where(m => m.Date.Contains(dates[4].Date.ToString("dd-MM-yyyy")) ).Sum(p => Convert.ToDouble(p.Total));
+            double sat = (double)Global.sale.Where(m => m.Date.Contains(dates[5].Date.ToString("dd-MM-yyyy")) ).Sum(p => Convert.ToDouble(p.Total));
+            double sun = (double)Global.sale.Where(m => m.Date.Contains(dates[6].Date.ToString("dd-MM-yyyy")) ).Sum(p => Convert.ToDouble(p.Total));
 
             Series series = this.chart1.Series.Add("Purchases this week");
             series.ChartType = SeriesChartType.Spline;
@@ -117,13 +117,13 @@ namespace VPOS
             var dates = Enumerable.Range(0, 7).Select(days => monday.AddDays(days)).ToList();
 
 
-            double mon = (double)Global._sale.Where(m => m.Date.Contains(dates[0].Date.ToString("dd-MM-yyyy")) && m.Type.Contains("Sale")).Sum(p => Convert.ToDouble(p.Total));
-            double tue = (double)Global._sale.Where(m => m.Date.Contains(dates[1].Date.ToString("dd-MM-yyyy")) && m.Type.Contains("Sale")).Sum(p => Convert.ToDouble(p.Total));
-            double wed = (double)Global._sale.Where(m => m.Date.Contains(dates[2].Date.ToString("dd-MM-yyyy")) && m.Type.Contains("Sale")).Sum(p => Convert.ToDouble(p.Total));
-            double thur = (double)Global._sale.Where(m => m.Date.Contains(dates[3].Date.ToString("dd-MM-yyyy")) && m.Type.Contains("Sale")).Sum(p => Convert.ToDouble(p.Total));
-            double fri = (double)Global._sale.Where(m => m.Date.Contains(dates[4].Date.ToString("dd-MM-yyyy")) && m.Type.Contains("Sale")).Sum(p => Convert.ToDouble(p.Total));
-            double sat = (double)Global._sale.Where(m => m.Date.Contains(dates[5].Date.ToString("dd-MM-yyyy")) && m.Type.Contains("Sale")).Sum(p => Convert.ToDouble(p.Total));
-            double sun = (double)Global._sale.Where(m => m.Date.Contains(dates[6].Date.ToString("dd-MM-yyyy")) && m.Type.Contains("Sale")).Sum(p => Convert.ToDouble(p.Total));
+            double mon = (double)Global.sale.Where(m => m.Date.Contains(dates[0].Date.ToString("dd-MM-yyyy"))).Sum(p => Convert.ToDouble(p.Total));
+            double tue = (double)Global.sale.Where(m => m.Date.Contains(dates[1].Date.ToString("dd-MM-yyyy"))).Sum(p => Convert.ToDouble(p.Total));
+            double wed = (double)Global.sale.Where(m => m.Date.Contains(dates[2].Date.ToString("dd-MM-yyyy"))).Sum(p => Convert.ToDouble(p.Total));
+            double thur = (double)Global.sale.Where(m => m.Date.Contains(dates[3].Date.ToString("dd-MM-yyyy"))).Sum(p => Convert.ToDouble(p.Total));
+            double fri = (double)Global.sale.Where(m => m.Date.Contains(dates[4].Date.ToString("dd-MM-yyyy"))).Sum(p => Convert.ToDouble(p.Total));
+            double sat = (double)Global.sale.Where(m => m.Date.Contains(dates[5].Date.ToString("dd-MM-yyyy"))).Sum(p => Convert.ToDouble(p.Total));
+            double sun = (double)Global.sale.Where(m => m.Date.Contains(dates[6].Date.ToString("dd-MM-yyyy"))).Sum(p => Convert.ToDouble(p.Total));
 
 
             Series series = this.chart2.Series.Add("Total Sales this week");
@@ -138,14 +138,14 @@ namespace VPOS
         }
         public void LoadData()
         {
-            salesLbl.Text = Global._sale.Where(m => m.Date.Contains(date) && m.Type.Contains("Sale")).Sum(p => Convert.ToDouble(p.Qty)).ToString("n0");
-            //   stockLbl.Text = Global._item.Sum(p => Convert.ToDouble(p.Quantity)).ToString("n0");
-            purchaseLbl.Text = Global._sale.Where(m => m.Date.Contains(date) && m.Type.Contains("Purchase")).Sum(p => Convert.ToDouble(p.Qty)).ToString("n0");
-            purchaseamountLbl.Text = "Purchase today: " + Global._sale.Where(m => m.Date.Contains(date) && m.Type.Contains("Purchase")).Sum(p => Convert.ToDouble(p.Total)).ToString("n0");
-            saleamountLbl.Text = "Sales today: " + Global._sale.Where(m => m.Date.Contains(date) && m.Type.Contains("Sale")).Sum(p => Convert.ToDouble(p.Total)).ToString("n0");
-            expenseLbl.Text = Global._expense.Where(m => m.Date.Contains(date)).Sum(p => Convert.ToDouble(p.Total)).ToString("n0");
-            stockLbl.Text = Global._item.Count().ToString();
-            profitLbl.Text = Global._payment.Where(m => m.Created.Contains(date) && m.Type.Contains("Sale")).Sum(p => Convert.ToDouble(p.Amount)).ToString("n0");
+            salesLbl.Text = Global.sale.Where(m => m.Date.Contains(date)).Sum(p => Convert.ToDouble(p.Qty)).ToString("n0");
+            //   stockLbl.Text = Global.item.Sum(p => Convert.ToDouble(p.Quantity)).ToString("n0");
+            purchaseLbl.Text = Global.purchase.Where(m => m.Date.Contains(date)).Sum(p => Convert.ToDouble(p.Qty)).ToString("n0");
+            purchaseamountLbl.Text = "Purchase today: " + Global.sale.Where(m => m.Date.Contains(date) ).Sum(p => Convert.ToDouble(p.Total)).ToString("n0");
+            saleamountLbl.Text = "Sales today: " + Global.sale.Where(m => m.Date.Contains(date)).Sum(p => Convert.ToDouble(p.Total)).ToString("n0");
+            expenseLbl.Text = Global.expense.Where(m => m.Date.Contains(date)).Sum(p => Convert.ToDouble(p.Total)).ToString("n0");
+            stockLbl.Text = Global.item.Count().ToString();
+            profitLbl.Text = Global.payment.Where(m => m.Created.Contains(date) && m.Type.Contains("Sale")).Sum(p => Convert.ToDouble(p.Amount)).ToString("n0");
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)

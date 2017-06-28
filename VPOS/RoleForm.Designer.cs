@@ -108,6 +108,7 @@
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 126;
             this.label2.Text = "Views";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // viewTxt
             // 
@@ -119,6 +120,7 @@
             this.viewTxt.Name = "viewTxt";
             this.viewTxt.Size = new System.Drawing.Size(180, 32);
             this.viewTxt.TabIndex = 127;
+            this.viewTxt.TextChanged += new System.EventHandler(this.viewTxt_TextChanged);
             // 
             // label16
             // 
@@ -128,6 +130,7 @@
             this.label16.Size = new System.Drawing.Size(28, 13);
             this.label16.TabIndex = 119;
             this.label16.Text = "Title";
+            this.label16.Click += new System.EventHandler(this.label16_Click);
             // 
             // titleTxt
             // 
@@ -163,6 +166,7 @@
             this.label9.Size = new System.Drawing.Size(41, 13);
             this.label9.TabIndex = 3;
             this.label9.Text = "Actions";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // actionTxt
             // 
@@ -174,6 +178,7 @@
             this.actionTxt.Name = "actionTxt";
             this.actionTxt.Size = new System.Drawing.Size(180, 32);
             this.actionTxt.TabIndex = 4;
+            this.actionTxt.TextChanged += new System.EventHandler(this.actionTxt_TextChanged);
             // 
             // splitContainer1
             // 

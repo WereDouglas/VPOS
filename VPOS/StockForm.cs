@@ -41,10 +41,10 @@ namespace VPOS
 
             foreach (Quantity h in Quantity.ListQuantity().Where(g=>g.Created.Contains(date)))
             {
-                double salesAmount = Convert.ToDouble(h.Sale_qty) * Convert.ToDouble(Global._stock.First(p => p.Id.Contains(h.ItemID)).Sale_price);
-                double purchaseAmount = Convert.ToDouble(h.Purchase_qty) * Convert.ToDouble(Global._stock.First(p => p.Id.Contains(h.ItemID)).Purchase_price);
+                double salesAmount = Convert.ToDouble(h.Sale_qty) * Convert.ToDouble(Global.stock.First(p => p.Id.Contains(h.ItemID)).Sale_price);
+                double purchaseAmount = Convert.ToDouble(h.Purchase_qty) * Convert.ToDouble(Global.stock.First(p => p.Id.Contains(h.ItemID)).Purchase_price);
                 double profit = salesAmount - purchaseAmount;
-                t.Rows.Add(new object[] { false, h.Id,h.Created, Global._item.First(p=>p.Id.Contains(h.ItemID)).Name, h.Sale_qty, salesAmount.ToString("n0"), h.Purchase_qty, purchaseAmount.ToString("n0"), profit.ToString("n0") });
+                t.Rows.Add(new object[] { false, h.Id,h.Created, Global.item.First(p=>p.Id.Contains(h.ItemID)).Name, h.Sale_qty, salesAmount.ToString("n0"), h.Purchase_qty, purchaseAmount.ToString("n0"), profit.ToString("n0") });
 
             }
             dtGrid.DataSource = t;            

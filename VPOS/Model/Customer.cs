@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace VPOS.Model
 {
-    public class Transactor
+    public class Customer
     {
         private string id;
         private string name;
         private string contact;
-        private string image;
-        private string type;
-        private string created;
+        private string image; 
         private string address;
+        private string created;
         private string orgID;
-        private string storeID;
+       
         static SQLiteDataReader Reader;
+
         public string Id
         {
             get
@@ -72,16 +72,16 @@ namespace VPOS.Model
             }
         }
 
-        public string Type
+        public string Address
         {
             get
             {
-                return type;
+                return address;
             }
 
             set
             {
-                type = value;
+                address = value;
             }
         }
 
@@ -98,19 +98,6 @@ namespace VPOS.Model
             }
         }
 
-        public string Address
-        {
-            get
-            {
-                return address;
-            }
-
-            set
-            {
-                address = value;
-            }
-        }
-
         public string OrgID
         {
             get
@@ -124,63 +111,46 @@ namespace VPOS.Model
             }
         }
 
-        public string StoreID
-        {
-            get
-            {
-                return storeID;
-            }
+        public Customer() { }
 
-            set
-            {
-                storeID = value;
-            }
-        }
-        public Transactor() { }
-        public Transactor(string id, string name, string contact, string image, string type, string created, string address, string orgID, string storeID)
+        public Customer(string id, string name, string contact, string image, string address, string created, string orgID)
         {
             this.Id = id;
             this.Name = name;
             this.Contact = contact;
             this.Image = image;
-            this.Type = type;
-            this.Created = created;
             this.Address = address;
+            this.Created = created;
             this.OrgID = orgID;
-            this.StoreID = storeID;
         }
 
-        public static List<Transactor> ListTransactor()
+        public static List<Customer> ListCustomer()
         {
+            List<Customer> customers = new List<Customer>();
+            string SQL = "SELECT * FROM customer";
             if (Helper.Type != "Lite")
             {
                 DBConnect.OpenConn();
-                List<Transactor> wards = new List<Transactor>();
-                string SQL = "SELECT * FROM transactor";
                 NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
                 NpgsqlDataReader Reader = command.ExecuteReader();
                 while (Reader.Read())
                 {
-                    Transactor p = new Transactor(Reader["id"].ToString(), Reader["name"].ToString(), Reader["contact"].ToString(), Reader["image"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["address"].ToString(), Reader["orgID"].ToString(), Reader["storeid"].ToString());
-                    wards.Add(p);
+                    Customer p = new Customer(Reader["id"].ToString(), Reader["name"].ToString(), Reader["contact"].ToString(), Reader["image"].ToString(), Reader["address"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString());
+                    customers.Add(p);
                 }
-                DBConnect.CloseConn();
-                return wards;
+                DBConnect.CloseConn();              
             }
             else
-            {
-                List<Transactor> wards = new List<Transactor>();
-                string SQL = "SELECT * FROM transactor";
+            {               
                 Reader = DBConnect.ReadingLite(SQL);
                 while (Reader.Read())
                 {
-                    Transactor p = new Transactor(Reader["id"].ToString(), Reader["name"].ToString(), Reader["contact"].ToString(), Reader["image"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["address"].ToString(), Reader["orgID"].ToString(), Reader["storeid"].ToString());
-                    wards.Add(p);
+                    Customer p = new Customer(Reader["id"].ToString(), Reader["name"].ToString(), Reader["contact"].ToString(), Reader["image"].ToString(), Reader["address"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString());
+                    customers.Add(p);
                 }
-                Reader.Close();
-
-                return wards;
+                Reader.Close();               
             }
+            return customers;
         }
     }
 }

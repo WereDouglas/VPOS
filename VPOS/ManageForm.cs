@@ -47,8 +47,13 @@ namespace VPOS
             }
             foreach (Item h in Item.ListItem())
             {
-                t.Rows.Add(new object[] { "Department :" + Global._stock.First(n => n.ItemID.Contains(h.Id)).Packing + Environment.NewLine + "Manufactured on :" + Global._stock.First(n => n.ItemID.Contains(h.Id)).Date_manufactured + Environment.NewLine + h.Generic + Environment.NewLine + h.Strength, h.Id, b, h.Barcode, h.Name + Environment.NewLine + Environment.NewLine + h.Description + Environment.NewLine + h.Manufacturer + Environment.NewLine + h.Country + Environment.NewLine + Global._stock.First(n => n.ItemID.Contains(h.Id)).Batch, Global._stock.First(n => n.ItemID.Contains(h.Id)).Purchase_price, Global._stock.First(n => n.ItemID.Contains(h.Id)).Sale_price, Global._stock.First(n => n.ItemID.Contains(h.Id)).Packing + Environment.NewLine + h.Composition + Environment.NewLine + Global._stock.First(n => n.ItemID.Contains(h.Id)).Expire + Environment.NewLine + h.Category, h.Image, Global._stock.First(n => n.ItemID.Contains(h.Id)).Quantity });
+                try
+                {
+                    t.Rows.Add(new object[] { "Department :" + Global.stock.First(n => n.ItemID.Contains(h.Id)).Packing + Environment.NewLine + "Manufactured on :" + Global.stock.First(n => n.ItemID.Contains(h.Id)).Date_manufactured + Environment.NewLine + h.Generic + Environment.NewLine + h.Strength, h.Id, b, h.Barcode, h.Name + Environment.NewLine + Environment.NewLine + h.Description + Environment.NewLine + h.Manufacturer + Environment.NewLine + h.Country + Environment.NewLine + Global.stock.First(n => n.ItemID.Contains(h.Id)).Batch, Global.stock.First(n => n.ItemID.Contains(h.Id)).Purchase_price, Global.stock.First(n => n.ItemID.Contains(h.Id)).Sale_price, Global.stock.First(n => n.ItemID.Contains(h.Id)).Packing + Environment.NewLine + h.Composition + Environment.NewLine + Global.stock.First(n => n.ItemID.Contains(h.Id)).Expire + Environment.NewLine + h.Category, h.Image, Global.stock.First(n => n.ItemID.Contains(h.Id)).Quantity });
+                }
+                catch {
 
+                }
             }
             dtGrid.DataSource = t;
             ThreadPool.QueueUserWorkItem(delegate

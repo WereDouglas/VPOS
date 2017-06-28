@@ -83,48 +83,51 @@ namespace VPOS
             switch (val)
             {
                 case 1: 
-                    Uploading.UploaOrganisation();
+                    Uploading.Organisation();
                   
                     break;
                 case 2: 
 
-                    Uploading.UploadUsers();
+                    Uploading.Users();
 
                     break;
                 case 3:
-
-                    Uploading.UploadSale();
+                    Uploading.Invoice();
+                    Uploading.Sale();
                     break;
                 case 4: 
 
-                    Uploading.UploadItem();
+                    Uploading.Item();
                     break;
                 case 5:
-                    Uploading.UploadBilling();
+                   
+                    Uploading.Purchase();
+                    Uploading.Payment();
                     break;
                 case 6:
-                    Uploading.UploadRoles();
+                    Uploading.Roles();
                     break;
                 case 7:
-                    Uploading.UploadTransactor();
+                    Uploading.Customer();
+                    Uploading.Supplier();
                     break;
                 case 8:
-                    Uploading.UploadCategory();
+                    Uploading.Category();
                     break;
                 case 9:
-                    Uploading.UploadExpense();
+                    Uploading.Expense();
                     break;
                 case 10:
-                    Uploading.UploadPayment();
+                   
                     break;
                 case 11:
-                    Uploading.UploadStore();
+                    Uploading.Store();
                     break;
                 case 12:
-                    Uploading.UploadTaking();
+                    Uploading.Taking();
                     break;
                 case 13:
-                    Uploading.UploadStock();
+                    Uploading.Stock();
                     break;
                 case 14: 
                  
@@ -232,7 +235,7 @@ namespace VPOS
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            BillingForm frm = new BillingForm();
+            PaymentForm frm = new PaymentForm();
             frm.MdiParent = this;
             frm.Dock = DockStyle.Fill;
             frm.Show();
@@ -248,7 +251,7 @@ namespace VPOS
 
         private void toolStripButton9_Click(object sender, EventArgs e)
         {
-            TransactorForm frm = new TransactorForm();
+            SupplierForm frm = new SupplierForm();
             frm.MdiParent = this;
             frm.Dock = DockStyle.Fill;
             frm.Show();
@@ -444,6 +447,30 @@ namespace VPOS
         {
             processLbl.SelectionStart = processLbl.Text.Length;
             processLbl.ScrollToCaret();
+        }
+
+        private void toolStripButton14_Click_1(object sender, EventArgs e)
+        {
+            CustomerForm frm = new CustomerForm();
+            frm.MdiParent = this;
+            frm.Dock = DockStyle.Fill;
+            frm.Show();
+        }
+
+        private void toolStripButton8_Click_1(object sender, EventArgs e)
+        {
+            InvoiceForm frm = new InvoiceForm();
+            frm.MdiParent = this;
+            frm.Dock = DockStyle.Fill;
+            frm.Show();
+        }
+
+        private void toolStripButton16_Click_1(object sender, EventArgs e)
+        {
+            PaymentForm frm = new PaymentForm();
+            frm.MdiParent = this;
+            frm.Dock = DockStyle.Fill;
+            frm.Show();
         }
     }
 }

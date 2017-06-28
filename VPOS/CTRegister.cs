@@ -62,11 +62,13 @@ namespace VPOS
             }
             foreach (Item h in Item.ListItem())
             {
-                int purchases = Global._sale.Where(r => r.Type.Contains("Purchase") && r.ItemID.Contains(h.Id) && ( Convert.ToDateTime(r.Created) > Convert.ToDateTime(Global._stock.First(n => n.ItemID.Contains(h.Id)).Taking))).Count();
-                int sales = Global._sale.Where(r => r.Type.Contains("Sale") && r.ItemID.Contains(h.Id) && Convert.ToDateTime(r.Created) > Convert.ToDateTime(Global._stock.First(n => n.ItemID.Contains(h.Id)).Taking)).Count();
-
-                t.Rows.Add(new object[] { "Department :" + h.Category + Environment.NewLine + "Manufactured on :" + Global._stock.First(n => n.ItemID.Contains(h.Id)).Date_manufactured + Environment.NewLine + h.Generic + Environment.NewLine + h.Strength, h.Id, b, h.Barcode, h.Name + Environment.NewLine + Environment.NewLine + h.Description + Environment.NewLine + h.Manufacturer + Environment.NewLine + h.Country + Environment.NewLine + Global._stock.First(n => n.ItemID.Contains(h.Id)).Batch, Global._stock.First(n => n.ItemID.Contains(h.Id)).Purchase_price, Global._stock.First(n => n.ItemID.Contains(h.Id)).Sale_price, Global._stock.First(n => n.ItemID.Contains(h.Id)).Packing + Environment.NewLine + h.Composition + Environment.NewLine + Global._stock.First(n => n.ItemID.Contains(h.Id)).Expire + Environment.NewLine + h.Category, h.Image, Global._stock.First(n => n.ItemID.Contains(h.Id)).Counts, purchases, sales, "0.0", Global._stock.First(n => n.ItemID.Contains(h.Id)).Quantity, "0", "0", "0", "0", "0", "0", "0", "0", "Approve" });
-
+                int purchases = Global.purchase.Where(r => r.ItemID.Contains(h.Id) && ( Convert.ToDateTime(r.Created) > Convert.ToDateTime(Global.stock.First(n => n.ItemID.Contains(h.Id)).Taking))).Count();
+                int sales = Global.sale.Where(r => r.ItemID.Contains(h.Id) && Convert.ToDateTime(r.Created) > Convert.ToDateTime(Global.stock.First(n => n.ItemID.Contains(h.Id)).Taking)).Count();
+                try
+                {
+                    t.Rows.Add(new object[] { "Department :" + h.Category + Environment.NewLine + "Manufactured on :" + Global.stock.First(n => n.ItemID.Contains(h.Id)).Date_manufactured + Environment.NewLine + h.Generic + Environment.NewLine + h.Strength, h.Id, b, h.Barcode, h.Name + Environment.NewLine + Environment.NewLine + h.Description + Environment.NewLine + h.Manufacturer + Environment.NewLine + h.Country + Environment.NewLine + Global.stock.First(n => n.ItemID.Contains(h.Id)).Batch, Global.stock.First(n => n.ItemID.Contains(h.Id)).Purchase_price, Global.stock.First(n => n.ItemID.Contains(h.Id)).Sale_price, Global.stock.First(n => n.ItemID.Contains(h.Id)).Packing + Environment.NewLine + h.Composition + Environment.NewLine + Global.stock.First(n => n.ItemID.Contains(h.Id)).Expire + Environment.NewLine + h.Category, h.Image, Global.stock.First(n => n.ItemID.Contains(h.Id)).Counts, purchases, sales, "0.0", Global.stock.First(n => n.ItemID.Contains(h.Id)).Quantity, "0", "0", "0", "0", "0", "0", "0", "0", "Approve" });
+                }
+                catch { }
             }
             dtGrid.DataSource = t;
             ThreadPool.QueueUserWorkItem(delegate
@@ -296,7 +298,7 @@ namespace VPOS
                         string IDs = Guid.NewGuid().ToString();
                         _take = new Taking(IDs,Convert.ToDateTime(takingDate.Text).ToString("dd-MM-yyyy"),dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["B/F"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Purchases"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Sales"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Total stock"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["System stock"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Variance"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Purchases amount"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Sales amount"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Profit"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Physical count"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Damages"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Shrinkable"].Value.ToString(), Helper.OrgID, Helper.UserID, DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), Helper.StoreID);
                         DBConnect.Insert(_take);
-                        Global._taking.Add(_take);
+                        Global.taking.Add(_take);
                         string SQL = "UPDATE stock SET taking = '" + DateTime.Now.ToString("dd-MM-yyyy H:mm:ss") + "',counts='"+ dtGrid.Rows[e.RowIndex].Cells["Physical count"].Value.ToString() + "' WHERE itemID= '" + dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'";
                         DBConnect.Execute(SQL);
 

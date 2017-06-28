@@ -93,7 +93,7 @@ namespace VPOS
                     string Query = "DELETE from organisation WHERE id ='" + results[K]["id"].ToString() + "'";
                     DBConnect.save(Query);
                
-                    _org = new Organisation(results[K]["id"].ToString(),results[K]["name"].ToString(),results[K]["code"].ToString(), results[K]["registration"].ToString(), results[K]["contact"].ToString(), results[K]["address"].ToString(), results[K]["tin"].ToString(), results[K]["vat"].ToString(), results[K]["email"].ToString(), results[K]["country"].ToString(), results[K]["initialPassword"].ToString(), results[K]["account"].ToString(), results[K]["status"].ToString(), results[K]["expires"].ToString(),results[K]["image"].ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), results[K]["account"].ToString(),results[K]["company"].ToString(), results[K]["storeID"].ToString());
+                    _org = new Organisation(results[K]["id"].ToString(),results[K]["name"].ToString(),results[K]["code"].ToString(), results[K]["registration"].ToString(), results[K]["contact"].ToString(), results[K]["address"].ToString(), results[K]["tin"].ToString(), results[K]["vat"].ToString(), results[K]["email"].ToString(), results[K]["country"].ToString(), results[K]["initialPassword"].ToString(), results[K]["account"].ToString(), results[K]["status"].ToString(), results[K]["expires"].ToString(),results[K]["image"].ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), results[K]["account"].ToString(),results[K]["company"].ToString(), results[K]["storeID"].ToString(), results[K]["sub"].ToString());
                     DBConnect.Insert(_org);
 
                     
@@ -133,7 +133,7 @@ namespace VPOS
                     string Query = "DELETE from item WHERE id ='" + results[K]["id"].ToString() + "'";
                     DBConnect.save(Query);
                   
-                    _item = new Item(results[K]["id"].ToString(), results[K]["name"].ToString(), results[K]["generic"].ToString(), results[K]["code"].ToString(), results[K]["description"].ToString(), results[K]["manufacturer"].ToString(), results[K]["country"].ToString(), results[K]["composition"].ToString(), results[K]["category"].ToString(), results[K]["barcode"].ToString(), results[K]["image"].ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), results[K]["strength"].ToString(), Helper.OrgID, results[K]["valid"].ToString());
+                    _item = new Item(results[K]["id"].ToString(), results[K]["name"].ToString(), results[K]["generic"].ToString(), results[K]["code"].ToString(), results[K]["description"].ToString(), results[K]["manufacturer"].ToString(), results[K]["country"].ToString(), results[K]["composition"].ToString(), results[K]["category"].ToString(), results[K]["barcode"].ToString(), results[K]["image"].ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), results[K]["strength"].ToString(), Helper.OrgID, results[K]["valid"].ToString(),results[K]["sub"].ToString());
                     DBConnect.Insert(_item);
                     MainForm._Form1.FeedBack("DOWNLOADING ITEM " + results[K]["name"].ToString());
                 }

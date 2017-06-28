@@ -81,6 +81,8 @@
             this.statusCbx = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.categoryCbx = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgVideo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).BeginInit();
@@ -660,6 +662,8 @@
             this.flowLayoutPanel1.Controls.Add(this.statusCbx);
             this.flowLayoutPanel1.Controls.Add(this.label14);
             this.flowLayoutPanel1.Controls.Add(this.expireDate);
+            this.flowLayoutPanel1.Controls.Add(this.label9);
+            this.flowLayoutPanel1.Controls.Add(this.categoryCbx);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(295, 51);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -691,6 +695,26 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(286, 26);
             this.panel3.TabIndex = 153;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(209, 278);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(49, 13);
+            this.label9.TabIndex = 155;
+            this.label9.Text = "Category";
+            // 
+            // categoryCbx
+            // 
+            this.categoryCbx.FormattingEnabled = true;
+            this.categoryCbx.Items.AddRange(new object[] {
+            "Active",
+            "Suspended"});
+            this.categoryCbx.Location = new System.Drawing.Point(209, 294);
+            this.categoryCbx.Name = "categoryCbx";
+            this.categoryCbx.Size = new System.Drawing.Size(200, 21);
+            this.categoryCbx.TabIndex = 154;
             // 
             // OrganisationDialog
             // 
@@ -773,5 +797,7 @@
         private System.Windows.Forms.DateTimePicker syncDate;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox categoryCbx;
     }
 }

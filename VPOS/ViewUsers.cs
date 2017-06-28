@@ -31,21 +31,7 @@ namespace VPOS
             searchCbx.Items.Add("Contact");
             searchCbx.Items.Add("Status");
             LoadData();
-            btnDelete.Name = "btnDelete";
-            btnDelete.Text = "Delete";
-            btnDelete.FlatStyle = FlatStyle.Flat;
-            btnDelete.Width = 50;
-            btnDelete.CellTemplate.Style.BackColor = Color.Wheat;
-            btnDelete.UseColumnTextForButtonValue = true;
-            btnDelete.HeaderText = "Delete";
-
-            btnEdit.Name = "btnEdit";
-            btnEdit.Text = "Edit";
-            btnEdit.FlatStyle = FlatStyle.Flat;
-            btnEdit.Width = 50;
-            btnEdit.CellTemplate.Style.BackColor = Color.Orange;
-            btnEdit.UseColumnTextForButtonValue = true;
-            btnEdit.HeaderText = "Edit";
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -64,7 +50,7 @@ namespace VPOS
         public void LoadData()
         {
             _usersList = new List<Users>();
-            _usersList = Global._users;
+            _usersList = Global.users;
             t = new DataTable();
 
             t.Columns.Add(new DataColumn("Select", typeof(bool)));
@@ -204,8 +190,8 @@ namespace VPOS
             _users = new Users(updateID, dtGrid.Rows[e.RowIndex].Cells[3].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[7].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[8].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[4].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[5].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[6].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[9].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[10].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[11].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[18].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[12].Value.ToString(), Helper.OrgID, dtGrid.Rows[e.RowIndex].Cells[13].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[19].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[15].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[14].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[17].Value.ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),Helper.StoreID);
 
             DBConnect.Update(_users, updateID);
-            Global._users.RemoveAll(x => x.Id == updateID);
-            Global._users.Add(_users);
+            Global.users.RemoveAll(x => x.Id == updateID);
+            Global.users.Add(_users);
 
         }
     }

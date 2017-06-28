@@ -47,8 +47,9 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.Location = new System.Drawing.Point(8, 2);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -60,8 +61,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dtGrid);
-            this.splitContainer1.Size = new System.Drawing.Size(959, 485);
-            this.splitContainer1.SplitterDistance = 37;
+            this.splitContainer1.Size = new System.Drawing.Size(1006, 539);
+            this.splitContainer1.SplitterDistance = 35;
             this.splitContainer1.TabIndex = 0;
             // 
             // panel1
@@ -78,7 +79,7 @@
             this.panel1.Controls.Add(this.label12);
             this.panel1.Location = new System.Drawing.Point(6, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(950, 26);
+            this.panel1.Size = new System.Drawing.Size(997, 27);
             this.panel1.TabIndex = 1;
             // 
             // label1
@@ -124,7 +125,7 @@
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(928, 2);
+            this.button1.Location = new System.Drawing.Point(975, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(19, 23);
             this.button1.TabIndex = 2;
@@ -139,9 +140,9 @@
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(905, 0);
+            this.button2.Location = new System.Drawing.Point(947, 0);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(17, 23);
+            this.button2.Size = new System.Drawing.Size(22, 23);
             this.button2.TabIndex = 3;
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -165,7 +166,7 @@
             this.dtGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtGrid.Location = new System.Drawing.Point(0, 0);
             this.dtGrid.Name = "dtGrid";
-            this.dtGrid.Size = new System.Drawing.Size(959, 444);
+            this.dtGrid.Size = new System.Drawing.Size(1006, 500);
             this.dtGrid.TabIndex = 0;
             this.dtGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellClick);
             this.dtGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellEndEdit);
@@ -178,7 +179,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(979, 497);
+            this.ClientSize = new System.Drawing.Size(1026, 551);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

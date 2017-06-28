@@ -208,8 +208,8 @@ namespace VPOS
             _role = new Roles(dtGrid.Rows[e.RowIndex].Cells[2].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[4].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[5].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[6].Value.ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),Helper.OrgID, Helper.StoreID);
 
             DBConnect.Update(_role, updateID);
-            Global._roles.RemoveAll(x => x.Id == updateID);
-            Global._roles.Add(_role);
+            Global.roles.RemoveAll(x => x.Id == updateID);
+            Global.roles.Add(_role);
 
         }
 
@@ -219,6 +219,31 @@ namespace VPOS
         }
 
         private void dtGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void actionTxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void viewTxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label16_Click(object sender, EventArgs e)
         {
 
         }

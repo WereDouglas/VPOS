@@ -43,8 +43,9 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton12 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton13 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton16 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton18 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
@@ -58,9 +59,9 @@
             this.accountsPayableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.profitAndLossToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton17 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton14 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.processLbl = new System.Windows.Forms.TextBox();
@@ -185,38 +186,40 @@
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Left;
             this.toolStrip2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(30, 30);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
             this.toolStripButton12,
             this.toolStripButton13,
+            this.toolStripButton16,
+            this.toolStripButton8,
             this.toolStripButton11,
-            this.toolStripButton2,
             this.toolStripButton18,
             this.toolStripButton7,
             this.toolStripButton10,
             this.toolStripDropDownButton3,
             this.toolStripButton17,
+            this.toolStripButton14,
             this.toolStripButton9,
             this.toolStripButton4,
-            this.toolStripButton8,
             this.toolStripButton3,
             this.toolStripButton6});
             this.toolStrip2.Location = new System.Drawing.Point(0, 47);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip2.Size = new System.Drawing.Size(145, 650);
+            this.toolStrip2.Stretch = true;
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // toolStripButton1
             // 
             this.toolStripButton1.AutoSize = false;
-            this.toolStripButton1.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton1.BackColor = System.Drawing.Color.Transparent;
             this.toolStripButton1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripButton1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton1.Image = global::VPOS.Properties.Resources.Desktop_32;
             this.toolStripButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(143, 35);
@@ -226,12 +229,11 @@
             // toolStripButton12
             // 
             this.toolStripButton12.AutoSize = false;
-            this.toolStripButton12.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton12.BackColor = System.Drawing.Color.Transparent;
             this.toolStripButton12.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripButton12.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.toolStripButton12.Image = global::VPOS.Properties.Resources.Counting_Machine_32;
+            this.toolStripButton12.Image = global::VPOS.Properties.Resources.Shopping_Basket_02_32;
             this.toolStripButton12.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton12.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton12.Name = "toolStripButton12";
             this.toolStripButton12.Size = new System.Drawing.Size(143, 35);
@@ -242,57 +244,67 @@
             // toolStripButton13
             // 
             this.toolStripButton13.AutoSize = false;
-            this.toolStripButton13.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton13.BackColor = System.Drawing.Color.Transparent;
             this.toolStripButton13.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripButton13.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.toolStripButton13.Image = global::VPOS.Properties.Resources.Note_Memo_01_32;
+            this.toolStripButton13.Image = global::VPOS.Properties.Resources.Transport_Van_32;
             this.toolStripButton13.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton13.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton13.Name = "toolStripButton13";
             this.toolStripButton13.Size = new System.Drawing.Size(143, 35);
-            this.toolStripButton13.Text = "Purchases";
+            this.toolStripButton13.Text = "Purchase";
             this.toolStripButton13.Click += new System.EventHandler(this.toolStripButton13_Click);
+            // 
+            // toolStripButton16
+            // 
+            this.toolStripButton16.AutoSize = false;
+            this.toolStripButton16.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripButton16.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton16.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.toolStripButton16.Image = global::VPOS.Properties.Resources.View_List_32__4_;
+            this.toolStripButton16.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolStripButton16.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton16.Name = "toolStripButton16";
+            this.toolStripButton16.Size = new System.Drawing.Size(143, 35);
+            this.toolStripButton16.Text = "Purchases";
+            this.toolStripButton16.Click += new System.EventHandler(this.toolStripButton16_Click_1);
+            // 
+            // toolStripButton8
+            // 
+            this.toolStripButton8.AutoSize = false;
+            this.toolStripButton8.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripButton8.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.toolStripButton8.Image = global::VPOS.Properties.Resources.Numbering__32;
+            this.toolStripButton8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton8.Name = "toolStripButton8";
+            this.toolStripButton8.Size = new System.Drawing.Size(143, 35);
+            this.toolStripButton8.Text = "Sales";
+            this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click_1);
             // 
             // toolStripButton11
             // 
             this.toolStripButton11.AutoSize = false;
-            this.toolStripButton11.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton11.BackColor = System.Drawing.Color.Transparent;
             this.toolStripButton11.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripButton11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.toolStripButton11.Image = global::VPOS.Properties.Resources.Book_Shelf_32;
+            this.toolStripButton11.Image = global::VPOS.Properties.Resources.Book_Shelf_32__1_;
             this.toolStripButton11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton11.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton11.Name = "toolStripButton11";
             this.toolStripButton11.Size = new System.Drawing.Size(143, 35);
             this.toolStripButton11.Text = "Inventory";
             this.toolStripButton11.Click += new System.EventHandler(this.toolStripButton11_Click);
             // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.AutoSize = false;
-            this.toolStripButton2.BackColor = System.Drawing.Color.GhostWhite;
-            this.toolStripButton2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.toolStripButton2.Image = global::VPOS.Properties.Resources.Shopping_Basket_01_32;
-            this.toolStripButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(143, 35);
-            this.toolStripButton2.Text = "Billing";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
-            // 
             // toolStripButton18
             // 
             this.toolStripButton18.AutoSize = false;
-            this.toolStripButton18.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton18.BackColor = System.Drawing.Color.Transparent;
             this.toolStripButton18.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripButton18.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.toolStripButton18.Image = global::VPOS.Properties.Resources.Flow_Cart_32;
+            this.toolStripButton18.Image = global::VPOS.Properties.Resources.Note_04_32;
             this.toolStripButton18.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton18.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton18.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton18.Name = "toolStripButton18";
             this.toolStripButton18.Size = new System.Drawing.Size(143, 35);
@@ -302,12 +314,11 @@
             // toolStripButton7
             // 
             this.toolStripButton7.AutoSize = false;
-            this.toolStripButton7.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton7.BackColor = System.Drawing.Color.Transparent;
             this.toolStripButton7.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripButton7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.toolStripButton7.Image = global::VPOS.Properties.Resources.QR_Code_32__1_;
+            this.toolStripButton7.Image = global::VPOS.Properties.Resources.QR_Code_32__3_;
             this.toolStripButton7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton7.Name = "toolStripButton7";
             this.toolStripButton7.Size = new System.Drawing.Size(143, 35);
@@ -317,12 +328,11 @@
             // toolStripButton10
             // 
             this.toolStripButton10.AutoSize = false;
-            this.toolStripButton10.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton10.BackColor = System.Drawing.Color.Transparent;
             this.toolStripButton10.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripButton10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.toolStripButton10.Image = global::VPOS.Properties.Resources.Bill_32;
+            this.toolStripButton10.Image = global::VPOS.Properties.Resources.Bill_32__2_;
             this.toolStripButton10.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton10.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton10.Name = "toolStripButton10";
             this.toolStripButton10.Size = new System.Drawing.Size(143, 35);
@@ -332,7 +342,7 @@
             // toolStripDropDownButton3
             // 
             this.toolStripDropDownButton3.AutoSize = false;
-            this.toolStripDropDownButton3.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripDropDownButton3.BackColor = System.Drawing.Color.Transparent;
             this.toolStripDropDownButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cashBookToolStripMenuItem,
             this.purchaseLedgerToolStripMenuItem,
@@ -344,9 +354,8 @@
             this.profitAndLossToolStripMenuItem});
             this.toolStripDropDownButton3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripDropDownButton3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.toolStripDropDownButton3.Image = global::VPOS.Properties.Resources.Table_32;
+            this.toolStripDropDownButton3.Image = global::VPOS.Properties.Resources.Table_32__1_;
             this.toolStripDropDownButton3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripDropDownButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripDropDownButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton3.Name = "toolStripDropDownButton3";
             this.toolStripDropDownButton3.Size = new System.Drawing.Size(143, 35);
@@ -405,27 +414,39 @@
             // toolStripButton17
             // 
             this.toolStripButton17.AutoSize = false;
-            this.toolStripButton17.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton17.BackColor = System.Drawing.Color.Transparent;
             this.toolStripButton17.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripButton17.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton17.Image = global::VPOS.Properties.Resources.Debit_Card_32;
             this.toolStripButton17.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton17.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton17.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton17.Name = "toolStripButton17";
             this.toolStripButton17.Size = new System.Drawing.Size(143, 35);
             this.toolStripButton17.Text = "Expenses";
             this.toolStripButton17.Click += new System.EventHandler(this.toolStripButton17_Click);
             // 
+            // toolStripButton14
+            // 
+            this.toolStripButton14.AutoSize = false;
+            this.toolStripButton14.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripButton14.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripButton14.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.toolStripButton14.Image = global::VPOS.Properties.Resources.User_Group_32__3_;
+            this.toolStripButton14.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolStripButton14.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton14.Name = "toolStripButton14";
+            this.toolStripButton14.Size = new System.Drawing.Size(143, 40);
+            this.toolStripButton14.Text = "Customer";
+            this.toolStripButton14.Click += new System.EventHandler(this.toolStripButton14_Click_1);
+            // 
             // toolStripButton9
             // 
             this.toolStripButton9.AutoSize = false;
-            this.toolStripButton9.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton9.BackColor = System.Drawing.Color.Transparent;
             this.toolStripButton9.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripButton9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton9.Image = global::VPOS.Properties.Resources.User_Group_32__3_;
             this.toolStripButton9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton9.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton9.Name = "toolStripButton9";
             this.toolStripButton9.Size = new System.Drawing.Size(143, 40);
@@ -435,41 +456,25 @@
             // toolStripButton4
             // 
             this.toolStripButton4.AutoSize = false;
-            this.toolStripButton4.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton4.BackColor = System.Drawing.Color.Transparent;
             this.toolStripButton4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripButton4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton4.Image = global::VPOS.Properties.Resources.Brick_32;
             this.toolStripButton4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Size = new System.Drawing.Size(143, 35);
             this.toolStripButton4.Text = "Categories";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
-            // toolStripButton8
-            // 
-            this.toolStripButton8.AutoSize = false;
-            this.toolStripButton8.BackColor = System.Drawing.Color.GhostWhite;
-            this.toolStripButton8.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.toolStripButton8.Image = global::VPOS.Properties.Resources.View_List_32;
-            this.toolStripButton8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton8.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton8.Name = "toolStripButton8";
-            this.toolStripButton8.Size = new System.Drawing.Size(143, 35);
-            this.toolStripButton8.Text = "Transactions";
-            // 
             // toolStripButton3
             // 
             this.toolStripButton3.AutoSize = false;
-            this.toolStripButton3.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton3.BackColor = System.Drawing.Color.Transparent;
             this.toolStripButton3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripButton3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton3.Image = global::VPOS.Properties.Resources.Desktop_32;
             this.toolStripButton3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(143, 35);
@@ -479,12 +484,11 @@
             // toolStripButton6
             // 
             this.toolStripButton6.AutoSize = false;
-            this.toolStripButton6.BackColor = System.Drawing.Color.GhostWhite;
+            this.toolStripButton6.BackColor = System.Drawing.Color.Transparent;
             this.toolStripButton6.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripButton6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.toolStripButton6.Image = global::VPOS.Properties.Resources.Desktop_32;
             this.toolStripButton6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
             this.toolStripButton6.Size = new System.Drawing.Size(143, 35);
@@ -580,7 +584,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton10;
         private System.Windows.Forms.ToolStripButton toolStripButton9;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton15;
         private System.Windows.Forms.ToolStripDropDownButton imageDropDown;
@@ -609,5 +612,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton8;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripMenuItem profitAndLossToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButton14;
+        private System.Windows.Forms.ToolStripButton toolStripButton16;
     }
 }

@@ -38,7 +38,7 @@ namespace VPOS
 
             _exp = new Expense(ID, particularTxt.Text, detailTxt.Text, qtyTxt.Text, Convert.ToDateTime(dateTimePicker1.Text).ToString("dd-MM-yyyy"), priceTxt.Text, typeCbx.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, totalTxt.Text, Helper.StoreID);
             DBConnect.Insert(_exp);
-            Global._expense.Add(_exp);
+            Global.expense.Add(_exp);
             MessageBox.Show("Information Saved");
             totalTxt.Text = "0";
             this.DialogResult = DialogResult.OK;

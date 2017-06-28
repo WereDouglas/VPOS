@@ -25,6 +25,8 @@ namespace VPOS.Model
         private string strength;       
         private string orgID;      
         private string valid;
+        private string sub;
+
         static SQLiteDataReader Reader;
 
         public string Id
@@ -221,8 +223,22 @@ namespace VPOS.Model
                 valid = value;
             }
         }
+
+        public string Sub
+        {
+            get
+            {
+                return sub;
+            }
+
+            set
+            {
+                sub = value;
+            }
+        }
+
         public Item() { }
-        public Item(string id, string name, string generic, string code, string description, string manufacturer, string country, string composition, string category, string barcode, string image, string created, string strength, string orgID, string valid)
+        public Item(string id, string name, string generic, string code, string description, string manufacturer, string country, string composition, string category, string barcode, string image, string created, string strength, string orgID, string valid,string sub)
         {
             this.Id = id;
             this.Name = name;
@@ -239,6 +255,7 @@ namespace VPOS.Model
             this.Strength = strength;
             this.OrgID = orgID;
             this.Valid = valid;
+            this.Sub = sub;
         }
 
         public static List<Item> ListItem()
@@ -251,7 +268,7 @@ namespace VPOS.Model
                 NpgsqlDataReader Reader = command.ExecuteReader();
                 while (Reader.Read())
                 {
-                    Item p = new Item(Reader["id"].ToString(), Reader["name"].ToString(), Reader["generic"].ToString(), Reader["code"].ToString(), Reader["description"].ToString(), Reader["manufacturer"].ToString(), Reader["country"].ToString(), Reader["composition"].ToString(), Reader["category"].ToString(), Reader["barcode"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["strength"].ToString(), Reader["orgID"].ToString(), Reader["valid"].ToString());
+                    Item p = new Item(Reader["id"].ToString(), Reader["name"].ToString(), Reader["generic"].ToString(), Reader["code"].ToString(), Reader["description"].ToString(), Reader["manufacturer"].ToString(), Reader["country"].ToString(), Reader["composition"].ToString(), Reader["category"].ToString(), Reader["barcode"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["strength"].ToString(), Reader["orgID"].ToString(), Reader["valid"].ToString(), Reader["sub"].ToString());
                     wards.Add(p);
                 }
                 DBConnect.CloseConn();
@@ -263,7 +280,7 @@ namespace VPOS.Model
                 Reader = DBConnect.ReadingLite(SQL);
                 while (Reader.Read())
                 {
-                    Item p = new Item(Reader["id"].ToString(), Reader["name"].ToString(), Reader["generic"].ToString(), Reader["code"].ToString(), Reader["description"].ToString(), Reader["manufacturer"].ToString(), Reader["country"].ToString(), Reader["composition"].ToString(), Reader["category"].ToString(), Reader["barcode"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["strength"].ToString(), Reader["orgID"].ToString(), Reader["valid"].ToString());
+                    Item p = new Item(Reader["id"].ToString(), Reader["name"].ToString(), Reader["generic"].ToString(), Reader["code"].ToString(), Reader["description"].ToString(), Reader["manufacturer"].ToString(), Reader["country"].ToString(), Reader["composition"].ToString(), Reader["category"].ToString(), Reader["barcode"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["strength"].ToString(), Reader["orgID"].ToString(), Reader["valid"].ToString(), Reader["sub"].ToString());
                     wards.Add(p);
                 }
                 Reader.Close();

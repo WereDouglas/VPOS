@@ -110,7 +110,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.16605F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.83395F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 571F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 590F));
             this.tableLayoutPanel1.Controls.Add(this.panel8, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 0, 0);
@@ -137,7 +137,7 @@
             this.panel8.Controls.Add(this.contactTxt);
             this.panel8.Controls.Add(this.label13);
             this.panel8.Controls.Add(this.label14);
-            this.panel8.Location = new System.Drawing.Point(616, 3);
+            this.panel8.Location = new System.Drawing.Point(597, 3);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(563, 73);
             this.panel8.TabIndex = 105;
@@ -224,7 +224,7 @@
             this.panel1.Controls.Add(this.addressLbl);
             this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(616, 82);
+            this.panel1.Location = new System.Drawing.Point(597, 82);
             this.panel1.Name = "panel1";
             this.tableLayoutPanel1.SetRowSpan(this.panel1, 2);
             this.panel1.Size = new System.Drawing.Size(566, 485);
@@ -668,7 +668,7 @@
             this.panel3.Controls.Add(this.barSearch);
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(607, 73);
+            this.panel3.Size = new System.Drawing.Size(588, 73);
             this.panel3.TabIndex = 106;
             // 
             // nameTxt
@@ -688,7 +688,7 @@
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(16, 7);
+            this.button2.Location = new System.Drawing.Point(-3, 7);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(21, 15);
             this.button2.TabIndex = 102;
@@ -752,7 +752,7 @@
             this.panel6.Controls.Add(this.button1);
             this.panel6.Controls.Add(this.button3);
             this.panel6.Controls.Add(this.itemGrid);
-            this.panel6.Location = new System.Drawing.Point(616, 573);
+            this.panel6.Location = new System.Drawing.Point(597, 573);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(561, 42);
             this.panel6.TabIndex = 107;
@@ -811,7 +811,7 @@
             this.listView1.Location = new System.Drawing.Point(3, 82);
             this.listView1.Name = "listView1";
             this.tableLayoutPanel1.SetRowSpan(this.listView1, 3);
-            this.listView1.Size = new System.Drawing.Size(607, 533);
+            this.listView1.Size = new System.Drawing.Size(588, 533);
             this.listView1.TabIndex = 108;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);

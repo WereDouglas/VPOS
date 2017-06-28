@@ -57,13 +57,12 @@
             this.button1 = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
-            this.imgCapture = new System.Windows.Forms.PictureBox();
             this.label13 = new System.Windows.Forms.Label();
             this.contactTxt = new System.Windows.Forms.TextBox();
-            this.customerTxt = new System.Windows.Forms.TextBox();
+            this.supplierTxt = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.customerLbl = new System.Windows.Forms.Label();
+            this.supplierLbl = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label8 = new System.Windows.Forms.Label();
@@ -74,17 +73,18 @@
             this.label15 = new System.Windows.Forms.Label();
             this.vatAmountTxt = new System.Windows.Forms.TextBox();
             this.balanceTxt = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.itemGrid = new System.Windows.Forms.DataGridView();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
             this.nameTxt = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.barSearch = new System.Windows.Forms.TextBox();
             this.barcodeTxt = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.imgCapture = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid2)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -93,14 +93,14 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).BeginInit();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemGrid)).BeginInit();
             this.panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -108,9 +108,9 @@
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.dtGrid2);
-            this.panel2.Location = new System.Drawing.Point(992, 90);
+            this.panel2.Location = new System.Drawing.Point(972, 90);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(246, 512);
+            this.panel2.Size = new System.Drawing.Size(266, 512);
             this.panel2.TabIndex = 2;
             // 
             // dtGrid2
@@ -135,7 +135,7 @@
             this.dtGrid2.Location = new System.Drawing.Point(3, 6);
             this.dtGrid2.Name = "dtGrid2";
             this.dtGrid2.RowHeadersVisible = false;
-            this.dtGrid2.Size = new System.Drawing.Size(239, 503);
+            this.dtGrid2.Size = new System.Drawing.Size(259, 503);
             this.dtGrid2.TabIndex = 2;
             this.dtGrid2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid2_CellClick);
             // 
@@ -370,7 +370,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.16605F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.83395F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 392F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 251F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 271F));
             this.tableLayoutPanel1.Controls.Add(this.panel8, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.panel7, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 3, 1);
@@ -392,7 +392,7 @@
             // 
             this.panel8.Controls.Add(this.button3);
             this.panel8.Controls.Add(this.button1);
-            this.panel8.Location = new System.Drawing.Point(600, 608);
+            this.panel8.Location = new System.Drawing.Point(580, 608);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(386, 30);
             this.panel8.TabIndex = 256;
@@ -434,9 +434,9 @@
             this.panel7.Controls.Add(this.imgCapture);
             this.panel7.Controls.Add(this.label13);
             this.panel7.Controls.Add(this.contactTxt);
-            this.panel7.Controls.Add(this.customerTxt);
+            this.panel7.Controls.Add(this.supplierTxt);
             this.panel7.Controls.Add(this.label14);
-            this.panel7.Location = new System.Drawing.Point(600, 3);
+            this.panel7.Location = new System.Drawing.Point(580, 3);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(386, 81);
             this.panel7.TabIndex = 105;
@@ -453,18 +453,6 @@
             this.label7.TabIndex = 104;
             this.label7.Text = "Supplier";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // imgCapture
-            // 
-            this.imgCapture.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.imgCapture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.imgCapture.Image = global::VPOS.Properties.Resources.temp;
-            this.imgCapture.Location = new System.Drawing.Point(10, 15);
-            this.imgCapture.Name = "imgCapture";
-            this.imgCapture.Size = new System.Drawing.Size(70, 60);
-            this.imgCapture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.imgCapture.TabIndex = 101;
-            this.imgCapture.TabStop = false;
             // 
             // label13
             // 
@@ -483,13 +471,13 @@
             this.contactTxt.TabIndex = 24;
             this.contactTxt.Leave += new System.EventHandler(this.contactTxt_Leave);
             // 
-            // customerTxt
+            // supplierTxt
             // 
-            this.customerTxt.Location = new System.Drawing.Point(132, 27);
-            this.customerTxt.Name = "customerTxt";
-            this.customerTxt.Size = new System.Drawing.Size(250, 21);
-            this.customerTxt.TabIndex = 22;
-            this.customerTxt.Leave += new System.EventHandler(this.contactTxt_Leave);
+            this.supplierTxt.Location = new System.Drawing.Point(132, 27);
+            this.supplierTxt.Name = "supplierTxt";
+            this.supplierTxt.Size = new System.Drawing.Size(250, 21);
+            this.supplierTxt.TabIndex = 22;
+            this.supplierTxt.Leave += new System.EventHandler(this.contactTxt_Leave);
             // 
             // label14
             // 
@@ -504,24 +492,24 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.customerLbl);
+            this.panel1.Controls.Add(this.supplierLbl);
             this.panel1.Controls.Add(this.tableLayoutPanel3);
             this.panel1.Controls.Add(this.addressLbl);
             this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(600, 90);
+            this.panel1.Location = new System.Drawing.Point(580, 90);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(386, 512);
             this.panel1.TabIndex = 1;
             // 
-            // customerLbl
+            // supplierLbl
             // 
-            this.customerLbl.AutoSize = true;
-            this.customerLbl.Location = new System.Drawing.Point(22, 66);
-            this.customerLbl.Name = "customerLbl";
-            this.customerLbl.Size = new System.Drawing.Size(12, 13);
-            this.customerLbl.TabIndex = 22;
-            this.customerLbl.Text = "#";
+            this.supplierLbl.AutoSize = true;
+            this.supplierLbl.Location = new System.Drawing.Point(22, 66);
+            this.supplierLbl.Name = "supplierLbl";
+            this.supplierLbl.Size = new System.Drawing.Size(12, 13);
+            this.supplierLbl.TabIndex = 22;
+            this.supplierLbl.Text = "#";
             // 
             // tableLayoutPanel3
             // 
@@ -669,18 +657,6 @@
             this.balanceTxt.TabIndex = 19;
             this.balanceTxt.Text = "0";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Image = global::VPOS.Properties.Resources.vugapos;
-            this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(335, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(38, 22);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 248;
-            this.pictureBox1.TabStop = false;
-            // 
             // itemGrid
             // 
             this.itemGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -694,14 +670,14 @@
             this.itemGrid.Name = "itemGrid";
             this.itemGrid.RowHeadersVisible = false;
             this.tableLayoutPanel1.SetRowSpan(this.itemGrid, 2);
-            this.itemGrid.Size = new System.Drawing.Size(591, 548);
+            this.itemGrid.Size = new System.Drawing.Size(571, 548);
             this.itemGrid.TabIndex = 26;
             this.itemGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemGrid_CellClick);
             // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.Transparent;
-            this.panel6.Location = new System.Drawing.Point(992, 3);
+            this.panel6.Location = new System.Drawing.Point(972, 3);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(244, 81);
             this.panel6.TabIndex = 27;
@@ -719,22 +695,8 @@
             this.panel9.Controls.Add(this.label6);
             this.panel9.Location = new System.Drawing.Point(3, 3);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(591, 81);
+            this.panel9.Size = new System.Drawing.Size(571, 81);
             this.panel9.TabIndex = 257;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackgroundImage = global::VPOS.Properties.Resources.Cancel_24;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(7, 7);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(16, 23);
-            this.button2.TabIndex = 103;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // nameTxt
             // 
@@ -795,6 +757,44 @@
             this.label6.TabIndex = 21;
             this.label6.Text = "Barcode";
             // 
+            // imgCapture
+            // 
+            this.imgCapture.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.imgCapture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.imgCapture.Image = global::VPOS.Properties.Resources.temp;
+            this.imgCapture.Location = new System.Drawing.Point(10, 15);
+            this.imgCapture.Name = "imgCapture";
+            this.imgCapture.Size = new System.Drawing.Size(70, 60);
+            this.imgCapture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imgCapture.TabIndex = 101;
+            this.imgCapture.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Image = global::VPOS.Properties.Resources.vugapos;
+            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.Location = new System.Drawing.Point(335, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(38, 22);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 248;
+            this.pictureBox1.TabStop = false;
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.BackgroundImage = global::VPOS.Properties.Resources.Cancel_24;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(-13, 7);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(16, 23);
+            this.button2.TabIndex = 103;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // PurchaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -817,7 +817,6 @@
             this.panel8.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -825,10 +824,11 @@
             this.tableLayoutPanel5.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemGrid)).EndInit();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -863,10 +863,10 @@
         private System.Windows.Forms.PictureBox imgCapture;
         private System.Windows.Forms.TextBox contactTxt;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox customerTxt;
+        private System.Windows.Forms.TextBox supplierTxt;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label customerLbl;
+        private System.Windows.Forms.Label supplierLbl;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridView itemGrid;

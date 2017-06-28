@@ -15,10 +15,10 @@ namespace VPOS
     public partial class PartiesDialog : Form
     {
 
-        Transactor _transactor;
+       
         WebCam webcam;
         DataTable t;
-        List<Transactor> _transactorList = new List<Transactor>();
+     
         static string base64String = null;
         public PartiesDialog()
         {
@@ -90,8 +90,12 @@ namespace VPOS
             }
             if (contactTxt.Text == "")
             {
-
                 contactTxt.BackColor = Color.Red;
+                return;
+            }
+            if (typeCbx.Text == "")
+            {
+                typeCbx.BackColor = Color.Red;
                 return;
             }
 
@@ -99,21 +103,26 @@ namespace VPOS
 
             MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
             string fullimage = ImageToBase64(stream);
-            _transactor = new Transactor(id, surnameTxt.Text, contactTxt.Text, fullimage, typeCbx.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), addressTxt.Text, Helper.OrgID, Helper.StoreID);
 
-            if (DBConnect.Insert(_transactor) != "")
+               
+            if (typeCbx.Text == "Supplier")
             {
-                //string query = "insert into transactor (id, transactorNo,contact,surname,lastname,email,dob,nationality,address,kin,kincontact,gender,created) values ('"+ id + "', '"+ transactorNoTxt.Text + "', '"+ contactTxt.Text + "', '" + surnameTxt.Text + "', '" + lastnameTxt.Text + "', '" + emailTxt.Text + "', '" +Convert.ToDateTime(dobdateTimePicker1.Text).ToString("dd-MM-yyyy") + "', '" + nationalityTxt.Text + "', '" + addressTxt.Text + "', '" + kinTxt.Text + "','" + kincontactTxt.Text + "', '" + genderCbx.Text + "','"+DateTime.Now.ToString("dd-MM-yyyy H:m:s")+"');";
-                Global._transactor.Add(_transactor);
+                Supplier _transactor = new Supplier(id, surnameTxt.Text, contactTxt.Text, fullimage, addressTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID);
+                Global.supplier.Add(_transactor);
                 MessageBox.Show("Information Saved");
                 this.DialogResult = DialogResult.OK;
                 this.Dispose();
-            }
-            else
-            {
-
-
-            }
+            
+        }
+            else {
+                Customer _transactor = new Customer(id, surnameTxt.Text, contactTxt.Text, fullimage, addressTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID);
+                Global.customer.Add(_transactor);
+                MessageBox.Show("Information Saved");
+                this.DialogResult = DialogResult.OK;
+                this.Dispose();
+            
+        }
+           
             surnameTxt.Text = "";
             contactTxt.Text = "";
         }

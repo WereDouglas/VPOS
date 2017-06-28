@@ -28,9 +28,9 @@ namespace VPOS
         }
         public void LoadData()
         {
-
             t = new DataTable();
-            t.Columns.Add(new DataColumn("Select", typeof(bool)));
+            t.Columns.Add("Manage");//26
+            t.Columns.Add("Stock");//26
             t.Columns.Add("id");//1
             t.Columns.Add(new DataColumn("Img", typeof(Bitmap)));//   2        
             t.Columns.Add("Name");//3 
@@ -40,7 +40,8 @@ namespace VPOS
             t.Columns.Add("Manufacturer");//6
             t.Columns.Add("Country");//7          
             t.Columns.Add("Composition");//11           
-            t.Columns.Add("Category");//13          
+            t.Columns.Add("Category");//13 
+            t.Columns.Add("Sub category");//13          
             t.Columns.Add("Barcode");//15
             t.Columns.Add("image");//16  
             t.Columns.Add("Created");//17           
@@ -49,16 +50,17 @@ namespace VPOS
             t.Columns.Add("Validity");//26
           
 
+
             Bitmap b = new Bitmap(50, 50);
 
             using (Graphics g = Graphics.FromImage(b))
             {
                 g.DrawString("Loading...", this.Font, new SolidBrush(Color.Gray), 00, 00);
             }
-            foreach (Item h in Global._item)
+            foreach (Item h in Global.item)
             {
 
-                t.Rows.Add(new object[] { false, h.Id, b, h.Name,h.Generic, h.Code, h.Description, h.Manufacturer, h.Country, h.Composition,h.Category, h.Barcode, h.Image, h.Created, h.Strength, "Delete",h.Valid});
+                t.Rows.Add(new object[] {"View", "Stock", h.Id, b, h.Name,h.Generic, h.Code, h.Description, h.Manufacturer, h.Country, h.Composition,h.Category,h.Sub, h.Barcode, h.Image, h.Created, h.Strength, "Delete",h.Valid});
 
             }
             dtGrid.DataSource = t;
@@ -84,6 +86,8 @@ namespace VPOS
             });
             dtGrid.AllowUserToAddRows = false;
             dtGrid.Columns["Delete"].DefaultCellStyle.BackColor = Color.Orange;
+            dtGrid.Columns["Manage"].DefaultCellStyle.BackColor = Color.Teal;
+            dtGrid.Columns["Stock"].DefaultCellStyle.BackColor = Color.PaleGoldenrod;
             dtGrid.RowTemplate.Height = 60;
             dtGrid.Columns["id"].Visible = false;
             dtGrid.Columns["image"].Visible = false;
@@ -163,7 +167,7 @@ namespace VPOS
 
         private void dtGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 22)
+            if (e.ColumnIndex == dtGrid.Columns["Delete"].Index && e.RowIndex >= 0)
             {
                 if (MessageBox.Show("YES or No?", "Are you sure you want to delete this information? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
@@ -173,17 +177,25 @@ namespace VPOS
 
                 }
             }
-            if (e.ColumnIndex == 0)
+            if (e.ColumnIndex == dtGrid.Columns["Stock"].Index && e.RowIndex >= 0)
             {
-                using (ItemDialog form = new ItemDialog(dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString()))
+                using (StockDialog form = new StockDialog(dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString()))
                 {
-
-                    this.Close();
-                    // DentalDialog form1 = new DentalDialog(item.Text, TransactorID);
                     DialogResult dr = form.ShowDialog();
                     if (dr == DialogResult.OK)
-                    {
-                        // MessageBox.Show(form.state);
+                    {                       
+                        LoadData();
+                    }
+                }
+
+            }
+            if (e.ColumnIndex == dtGrid.Columns["Manage"].Index && e.RowIndex >= 0)
+            {
+                using (ItemDialog form = new ItemDialog(dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString()))
+                {                   
+                    DialogResult dr = form.ShowDialog();
+                    if (dr == DialogResult.OK)
+                    {                       
                         LoadData();
                     }
                 }
@@ -200,15 +212,14 @@ namespace VPOS
                 MessageBox.Show("Please input a name ");
                 return;
 
-            }
-        
+            }        
           
             string updateID = dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString();
-            _item = new Item(updateID,dtGrid.Rows[e.RowIndex].Cells["name"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Generic name"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Code"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Description"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Manufacturer"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Country"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Composition"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Category"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Barcode"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["image"].Value.ToString(),DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), dtGrid.Rows[e.RowIndex].Cells["Strength"].Value.ToString(),Helper.OrgID, dtGrid.Rows[e.RowIndex].Cells["Validity"].Value.ToString());
+            _item = new Item(updateID,dtGrid.Rows[e.RowIndex].Cells["name"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Generic name"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Code"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Description"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Manufacturer"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Country"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Composition"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Category"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Barcode"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["image"].Value.ToString(),DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), dtGrid.Rows[e.RowIndex].Cells["Strength"].Value.ToString(),Helper.OrgID, dtGrid.Rows[e.RowIndex].Cells["Validity"].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells["Sub category"].Value.ToString());
 
             DBConnect.Update(_item, updateID);
-            Global._item.RemoveAll(x => x.Id == updateID);
-            Global._item.Add(_item);
+            Global.item.RemoveAll(x => x.Id == updateID);
+            Global.item.Add(_item);
         }
 
         private void searchCbx_SelectedIndexChanged(object sender, EventArgs e)

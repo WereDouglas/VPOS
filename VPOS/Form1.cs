@@ -26,8 +26,8 @@ namespace VPOS
 {
     public partial class Form1 : Form
     {
-        Organisation _org;
-        List<Organisation> _orgList;
+        Organisation org;
+        List<Organisation> orgList;
         Roles _role;
         string originalPassword;
         Connection dbobject = new Connection();
@@ -39,7 +39,7 @@ namespace VPOS
         string end;
         public Form1()
         {
-           
+
 
             start = DateTime.Now.ToString("dd-MM-yyyy");
             end = DateTime.Now.ToString("dd-MM-yyyy");
@@ -50,8 +50,6 @@ namespace VPOS
             //in setting is where am loading Global 
             LoadSettings();
             _Form1 = this;
-
-
 
             lblStatus.Text = "";
             bwLite.DoWork += backgroundWorker1_DoWork;
@@ -77,50 +75,57 @@ namespace VPOS
             {
                 case 1:
                     hides();
-                    Refreshing.DownloadPayment();
+                    Refreshing.Payment();
                     break;
                 case 2:
-                    Refreshing.DownloadStores();
+                    Refreshing.Stores();
 
                     break;
                 case 3:
-                    Refreshing.DownloadRole();
+                    Refreshing.Role();
                     break;
                 case 4:
-                    Refreshing.DownloadItems();
+                    Refreshing.Items();
                     break;
                 case 5:
-                    Refreshing.DownloadUsers();
+                    Refreshing.Users();
                     break;
                 case 6:
-                    Refreshing.DownloadSale();
+                    Refreshing.Purchase();
+                    Refreshing.Sale();
                     break;
                 case 7:
-                    Refreshing.DownloadCategories();
+                    Refreshing.Categories();
                     break;
                 case 8:
-                    Refreshing.DownloadParties();
+                    Refreshing.Invoice();
                     break;
                 case 9:
-                    Refreshing.DownloadExpenses();
+                    Refreshing.Expenses();
                     break;
                 case 10:
-                    Refreshing.DownloadBill();
+                    Refreshing.Bill();
                     break;
                 case 11:
-                    Refreshing.DownloadStock();
+                    Refreshing.Stock();
                     break;
                 case 12:
-                    Refreshing.DownloadOrg();
+                    Refreshing.Org();
                     break;
                 case 13:
+                    Refreshing.Customer();
+                    break;
+                case 14:
+                    Refreshing.Supplier();
+                    break;
+                case 15:
                     // Upload.updateSyncTime();
                     FeedBack("Uploading and Downloading of information complete");
                     Helper.lastSync = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                     FeedBack("LAST SYNC " + Helper.lastSync);
                     // shows();
                     break;
-                case 14:
+                case 16:
                     shows();
                     break;
                 default:
@@ -149,7 +154,7 @@ namespace VPOS
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
 
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 17; i++)
             {
                 FeedBack("STEP " + i.ToString());
                 //try
@@ -173,10 +178,10 @@ namespace VPOS
 
         private void LoadSettings()
         {
-            
-            try
-            {
-                XDocument xmlDoc = XDocument.Load("LocalXMLFile.xml");
+
+            //try
+            //{
+                XDocument xmlDoc = XDocument.Load(Connection.XMLFile());
                 var servers = from person in xmlDoc.Descendants("Server")
                               select new
                               {
@@ -246,19 +251,19 @@ namespace VPOS
                 // MessageBox.Show(Helper.serverIP);
 
 
-            }
-            catch
-            {
-                using (SettingDialog form = new SettingDialog())
-                {
+            //}
+            //catch
+            //{
+            //    using (SettingDialog form = new SettingDialog())
+            //    {
 
-                    DialogResult dr = form.ShowDialog();
-                    if (dr == DialogResult.OK)
-                    {
-                        LoadSettings();
-                    }
-                }
-            }
+            //        DialogResult dr = form.ShowDialog();
+            //        if (dr == DialogResult.OK)
+            //        {
+            //            LoadSettings();
+            //        }
+            //    }
+            //}
 
         }
         private String IPAddressCheck(string HostName)
@@ -315,41 +320,31 @@ namespace VPOS
             dSecurity.AddAccessRule(new FileSystemAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null), FileSystemRights.FullControl, InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit, PropagationFlags.NoPropagateInherit, AccessControlType.Allow));
             dInfo.SetAccessControl(dSecurity);
         }
-        Users _users = new Users();
-        Billing _bill = new Billing();
-        Category _cat = new Category();
-        Expense _exp = new Expense();
-        Item _item = new Item();
-        Organisation _organisation = new Organisation();
-        Payment _pay = new Payment();
-        Purchase _purchase = new Purchase();
-        Quantity _qty = new Quantity();
-        Roles _roles = new Roles();
-        Sale _sale = new Sale();
-        Stock _stock = new Stock();
-        Store _store = new Store();
-        Taking _take = new Taking();
-        Transactor _trans = new Transactor();
+     
 
         private void createSqlliteDB()
         {
             //  string fullFilePath = Path.Combine(appPath, "casesLite.txt");            
             //  string SQL = DBConnect.CreateDBSQL(_users);
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(_users));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(_bill));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(_cat));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(_exp));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(_item));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(_organisation));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(_pay));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(_purchase));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(_qty));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(_roles));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(_sale));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(_stock));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(_take));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(_trans));
-            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(_store));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Users()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Billing()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Category()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Customer()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Expense()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Invoice()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Item()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Organisation()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Payment()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Purchase()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Quantity()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Roles()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Sale()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Stock()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Store()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Supplier()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Taking()));
+            Connection.createSQLLiteDB(DBConnect.CreateDBSQL(new Sub()));
+
 
 
         }
@@ -364,36 +359,43 @@ namespace VPOS
             contactTxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
             contactTxt.AutoCompleteCustomSource = AutoItem;
 
-            DBConnect.CloseConn();
+           
 
         }
         List<Users> _userList;
         private void button1_Click(object sender, EventArgs e)
         {
+            if (contactTxt.Text == "" || passwordTxt.Text == "")
+            {
+                MessageBox.Show("Insert login credentials");
+                //  loginBtn.Visible = true;
+                return;
+            }
             try
             {
-                _userList = Global._users.Where(j => j.Contact.Contains(contactTxt.Text) && (j.Passwords.Contains(Helper.MD5Hash(passwordTxt.Text)) || j.InitialPassword.Contains(Helper.MD5Hash(passwordTxt.Text)))).ToList();
+                _userList = Global.users.Where(j => j.Contact.Contains(contactTxt.Text) && (j.Passwords.Contains(Helper.MD5Hash(passwordTxt.Text)) || j.InitialPassword.Contains(Helper.MD5Hash(passwordTxt.Text)))).ToList();
 
             }
-            catch {
+            catch
+            {
 
                 MessageBox.Show("No Users defined");
                 return;
 
             }
 
-                if (_userList.Count() > 0)
+            if (_userList.Count() > 0)
             {
                 Helper.UserID = _userList.First().Id;
-                Helper.Code = Global._org.First().Code;
+                Helper.Code = Global.org.First().Code;
                 Helper.Image = _userList.First().Image;
                 Helper.Username = _userList.First().Surname + " " + _userList.First().Lastname;
 
 
-                Helper.OrgID = Global._org.FirstOrDefault().Id;
-                Helper.lastSync = Global._org.First().Sync;
-                Helper.stocktaking = Global._org.First().Counts;
-                Helper.StoreID = Global._org.First().StoreID;
+                Helper.OrgID = Global.org.FirstOrDefault().Id;
+                Helper.lastSync = Global.org.First().Sync;
+                Helper.stocktaking = Global.org.First().Counts;
+                Helper.StoreID = Global.org.First().StoreID;
                 if (String.IsNullOrEmpty(Helper.StoreID))
                 {
                     using (OrganisationDialog form = new OrganisationDialog(Helper.OrgID))
@@ -555,7 +557,7 @@ namespace VPOS
                     LoadSettings();
                     // MessageBox.Show(form.state);
                     autocomplete();
-                   
+
                 }
             }
 
@@ -572,21 +574,25 @@ namespace VPOS
             // DBConnect.save(string query);
             if (MessageBox.Show("YES or No?", "Are you sure you want to delete all database information? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {
-                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_users));
-                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_bill));
-                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_cat));
-                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_exp));
-                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_item));
-                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_organisation));
-                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_pay));
-                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_purchase));
-                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_qty));
-                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_roles));
-                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_sale));
-                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_stock));
-                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_take));
-                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_trans));
-                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(_store));
+               
+
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(new Users()));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(new Billing()));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(new Category()));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(new Customer()));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(new Expense()));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(new Invoice()));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(new Item()));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(new Organisation()));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(new Payment()));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(new Purchase()));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(new Quantity()));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(new Roles()));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(new Sale()));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(new Stock()));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(new Store()));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(new Supplier()));
+                Connection.createSQLLiteDB(DBConnect.EmptyDBSQL(new Taking()));
             }
         }
     }

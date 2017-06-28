@@ -33,7 +33,7 @@ namespace VPOS
             }
 
         }
-        public static void DownloadUsers()
+        public static void Users()
         {
             string query = "";
 
@@ -48,7 +48,7 @@ namespace VPOS
             if (resulted != "false")
             {
                 JArray results = JArray.Parse(resulted);
-                Form1._Form1.FeedBack("USERS TO BE DOWNLOADED" + results.ToString());
+               // Form1._Form1.FeedBack("USERS TO BE DOWNLOADED" + results.ToString());
                 for (int K = 0; K < results.Count; K++)
                 {
                     Form1._Form1.FeedBack("DEALING WITH " + results[K]["surname"].ToString());
@@ -64,7 +64,7 @@ namespace VPOS
             }
             Form1._Form1.FeedBack("DOWNLOADING USERS COMPLETE");
         }
-        public static void DownloadOrg()
+        public static void Org()
         {
             string query = "";
             query = "SELECT * FROM organisation WHERE  id = '" + Helper.OrgID + "' ;";
@@ -79,14 +79,14 @@ namespace VPOS
             if (resulted != "false")
             {
                 JArray results = JArray.Parse(resulted);
-                Form1._Form1.FeedBack("COMPANY TO BE DOWNLOADED" + results.ToString());
+               // Form1._Form1.FeedBack("COMPANY TO BE DOWNLOADED" + results.ToString());
                 for (int K = 0; K < results.Count; K++)
                 {
                     Form1._Form1.FeedBack("DEALING WITH " + results[K]["name"].ToString());
                     string Query = "DELETE from organisation WHERE id ='" + results[K]["id"].ToString() + "'";
                     DBConnect.save(Query);
 
-                    _org = new Organisation(results[K]["id"].ToString(), results[K]["name"].ToString(), results[K]["code"].ToString(), results[K]["registration"].ToString(), results[K]["contact"].ToString(), results[K]["address"].ToString(), results[K]["tin"].ToString(), results[K]["vat"].ToString(), results[K]["email"].ToString(), results[K]["country"].ToString(), results[K]["initialpassword"].ToString(), results[K]["account"].ToString(), results[K]["status"].ToString(), results[K]["expires"].ToString(), results[K]["image"].ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), results[K]["counts"].ToString(), results[K]["company"].ToString(), results[K]["storeID"].ToString());
+                    _org = new Organisation(results[K]["id"].ToString(), results[K]["name"].ToString(), results[K]["code"].ToString(), results[K]["registration"].ToString(), results[K]["contact"].ToString(), results[K]["address"].ToString(), results[K]["tin"].ToString(), results[K]["vat"].ToString(), results[K]["email"].ToString(), results[K]["country"].ToString(), results[K]["initialpassword"].ToString(), results[K]["account"].ToString(), results[K]["status"].ToString(), results[K]["expires"].ToString(), results[K]["image"].ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), results[K]["counts"].ToString(), results[K]["company"].ToString(), results[K]["storeID"].ToString(), results[K]["category"].ToString());
                     DBConnect.Insert(_org);
 
 
@@ -97,7 +97,7 @@ namespace VPOS
             Form1._Form1.FeedBack("DOWNLOADING USERS COMPLETE");
         }
 
-        public static void DownloadItems()
+        public static void Items()
         {
             string query = "SELECT * FROM item WHERE  orgID = '" + Helper.OrgID + "' ;";          
             Item _item;
@@ -108,7 +108,7 @@ namespace VPOS
             if (resulted != "false")
             {
                 JArray results = JArray.Parse(resulted);
-                Form1._Form1.FeedBack("ITEMS TO BE DOWNLOADED" + results.ToString());
+               // Form1._Form1.FeedBack("ITEMS TO BE DOWNLOADED" + results.ToString());
                 for (int K = 0; K < results.Count; K++)
                 {
                     Form1._Form1.FeedBack("DEALING WITH " + results[K]["name"].ToString());
@@ -116,14 +116,14 @@ namespace VPOS
                     string Query = "DELETE from item WHERE id ='" + results[K]["id"].ToString() + "'";
                     DBConnect.save(Query);
 
-                    _item = new Item(results[K]["id"].ToString(), results[K]["name"].ToString(), results[K]["generic"].ToString(), results[K]["code"].ToString(), results[K]["description"].ToString(), results[K]["manufacturer"].ToString(), results[K]["country"].ToString(), results[K]["composition"].ToString(), results[K]["category"].ToString(), results[K]["barcode"].ToString(), results[K]["image"].ToString(), DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), results[K]["strength"].ToString(), Helper.OrgID, results[K]["valid"].ToString());
+                    _item = new Item(results[K]["id"].ToString(), results[K]["name"].ToString(), results[K]["generic"].ToString(), results[K]["code"].ToString(), results[K]["description"].ToString(), results[K]["manufacturer"].ToString(), results[K]["country"].ToString(), results[K]["composition"].ToString(), results[K]["category"].ToString(), results[K]["barcode"].ToString(), results[K]["image"].ToString(), DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), results[K]["strength"].ToString(), Helper.OrgID, results[K]["valid"].ToString(), results[K]["sub"].ToString());
                     DBConnect.Insert(_item);
                     Form1._Form1.FeedBack("DOWNLOADING ITEM " + results[K]["name"].ToString());
                 }
             }
             Form1._Form1.FeedBack("DOWNLOADING ITEMS COMPLETE");
         }
-        public static void DownloadStock()
+        public static void Stock()
         {
             string query = "";
             query = "SELECT * FROM stock WHERE  orgID = '" + Helper.OrgID + "' ;";
@@ -134,7 +134,7 @@ namespace VPOS
             if (resulted != "false")
             {
                 JArray results = JArray.Parse(resulted);
-                Form1._Form1.FeedBack("STOCK TO BE DOWNLOADED" + results.ToString());
+               // Form1._Form1.FeedBack("STOCK TO BE DOWNLOADED" + results.ToString());
                 for (int K = 0; K < results.Count; K++)
                 {
                    
@@ -152,7 +152,7 @@ namespace VPOS
             }
             Form1._Form1.FeedBack("DOWNLOADING STOCK COMPLETE");
         }
-        public static void DownloadSale()
+        public static void Sale()
         {
             string query = "";
             query = "SELECT * FROM sale WHERE  orgID = '" + Helper.OrgID + "' ;";
@@ -163,14 +163,14 @@ namespace VPOS
             if (resulted != "false")
             {
                 JArray results = JArray.Parse(resulted);
-                Form1._Form1.FeedBack("SALE DOWNLOADED" + results.ToString());
+              //  Form1._Form1.FeedBack("SALE DOWNLOADED" + results.ToString());
                 for (int K = 0; K < results.Count; K++)
                 {
                     Form1._Form1.FeedBack("DEALING WITH " + results[K]["no"].ToString());
 
                     string Query = "DELETE from sale WHERE id ='" + results[K]["id"].ToString() + "'";
                     DBConnect.save(Query);
-                    Sale _stk = new Sale(results[K]["id"].ToString(), results[K]["no"].ToString(),results[K]["itemID"].ToString(), results[K]["qty"].ToString(), results[K]["date"].ToString(), results[K]["price"].ToString(),results[K]["type"].ToString(),DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), Helper.OrgID, results[K]["userID"].ToString(),results[K]["total"].ToString(),results[K]["tax"].ToString(), results[K]["storeID"].ToString());
+                    Sale _stk = new Sale(results[K]["id"].ToString(), results[K]["no"].ToString(),results[K]["itemID"].ToString(), results[K]["qty"].ToString(), results[K]["date"].ToString(), results[K]["price"].ToString(),results[K]["total"].ToString(), results[K]["amount"].ToString(), results[K]["method"].ToString(), results[K]["balance"].ToString(), results[K]["customerid"].ToString(), DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), results[K]["tax"].ToString(), results[K]["storeID"].ToString(), Helper.OrgID, results[K]["userID"].ToString());
 
                     // Stock _stk = new Stock(results[K]["id"].ToString(), results[K]["itemid"].ToString(), results[K]["qty"].ToString(), results[K]["sale_price"].ToString(),  results[K]["purchase_price"].ToString(), results[K]["previous_price"].ToString(), "","", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
 
@@ -180,7 +180,35 @@ namespace VPOS
             }
             Form1._Form1.FeedBack("DOWNLOADING SALES COMPLETE");
         }
-        public static void DownloadBill()
+        public static void Purchase()
+        {
+            string query = "";
+            query = "SELECT * FROM purchase WHERE  orgID = '" + Helper.OrgID + "' ;";
+            string URL = Helper.genUrl + "api/request";
+            NameValueCollection formData = new NameValueCollection();
+            formData["query"] = query;
+            string resulted = Helper.get(URL, formData);
+            if (resulted != "false")
+            {
+                JArray results = JArray.Parse(resulted);
+              //  Form1._Form1.FeedBack("SALE DOWNLOADED" + results.ToString());
+                for (int K = 0; K < results.Count; K++)
+                {
+                    Form1._Form1.FeedBack("DEALING WITH " + results[K]["no"].ToString());
+
+                    string Query = "DELETE from purchase WHERE id ='" + results[K]["id"].ToString() + "'";
+                    DBConnect.save(Query);
+                    Purchase _stk = new Purchase(results[K]["id"].ToString(), results[K]["no"].ToString(), results[K]["itemID"].ToString(), results[K]["qty"].ToString(), results[K]["date"].ToString(), results[K]["price"].ToString(), results[K]["total"].ToString(), results[K]["amount"].ToString(), results[K]["method"].ToString(), results[K]["balance"].ToString(), results[K]["supplierid"].ToString(), DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), results[K]["tax"].ToString(), results[K]["storeID"].ToString(), Helper.OrgID, results[K]["userID"].ToString());
+
+                    // Stock _stk = new Stock(results[K]["id"].ToString(), results[K]["itemid"].ToString(), results[K]["qty"].ToString(), results[K]["purchase_price"].ToString(),  results[K]["purchase_price"].ToString(), results[K]["previous_price"].ToString(), "","", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+
+                    DBConnect.Insert(_stk);
+                    Form1._Form1.FeedBack("DOWNLOADING SALE " + results[K]["no"].ToString());
+                }
+            }
+            Form1._Form1.FeedBack("DOWNLOADING SALES COMPLETE");
+        }
+        public static void Bill()
         {
             string query = "";
             query = "SELECT * FROM billing WHERE  orgID = '" + Helper.OrgID + "' ;";
@@ -191,7 +219,7 @@ namespace VPOS
             if (resulted != "false")
             {
                 JArray results = JArray.Parse(resulted);
-                Form1._Form1.FeedBack("BILLING DOWNLOADED" + results.ToString());
+               // Form1._Form1.FeedBack("BILLING DOWNLOADED" + results.ToString());
                 for (int K = 0; K < results.Count; K++)
                 {
                     Form1._Form1.FeedBack("DEALING WITH " + results[K]["no"].ToString());
@@ -206,7 +234,7 @@ namespace VPOS
             }
             Form1._Form1.FeedBack("DOWNLOADING BILLS COMPLETE");
         }
-        public static void DownloadPayment()
+        public static void Payment()
         {
             string query = "";
             query = "SELECT * FROM payment WHERE  orgID = '" + Helper.OrgID + "' ;";
@@ -217,14 +245,14 @@ namespace VPOS
             if (resulted != "false")
             {
                 JArray results = JArray.Parse(resulted);
-                Form1._Form1.FeedBack("Payment DOWNLOADED" + results.ToString());
+               // Form1._Form1.FeedBack("Payment DOWNLOADED" + results.ToString());
                 for (int K = 0; K < results.Count; K++)
                 {
                     Form1._Form1.FeedBack("DEALING WITH " + results[K]["no"].ToString());
 
                     string Query = "DELETE from payment WHERE id ='" + results[K]["id"].ToString() + "'";
                     DBConnect.save(Query);
-                    Payment _stk = new Payment(results[K]["id"].ToString(),results[K]["no"].ToString(), results[K]["method"].ToString(), results[K]["amount"].ToString(), results[K]["by"].ToString(),DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), Helper.OrgID, results[K]["userID"].ToString(), results[K]["type"].ToString(), results[K]["storeID"].ToString());
+                    Payment _stk = new Payment(results[K]["id"].ToString(),results[K]["no"].ToString(), results[K]["method"].ToString(), results[K]["amount"].ToString(), results[K]["by"].ToString(),DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), Helper.OrgID, results[K]["userID"].ToString(), results[K]["type"].ToString(), results[K]["storeID"].ToString(), results[K]["customerID"].ToString(), results[K]["balance"].ToString());
 
                     DBConnect.Insert(_stk);
                     Form1._Form1.FeedBack("DOWNLOADING PAY " + results[K]["no"].ToString());
@@ -232,7 +260,33 @@ namespace VPOS
             }
             Form1._Form1.FeedBack("DOWNLOADING PAYMENT COMPLETE");
         }
-        public static void DownloadExpenses()
+        public static void Invoice()
+        {
+            string query = "";
+            query = "SELECT * FROM invoice WHERE  orgID = '" + Helper.OrgID + "' ;";
+            string URL = Helper.genUrl + "api/request";
+            NameValueCollection formData = new NameValueCollection();
+            formData["query"] = query;
+            string resulted = Helper.get(URL, formData);
+            if (resulted != "false")
+            {
+                JArray results = JArray.Parse(resulted);
+               // Form1._Form1.FeedBack("Payment DOWNLOADED" + results.ToString());
+                for (int K = 0; K < results.Count; K++)
+                {
+                    Form1._Form1.FeedBack("DEALING WITH " + results[K]["no"].ToString());
+
+                    string Query = "DELETE from invoice WHERE id ='" + results[K]["id"].ToString() + "'";
+                    DBConnect.save(Query);
+                    Payment _stk = new Payment(results[K]["id"].ToString(), results[K]["no"].ToString(), results[K]["method"].ToString(), results[K]["amount"].ToString(), results[K]["by"].ToString(), DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), Helper.OrgID, results[K]["userID"].ToString(), results[K]["type"].ToString(), results[K]["storeID"].ToString(), results[K]["customerID"].ToString(), results[K]["balance"].ToString());
+
+                    DBConnect.Insert(_stk);
+                    Form1._Form1.FeedBack("DOWNLOADING INVOICE " + results[K]["no"].ToString());
+                }
+            }
+            Form1._Form1.FeedBack("DOWNLOADING INVOICE COMPLETE");
+        }
+        public static void Expenses()
         {
             string query = "";
             query = "SELECT * FROM expense WHERE  orgID = '" + Helper.OrgID + "' ;";
@@ -243,7 +297,7 @@ namespace VPOS
             if (resulted != "false")
             {
                 JArray results = JArray.Parse(resulted);
-                Form1._Form1.FeedBack("EXPENSE DOWNLOADED" + results.ToString());
+               // Form1._Form1.FeedBack("EXPENSE DOWNLOADED" + results.ToString());
                 for (int K = 0; K < results.Count; K++)
                 {
                     Form1._Form1.FeedBack("DEALING WITH " + results[K]["no"].ToString());
@@ -257,10 +311,10 @@ namespace VPOS
             }
             Form1._Form1.FeedBack("DOWNLOADING EXPENSE COMPLETE");
         }
-        public static void DownloadParties()
+        public static void Customer()
         {
             string query = "";
-            query = "SELECT * FROM transactor WHERE  orgID = '" + Helper.OrgID + "' ;";
+            query = "SELECT * FROM customer WHERE  orgID = '" + Helper.OrgID + "' ;";
             string URL = Helper.genUrl + "api/request";
             NameValueCollection formData = new NameValueCollection();
             formData["query"] = query;
@@ -268,22 +322,47 @@ namespace VPOS
             if (resulted != "false")
             {
                 JArray results = JArray.Parse(resulted);
-                Form1._Form1.FeedBack("Transactors DOWNLOADED" + results.ToString());
+               // Form1._Form1.FeedBack("CUSTOMER DOWNLOADED" + results.ToString());
                 for (int K = 0; K < results.Count; K++)
                 {
                     Form1._Form1.FeedBack("DEALING WITH " + results[K]["name"].ToString());
-                    string Query = "DELETE from transactor WHERE id ='" + results[K]["id"].ToString() + "'";
+                    string Query = "DELETE from customer WHERE id ='" + results[K]["id"].ToString() + "'";
                     DBConnect.save(Query);
-                    Transactor _stk = new Transactor(results[K]["id"].ToString(), results[K]["name"].ToString(), results[K]["contact"].ToString(), results[K]["image"].ToString(), results[K]["type"].ToString(), DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), results[K]["address"].ToString(), Helper.OrgID, results[K]["storeID"].ToString());
+                    Customer _stk = new Customer(results[K]["id"].ToString(), results[K]["name"].ToString(), results[K]["contact"].ToString(), results[K]["image"].ToString(), results[K]["address"].ToString(), DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), Helper.OrgID);
 
                     DBConnect.Insert(_stk);
                     Form1._Form1.FeedBack("DOWNLOADING TRANS " + results[K]["name"].ToString());
                 }
             }
-            Form1._Form1.FeedBack("DOWNLOADING TRANSACTORS COMPLETE");
+            Form1._Form1.FeedBack("DOWNLOADING CUSTOMER COMPLETE");
+        }
+        public static void Supplier()
+        {
+            string query = "";
+            query = "SELECT * FROM supplier WHERE  orgID = '" + Helper.OrgID + "' ;";
+            string URL = Helper.genUrl + "api/request";
+            NameValueCollection formData = new NameValueCollection();
+            formData["query"] = query;
+            string resulted = Helper.get(URL, formData);
+            if (resulted != "false")
+            {
+                JArray results = JArray.Parse(resulted);
+                // Form1._Form1.FeedBack("CUSTOMER DOWNLOADED" + results.ToString());
+                for (int K = 0; K < results.Count; K++)
+                {
+                    Form1._Form1.FeedBack("DEALING WITH " + results[K]["name"].ToString());
+                    string Query = "DELETE from supplier WHERE id ='" + results[K]["id"].ToString() + "'";
+                    DBConnect.save(Query);
+                   Supplier _stk = new Supplier(results[K]["id"].ToString(), results[K]["name"].ToString(), results[K]["contact"].ToString(), results[K]["image"].ToString(), results[K]["address"].ToString(), DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"), Helper.OrgID);
+
+                    DBConnect.Insert(_stk);
+                    Form1._Form1.FeedBack("DOWNLOADING SUPPLIER " + results[K]["name"].ToString());
+                }
+            }
+            Form1._Form1.FeedBack("DOWNLOADING SUPPLIER COMPLETE");
         }
 
-        public static void DownloadRole()
+        public static void Role()
         {
             string query = "SELECT * FROM roles WHERE orgID = '" + Helper.OrgID + "'";          
             Roles _role;
@@ -293,9 +372,9 @@ namespace VPOS
             string resulted = Helper.get(URL, formData);
             if (resulted != "false")
             {
-                Form1._Form1.FeedBack("DOWNLOADING ROLES" + resulted);
+               // Form1._Form1.FeedBack("DOWNLOADING ROLES" + resulted);
                 JArray results = JArray.Parse(resulted);
-                Form1._Form1.FeedBack("CLIENTS TO BE DOWNLOADED" + results.ToString());
+               
                 for (int K = 0; K < results.Count; K++)
                 {
                     Form1._Form1.FeedBack("DEALING WITH ROLE " + results[K]["title"].ToString());
@@ -308,7 +387,7 @@ namespace VPOS
                 Form1._Form1.FeedBack("ROLES DOWNLOAD COMPLETE" + Helper.lastSync);
             }
         }
-        public static void DownloadCategories()
+        public static void Categories()
         {
             string query = "SELECT * FROM category ";
            
@@ -318,7 +397,7 @@ namespace VPOS
             string resulted = Helper.get(URL, formData);
             if (resulted != "false")
             {
-                Form1._Form1.FeedBack("DOWNLOADING CATEGORIES" + resulted);
+               // Form1._Form1.FeedBack("DOWNLOADING CATEGORIES" + resulted);
                 JArray results = JArray.Parse(resulted);
                 Form1._Form1.FeedBack("CLIENTS TO BE DOWNLOADED" + results.ToString());
                 for (int K = 0; K < results.Count; K++)
@@ -334,7 +413,7 @@ namespace VPOS
             }
         }
 
-        public static void DownloadStores()
+        public static void Stores()
         {
             string query = "SELECT * FROM store WHERE orgID = '" + Helper.OrgID + "'";
 

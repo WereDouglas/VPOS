@@ -13,14 +13,15 @@ namespace VPOS.Model
         private string id;
         private string no;
         private string method;       
-        private string amount;
-      
+        private string amount;      
         private string by;        
         private string created;        
         private string orgID;
         private string userID;
-        private string type;
+        private string type;//credit/debit
         private string storeID;
+        private string customerID;
+        private string balance;
         static SQLiteDataReader Reader;
         public string Id
         {
@@ -151,8 +152,35 @@ namespace VPOS.Model
                 storeID = value;
             }
         }
+
+        public string CustomerID
+        {
+            get
+            {
+                return customerID;
+            }
+
+            set
+            {
+                customerID = value;
+            }
+        }
+
+        public string Balance
+        {
+            get
+            {
+                return balance;
+            }
+
+            set
+            {
+                balance = value;
+            }
+        }
+
         public Payment() { }
-        public Payment(string id, string no, string method, string amount, string by, string created, string orgID, string userID,string type, string storeID)
+        public Payment(string id, string no, string method, string amount, string by, string created, string orgID, string userID,string type, string storeID,string customerID,string balance)
         {
             this.Id = id;
             this.No = no;
@@ -165,6 +193,8 @@ namespace VPOS.Model
             this.Type = type;
             this.OrgID = orgID;
             this.StoreID = storeID;
+            this.CustomerID = customerID;
+            this.Balance = balance;
         }
 
         public static List<Payment> ListPayment()
@@ -178,7 +208,7 @@ namespace VPOS.Model
                 NpgsqlDataReader Reader = command.ExecuteReader();
                 while (Reader.Read())
                 {
-                    Payment p = new Payment(Reader["id"].ToString(), Reader["no"].ToString(), Reader["method"].ToString(), Reader["amount"].ToString(), Reader["by"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["type"].ToString(), Reader["storeid"].ToString());
+                    Payment p = new Payment(Reader["id"].ToString(), Reader["no"].ToString(), Reader["method"].ToString(), Reader["amount"].ToString(), Reader["by"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["type"].ToString(), Reader["storeid"].ToString(), Reader["customerid"].ToString(), Reader["balance"].ToString());
                     payment.Add(p);
                 }
                 DBConnect.CloseConn();
@@ -191,7 +221,7 @@ namespace VPOS.Model
                 Reader = DBConnect.ReadingLite(SQL);
                 while (Reader.Read())
                 {
-                    Payment p = new Payment(Reader["id"].ToString(), Reader["no"].ToString(), Reader["method"].ToString(), Reader["amount"].ToString(), Reader["by"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["type"].ToString(), Reader["storeid"].ToString());
+                    Payment p = new Payment(Reader["id"].ToString(), Reader["no"].ToString(), Reader["method"].ToString(), Reader["amount"].ToString(), Reader["by"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["type"].ToString(), Reader["storeid"].ToString(), Reader["customerid"].ToString(), Reader["balance"].ToString());
                     payment.Add(p);
                 }
                 Reader.Close();
@@ -200,6 +230,38 @@ namespace VPOS.Model
             }
 
         }
-       
+        public static List<Payment> ListWhere(string no)
+        {
+            List<Payment> payment = new List<Payment>();
+            string SQL = "SELECT * FROM payment WHERE no = '" + no + "'";
+            if (Helper.Type != "Lite")
+            {
+                DBConnect.OpenConn();
+                NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
+                NpgsqlDataReader Reader = command.ExecuteReader();
+                while (Reader.Read())
+                {
+                    Payment p = new Payment(Reader["id"].ToString(), Reader["no"].ToString(), Reader["method"].ToString(), Reader["amount"].ToString(), Reader["by"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["type"].ToString(), Reader["storeid"].ToString(), Reader["customerid"].ToString(), Reader["balance"].ToString());
+                    payment.Add(p);
+                }
+                DBConnect.CloseConn();
+
+            }
+            else
+            {
+
+                Reader = DBConnect.ReadingLite(SQL);
+                while (Reader.Read())
+                {
+                    Payment p = new Payment(Reader["id"].ToString(), Reader["no"].ToString(), Reader["method"].ToString(), Reader["amount"].ToString(), Reader["by"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["type"].ToString(), Reader["storeid"].ToString(), Reader["customerid"].ToString(), Reader["balance"].ToString());
+                    payment.Add(p);
+                }
+                Reader.Close();
+
+
+            }
+            return payment;
+        }
+
     }
 }

@@ -30,6 +30,7 @@ namespace VPOS.Model
         private string counts;
         private string company;
         private string storeID;
+        private string category;
 
         public string Id
         {
@@ -290,8 +291,22 @@ namespace VPOS.Model
                 storeID = value;
             }
         }
+
+        public string Category
+        {
+            get
+            {
+                return category;
+            }
+
+            set
+            {
+                category = value;
+            }
+        }
+
         public Organisation() { }
-        public Organisation(string id, string name, string code, string registration, string contact, string address, string tin, string vat, string email, string country, string initialpassword, string account, string status, string expires, string image, string created, string sync, string counts, string company, string storeID)
+        public Organisation(string id, string name, string code, string registration, string contact, string address, string tin, string vat, string email, string country, string initialpassword, string account, string status, string expires, string image, string created, string sync, string counts, string company, string storeID,string category)
         {
             this.Id = id;
             this.Name = name;
@@ -313,6 +328,7 @@ namespace VPOS.Model
             this.Counts = counts;
             this.Company = company;
             this.StoreID = storeID;
+            this.Category = category;
         }
         static SQLiteDataReader Reader;
         public static List<Organisation> ListOrganisation()
@@ -326,7 +342,7 @@ namespace VPOS.Model
                 NpgsqlDataReader Reader = command.ExecuteReader();
                 while (Reader.Read())
                 {
-                    Organisation p = new Organisation(Reader["id"].ToString(), Reader["name"].ToString(), Reader["code"].ToString(), Reader["registration"].ToString(), Reader["contact"].ToString(), Reader["address"].ToString(), Reader["tin"].ToString(), Reader["vat"].ToString(), Reader["email"].ToString(), Reader["country"].ToString(), Reader["initialpassword"].ToString(), Reader["account"].ToString(), Reader["status"].ToString(), Reader["expires"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["sync"].ToString(), Reader["counts"].ToString(), Reader["company"].ToString(), Reader["storeID"].ToString());
+                    Organisation p = new Organisation(Reader["id"].ToString(), Reader["name"].ToString(), Reader["code"].ToString(), Reader["registration"].ToString(), Reader["contact"].ToString(), Reader["address"].ToString(), Reader["tin"].ToString(), Reader["vat"].ToString(), Reader["email"].ToString(), Reader["country"].ToString(), Reader["initialpassword"].ToString(), Reader["account"].ToString(), Reader["status"].ToString(), Reader["expires"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["sync"].ToString(), Reader["counts"].ToString(), Reader["company"].ToString(), Reader["storeID"].ToString(), Reader["category"].ToString());
                     wards.Add(p);
                 }
                 DBConnect.CloseConn();
@@ -340,7 +356,7 @@ namespace VPOS.Model
                 Reader = DBConnect.ReadingLite(SQL);
                 while (Reader.Read())
                 {
-                    Organisation p = new Organisation(Reader["id"].ToString(), Reader["name"].ToString(), Reader["code"].ToString(), Reader["registration"].ToString(), Reader["contact"].ToString(), Reader["address"].ToString(), Reader["tin"].ToString(), Reader["vat"].ToString(), Reader["email"].ToString(), Reader["country"].ToString(), Reader["initialpassword"].ToString(), Reader["account"].ToString(), Reader["status"].ToString(), Reader["expires"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["sync"].ToString(), Reader["counts"].ToString(), Reader["company"].ToString(), Reader["storeID"].ToString());
+                    Organisation p = new Organisation(Reader["id"].ToString(), Reader["name"].ToString(), Reader["code"].ToString(), Reader["registration"].ToString(), Reader["contact"].ToString(), Reader["address"].ToString(), Reader["tin"].ToString(), Reader["vat"].ToString(), Reader["email"].ToString(), Reader["country"].ToString(), Reader["initialpassword"].ToString(), Reader["account"].ToString(), Reader["status"].ToString(), Reader["expires"].ToString(), Reader["image"].ToString(), Reader["created"].ToString(), Reader["sync"].ToString(), Reader["counts"].ToString(), Reader["company"].ToString(), Reader["storeID"].ToString(), Reader["category"].ToString());
                     wards.Add(p);
                 }
                 Reader.Close();

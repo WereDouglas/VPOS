@@ -15,14 +15,14 @@ namespace VPOS
 {
     public partial class PurchaseForm : Form
     {
-        Item _item;
+        Item item;
         DataTable t;
         DataTable s;
         DataTable m;
         private string barcode = string.Empty;
         Dictionary<int, double> TotalDictionary = new Dictionary<int, double>();
         Dictionary<string, string> BarDictionary = new Dictionary<string, string>();
-        Dictionary<string, string> CustomerDictionary = new Dictionary<string, string>();
+        Dictionary<string, string> SupplierDictionary = new Dictionary<string, string>();
         Dictionary<string, string> ContactDictionary = new Dictionary<string, string>();
         public PurchaseForm()
         {
@@ -31,14 +31,17 @@ namespace VPOS
             dateLbl.Text = DateTime.Now.ToString("dd-MM-yyyy");
             //noLbl.Text = DateTime.Now.ToString("ddHHs");
             autocomplete();
-            autocustomer();
+            autosupplier();
             Profile(Helper.OrgID);
+            int follow = Global.purchase.Count();
+            int next = follow + 1;
+            invoiceTxt.Text = Helper.Code + "-" + DateTime.Now.ToString("dd:MM:yyyy") + "-" + next;
         }
         private void Profile(string ID)
         {
 
-            addressLbl.Text = Global._org.First(k => k.Id.Contains(ID)).Name + " " + Global._org.First(k => k.Id.Contains(ID)).Address + " " + Global._org.First(k => k.Id.Contains(ID)).Contact;
-            Image img = Base64ToImage(Global._org.First(k => k.Id.Contains(ID)).Image);
+            addressLbl.Text = Global.org.First(k => k.Id.Contains(ID)).Name + " " + Global.org.First(k => k.Id.Contains(ID)).Address + " " + Global.org.First(k => k.Id.Contains(ID)).Contact;
+            Image img = Base64ToImage(Global.org.First(k => k.Id.Contains(ID)).Image);
             System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img);
             //Bitmap bps = new Bitmap(bmp, 50, 50);
             pictureBox1.Image = bmp;
@@ -75,10 +78,10 @@ namespace VPOS
             int c = 0;
             foreach (var h in SelectedItems)
             {
-                t.Rows.Add(new object[] { b, Global._item.First(r => r.Barcode.Contains(h.Key)).Barcode, Global._item.First(r => r.Barcode.Contains(h.Key)).Name + Environment.NewLine + "PRICE:" + Global._stock.First(r => r.Barcode.Contains(h.Key)).Purchase_price + Environment.NewLine + "MANUFACTURER :" + Global._item.First(r => r.Barcode.Contains(h.Key)).Manufacturer + Environment.NewLine + "EXPIRES:" + Global._stock.First(r => r.Barcode.Contains(h.Key)).Expire, h.Value, Global._item.First(r => r.Barcode.Contains(h.Key)).Image, "Remove" });
-                double TotalCost = (Convert.ToDouble(h.Value) * Convert.ToDouble(Global._stock.First(r => r.Barcode.Contains(h.Key)).Purchase_price));
+                t.Rows.Add(new object[] { b, Global.item.First(r => r.Barcode.Contains(h.Key)).Barcode, Global.item.First(r => r.Barcode.Contains(h.Key)).Name + Environment.NewLine + "PRICE:" + Global.stock.First(r => r.Barcode.Contains(h.Key)).Purchase_price + Environment.NewLine + "MANUFACTURER :" + Global.item.First(r => r.Barcode.Contains(h.Key)).Manufacturer + Environment.NewLine + "EXPIRES:" + Global.stock.First(r => r.Barcode.Contains(h.Key)).Expire, h.Value, Global.item.First(r => r.Barcode.Contains(h.Key)).Image, "Remove" });
+                double TotalCost = (Convert.ToDouble(h.Value) * Convert.ToDouble(Global.stock.First(r => r.Barcode.Contains(h.Key)).Purchase_price));
 
-                s.Rows.Add(new object[] { Global._item.First(r => r.Barcode.Contains(h.Key)).Name, h.Value, Global._stock.First(r => r.Barcode.Contains(h.Key)).Purchase_price, TotalCost.ToString("n0") });
+                s.Rows.Add(new object[] { Global.item.First(r => r.Barcode.Contains(h.Key)).Name, h.Value, Global.stock.First(r => r.Barcode.Contains(h.Key)).Purchase_price, TotalCost.ToString("n0") });
                 TotalDictionary.Add(c++, TotalCost);
             }
             dtGrid2.DataSource = t;
@@ -190,9 +193,10 @@ namespace VPOS
         {
             AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
             AutoCompleteStringCollection AutoItem2 = new AutoCompleteStringCollection();
-            foreach (Item p in Global._item)
+            foreach (Item p in Global.item)
             {
-                if (!ItemDictionary.ContainsKey(p.Barcode)) {
+                if (!ItemDictionary.ContainsKey(p.Barcode))
+                {
                     AutoItem.Add(p.Name);
                     AutoItem2.Add(p.Barcode);
                     ItemDictionary.Add(p.Barcode, p.Name);
@@ -209,28 +213,28 @@ namespace VPOS
             barSearch.AutoCompleteCustomSource = AutoItem2;
             LoadItem("");
         }
-        private void autocustomer()
+        private void autosupplier()
         {
             AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
             AutoCompleteStringCollection AutoItem2 = new AutoCompleteStringCollection();
-            foreach (Transactor p in Global._transactor)
+            foreach (Supplier p in Global.supplier)
             {
                 AutoItem.Add(p.Name);
                 AutoItem2.Add(p.Contact);
-                CustomerDictionary.Add(p.Name, p.Id);
+                SupplierDictionary.Add(p.Name, p.Id);
                 ContactDictionary.Add(p.Contact, p.Id);
             }
 
-            customerTxt.AutoCompleteMode = AutoCompleteMode.Suggest;
-            customerTxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            customerTxt.AutoCompleteCustomSource = AutoItem;
+            supplierTxt.AutoCompleteMode = AutoCompleteMode.Suggest;
+            supplierTxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            supplierTxt.AutoCompleteCustomSource = AutoItem;
 
             contactTxt.AutoCompleteMode = AutoCompleteMode.Suggest;
             contactTxt.AutoCompleteSource = AutoCompleteSource.CustomSource;
             contactTxt.AutoCompleteCustomSource = AutoItem2;
 
         }
-        List<Item> _itemList = new List<Item>();
+        List<Item> itemList = new List<Item>();
 
         public void LoadItem(string name)
         {
@@ -243,18 +247,18 @@ namespace VPOS
             if (name == "")
             {
 
-                _itemList = Global._item;
+                itemList = Global.item;
             }
             else
             {
 
-                _itemList = Global._item.Where(e => e.Name.Contains(name)).ToList();
+                itemList = Global.item.Where(e => e.Name.Contains(name)).ToList();
             }
-            foreach (Item h in _itemList)
+            foreach (Item h in itemList)
             {
                 try
                 {
-                    m.Rows.Add(new object[] { h.Name + Environment.NewLine + "COST:" + Global._stock.First(n => n.ItemID.Contains(h.Id)).Purchase_price + Environment.NewLine + "MANUFACTURER :" + h.Manufacturer, h.Barcode, Global._stock.First(n => n.ItemID.Contains(h.Id)).Barcode, h.Description, "Add" });
+                    m.Rows.Add(new object[] { h.Name + Environment.NewLine + "COST:" + Global.stock.First(n => n.ItemID.Contains(h.Id)).Purchase_price + Environment.NewLine + "MANUFACTURER :" + h.Manufacturer, h.Barcode, Global.stock.First(n => n.ItemID.Contains(h.Id)).Barcode, h.Description, "Add" });
                 }
                 catch { }
             }
@@ -355,17 +359,17 @@ namespace VPOS
 
             }
         }
-        string customerID="Walk in";
-        Transactor _transactor;
+        string supplierID = "Walk in";
+        Supplier supplier;
 
         private void contactTxt_Leave(object sender, EventArgs e)
         {
-            customerID = "";
-            customerLbl.Text = "";
+            supplierID = "";
+            supplierLbl.Text = "";
             try
             {                  // var value = ItemDictionary.FirstOrDefault(x => x.Value.Contains(nameTxt.Text)).Key;
-                customerID = CustomerDictionary[customerTxt.Text];
-                customerLbl.Text = "CUSTOMER :" + customerTxt.Text + Environment.NewLine + "CONTACT: " + Global._transactor.First(y => y.Id.Contains(customerID)).Contact + Environment.NewLine + "ADDRESS " + Global._transactor.First(y => y.Id.Contains(customerID)).Address;
+                supplierID = SupplierDictionary[supplierTxt.Text];
+                supplierLbl.Text = "CUSTOMER :" + supplierTxt.Text + Environment.NewLine + "CONTACT: " + Global.supplier.First(y => y.Id.Contains(supplierID)).Contact + Environment.NewLine + "ADDRESS " + Global.supplier.First(y => y.Id.Contains(supplierID)).Address;
             }
             catch
             {
@@ -373,8 +377,8 @@ namespace VPOS
             }
             try
             {                  // var value = ItemDictionary.FirstOrDefault(x => x.Value.Contains(nameTxt.Text)).Key;
-                customerID = ContactDictionary[contactTxt.Text];
-                customerLbl.Text = "CUSTOMER :" + customerTxt.Text + Environment.NewLine + "CONTACT: " + Global._transactor.First(y => y.Id.Contains(customerID)).Contact + Environment.NewLine + "ADDRESS " + Global._transactor.First(y => y.Id.Contains(customerID)).Address;
+                supplierID = ContactDictionary[contactTxt.Text];
+                supplierLbl.Text = "CUSTOMER :" + supplierTxt.Text + Environment.NewLine + "CONTACT: " + Global.supplier.First(y => y.Id.Contains(supplierID)).Contact + Environment.NewLine + "ADDRESS " + Global.supplier.First(y => y.Id.Contains(supplierID)).Address;
             }
             catch
             {
@@ -382,28 +386,26 @@ namespace VPOS
             }
             try
             {
-                Image img = Base64ToImage(Global._transactor.First(y => y.Id.Contains(customerID)).Image);
+                Image img = Base64ToImage(Global.supplier.First(y => y.Id.Contains(supplierID)).Image);
                 System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img);
                 //Bitmap bps = new Bitmap(bmp, 50, 50);
                 imgCapture.Image = bmp;
                 imgCapture.SizeMode = PictureBoxSizeMode.StretchImage;
             }
             catch { }
-            if (Global._transactor.Select(k => k.Contact.Contains(contactTxt.Text)).Count() < 1)
+            if (Global.supplier.Select(k => k.Contact.Contains(contactTxt.Text)).Count() < 1)
             {
-                if (MessageBox.Show("YES or No?", "This customer does not exist would you like to save this information ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                if (MessageBox.Show("YES or No?", "This supplier does not exist would you like to save this information ? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-
-                    customerID = Guid.NewGuid().ToString();
+                    supplierID = Guid.NewGuid().ToString();
 
                     MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
                     string fullimage = ImageToBase64(stream);
-                    _transactor = new Transactor(customerID, nameTxt.Text, contactTxt.Text, fullimage, "Customer", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), contactTxt.Text, Helper.OrgID, Helper.StoreID);
-
-                    if (DBConnect.Insert(_transactor) != "")
+                    Supplier supplier = new Supplier(supplierID, nameTxt.Text, contactTxt.Text, fullimage, "", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID);
+                    if (DBConnect.Insert(supplier) != "")
                     {
                         //string query = "insert into transactor (id, transactorNo,contact,surname,lastname,email,dob,nationality,address,kin,kincontact,gender,created) values ('"+ id + "', '"+ transactorNoTxt.Text + "', '"+ contactTxt.Text + "', '" + surnameTxt.Text + "', '" + lastnameTxt.Text + "', '" + emailTxt.Text + "', '" +Convert.ToDateTime(dobdateTimePicker1.Text).ToString("dd-MM-yyyy") + "', '" + nationalityTxt.Text + "', '" + addressTxt.Text + "', '" + kinTxt.Text + "','" + kincontactTxt.Text + "', '" + genderCbx.Text + "','"+DateTime.Now.ToString("dd-MM-yyyy H:m:s")+"');";
-                        Global._transactor.Add(_transactor);
+                        Global.supplier.Add(supplier);
                         MessageBox.Show("Information Saved");
 
                     }
@@ -443,58 +445,51 @@ namespace VPOS
             {
                 paid = "Yes";
             }
-            if (Helper.Exists("billing","no",invoiceTxt.Text)) {
-
-                MessageBox.Show("This transaction is already saved !");
-                return;
-            }
+           
             if (String.IsNullOrEmpty(invoiceTxt.Text))
             {
                 invoiceTxt.BackColor = Color.Red;
                 MessageBox.Show("Please input the Invoice number !");
                 return;
             }
-            if (methodCbx.Text =="")
+            if (methodCbx.Text == "")
             {
                 methodCbx.BackColor = Color.Red;
                 MessageBox.Show("Please select the mode/method of payment !");
                 return;
             }
-            _billing = new Billing(ID, invoiceTxt.Text, "",amountTxt.Text, methodCbx.Text, refTxt.Text, totalLbl.Text, balanceTxt.Text, "", contactTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),"Purchase",Helper.OrgID,Helper.UserID,vatAmountTxt.Text, Helper.StoreID);
-            
-            if (Convert.ToDouble(amountTxt.Text) > 0)
-            {
-                _pay = new Payment(ID, invoiceTxt.Text, methodCbx.Text, amountTxt.Text, customerID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, "Purchase", Helper.StoreID);
-                DBConnect.Insert(_pay);
-                Global._payment.Add(_pay);
+            if (Global.payment.Where(g=>g.No.Contains(invoiceTxt.Text)).Count() > 0) {
+                invoiceTxt.BackColor = Color.Red;
+                MessageBox.Show("Transaction already saved !");
+                return;
             }
 
-            if (DBConnect.Insert(_billing) != "")
+            if (Convert.ToDouble(amountTxt.Text) > 0)
             {
-                Global._billings.Add(_billing);
+                Payment _pay = new Payment(ID, invoiceTxt.Text, methodCbx.Text,Convert.ToDouble(amountTxt.Text).ToString(), supplierID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.UserID, "Purchase", Helper.StoreID,supplierID,Convert.ToDouble(balanceTxt.Text).ToString());
+                DBConnect.Insert(_pay);
+                Global.payment.Add(_pay);
+            }
                 foreach (var h in SelectedItems)
                 {
-                    double TotalCost = (Convert.ToDouble(h.Value) * Convert.ToDouble(Global._stock.First(r => r.Barcode.Contains(h.Key)).Purchase_price));
+                    double TotalCost = (Convert.ToDouble(h.Value) * Convert.ToDouble(Global.stock.First(r => r.Barcode.Contains(h.Key)).Purchase_price));
 
                     string IDs = Guid.NewGuid().ToString();
                     double tax = 0;
-                    if (Global._stock.First(r => r.Barcode.Contains(h.Key)).Tax != "0" || String.IsNullOrEmpty(Global._stock.First(r => r.Barcode.Contains(h.Key)).Tax))
+                    if (Global.stock.First(r => r.Barcode.Contains(h.Key)).Tax != "0" || String.IsNullOrEmpty(Global.stock.First(r => r.Barcode.Contains(h.Key)).Tax))
                     {
-                        tax = Math.Round((TotalCost) * (100 / (100 + Convert.ToDouble(Global._stock.First(r => r.Barcode.Contains(h.Key)).Tax))), 0);
+                        tax = Math.Round((TotalCost) * (100 / (100 + Convert.ToDouble(Global.stock.First(r => r.Barcode.Contains(h.Key)).Tax))), 0);
                     }
-                    _sale = new Sale(IDs, invoiceTxt.Text, Global._item.First(r => r.Barcode.Contains(h.Key)).Id, h.Value.ToString(), dateLbl.Text, Global._stock.First(r => r.Barcode.Contains(h.Key)).Purchase_price,"Purchase", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),Helper.OrgID, Helper.UserID,TotalCost.ToString(),tax.ToString(), Helper.StoreID);
-
-                    double cQty = Convert.ToDouble(Global._stock.First(g => g.Barcode.Contains((h.Key))).Qty);
+                    Purchase pur = new Purchase(IDs, invoiceTxt.Text, Global.item.First(r => r.Barcode.Contains(h.Key)).Id, h.Value.ToString(), dateLbl.Text, Global.stock.First(r => r.Barcode.Contains(h.Key)).Sale_price,TotalCost.ToString(), TotalCost.ToString(), methodCbx.Text, "0", supplierID, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), tax.ToString(), Helper.StoreID, Helper.OrgID, Helper.UserID);
+                    double cQty = Convert.ToDouble(Global.stock.First(g => g.Barcode.Contains((h.Key))).Qty);
                     double newQty = cQty + h.Value;
 
-                    string Query2 = "UPDATE stock SET  quantity='" + newQty + "',created = '" + DateTime.Now.ToString("dd-MM-yyyy H:mm:ss") + "'  WHERE itemID ='" + Global._item.First(r => r.Barcode.Contains(h.Key)).Id + "'";
+                    string Query2 = "UPDATE stock SET  quantity='" + newQty + "',created = '" + DateTime.Now.ToString("dd-MM-yyyy H:mm:ss") + "'  WHERE itemID ='" + Global.item.First(r => r.Barcode.Contains(h.Key)).Id + "'";
                     DBConnect.save(Query2);
-                    DBConnect.Insert(_sale);
-                    Global._sale.Add(_sale);
+                    DBConnect.Insert(pur);
+                    Global.purchase.Add(pur);
                 }
-                MessageBox.Show("Information Saved");
-
-            }
+                MessageBox.Show("Information Saved");            
         }
 
         private void amountTxt_TextChanged(object sender, EventArgs e)

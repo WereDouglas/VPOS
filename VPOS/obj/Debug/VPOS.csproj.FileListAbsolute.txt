@@ -25,7 +25,6 @@ C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.MerchandiseForm.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.ManageForm.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.CategoryForm.resources
-C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.TransactorForm.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\zxing.dll
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\zxing.presentation.dll
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\zxing.pdb
@@ -33,7 +32,6 @@ C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\zxing
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\zxing.presentation.pdb
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\zxing.presentation.xml
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.StockForm.resources
-C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.BillingForm.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.TransactionForm.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.CashFlowForm.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.ExpenseForm.resources
@@ -75,3 +73,10 @@ C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\SQLit
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\x64\SQLite.Interop.dll
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\x86\SQLite.Interop.dll
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.csprojResolveAssemblyReference.cache
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.InvoiceForm.resources
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.PaymentForm.resources
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.CustomerForm.resources
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.SupplierForm.resources
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.CategoryDialog.resources
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.SubDialog.resources
+C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.StockDialog.resources

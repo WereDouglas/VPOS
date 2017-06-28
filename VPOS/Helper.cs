@@ -137,63 +137,7 @@ namespace VPOS
         }
         static NpgsqlDataReader Reader = null;
         static NpgsqlCommand cmd = null;
-        public static bool Exists(string table, string field, string value)
-        {
-
-            string exists = "";
-            string query = "SELECT * FROM " + table + " WHERE " + field + "= '" + value + "'";
-
-            if (!Helper.Type.Contains("Lite"))
-            {
-              
-                Reader = DBConnect.Reading(query);
-                while (Reader.Read())
-                {
-                    exists = Reader.IsDBNull(0) ? "" : Reader.GetString(0);
-                }
-                Reader.Close();
-                if (exists != "")
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                try
-                {
-                    SQLconnect.ConnectionString = dbobject.datalocation();
-                    SQLconnect.Open();
-                }
-                catch
-                {
-
-                }
-
-                SQLiteCommand cmd = new SQLiteCommand();
-                cmd = SQLconnect.CreateCommand();
-                cmd.CommandText = query;
-                while (Reader.Read())
-                {
-                    exists = Reader.IsDBNull(0) ? "" : Reader.GetString(0);
-                }
-                Reader.Close();
-
-                if (exists != "")
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }           
-              
-            }
-
-        }
+       
         public static bool ExistsAnd(string table, string field1, string field2, string value1, string value2)
         {
             string exists = "";
@@ -798,4 +742,51 @@ namespace VPOS
         };
     };
 
+
+    public static class CategoryArrays
+    {
+        /// <summary>
+        /// Country names
+        /// </summary>
+        public static string[] Names = new string[]
+        {
+        "Antiques",
+        "Art",
+        "Baby",
+        "Business & Industrial",
+        "Cameras & Photo",
+        "Cell Phones & Accessories",
+        "Clothing, Shoes & Accessories",
+        "Coins & Paper Money",
+        "Collectibles",
+        "Computers/Tablets & Networking",
+        "Consumer Electronics",
+        "Crafts",
+        "Dolls & Bears",
+        "DVDs & Movies",
+        "Motors",
+        "Entertainment",
+        "Gift Cards",
+        "Health & Beauty",
+        "Home & Garden",
+        "Jewelry & Watches",
+        "Music",
+        "Musical Instruments & Gear",
+        "Pet Supplies",
+        "Pottery & Glass",
+        "Real Estate",
+        "Specialty Services",
+        "Sporting Goods",
+        "Sports Mem, Cards & Fan Shop",
+        "Toys & Hobbies",
+        "Travel",
+        "Video Games & Consoles",
+        "Everything Else",
+       
+        };
+
+      
+    };
+
 }
+

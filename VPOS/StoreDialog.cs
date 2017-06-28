@@ -53,16 +53,13 @@ namespace VPOS
 
 
             if (DBConnect.Insert(_store) != "")
-            Global._store.Add(_store);
+            Global.store.Add(_store);
             nameTxt.Text = "";
             addressTxt.Text = "";
             locationTxt.Text = "";
             MessageBox.Show("Information Saved");
             this.DialogResult = DialogResult.OK;
             this.Dispose();
-
-
-
 
         }
 

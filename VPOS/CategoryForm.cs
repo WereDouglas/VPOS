@@ -22,34 +22,35 @@ namespace VPOS
         {
             InitializeComponent();
             LoadData();
-            
+
         }
         public void LoadData()
         {
 
-            _categorys = Global._category;
+            _categorys = Global.category;
             t = new DataTable();
             // create and execute query 
 
-          
-           
+
+
             t.Columns.Add(new DataColumn("Img", typeof(Bitmap)));//   2 
             t.Columns.Add("id");//1 
             t.Columns.Add("Name");//2
             t.Columns.Add("Description");// 3       
             t.Columns.Add("Created");// 4
             t.Columns.Add("Delete");// 5
-            t.Columns.Add("image");// 5
+            t.Columns.Add("image");// 5          
+            t.Columns.Add("Sub category");// 5
             Bitmap b = new Bitmap(50, 50);
 
             using (Graphics g = Graphics.FromImage(b))
             {
                 g.DrawString("Loading...", this.Font, new SolidBrush(Color.Gray), 00, 00);
             }
-            foreach (Category r in Global._category)
+            foreach (Category r in Global.category)
             {
 
-                t.Rows.Add(new object[] { b, r.Id,r.Name, r.Description, r.Created, "Delete",r.Image });
+                t.Rows.Add(new object[] { b, r.Id, r.Name, r.Description, r.Created, "Delete", r.Image, "View Subs" });
 
             }
             dtGrid.DataSource = t;
@@ -76,9 +77,64 @@ namespace VPOS
             dtGrid.Columns["id"].Visible = false;
             dtGrid.Columns["image"].Visible = false;
             dtGrid.Columns["delete"].DefaultCellStyle.BackColor = Color.OrangeRed;
+            dtGrid.Columns["Sub category"].DefaultCellStyle.BackColor = Color.Green;
             dtGrid.AllowUserToAddRows = false;
             dtGrid.RowTemplate.Height = 60;
         }
+        public void LoadSub(string name)
+        {
+
+            _categorys = Global.category;
+            t = new DataTable();
+            // create and execute query 
+
+            t.Columns.Add(new DataColumn("Img", typeof(Bitmap)));//   2 
+            t.Columns.Add("id");//1 
+            t.Columns.Add("Name");//2
+            t.Columns.Add("Description");// 3       
+            t.Columns.Add("Created");// 4
+            t.Columns.Add("Delete");// 5
+            t.Columns.Add("image");// 5
+
+            Bitmap b = new Bitmap(50, 50);
+
+            using (Graphics g = Graphics.FromImage(b))
+            {
+                g.DrawString("Loading...", this.Font, new SolidBrush(Color.Gray), 00, 00);
+            }
+            foreach (Sub r in Global.sub.Where(f=>f.Name.Contains(name)))
+            {
+                t.Rows.Add(new object[] { b, r.Id, r.Name, r.Description, r.Created, "Delete", r.Image });
+            }
+            subGrid.DataSource = t;
+            ThreadPool.QueueUserWorkItem(delegate
+            {
+                foreach (DataRow row in t.Rows)
+                {
+                    try
+                    {
+
+                        Image img = Base64ToImage(row["image"].ToString());
+                        System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img);
+                        Bitmap bps = new Bitmap(bmp, 50, 50);
+
+                        row["Img"] = bps;
+
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            });
+            subGrid.Columns["id"].Visible = false;
+            subGrid.Columns["image"].Visible = false;
+            subGrid.Columns["delete"].DefaultCellStyle.BackColor = Color.OrangeRed;
+            subGrid.AllowUserToAddRows = false;
+            subGrid.RowTemplate.Height = 60;
+        }
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -122,32 +178,7 @@ namespace VPOS
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            if (nameTxt.Text == "")
-            {
-                nameTxt.BackColor = Color.Red;
-                return;
-            }
 
-            MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
-            string fullimage = ImageToBase64(stream);
-
-            string id = Guid.NewGuid().ToString();
-            _category = new Category(id, nameTxt.Text, descriptionTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),Helper.OrgID, Helper.StoreID,fullimage);
-
-            if (DBConnect.Insert(_category) != "")
-            {
-                Global._category.Add(_category);
-                nameTxt.Text = "";
-                descriptionTxt.Text = "";
-                MessageBox.Show("Information Saved");
-                LoadData();
-
-            }
-            else
-            {
-                return;
-
-            }
 
         }
 
@@ -155,41 +186,76 @@ namespace VPOS
         {
             var senderGrid = (DataGridView)sender;
 
-            if (e.ColumnIndex == 5)
+            if (e.ColumnIndex == dtGrid.Columns["Delete"].Index && e.RowIndex >= 0)
             {
                 if (MessageBox.Show("YES or No?", "Are you sure you want to delete this information? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    DBConnect.Delete("category", dtGrid.Rows[e.RowIndex].Cells[1].Value.ToString());
+                    string ID = Guid.NewGuid().ToString();
+                    DBConnect.Delete("category", dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
+                    //Deletion _del = new Deletion(ID, "files", dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString(), "id", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), Helper.orgID);
+                    //DBConnect.Insert(_del);
+                    //Global.deletions.Add(_del);
 
                     MessageBox.Show("Information deleted");
                     LoadData();
 
                 }
             }
-           
+            if (e.ColumnIndex == dtGrid.Columns["Sub category"].Index && e.RowIndex >= 0)
+            {
+
+                LoadSub(dtGrid.Rows[e.RowIndex].Cells["name"].Value.ToString());
+
+            }
+
+
+
         }
 
         private void dtGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-          string  updateID = dtGrid.Rows[e.RowIndex].Cells[1].Value.ToString();
-            _category = new Category(dtGrid.Rows[e.RowIndex].Cells[1].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[2].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[3].Value.ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),Helper.OrgID, Helper.StoreID, dtGrid.Rows[e.RowIndex].Cells["image"].Value.ToString());
+            string updateID = dtGrid.Rows[e.RowIndex].Cells[1].Value.ToString();
+            _category = new Category(dtGrid.Rows[e.RowIndex].Cells[1].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[2].Value.ToString(), dtGrid.Rows[e.RowIndex].Cells[3].Value.ToString(), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.StoreID, dtGrid.Rows[e.RowIndex].Cells["image"].Value.ToString());
             DBConnect.Update(_category, updateID);
-            Global._category.RemoveAll(x => x.Id == updateID);
-            Global._category.Add(_category);
+            Global.category.RemoveAll(x => x.Id == updateID);
+            Global.category.Add(_category);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            // open file dialog 
-            OpenFileDialog open = new OpenFileDialog();
-            // image filters
-            open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
-            if (open.ShowDialog() == DialogResult.OK)
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveBtn_Click_1(object sender, EventArgs e)
+        {
+            using (CategoryDialog form = new CategoryDialog())
             {
-                // display image in picture box
-                imgCapture.Image = new Bitmap(open.FileName);
-                imgCapture.SizeMode = PictureBoxSizeMode.StretchImage;
-                fileUrlTxtBx.Text = open.FileName;
+                // DentalDialog form1 = new DentalDialog(item.Text, TransactorID);
+                DialogResult dr = form.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    LoadData();
+
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            using (SubDialog form = new SubDialog())
+            {
+                // DentalDialog form1 = new DentalDialog(item.Text, TransactorID);
+                DialogResult dr = form.ShowDialog();
+                if (dr == DialogResult.OK)
+                {                   
+                   // LoadSub();
+
+                }
             }
         }
     }

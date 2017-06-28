@@ -26,15 +26,15 @@ namespace VPOS
             webcam.InitializeWebCam(ref imgVideo);
             autocomplete();
 
-            if (Global._roles.Count() < 1)
+            if (Global.roles.Count() < 1)
             {
                 string ids = Guid.NewGuid().ToString();
                 _role = new Roles(ids, "Administrator", "All item pos daily purchases merchandise inventory expenses cash flow suppliers users suppliers catgories transactions ledgers logs profile ", "create update delete log ", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, "");
                 DBConnect.Insert(_role);
-                Global._roles.Add(_role);
+                Global.roles.Add(_role);
 
             }
-            foreach (Roles r in Global._roles)
+            foreach (Roles r in Global.roles)
             {
                 roleCbx.Items.Add(r.Title);
             }
@@ -47,7 +47,7 @@ namespace VPOS
                 UserID = userID;
                 Profile(UserID);
             }
-            foreach (Store s in Global._store)
+            foreach (Store s in Global.store)
             {
 
                 storeCbx.Items.Add(s.Name);
@@ -58,22 +58,22 @@ namespace VPOS
         private void Profile(string ID)
         {
 
-            surnameTxt.Text = Global._users.First(k => k.Id.Contains(ID)).Surname;
-            firstnameTxt.Text = Global._users.First(k => k.Id.Contains(ID)).Lastname;
-            othernameTxt.Text = Global._users.First(k => k.Id.Contains(ID)).Othername;
-            idTxt.Text = Global._users.First(k => k.Id.Contains(ID)).IdNo;
-            primaryTxt.Text = Global._users.First(k => k.Id.Contains(ID)).Contact;
-            secondaryTxt.Text = Global._users.First(k => k.Id.Contains(ID)).Contact2;
-            emailTxt.Text = Global._users.First(k => k.Id.Contains(ID)).Email;
-            nationalityTxt.Text = Global._users.First(k => k.Id.Contains(ID)).Nationality;
-            genderCbx.Text = Global._users.First(k => k.Id.Contains(ID)).Gender;
-            roleCbx.Text = Global._users.First(k => k.Id.Contains(ID)).Roles;
-            originalPassword = Global._users.First(k => k.Id.Contains(ID)).Passwords;
-            initialTxt.Text = Global._users.First(k => k.Id.Contains(ID)).InitialPassword;
-            accountTxt.Text = Global._users.First(k => k.Id.Contains(ID)).Account;
-            statusCbx.Text = Global._users.First(k => k.Id.Contains(ID)).Status;
-            addressTxt.Text = Global._users.First(k => k.Id.Contains(ID)).Address;
-            Image img = Base64ToImage(Global._users.First(k => k.Id.Contains(ID)).Image);
+            surnameTxt.Text = Global.users.First(k => k.Id.Contains(ID)).Surname;
+            firstnameTxt.Text = Global.users.First(k => k.Id.Contains(ID)).Lastname;
+            othernameTxt.Text = Global.users.First(k => k.Id.Contains(ID)).Othername;
+            idTxt.Text = Global.users.First(k => k.Id.Contains(ID)).IdNo;
+            primaryTxt.Text = Global.users.First(k => k.Id.Contains(ID)).Contact;
+            secondaryTxt.Text = Global.users.First(k => k.Id.Contains(ID)).Contact2;
+            emailTxt.Text = Global.users.First(k => k.Id.Contains(ID)).Email;
+            nationalityTxt.Text = Global.users.First(k => k.Id.Contains(ID)).Nationality;
+            genderCbx.Text = Global.users.First(k => k.Id.Contains(ID)).Gender;
+            roleCbx.Text = Global.users.First(k => k.Id.Contains(ID)).Roles;
+            originalPassword = Global.users.First(k => k.Id.Contains(ID)).Passwords;
+            initialTxt.Text = Global.users.First(k => k.Id.Contains(ID)).InitialPassword;
+            accountTxt.Text = Global.users.First(k => k.Id.Contains(ID)).Account;
+            statusCbx.Text = Global.users.First(k => k.Id.Contains(ID)).Status;
+            addressTxt.Text = Global.users.First(k => k.Id.Contains(ID)).Address;
+            Image img = Base64ToImage(Global.users.First(k => k.Id.Contains(ID)).Image);
             System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img);
             //Bitmap bps = new Bitmap(bmp, 50, 50);
             imgCapture.Image = bmp;
@@ -172,7 +172,7 @@ namespace VPOS
         string originalPassword = "";
         private void button2_Click(object sender, EventArgs e)
         {
-         if (Store.ListStore().Count() < 1)
+            if (Store.ListStore().Count() < 1)
             {
                 MessageBox.Show("Please add the name of the store");
                 return;
@@ -209,15 +209,15 @@ namespace VPOS
             string id = Guid.NewGuid().ToString();
             MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
             string fullimage = ImageToBase64(stream);
-            _user = new Users(id, idTxt.Text, primaryTxt.Text, secondaryTxt.Text, surnameTxt.Text, firstnameTxt.Text, othernameTxt.Text, emailTxt.Text, nationalityTxt.Text, addressTxt.Text, password, genderCbx.Text, Helper.OrgID, roleCbx.Text, Helper.MD5Hash(initialTxt.Text), accountTxt.Text, statusCbx.Text, fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"),Helper.StoreID);
+            _user = new Users(id, idTxt.Text, primaryTxt.Text, secondaryTxt.Text, surnameTxt.Text, firstnameTxt.Text, othernameTxt.Text, emailTxt.Text, nationalityTxt.Text, addressTxt.Text, password, genderCbx.Text, Helper.OrgID, roleCbx.Text, Helper.MD5Hash(initialTxt.Text), accountTxt.Text, statusCbx.Text, fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.StoreID);
 
             if (UserID != "")
             {
                 _user = new Users(UserID, idTxt.Text, primaryTxt.Text, secondaryTxt.Text, surnameTxt.Text, firstnameTxt.Text, othernameTxt.Text, emailTxt.Text, nationalityTxt.Text, addressTxt.Text, password, genderCbx.Text, Helper.OrgID, roleCbx.Text, Helper.MD5Hash(initialTxt.Text), accountTxt.Text, statusCbx.Text, fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.StoreID);
 
                 DBConnect.Update(_user, UserID);
-                Global._users.RemoveAll(x => x.Id == UserID);
-                Global._users.Add(_user);
+                Global.users.RemoveAll(x => x.Id == UserID);
+                Global.users.Add(_user);
                 MessageBox.Show("Information Updated ");
                 Close();
             }
@@ -225,8 +225,8 @@ namespace VPOS
             {
                 if (DBConnect.Insert(_user) != "")
                 {
-                    Global._users.Add(_user);
-                    
+                    Global.users.Add(_user);
+
                     MessageBox.Show("Information Saved");
                     Close();
                 }
@@ -241,8 +241,8 @@ namespace VPOS
             {
 
                 storeID = "";
-                storeID = 
-                Helper.StoreID= storeDictionary[storeCbx.Text];
+                storeID =
+                Helper.StoreID = storeDictionary[storeCbx.Text];
             }
             catch { }
         }

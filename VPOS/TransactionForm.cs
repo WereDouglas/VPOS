@@ -47,7 +47,7 @@ namespace VPOS
             foreach (Sale h in Sale.ListSale().Where(g => g.Created.Contains(date)))
             {
                 double amount = (Convert.ToDouble(h.Qty)* Convert.ToDouble(h.Price));
-                t.Rows.Add(new object[] {  h.Id, h.Created, h.No, Global._item.First(p => p.Id.Contains(h.ItemID)).Name, h.Qty, h.Price,  amount.ToString("n0"),h.Type });
+                t.Rows.Add(new object[] {  h.Id, h.Created, h.No, Global.item.First(p => p.Id.Contains(h.ItemID)).Name, h.Qty, h.Price,  amount.ToString("n0"),"" });
 
             }
             itemGrid.DataSource = t;

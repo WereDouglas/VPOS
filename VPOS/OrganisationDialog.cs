@@ -25,7 +25,7 @@ namespace VPOS
             webcam = new WebCam();
             webcam.InitializeWebCam(ref imgVideo);
             autocomplete();
-
+            autocompleteCats();
             if (orgID != "")
             {
                 Helper.OrgID = orgID;
@@ -47,11 +47,11 @@ namespace VPOS
                     Helper.OrgID = OrgID;
                     MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
                     string fullimage = ImageToBase64(stream);
-                    _org = new Organisation(OrgID, nameTxt.Text, codeTxt.Text, registrationTxt.Text, contactTxt.Text, addressTxt.Text, tinTxt.Text, vatTxt.Text, emailTxt.Text, nationalityTxt.Text, "", accountTxt.Text, statusCbx.Text, DateTime.Now.AddMonths(3).ToString("dd-MM-yyyy H:mm:ss"), fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), countsTxt.Text, companyCode.Text, "");
-
+                    _org = new Organisation(OrgID, nameTxt.Text, codeTxt.Text, registrationTxt.Text, contactTxt.Text, addressTxt.Text, tinTxt.Text, vatTxt.Text, emailTxt.Text, nationalityTxt.Text, "", accountTxt.Text, statusCbx.Text, DateTime.Now.AddMonths(3).ToString("dd-MM-yyyy H:mm:ss"), fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), countsTxt.Text, companyCode.Text, "",categoryCbx.Text);
                     DBConnect.Insert(_org);
                 }
                 else {
+
                     Helper.OrgID = exists;
                     OrgID = exists;
                     Profile(exists);
@@ -60,40 +60,55 @@ namespace VPOS
             }
             LoadStores();
         }
-        private void LoadStores()
+        private void autocompleteCats()
         {
-
-            foreach (Store s in Global._store)
+            AutoCompleteStringCollection AutoItem = new AutoCompleteStringCollection();
+            for (int w = 0; w < CategoryArrays.Names.Count(); w++)
             {
-                storeCbx.Items.Add(s.Name);
-                storeDictionary.Add(s.Name, s.Id);
+                AutoItem.Add(CategoryArrays.Names[w]);
             }
 
-
+            categoryCbx.AutoCompleteMode = AutoCompleteMode.Suggest;
+            categoryCbx.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            categoryCbx.AutoCompleteCustomSource = AutoItem;
+            foreach (Category c in Global.category)
+            {
+                categoryCbx.Items.Add(c.Name);
+            }
+        }
+        private void LoadStores()
+        {
+            foreach (Store s in Global.store)
+            {
+                storeCbx.Items.Add(s.Name);
+                if (!storeDictionary.ContainsKey(storeCbx.Text)) { 
+                storeDictionary.Add(s.Name, s.Id);
+                }
+            }
         }
         private void Profile(string ID)
         {
 
-            nameTxt.Text = Global._org.First(k => k.Id.Contains(ID)).Name;
-            codeTxt.Text = Global._org.First(k => k.Id.Contains(ID)).Code;
-            registrationTxt.Text = Global._org.First(k => k.Id.Contains(ID)).Registration;
-            contactTxt.Text = Global._org.First(k => k.Id.Contains(ID)).Contact;
-            addressTxt.Text = Global._org.First(k => k.Id.Contains(ID)).Address;
-            tinTxt.Text = Global._org.First(k => k.Id.Contains(ID)).Tin;
-            vatTxt.Text = Global._org.First(k => k.Id.Contains(ID)).Vat;
-            nationalityTxt.Text = Global._org.First(k => k.Id.Contains(ID)).Country;
-            emailTxt.Text = Global._org.First(k => k.Id.Contains(ID)).Email;
-            originalPassword = Global._org.First(k => k.Id.Contains(ID)).Initialpassword;
-            accountTxt.Text = Global._org.First(k => k.Id.Contains(ID)).Account;
-            statusCbx.Text = Global._org.First(k => k.Id.Contains(ID)).Status;
-            expireDate.Text = Global._org.First(k => k.Id.Contains(ID)).Expires;
-            syncDate.Text = Global._org.First(k => k.Id.Contains(ID)).Sync;
+            nameTxt.Text = Global.org.First(k => k.Id.Contains(ID)).Name;
+            codeTxt.Text = Global.org.First(k => k.Id.Contains(ID)).Code;
+            registrationTxt.Text = Global.org.First(k => k.Id.Contains(ID)).Registration;
+            contactTxt.Text = Global.org.First(k => k.Id.Contains(ID)).Contact;
+            addressTxt.Text = Global.org.First(k => k.Id.Contains(ID)).Address;
+            tinTxt.Text = Global.org.First(k => k.Id.Contains(ID)).Tin;
+            vatTxt.Text = Global.org.First(k => k.Id.Contains(ID)).Vat;
+            nationalityTxt.Text = Global.org.First(k => k.Id.Contains(ID)).Country;
+            emailTxt.Text = Global.org.First(k => k.Id.Contains(ID)).Email;
+            originalPassword = Global.org.First(k => k.Id.Contains(ID)).Initialpassword;
+            accountTxt.Text = Global.org.First(k => k.Id.Contains(ID)).Account;
+            statusCbx.Text = Global.org.First(k => k.Id.Contains(ID)).Status;
+            expireDate.Text = Global.org.First(k => k.Id.Contains(ID)).Expires;
+            syncDate.Text = Global.org.First(k => k.Id.Contains(ID)).Sync;
             try
             {
-                storeCbx.Text = Global._store.First(p => p.Id.Contains(Global._org.First(k => k.Id.Contains(ID)).StoreID)).Name;
+                storeCbx.Text = Global.store.First(p => p.Id.Contains(Global.org.First(k => k.Id.Contains(ID)).StoreID)).Name;
             }
             catch { }
-            Image img = Base64ToImage(Global._org.First(k => k.Id.Contains(ID)).Image);
+            Image img = Base64ToImage(Global.org.First(k => k.Id.Contains(ID)).Image);
             System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img);
             //Bitmap bps = new Bitmap(bmp, 50, 50);
             imgCapture.Image = bmp;
@@ -178,6 +193,12 @@ namespace VPOS
                 MessageBox.Show("Please select a store/Shop");
                 return;
             }
+            if (String.IsNullOrEmpty(categoryCbx.Text))
+            {
+                MessageBox.Show("Please select the category of your  business");
+                categoryCbx.BackColor = Color.Green;
+                return;
+            }
 
             // Helper.StoreID = "";
             string password = "";
@@ -201,7 +222,7 @@ namespace VPOS
 
             MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
             string fullimage = ImageToBase64(stream);
-            _org = new Organisation(OrgID, nameTxt.Text, codeTxt.Text, registrationTxt.Text, contactTxt.Text, addressTxt.Text, tinTxt.Text, vatTxt.Text, emailTxt.Text, nationalityTxt.Text, "", accountTxt.Text, statusCbx.Text, Convert.ToDateTime(expireDate.Text).ToString("dd-MM-yyyy"), fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Convert.ToDateTime(syncDate.Text).ToString("dd-MM-yyyy H:mm:ss"), countsTxt.Text, companyCode.Text, Helper.StoreID);
+            _org = new Organisation(OrgID, nameTxt.Text, codeTxt.Text, registrationTxt.Text, contactTxt.Text, addressTxt.Text, tinTxt.Text, vatTxt.Text, emailTxt.Text, nationalityTxt.Text, "", accountTxt.Text, statusCbx.Text, Convert.ToDateTime(expireDate.Text).ToString("dd-MM-yyyy"), fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Convert.ToDateTime(syncDate.Text).ToString("dd-MM-yyyy H:mm:ss"), countsTxt.Text, companyCode.Text, Helper.StoreID,categoryCbx.Text);
 
             DBConnect.Update(_org, OrgID);
             Helper.OrgID = OrgID;
@@ -210,14 +231,14 @@ namespace VPOS
             DBConnect.Execute(SQL);
             MessageBox.Show("Information Saved");
            
-            if (Global._users.Count() < 1)
+            if (Global.users.Count() < 1)
             {
 
                 string ids = Guid.NewGuid().ToString();
                 _role = new Roles(ids, "Administrator", "All item pos daily purchases merchandise inventory expenses cash flow suppliers users suppliers catgories transactions ledgers logs profile ", "create update delete log ", DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Helper.OrgID, Helper.StoreID);
 
                 DBConnect.Insert(_role);
-                Global._roles.Add(_role);
+                Global.roles.Add(_role);
             }
             this.DialogResult = DialogResult.OK;
             this.Dispose();
@@ -313,7 +334,7 @@ namespace VPOS
             }
             MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
             string fullimage = ImageToBase64(stream);
-            _org = new Organisation(OrgID, nameTxt.Text, codeTxt.Text, registrationTxt.Text, contactTxt.Text, addressTxt.Text, tinTxt.Text, vatTxt.Text, emailTxt.Text, nationalityTxt.Text, "", accountTxt.Text, statusCbx.Text, Convert.ToDateTime(expireDate.Text).ToString("dd-MM-yyyy"), fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Convert.ToDateTime(syncDate.Text).ToString("dd-MM-yyyy H:mm:ss"), countsTxt.Text, companyCode.Text, StoreID);
+            _org = new Organisation(OrgID, nameTxt.Text, codeTxt.Text, registrationTxt.Text, contactTxt.Text, addressTxt.Text, tinTxt.Text, vatTxt.Text, emailTxt.Text, nationalityTxt.Text, "", accountTxt.Text, statusCbx.Text, Convert.ToDateTime(expireDate.Text).ToString("dd-MM-yyyy"), fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), Convert.ToDateTime(syncDate.Text).ToString("dd-MM-yyyy H:mm:ss"), countsTxt.Text, companyCode.Text, StoreID,categoryCbx.Text);
             if (OrgID != "")
             {
                 DBConnect.Update(_org, OrgID);
@@ -340,6 +361,11 @@ namespace VPOS
 
         private void button6_Click_1(object sender, EventArgs e)
         {
+            if (Store.ListStore().Count() < 1)
+            {
+                MessageBox.Show("Please add the name of the store first ");
+                return;
+            }
             using (UserDialog form = new UserDialog(""))
             {
                 // DentalDialog form1 = new DentalDialog(item.Text, TransactorID);

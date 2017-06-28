@@ -125,12 +125,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BillingForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BillingForm.Designer.cs">
-      <DependentUpon>BillingForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="CashBook.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +137,12 @@
     <Compile Include="CashFlowForm.Designer.cs">
       <DependentUpon>CashFlowForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CategoryDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CategoryDialog.Designer.cs">
+      <DependentUpon>CategoryDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="CategoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +154,12 @@
     </Compile>
     <Compile Include="CTRegister.Designer.cs">
       <DependentUpon>CTRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomerForm.Designer.cs">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DashBoard.cs">
       <SubType>Form</SubType>
@@ -183,6 +189,12 @@
     </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="InvoiceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InvoiceForm.Designer.cs">
+      <DependentUpon>InvoiceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ItemDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -207,7 +219,10 @@
     <Compile Include="MerchandiseForm.Designer.cs">
       <DependentUpon>MerchandiseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Sub.cs" />
+    <Compile Include="Model\Invoice.cs" />
     <Compile Include="Model\Store.cs" />
+    <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Taking.cs" />
     <Compile Include="Model\Tax.cs" />
     <Compile Include="Model\Payment.cs" />
@@ -218,8 +233,8 @@
     <Compile Include="Model\Sale.cs" />
     <Compile Include="Model\Quantity.cs" />
     <Compile Include="Model\Organisation.cs" />
+    <Compile Include="Model\Supplier.cs" />
     <Compile Include="Model\Users.cs" />
-    <Compile Include="Model\Transactor.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Stock.cs" />
@@ -234,6 +249,12 @@
     </Compile>
     <Compile Include="PartiesDialog.Designer.cs">
       <DependentUpon>PartiesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PaymentForm.Designer.cs">
+      <DependentUpon>PaymentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -263,6 +284,12 @@
       <DependentUpon>SettingDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLite\Connection.cs" />
+    <Compile Include="StockDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockDialog.Designer.cs">
+      <DependentUpon>StockDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="StockForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,17 +314,23 @@
     <Compile Include="StoreForm.Designer.cs">
       <DependentUpon>StoreForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SubDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubDialog.Designer.cs">
+      <DependentUpon>SubDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SupplierForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SupplierForm.Designer.cs">
+      <DependentUpon>SupplierForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TransactionForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TransactionForm.Designer.cs">
       <DependentUpon>TransactionForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TransactorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TransactorForm.Designer.cs">
-      <DependentUpon>TransactorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Uploading.cs" />
     <Compile Include="UserDialog.cs">
@@ -313,20 +346,23 @@
       <DependentUpon>ViewUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="WebCam.cs" />
-    <EmbeddedResource Include="BillingForm.resx">
-      <DependentUpon>BillingForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CashBook.resx">
       <DependentUpon>CashBook.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CashFlowForm.resx">
       <DependentUpon>CashFlowForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CategoryDialog.resx">
+      <DependentUpon>CategoryDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CategoryForm.resx">
       <DependentUpon>CategoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CTRegister.resx">
       <DependentUpon>CTRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerForm.resx">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DashBoard.resx">
       <DependentUpon>DashBoard.cs</DependentUpon>
@@ -339,6 +375,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InvoiceForm.resx">
+      <DependentUpon>InvoiceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ItemDialog.resx">
       <DependentUpon>ItemDialog.cs</DependentUpon>
@@ -357,6 +396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PartiesDialog.resx">
       <DependentUpon>PartiesDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PaymentForm.resx">
+      <DependentUpon>PaymentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -380,6 +422,9 @@
     <EmbeddedResource Include="SettingDialog.resx">
       <DependentUpon>SettingDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="StockDialog.resx">
+      <DependentUpon>StockDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StockForm.resx">
       <DependentUpon>StockForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -392,11 +437,14 @@
     <EmbeddedResource Include="StoreForm.resx">
       <DependentUpon>StoreForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SubDialog.resx">
+      <DependentUpon>SubDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SupplierForm.resx">
+      <DependentUpon>SupplierForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TransactionForm.resx">
       <DependentUpon>TransactionForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TransactorForm.resx">
-      <DependentUpon>TransactorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserDialog.resx">
       <DependentUpon>UserDialog.cs</DependentUpon>
@@ -620,6 +668,21 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Format-Numbering-32.png" />
+    <None Include="Resources\View-List-32 %282%29.png" />
+    <None Include="Resources\View-List-32 %283%29.png" />
+    <None Include="Resources\View-List-24.png" />
+    <None Include="Resources\Numbering -24.png" />
+    <None Include="Resources\Book-Shelf-24 %282%29.png" />
+    <None Include="Resources\View-List-32 %284%29.png" />
+    <None Include="Resources\Numbering -32.png" />
+    <None Include="Resources\Shopping-Basket-02-32.png" />
+    <None Include="Resources\Book-Shelf-32 %281%29.png" />
+    <None Include="Resources\Note-04-32.png" />
+    <None Include="Resources\Transport-Van-32.png" />
+    <None Include="Resources\QR-Code-32 %283%29.png" />
+    <None Include="Resources\Bill-32 %282%29.png" />
+    <None Include="Resources\Table-32 %281%29.png" />
     <Content Include="SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

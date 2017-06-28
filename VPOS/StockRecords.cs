@@ -55,11 +55,11 @@ namespace VPOS
             {
                 g.DrawString("Loading...", this.Font, new SolidBrush(Color.Gray), 00, 00);
             }
-            foreach (Taking h in Global._taking)
+            foreach (Taking h in Global.taking)
             {
                 try
                 {
-                    t.Rows.Add(new object[] { false, h.Id, h.Date, Global._item.First(j => j.Id.Contains(h.ItemID)).Name, h.Bf, h.Purchases, h.Sales, h.Total_stock, h.System_stock, h.Variance, h.Purchase_amount, h.Sale_amount, h.Profit, h.Physical_count, h.Damages, h.Shrinkable, h.OrgID, h.UserID, h.Created, Global._item.First(j => j.Id.Contains(h.ItemID)).Image, "Delete" });
+                    t.Rows.Add(new object[] { false, h.Id, h.Date, Global.item.First(j => j.Id.Contains(h.ItemID)).Name, h.Bf, h.Purchases, h.Sales, h.Total_stock, h.System_stock, h.Variance, h.Purchase_amount, h.Sale_amount, h.Profit, h.Physical_count, h.Damages, h.Shrinkable, h.OrgID, h.UserID, h.Created, Global.item.First(j => j.Id.Contains(h.ItemID)).Image, "Delete" });
                 }
                 catch { }
             }

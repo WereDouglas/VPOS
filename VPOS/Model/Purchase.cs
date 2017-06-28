@@ -16,12 +16,18 @@ namespace VPOS.Model
         private string qty;
         private string date;
         private string price;
-        private string type;      
+        private string total;
+        private string amount;
+        private string method;
+        private string balance;
+        private string supplierID;
         private string created;
+        private string tax;
+        private string storeID;
         private string orgID;
         private string userID;
-        private string storeID;
         static SQLiteDataReader Reader;
+
         public string Id
         {
             get
@@ -100,16 +106,68 @@ namespace VPOS.Model
             }
         }
 
-        public string Type
+        public string Total
         {
             get
             {
-                return type;
+                return total;
             }
 
             set
             {
-                type = value;
+                total = value;
+            }
+        }
+
+        public string Amount
+        {
+            get
+            {
+                return amount;
+            }
+
+            set
+            {
+                amount = value;
+            }
+        }
+
+        public string Method
+        {
+            get
+            {
+                return method;
+            }
+
+            set
+            {
+                method = value;
+            }
+        }
+
+        public string Balance
+        {
+            get
+            {
+                return balance;
+            }
+
+            set
+            {
+                balance = value;
+            }
+        }
+
+        public string SupplierID
+        {
+            get
+            {
+                return supplierID;
+            }
+
+            set
+            {
+                supplierID = value;
             }
         }
 
@@ -123,6 +181,32 @@ namespace VPOS.Model
             set
             {
                 created = value;
+            }
+        }
+
+        public string Tax
+        {
+            get
+            {
+                return tax;
+            }
+
+            set
+            {
+                tax = value;
+            }
+        }
+
+        public string StoreID
+        {
+            get
+            {
+                return storeID;
+            }
+
+            set
+            {
+                storeID = value;
             }
         }
 
@@ -152,20 +236,9 @@ namespace VPOS.Model
             }
         }
 
-        public string StoreID
-        {
-            get
-            {
-                return storeID;
-            }
-
-            set
-            {
-                storeID = value;
-            }
-        }
         public Purchase() { }
-        public Purchase(string id, string no, string itemID, string qty, string date, string price, string type, string created, string orgID, string userID, string storeID)
+
+        public Purchase(string id, string no, string itemID, string qty, string date, string price, string total, string amount, string method, string balance, string supplierID, string created, string tax, string storeID, string orgID, string userID)
         {
             this.Id = id;
             this.No = no;
@@ -173,43 +246,46 @@ namespace VPOS.Model
             this.Qty = qty;
             this.Date = date;
             this.Price = price;
-            this.Type = type;
+            this.Total = total;
+            this.Amount = amount;
+            this.Method = method;
+            this.Balance = balance;
+            this.SupplierID = supplierID;
             this.Created = created;
+            this.Tax = tax;
+            this.StoreID = storeID;
             this.OrgID = orgID;
             this.UserID = userID;
-            this.StoreID = storeID;
         }
 
         public static List<Purchase> ListPurchase()
         {
+            List<Purchase> purs = new List<Purchase>();
+            string SQL = "SELECT * FROM purchase";
             if (Helper.Type!="Lite") {
                 DBConnect.OpenConn();
-                List<Purchase> categories = new List<Purchase>();
-                string SQL = "SELECT * FROM purchase";
+               
                 NpgsqlCommand command = new NpgsqlCommand(SQL, DBConnect.conn);
                 NpgsqlDataReader Reader = command.ExecuteReader();
                 while (Reader.Read())
                 {
-                    Purchase p = new Purchase(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["storeid"].ToString());
-                    categories.Add(p);
+                   Purchase p = new Purchase(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["total"].ToString(), Reader["amount"].ToString(), Reader["method"].ToString(), Reader["balance"].ToString(), Reader["customerID"].ToString(), Reader["created"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString(), Reader["orgid"].ToString(), Reader["userid"].ToString());
+                    purs.Add(p);
                 }
                 DBConnect.CloseConn();
-                return categories;
+             
             }
             else {
-                List<Purchase> categories = new List<Purchase>();
-                string SQL = "SELECT * FROM purchase";
+                
                 Reader = DBConnect.ReadingLite(SQL);
                 while (Reader.Read())
                 {
-                    Purchase p = new Purchase(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["type"].ToString(), Reader["created"].ToString(), Reader["orgID"].ToString(), Reader["userID"].ToString(), Reader["storeid"].ToString());
-                    categories.Add(p);
+                    Purchase p = new Purchase(Reader["id"].ToString(), Reader["no"].ToString(), Reader["itemID"].ToString(), Reader["qty"].ToString(), Reader["date"].ToString(), Reader["price"].ToString(), Reader["total"].ToString(), Reader["amount"].ToString(), Reader["method"].ToString(), Reader["balance"].ToString(), Reader["customerID"].ToString(), Reader["created"].ToString(), Reader["tax"].ToString(), Reader["storeid"].ToString(), Reader["orgid"].ToString(), Reader["userid"].ToString());
+                    purs.Add(p);
                 }
                 Reader.Close();
-                return categories;
-
-
             }
+            return purs;
 
         }
       
