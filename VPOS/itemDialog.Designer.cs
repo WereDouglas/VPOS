@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label17 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label26 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,45 +42,42 @@
             this.label18 = new System.Windows.Forms.Label();
             this.genericTxt = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.codeTxt = new System.Windows.Forms.TextBox();
+            this.barcodeTxt = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.descriptionTxt = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.barcodeTxt = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.compositionTxt = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.strengthTxt = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.subCbx = new System.Windows.Forms.ComboBox();
+            this.label31 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.bntStart = new System.Windows.Forms.Button();
             this.bntContinue = new System.Windows.Forms.Button();
             this.bntStop = new System.Windows.Forms.Button();
+            this.imgVideo = new System.Windows.Forms.PictureBox();
+            this.imgCapture = new System.Windows.Forms.PictureBox();
             this.bntCapture = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.fileUrlTxtBx = new System.Windows.Forms.TextBox();
             this.categoryTxt = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.Update = new System.Windows.Forms.Button();
-            this.label31 = new System.Windows.Forms.Label();
-            this.subCbx = new System.Windows.Forms.ComboBox();
-            this.imgVideo = new System.Windows.Forms.PictureBox();
-            this.imgCapture = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgVideo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).BeginInit();
             this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -106,16 +102,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(609, 491);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // label17
-            // 
-            this.label17.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label17.Location = new System.Drawing.Point(29, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(277, 20);
-            this.label17.TabIndex = 12;
-            this.label17.Text = "ADD NEW INVENTORY/STOCK ITEM";
-            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -134,13 +120,9 @@
             this.flowLayoutPanel1.Controls.Add(this.label18);
             this.flowLayoutPanel1.Controls.Add(this.genericTxt);
             this.flowLayoutPanel1.Controls.Add(this.label16);
-            this.flowLayoutPanel1.Controls.Add(this.textBox1);
-            this.flowLayoutPanel1.Controls.Add(this.label2);
-            this.flowLayoutPanel1.Controls.Add(this.codeTxt);
+            this.flowLayoutPanel1.Controls.Add(this.barcodeTxt);
             this.flowLayoutPanel1.Controls.Add(this.label3);
             this.flowLayoutPanel1.Controls.Add(this.descriptionTxt);
-            this.flowLayoutPanel1.Controls.Add(this.label9);
-            this.flowLayoutPanel1.Controls.Add(this.barcodeTxt);
             this.flowLayoutPanel1.Controls.Add(this.label13);
             this.flowLayoutPanel1.Controls.Add(this.compositionTxt);
             this.flowLayoutPanel1.Controls.Add(this.label30);
@@ -258,35 +240,19 @@
             this.label16.TabIndex = 108;
             this.label16.Text = "Barcode ";
             // 
-            // textBox1
+            // barcodeTxt
             // 
-            this.textBox1.Location = new System.Drawing.Point(102, 177);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(180, 21);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
-            this.textBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyUp);
-            // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label2.Location = new System.Drawing.Point(3, 208);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Code";
-            // 
-            // codeTxt
-            // 
-            this.codeTxt.Location = new System.Drawing.Point(102, 204);
-            this.codeTxt.Name = "codeTxt";
-            this.codeTxt.Size = new System.Drawing.Size(180, 21);
-            this.codeTxt.TabIndex = 3;
+            this.barcodeTxt.Location = new System.Drawing.Point(102, 177);
+            this.barcodeTxt.Name = "barcodeTxt";
+            this.barcodeTxt.Size = new System.Drawing.Size(180, 21);
+            this.barcodeTxt.TabIndex = 1;
+            this.barcodeTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.barcodeTxt.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyUp);
             // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label3.Location = new System.Drawing.Point(3, 235);
+            this.label3.Location = new System.Drawing.Point(3, 208);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(93, 13);
             this.label3.TabIndex = 4;
@@ -294,31 +260,15 @@
             // 
             // descriptionTxt
             // 
-            this.descriptionTxt.Location = new System.Drawing.Point(102, 231);
+            this.descriptionTxt.Location = new System.Drawing.Point(102, 204);
             this.descriptionTxt.Name = "descriptionTxt";
             this.descriptionTxt.Size = new System.Drawing.Size(180, 21);
             this.descriptionTxt.TabIndex = 5;
             // 
-            // label9
-            // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label9.Location = new System.Drawing.Point(3, 262);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(93, 13);
-            this.label9.TabIndex = 17;
-            this.label9.Text = "Confirmed code";
-            // 
-            // barcodeTxt
-            // 
-            this.barcodeTxt.Location = new System.Drawing.Point(102, 258);
-            this.barcodeTxt.Name = "barcodeTxt";
-            this.barcodeTxt.Size = new System.Drawing.Size(180, 21);
-            this.barcodeTxt.TabIndex = 16;
-            // 
             // label13
             // 
             this.label13.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label13.Location = new System.Drawing.Point(3, 289);
+            this.label13.Location = new System.Drawing.Point(3, 235);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(93, 13);
             this.label13.TabIndex = 25;
@@ -326,7 +276,7 @@
             // 
             // compositionTxt
             // 
-            this.compositionTxt.Location = new System.Drawing.Point(102, 285);
+            this.compositionTxt.Location = new System.Drawing.Point(102, 231);
             this.compositionTxt.Name = "compositionTxt";
             this.compositionTxt.Size = new System.Drawing.Size(180, 21);
             this.compositionTxt.TabIndex = 24;
@@ -334,7 +284,7 @@
             // label30
             // 
             this.label30.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label30.Location = new System.Drawing.Point(3, 316);
+            this.label30.Location = new System.Drawing.Point(3, 262);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(93, 13);
             this.label30.TabIndex = 166;
@@ -342,7 +292,7 @@
             // 
             // strengthTxt
             // 
-            this.strengthTxt.Location = new System.Drawing.Point(102, 312);
+            this.strengthTxt.Location = new System.Drawing.Point(102, 258);
             this.strengthTxt.Name = "strengthTxt";
             this.strengthTxt.Size = new System.Drawing.Size(180, 21);
             this.strengthTxt.TabIndex = 165;
@@ -368,6 +318,23 @@
             this.groupBox1.Size = new System.Drawing.Size(283, 418);
             this.groupBox1.TabIndex = 107;
             this.groupBox1.TabStop = false;
+            // 
+            // subCbx
+            // 
+            this.subCbx.FormattingEnabled = true;
+            this.subCbx.Location = new System.Drawing.Point(117, 73);
+            this.subCbx.Name = "subCbx";
+            this.subCbx.Size = new System.Drawing.Size(138, 21);
+            this.subCbx.TabIndex = 167;
+            // 
+            // label31
+            // 
+            this.label31.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label31.Location = new System.Drawing.Point(3, 76);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(88, 20);
+            this.label31.TabIndex = 166;
+            this.label31.Text = "Sub Category";
             // 
             // label29
             // 
@@ -439,6 +406,29 @@
             this.bntStop.UseVisualStyleBackColor = false;
             this.bntStop.Click += new System.EventHandler(this.bntStop_Click);
             // 
+            // imgVideo
+            // 
+            this.imgVideo.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.imgVideo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.imgVideo.Location = new System.Drawing.Point(114, 96);
+            this.imgVideo.Name = "imgVideo";
+            this.imgVideo.Size = new System.Drawing.Size(141, 113);
+            this.imgVideo.TabIndex = 104;
+            this.imgVideo.TabStop = false;
+            this.imgVideo.Click += new System.EventHandler(this.imgVideo_Click);
+            // 
+            // imgCapture
+            // 
+            this.imgCapture.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.imgCapture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.imgCapture.Image = global::VPOS.Properties.Resources.images;
+            this.imgCapture.Location = new System.Drawing.Point(117, 217);
+            this.imgCapture.Name = "imgCapture";
+            this.imgCapture.Size = new System.Drawing.Size(138, 168);
+            this.imgCapture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imgCapture.TabIndex = 102;
+            this.imgCapture.TabStop = false;
+            // 
             // bntCapture
             // 
             this.bntCapture.BackColor = System.Drawing.SystemColors.ButtonShadow;
@@ -496,6 +486,40 @@
             this.label14.TabIndex = 27;
             this.label14.Text = "Category";
             // 
+            // panel2
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.panel2, 2);
+            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.label17);
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(603, 23);
+            this.panel2.TabIndex = 109;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackgroundImage = global::VPOS.Properties.Resources.Cancel_24;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(569, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(29, 17);
+            this.button1.TabIndex = 0;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label17
+            // 
+            this.label17.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.label17.Location = new System.Drawing.Point(29, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(277, 20);
+            this.label17.TabIndex = 12;
+            this.label17.Text = "ADD NEW INVENTORY/STOCK ITEM";
+            // 
             // panel1
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.panel1, 2);
@@ -506,6 +530,23 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(603, 32);
             this.panel1.TabIndex = 108;
+            // 
+            // button5
+            // 
+            this.button5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button5.BackColor = System.Drawing.Color.SkyBlue;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.button5.Location = new System.Drawing.Point(229, 2);
+            this.button5.Margin = new System.Windows.Forms.Padding(2);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(138, 29);
+            this.button5.TabIndex = 107;
+            this.button5.Text = "View stock";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button2
             // 
@@ -541,87 +582,6 @@
             this.Update.UseVisualStyleBackColor = false;
             this.Update.Click += new System.EventHandler(this.Update_Click);
             // 
-            // label31
-            // 
-            this.label31.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label31.Location = new System.Drawing.Point(3, 76);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(88, 20);
-            this.label31.TabIndex = 166;
-            this.label31.Text = "Sub Category";
-            // 
-            // subCbx
-            // 
-            this.subCbx.FormattingEnabled = true;
-            this.subCbx.Location = new System.Drawing.Point(117, 73);
-            this.subCbx.Name = "subCbx";
-            this.subCbx.Size = new System.Drawing.Size(138, 21);
-            this.subCbx.TabIndex = 167;
-            // 
-            // imgVideo
-            // 
-            this.imgVideo.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.imgVideo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.imgVideo.Location = new System.Drawing.Point(114, 96);
-            this.imgVideo.Name = "imgVideo";
-            this.imgVideo.Size = new System.Drawing.Size(141, 113);
-            this.imgVideo.TabIndex = 104;
-            this.imgVideo.TabStop = false;
-            this.imgVideo.Click += new System.EventHandler(this.imgVideo_Click);
-            // 
-            // imgCapture
-            // 
-            this.imgCapture.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.imgCapture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.imgCapture.Image = global::VPOS.Properties.Resources.images;
-            this.imgCapture.Location = new System.Drawing.Point(117, 217);
-            this.imgCapture.Name = "imgCapture";
-            this.imgCapture.Size = new System.Drawing.Size(138, 168);
-            this.imgCapture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.imgCapture.TabIndex = 102;
-            this.imgCapture.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackgroundImage = global::VPOS.Properties.Resources.Cancel_24;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(569, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(29, 17);
-            this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // panel2
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.panel2, 2);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.label17);
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(603, 23);
-            this.panel2.TabIndex = 109;
-            // 
-            // button5
-            // 
-            this.button5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button5.BackColor = System.Drawing.Color.SkyBlue;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.button5.Location = new System.Drawing.Point(229, 2);
-            this.button5.Margin = new System.Windows.Forms.Padding(2);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(138, 29);
-            this.button5.TabIndex = 107;
-            this.button5.Text = "View stock";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
             // ItemDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -642,10 +602,10 @@
             this.flowLayoutPanel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.imgVideo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -656,13 +616,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox codeTxt;
+        private System.Windows.Forms.TextBox barcodeTxt;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox descriptionTxt;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox barcodeTxt;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox manufactureTxt;
         private System.Windows.Forms.Label label11;

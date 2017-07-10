@@ -171,15 +171,16 @@ namespace VPOS
             {
                 if (MessageBox.Show("YES or No?", "Are you sure you want to delete this information? ", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    DBConnect.Delete("item", dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
+                    // DBConnect.Delete("item", dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
+                    DBConnect.save("DELETE FROM item WHERE id = '" + dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString() + "'");
+                    Global.item.RemoveAll(x => x.Id == dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString());
                     MessageBox.Show("Information deleted");
                     LoadData();
-
                 }
             }
             if (e.ColumnIndex == dtGrid.Columns["Stock"].Index && e.RowIndex >= 0)
             {
-                using (StockDialog form = new StockDialog(dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString()))
+                using (StockDialog form = new StockDialog(dtGrid.Rows[e.RowIndex].Cells["barcode"].Value.ToString()))
                 {
                     DialogResult dr = form.ShowDialog();
                     if (dr == DialogResult.OK)
@@ -191,7 +192,7 @@ namespace VPOS
             }
             if (e.ColumnIndex == dtGrid.Columns["Manage"].Index && e.RowIndex >= 0)
             {
-                using (ItemDialog form = new ItemDialog(dtGrid.Rows[e.RowIndex].Cells["id"].Value.ToString()))
+                using (ItemDialog form = new ItemDialog(dtGrid.Rows[e.RowIndex].Cells["barcode"].Value.ToString()))
                 {                   
                     DialogResult dr = form.ShowDialog();
                     if (dr == DialogResult.OK)

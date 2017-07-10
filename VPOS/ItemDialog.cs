@@ -20,19 +20,19 @@ namespace VPOS
         Item _item;
         Stock _stock;
         WebCam webcam;
-        string ItemID = "";
+        string Barcode = "";
         private delegate void SetTextDeleg(string text);
         Dictionary<string, string> storeDictionary = new Dictionary<string, string>();
-        public ItemDialog(string itemID)
+        public ItemDialog(string barcode)
         {
             InitializeComponent();
             webcam = new WebCam();
             webcam.InitializeWebCam(ref imgVideo);
             autocomplete();
-            if (!String.IsNullOrEmpty(itemID))
+            if (!String.IsNullOrEmpty(barcode))
             {
-                ItemID = itemID;
-                LoadItem(ItemID);
+                Barcode = barcode;
+                LoadItem(Barcode);
             }
             foreach (Store s in Global.store)
             {
@@ -41,20 +41,20 @@ namespace VPOS
             }
 
         }
-        private void LoadItem(string ID)
+        private void LoadItem(string barcode)
         {
-            //  _item = new Item(Helper.OrgID, qtyTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "false", taxTxt.Text);
+            //  _item = new Item(Helper.Orgbarcode, qtyTxt.Text, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), "false", taxTxt.Text);
 
-            nameTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Name;
-            codeTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Code;
-            descriptionTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Description;
-            manufactureTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Manufacturer;
-            nationalityTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Country;
-            barcodeTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Barcode;           
-            compositionTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Composition;         
-            categoryTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Category;       
-            genericTxt.Text = Global.item.First(k => k.Id.Contains(ID)).Generic;
-            Image img = Base64ToImage(Global.item.First(k => k.Id.Contains(ID)).Image);
+            nameTxt.Text = Global.item.First(k => k.Barcode.Contains(barcode)).Name;
+          
+            descriptionTxt.Text = Global.item.First(k => k.Barcode.Contains(barcode)).Description;
+            manufactureTxt.Text = Global.item.First(k => k.Barcode.Contains(barcode)).Manufacturer;
+            nationalityTxt.Text = Global.item.First(k => k.Barcode.Contains(barcode)).Country;
+            barcodeTxt.Text = Global.item.First(k => k.Barcode.Contains(barcode)).Barcode;           
+            compositionTxt.Text = Global.item.First(k => k.Barcode.Contains(barcode)).Composition;         
+            categoryTxt.Text = Global.item.First(k => k.Barcode.Contains(barcode)).Category;       
+            genericTxt.Text = Global.item.First(k => k.Barcode.Contains(barcode)).Generic;
+            Image img = Base64ToImage(Global.item.First(k => k.Barcode.Contains(barcode)).Image);
             System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img);
             //Bitmap bps = new Bitmap(bmp, 50, 50);
             imgCapture.Image = bmp;
@@ -159,11 +159,7 @@ namespace VPOS
                 categoryTxt.BackColor = Color.Red;
                 return;
             }
-            if (codeTxt.Text == "")
-            {
-                codeTxt.BackColor = Color.Red;
-                return;
-            }
+           
            
             string id = Guid.NewGuid().ToString();
             if (barcodeTxt.Text == "")
@@ -178,7 +174,8 @@ namespace VPOS
 
             MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
             string fullimage = ImageToBase64(stream);
-            _item = new Item(id, nameTxt.Text,genericTxt.Text,codeTxt.Text, descriptionTxt.Text, manufactureTxt.Text, nationalityTxt.Text,compositionTxt.Text,categoryTxt.Text, barcodeTxt.Text,fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), strengthTxt.Text, Helper.OrgID, "false",subCbx.Text);
+            _item = new Item(id, nameTxt.Text,genericTxt.Text,barcodeTxt.Text, descriptionTxt.Text, manufactureTxt.Text, nationalityTxt.Text,compositionTxt.Text,categoryTxt.Text, barcodeTxt.Text,fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), strengthTxt.Text, Helper.OrgID, "false",subCbx.Text);
+
             int index = Global.item.FindIndex(g => g.Name.Contains(nameTxt.Text));
             if (index >= 0)
             {
@@ -187,8 +184,8 @@ namespace VPOS
                 return;
             }
 
-            int bar = Global.item.FindIndex(g => g.Barcode.Contains(barcodeTxt.Text));
-            if (bar >= 0)
+            int bar = Global.item.Where(h=>h.Barcode.Contains(barcodeTxt.Text)).Count();
+            if (bar > 0)
             {
                 MessageBox.Show("Item of the same exact bar code already exists");
                 barcodeTxt.BackColor = Color.Red;
@@ -196,7 +193,8 @@ namespace VPOS
             }
             if (DBConnect.Insert(_item) != "")
             {
-                using (StockDialog form = new StockDialog(id))
+                Global.item.Add(_item);
+                using (StockDialog form = new StockDialog(barcodeTxt.Text))
                 {
                     DialogResult dr = form.ShowDialog();
                     if (dr == DialogResult.OK)
@@ -212,7 +210,7 @@ namespace VPOS
             }
 
             nameTxt.Text = "";
-            codeTxt.Text = "";
+            barcodeTxt.Text = "";
         }
         private string barcode = string.Empty;
         private void ItemDialog_Load(object sender, EventArgs e)
@@ -302,13 +300,13 @@ namespace VPOS
                 fileUrlTxtBx.Text = open.FileName;
             }
         }
-        string storeID;
+        string storebarcode;
         private void storeCbx_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                storeID = "";
-                storeID = storeDictionary[storeCbx.Text];
+                storebarcode = "";
+                storebarcode = storeDictionary[storeCbx.Text];
             }
             catch { }
         }
@@ -317,13 +315,14 @@ namespace VPOS
         {
             MemoryStream stream = ImageToStream(imgCapture.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
             string fullimage = ImageToBase64(stream);
-            _item = new Item(ItemID, nameTxt.Text, genericTxt.Text, codeTxt.Text, descriptionTxt.Text, manufactureTxt.Text, nationalityTxt.Text, compositionTxt.Text, categoryTxt.Text, barcodeTxt.Text, fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), strengthTxt.Text, Helper.OrgID, "false",subCbx.Text);
+            _item = new Item(Barcode, nameTxt.Text, genericTxt.Text, barcodeTxt.Text, descriptionTxt.Text, manufactureTxt.Text, nationalityTxt.Text, compositionTxt.Text, categoryTxt.Text, barcodeTxt.Text, fullimage, DateTime.Now.ToString("dd-MM-yyyy H:mm:ss"), strengthTxt.Text, Helper.OrgID, "false",subCbx.Text);
 
-            if (ItemID != "")
+            if (Barcode != "")
             {
-                DBConnect.Update(_item, ItemID);
+                string ID = Global.item.First(k => k.Id.Contains(barcode)).Id; 
+                DBConnect.Update(_item, ID);
               
-                Global.item.RemoveAll(x => x.Id == ItemID);
+                Global.item.RemoveAll(x => x.Barcode == Barcode);
                 Global.item.Add(_item);
                 MessageBox.Show("Information Updated ");
                 this.DialogResult = DialogResult.OK;
@@ -350,7 +349,7 @@ namespace VPOS
 
         private void button5_Click(object sender, EventArgs e)
         {
-            using (StockDialog form = new StockDialog(ItemID))
+            using (StockDialog form = new StockDialog(Barcode))
             {
                 DialogResult dr = form.ShowDialog();
                 if (dr == DialogResult.OK)

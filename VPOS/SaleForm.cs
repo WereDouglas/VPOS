@@ -528,8 +528,6 @@ namespace VPOS
             pdoc = new PrintDocument();
             PrinterSettings ps = new PrinterSettings();
             Font font = new Font("Courier New", 12);
-
-
             PaperSize psize = new PaperSize("Custom", 100, 200);
             //ps.DefaultPageSettings.PaperSize = psize;
 

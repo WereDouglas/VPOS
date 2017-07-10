@@ -72,7 +72,6 @@ C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\tr\Au
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\SQLite.Interop.dll
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\x64\SQLite.Interop.dll
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\bin\Debug\x86\SQLite.Interop.dll
-C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.csprojResolveAssemblyReference.cache
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.InvoiceForm.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.PaymentForm.resources
 C:\Users\DOUGLAS\Documents\Visual Studio 2015\Projects\VPOS\VPOS\obj\Debug\VPOS.CustomerForm.resources

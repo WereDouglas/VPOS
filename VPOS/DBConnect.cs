@@ -502,21 +502,48 @@ namespace VPOS
         }
         public static void Delete(string table, string idValue)
         {
-            //try
-            //{
-            OpenConn();
+           
 
-            string SQL = "DELETE FROM " + table + " WHERE id = '" + idValue + "';";
+            string query = "DELETE FROM " + table + " WHERE id = '" + idValue + "';";
 
-            NpgsqlCommand command = new NpgsqlCommand(SQL, conn);
-            Int32 rowsaffected = command.ExecuteNonQuery();
 
-            CloseConn();
-            //}
-            //catch (Exception)
-            //{
-            //    Console.WriteLine("Errr on update!");
-            //}
+
+
+            if (!Helper.Type.Contains("Lite"))
+            {
+                OpenConn();
+                NpgsqlCommand command = new NpgsqlCommand(query, conn);
+                Int32 rowsaffected = command.ExecuteNonQuery();
+
+                CloseConn();
+
+                //}
+                //catch (Exception c)
+                //{
+                //    Console.WriteLine("Errr on insert!" + c.Message);
+                //    return "";
+                //}
+            }
+            else
+            {
+                try
+                {
+                    SQLconnect.ConnectionString = dbobject.datalocation();
+                    SQLconnect.Open();
+                }
+                catch
+                {
+
+                }
+
+                SQLiteCommand cmd = new SQLiteCommand();
+                cmd = SQLconnect.CreateCommand();
+                cmd.CommandText = query;
+
+                cmd.Dispose();
+                SQLconnect.Close();
+            }
+
         }
         public static List<Object> QueryTable(string table)
         {

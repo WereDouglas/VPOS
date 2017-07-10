@@ -44,8 +44,6 @@ namespace VPOS
             start = DateTime.Now.ToString("dd-MM-yyyy");
             end = DateTime.Now.ToString("dd-MM-yyyy");
             createSqlliteDB();
-
-
             InitializeComponent();
             //in setting is where am loading Global 
             LoadSettings();
@@ -179,8 +177,8 @@ namespace VPOS
         private void LoadSettings()
         {
 
-            //try
-            //{
+            try
+            {
                 XDocument xmlDoc = XDocument.Load(Connection.XMLFile());
                 var servers = from person in xmlDoc.Descendants("Server")
                               select new
@@ -251,19 +249,19 @@ namespace VPOS
                 // MessageBox.Show(Helper.serverIP);
 
 
-            //}
-            //catch
-            //{
-            //    using (SettingDialog form = new SettingDialog())
-            //    {
+            }
+            catch
+            {
+                using (SettingDialog form = new SettingDialog())
+               {
 
-            //        DialogResult dr = form.ShowDialog();
-            //        if (dr == DialogResult.OK)
-            //        {
-            //            LoadSettings();
-            //        }
-            //    }
-            //}
+                    DialogResult dr = form.ShowDialog();
+                    if (dr == DialogResult.OK)
+                    {
+                        LoadSettings();
+                    }
+                }
+            }
 
         }
         private String IPAddressCheck(string HostName)
